@@ -9,10 +9,16 @@ public abstract class GnosticNet {
 	
 	Map subMap = new HashMap<Integer, Integer>();
 	
-	public void GnosticNet(Integer numDimensions, ArrayList<Integer> dimensionsShape) {
-		return;
+	Map metaAF = new HashMap<HashMap, HashMap>();
+	
+	public GnosticNet(Integer numDimensions, ArrayList<Integer> dimensionsShape) {
+		this.dShape = dimensionsShape;
+		this.numDimensions = numDimensions;
+		this.convert_and_quad();
 	}
 	
-	public void convert_and_quad()
+	public void convert_and_quad() {
+		
+	}
 
 }
