@@ -15,3 +15,5 @@ public class QuadTree {
 		this.inCoord = incoming;
 	}
 }
+
+
