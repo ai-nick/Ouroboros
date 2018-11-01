@@ -26,10 +26,9 @@ public class FractalTree {
 		}
 	}
 	
-	public void add_subs(Double[] new_c) {
-		if(is_root) {
-			while(new_c.length < this.coord.len)
-		}
+	
+	public void divide_and_init(Double[] c) {
+		
 	}
 	
 }
