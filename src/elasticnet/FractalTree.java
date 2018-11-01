@@ -26,7 +26,6 @@ public class FractalTree {
 		}
 	}
 	
-	
 	public void divide_and_init(Double[] c) {
 		
 	}
