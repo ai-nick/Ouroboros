@@ -6,10 +6,10 @@ public class FractalTree {
 	Boolean is_root = false;
 	FractalTree[] children;
 	
-	public FractalTree(Double[] c, Boolean ir) {
-		for(int v = 0; v < c.length; v++) {
-			this.coord[v] = c[v];
-			this.coord[v+c.length] = 1.0;
+	public FractalTree(int coord_len, Boolean ir) {
+		for(int v = 0; v < coord_len; v++) {
+			this.coord[v] = 0.0;
+			this.coord[v+coord_len] = 1.0;
 		}
 		this.is_root = ir;
 	}
@@ -26,7 +26,7 @@ public class FractalTree {
 		}
 	}
 	
-	public void divide_and_init(Double[] c) {
+	public void divide() {
 		
 	}
 	
