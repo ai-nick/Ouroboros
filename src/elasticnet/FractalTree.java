@@ -1,33 +1,43 @@
 package elasticnet;
 import java.lang.Math;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class FractalTree {
-	Double phi = (1.0 + Math.sqrt(5.0))/2;
-	Double[] coord;
-	Boolean is_root = false;
-	FractalTree[] children;
-	
-	public FractalTree(int coord_len, Boolean ir) {
-		for(int v = 0; v < coord_len; v++) {
-			this.coord[v] = 0.0;
-			this.coord[v+coord_len] = 1.0;
+	public double[] coord;
+	public double width;
+	public double weight;
+	public double lvl;
+	public String[] signs;
+	public FractalTree[] children;
+	public FractalTree(double[] c, double width, int lvl) {
+		this.coord = c;
+		this.width = width;
+		this.lvl = lvl;
+		this.children = new FractalTree[(int)Math.pow(2.0, (double)c.length)];
+		this.permute_signs(this.coord.length);
+	}
+	public void subdivide_into_children() {
+		for(int idx = 0; idx < this.children.length; idx++) {
+			String sign_pattern = this.signs[idx];
+			double[]  new_coord = new double[this.coord.length];
+			for(int idx_2 = 0; idx_2 < this.coord.length; idx_2++) {
+				char sign = sign_pattern.charAt(idx_2);
+				if(sign == '1') {
+					new_coord[idx_2] = coord[idx_2] + this.width/2.0;
+				} else {
+					new_coord[idx_2] = coord[idx_2] - this.width/2.0;
+				}
+			}
 		}
-		this.is_root = ir;
 	}
 	
-	public FractalTree() {
-		this.coord[0] = 1.0;
-		this.is_root = true;
-	}
-	
-	public FractalTree(int len_of_coord) {
-		for(int x = 0; x < len_of_coord; x++) {
-			this.coord[x] = 0.0;
-			this.coord[len_of_coord+x] = 1.0;
+	public void permute_signs(int coord_len) {
+		String str_len = "%" + Integer.toString(coord_len) + "s";
+		for(long ix = 0; ix < this.children.length; ix++) {
+			this.signs[(int)ix] = String.format(str_len, Long.toBinaryString(ix)).replace(' ', '0');
 		}
-	}
-	
-	public void divide() {
-		
 	}
 	
 }
