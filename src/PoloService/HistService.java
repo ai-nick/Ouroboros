@@ -21,12 +21,14 @@ public class HistService {
 		this.look_back = 777;
 		this.symbols = this.pes.returnAllMarkets();
 		System.out.print(this.symbols.toString());
+		this.get_hist(this.symbols.get(0));
 	}
 
 	private void get_hist(String symbol) {
 		this.histdata.put(symbol, this.pes.returnChartData("USDT_BTC", 
                 7200L, 
                 ZonedDateTime.now(ZoneOffset.UTC).minusDays(777).toEpochSecond()));
+		System.out.print(this.histdata.get(symbol).toString());
 	}
 
 	public static void main(String[] args) {
