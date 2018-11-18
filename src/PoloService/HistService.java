@@ -20,6 +20,7 @@ public class HistService {
 	public HistService() {
 		this.look_back = 777;
 		this.symbols = this.pes.returnAllMarkets();
+		System.out.print(this.symbols.toString());
 	}
 
 	private void get_hist(String symbol) {
@@ -27,4 +28,10 @@ public class HistService {
                 7200L, 
                 ZonedDateTime.now(ZoneOffset.UTC).minusDays(777).toEpochSecond()));
 	}
+
+	public static void main(String[] args) {
+		System.out.println("canyouhearme");
+		HistService hs = new HistService();
+	}
+	
 }
