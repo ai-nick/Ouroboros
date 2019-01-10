@@ -7,11 +7,11 @@ public class Genome {
 	public int level;
 	int gen_born;
 	int species_id;
-	String population_hash;
+	int population_hash;
 	String nodeGeneType;
 	String connectionGeneType;
 	
-	public Genome(String p_hash) {
+	public Genome(int p_hash) {
 		this.level = 0;
 		this.species_id = 0;
 		this.nodeGeneType = "default";
@@ -19,13 +19,13 @@ public class Genome {
 		this.population_hash = p_hash;
 	}
 	
-	public Genome(String p_hash, int level, int species_id) {
+	public Genome(int p_hash, int level, int species_id) {
 		this.level = level;
 		this.species_id = species_id;
 		this.population_hash = p_hash;
 	}
 	
-	public Genome(String p_hash, int level, int species_id, NodeGene[] nG, ConnectionGene[] cG) {
+	public Genome(int p_hash, int level, int species_id, NodeGene[] nG, ConnectionGene[] cG) {
 		this.level = level;
 		this.species_id = species_id;
 		this.nGenes = nG;
