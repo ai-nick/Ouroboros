@@ -1,5 +1,5 @@
 package elasticnet;
 
-public class HyperNet {
+public class Species {
 
 }
