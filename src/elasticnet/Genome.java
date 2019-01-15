@@ -4,7 +4,6 @@ public class Genome {
 
 	NodeGene[] nGenes = {};
 	ConnectionGene[] cGenes = {};
-	public int level;
 	int gen_born;
 	int species_id;
 	int population_hash;
@@ -12,21 +11,18 @@ public class Genome {
 	String connectionGeneType;
 	
 	public Genome(int p_hash) {
-		this.level = 0;
 		this.species_id = 0;
 		this.nodeGeneType = "default";
 		this.connectionGeneType = "default";
 		this.population_hash = p_hash;
 	}
 	
-	public Genome(int p_hash, int level, int species_id) {
-		this.level = level;
+	public Genome(int p_hash, int species_id) {
 		this.species_id = species_id;
 		this.population_hash = p_hash;
 	}
 	
-	public Genome(int p_hash, int level, int species_id, NodeGene[] nG, ConnectionGene[] cG) {
-		this.level = level;
+	public Genome(int p_hash, int species_id, NodeGene[] nG, ConnectionGene[] cG) {
 		this.species_id = species_id;
 		this.nGenes = nG;
 		this.cGenes = cG;
