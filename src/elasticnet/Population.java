@@ -22,4 +22,5 @@ public class Population {
 	public Population(int num_genomes, int gens) {
 		this.num_genomes = num_genomes;
 		this.num_gens = gens;
+	}
 }

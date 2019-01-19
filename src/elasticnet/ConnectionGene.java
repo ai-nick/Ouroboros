@@ -6,6 +6,7 @@ public class ConnectionGene {
 	public int genome_id;
 	NodeGene from_node;
 	NodeGene to_node;
+	double weight;
 	
 	public ConnectionGene(NodeGene f, NodeGene t, int inno, int genome_idx) {
 		this.genome_id = genome_idx;
@@ -14,6 +15,13 @@ public class ConnectionGene {
 		this.to_node = t;
 	}
 	
+	public void setWeight(double w) {
+		this.weight = w;
+	}
+	
+	public double getWeight() {
+		return this.weight;
+	}
 	public NodeGene get_from() {
 		return this.from_node;
 	}
