@@ -8,6 +8,9 @@ public class Genome {
 	String connectionGeneType;
 	Genotype[] gTypes;
 	
+	ConnectionGene[] conn_genes;
+	NodeGene[] node_genes;
+	
 	public Genome(int p_hash) {
 		this.nodeGeneType = "default";
 		this.connectionGeneType = "default";
@@ -20,5 +23,15 @@ public class Genome {
 	public void ingestConfig(HashMap<String, String> config) {
 		this.nodeGeneType = config.get("nGeneType");
 		this.connectionGeneType = config.get("cGeneType");
-	}	
+	}
+	
+	public void set_nodes(NodeGene[] ngs)
+	{
+		this.node_genes = ngs;
+	}
+	
+	public void set_connections(ConnectionGenes[] conngs)
+	{
+		this.conn_genes = conngs;
+	}
 }
