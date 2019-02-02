@@ -30,7 +30,7 @@ public class Genome {
 		this.node_genes = ngs;
 	}
 	
-	public void set_connections(ConnectionGenes[] conngs)
+	public void set_connections(ConnectionGene[] conngs)
 	{
 		this.conn_genes = conngs;
 	}
