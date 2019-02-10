@@ -2,7 +2,10 @@ package elasticnet;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import com.google.gson.*;
+import java.util.Arrays;
 
 public class Population {
 	
@@ -33,8 +36,47 @@ public class Population {
 		
 	}
 	
-	public double speciate_genomes(Genome one, Genome two) {
-		
+	public double speciate_genomes(Genome one, Genome two, int[] speciation_coefficients) {
+		double w = (one.avg_w + two.avg_w) / 2;
+		double s = 0.0;
+		int e = 0,d = 0;
+		int[] j = null;
+		for(int idx = 0; idx < one.gene_ids.length; idx++)
+		{
+			if(Arrays.asList(two).contains(one.gene_ids[idx]))
+			{
+				j[idx] = one.gene_ids[idx];
+			}
+			else
+			{
+				if(one.gene_ids[idx] >= two.gene_id_min && one.gene_ids[idx] <= two.gene_id_max)
+				{
+					d += 1;
+				}
+				else
+				{
+					e += 1;
+				}
+			}
+		}
+		for(int ix = 0; ix < two.gene_ids.length; ix++)
+		{
+			if(!Arrays.asList(j).contains(two.gene_ids[ix]))
+			{
+				if(two.gene_ids[ix] >= one.gene_id_min && two.gene_ids[ix] <= one.gene_id_max)
+				{
+					d += 1;
+				}
+				else
+				{
+					e += 1;
+				}
+			}
+		}
+		s += e*speciation_coefficients[0]/10;
+		s += d*speciation_coefficients[1]/10;
+		s += w*speciation_coefficients[2];
+		return s;
 	}
 	
 	public String as_json()

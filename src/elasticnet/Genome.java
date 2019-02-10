@@ -9,11 +9,11 @@ public class Genome {
 	int species_id;
 	String nodeGeneType;
 	String connectionGeneType;
-	Genotype[] gTypes;
 	public double fitness;
 	public int avg_w;
 	ConnectionGene[] conn_genes;
 	NodeGene[] node_genes;
+	public int gene_id_min, gene_id_max;
 	
 	public Genome(int p_hash) {
 		this.nodeGeneType = "default";
@@ -23,7 +23,6 @@ public class Genome {
 	}
 	
 	public Genome(Genotype[] gs) {
-		this.gTypes = gs;
 		this.fitness = 0.0;
 	}
 	public void ingestConfig(HashMap<String, String> config) {
