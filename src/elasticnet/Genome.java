@@ -3,6 +3,7 @@ import java.util.HashMap;
 
 public class Genome {
 
+	public int id;
 	public int[] gene_ids;
 	int gen_born;
 	int population_hash;
@@ -14,6 +15,7 @@ public class Genome {
 	ConnectionGene[] conn_genes;
 	NodeGene[] node_genes;
 	public int gene_id_min, gene_id_max;
+	HashMap<Integer, Double> fit_dists;
 	
 	public Genome(int p_hash) {
 		this.nodeGeneType = "default";

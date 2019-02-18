@@ -76,6 +76,7 @@ public class Population {
 		s += e*speciation_coefficients[0]/10;
 		s += d*speciation_coefficients[1]/10;
 		s += w*speciation_coefficients[2];
+		one.fit_dists.put(two.id, s);
 		return s;
 	}
 	
