@@ -24,6 +24,11 @@ public class Genome {
 		this.fitness = 0.0;
 	}
 	
+	public double get_prime(int num_others)
+	{
+		return this.fitness/num_others;
+	}
+	
 	public Genome(Genotype[] gs) {
 		this.fitness = 0.0;
 	}
