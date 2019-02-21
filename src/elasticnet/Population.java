@@ -2,14 +2,18 @@ package elasticnet;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import com.google.gson.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Population {
 	
-	Genome[] genomes;
+	ArrayList<Genome> genomes = new ArrayList<Genome>();
 	int num_genomes;
 	int num_gens;
 	int hash_id;
@@ -18,6 +22,8 @@ public class Population {
 	String ts = "";
 	int current_gen = 0;
 	int inno_num = 0;
+	ArrayList<Species> pop_species = new ArrayList<Species>();
+	HashMap<String, String> config;
 	
 	public Population() 
 	{
@@ -25,15 +31,11 @@ public class Population {
 		this.hash_id = this.ts.hashCode();
 	}
 	
-	public Population(int num_genomes, int gens) 
+	public Population(int num_genomes, int gens, HashMap<String, String> config_in) 
 	{
 		this.num_genomes = num_genomes;
 		this.num_gens = gens;
-	}
-	
-	public void speciate()
-	{
-		
+		this.config = config_in;
 	}
 	
 	public double speciate_genomes(Genome one, Genome two, int[] speciation_coefficients) {
@@ -78,6 +80,16 @@ public class Population {
 		s += w*speciation_coefficients[2];
 		one.fit_dists.put(two.id, s);
 		return s;
+	}
+	
+	public void speciate_population()
+	{
+		if (this.pop_species.size() == 0)
+		{
+			Random rnd = new Random();
+			int first_rep_index = rnd.nextInt(this.genomes.size());
+			
+		}
 	}
 	
 	public String as_json()
