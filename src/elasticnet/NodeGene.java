@@ -3,8 +3,6 @@ import java.util.HashMap;
 
 public class NodeGene {
 
-	public boolean is_output;
-	public ConnectionGene[] connections;
 	int level = 0;
 	String activation = "";
 	int genome_id;

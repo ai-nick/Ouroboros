@@ -1,19 +1,22 @@
 package elasticnet;
 import java.util.HashMap;
+import java.util.List;
 
 public class Genome {
 
 	public int id;
-	public int[] gene_ids;
 	int gen_born;
+	int[] gene_ids;
 	int population_hash;
 	int species_id;
 	String nodeGeneType;
 	String connectionGeneType;
 	public double fitness;
 	public int avg_w;
-	ConnectionGene[] conn_genes;
-	NodeGene[] node_genes;
+	List<ConnectionGene> conn_genes;
+	List<NodeGene> input_nodes;
+	List<NodeGene> hidden_nodes;
+	List<NodeGene> output_nodes;
 	public int gene_id_min, gene_id_max;
 	HashMap<Integer, Double> fit_dists;
 	
@@ -37,24 +40,24 @@ public class Genome {
 		this.connectionGeneType = config.get("cGeneType");
 	}
 	
-	public void set_nodes(NodeGene[] ngs)
+	public void set_nodes(List<NodeGene> ngs)
 	{
-		this.node_genes = ngs;
+		this.input_nodes = ngs;
 	}
 	
-	public void set_connections(ConnectionGene[] conngs)
+	public void set_connections(List<ConnectionGene> conngs)
 	{
 		this.conn_genes = conngs;
 	}
 	
 	public NodeGene get_node_gene(int idx)
 	{
-		return node_genes[idx];
+		return input_nodes.get(idx);
 	}
 	
 	public ConnectionGene get_connection_gene(int idx)
 	{
-		return conn_genes[idx];
+		return conn_genes.get(idx);
 	}
 	
 	public void set_species(int id)

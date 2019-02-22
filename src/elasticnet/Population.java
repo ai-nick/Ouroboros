@@ -45,7 +45,7 @@ public class Population {
 		int[] j = null;
 		for(int idx = 0; idx < one.gene_ids.length; idx++)
 		{
-			if(Arrays.asList(two).contains(one.gene_ids[idx]))
+			if(Arrays.asList(two).contains(one.gene_ids))
 			{
 				j[idx] = one.gene_ids[idx];
 			}
