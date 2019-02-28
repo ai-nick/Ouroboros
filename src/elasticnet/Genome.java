@@ -32,9 +32,6 @@ public class Genome {
 		return this.fitness/num_others;
 	}
 	
-	public Genome(Genotype[] gs) {
-		this.fitness = 0.0;
-	}
 	public void ingestConfig(HashMap<String, String> config) {
 		this.nodeGeneType = config.get("nGeneType");
 		this.connectionGeneType = config.get("cGeneType");

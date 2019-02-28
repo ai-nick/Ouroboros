@@ -1,6 +1,6 @@
 package elasticnet;
 
-public class ConnectionGene {
+public class ConnectionGene implements IConnection {
 
 	int inno_id;
 	public int genome_id;
