@@ -42,4 +42,14 @@ public class NodeGene {
 	{
 		return this.is_recurrent;
 	}
+	
+	public int get_node_id()
+	{
+		return inno_id;
+	}
+	
+	public ArrayList<IConnection> get_connections()
+	{
+		return this.connections;
+	}
 }
