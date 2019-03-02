@@ -3,23 +3,22 @@ package elasticnet;
 public class ConnectionGene implements IConnection {
 
 	int inno_id;
-	public int genome_id;
 	NodeGene from_node;
 	NodeGene to_node;
+	int activation_level;
 	double weight;
 	
-	public ConnectionGene(NodeGene f, NodeGene t, int inno, int genome_idx) {
-		this.genome_id = genome_idx;
+	public ConnectionGene(NodeGene f, NodeGene t, int inno) {
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;
 	}
 	
-	public void setWeight(double w) {
+	public void set_weight(double w) {
 		this.weight = w;
 	}
 	
-	public double getWeight() {
+	public double get_weight() {
 		return this.weight;
 	}
 	public NodeGene get_from() {

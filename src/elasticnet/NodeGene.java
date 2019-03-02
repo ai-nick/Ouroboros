@@ -1,14 +1,14 @@
 package elasticnet;
-import java.util.List;
+import java.util.ArrayList;
 
 public class NodeGene {
-
-	int level = 0;
+	boolean is_input;
+	boolean is_output;
 	String activation = "";
-	int genome_id;
 	int inno_id;
-	List<Double> coordinate;
+	ArrayList<Double> coordinate;
 	boolean is_recurrent;
+	ArrayList<IConnection> connections = new ArrayList<IConnection>();
 	
 	public NodeGene(int inno_id, String act) {
 		this.inno_id = inno_id;
@@ -20,12 +20,8 @@ public class NodeGene {
 		return this.activation;
 	}
 	
-	public int get_level()
-	{
-		return this.level;
-	}
 	
-	public List<Double> get_coord()
+	public ArrayList<Double> get_coord()
 	{
 		return this.coordinate;
 	}
