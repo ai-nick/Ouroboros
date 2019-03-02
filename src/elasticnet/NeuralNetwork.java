@@ -19,8 +19,17 @@ public class NeuralNetwork implements INeuralNet {
 	}
 	
 	@Override
-	public void Activate() {
+	public void Activate(ArrayList<Double> inputs) {
 		// TODO Auto-generated method stub
+		for(int ix = 0; ix < inputs.size(); ix++)
+		{
+			this.in_nodes.get(ix).set_current_val(inputs.get(ix));
+		}
+	}
+	
+	@Override
+	public void Activate()
+	{
 		
 	}
 
