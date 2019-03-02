@@ -2,7 +2,7 @@ package elasticnet;
 import java.util.HashMap;
 import java.util.List;
 
-public class Genome implements INeuralNet {
+public class Genome {
 
 	public int id;
 	int gen_born;
@@ -75,23 +75,5 @@ public class Genome implements INeuralNet {
 	public int get_pop_id()
 	{
 		return this.population_hash;
-	}
-
-	@Override
-	public void Activate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void Reset() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void get_output() {
-		// TODO Auto-generated method stub
-		
 	}
 }
