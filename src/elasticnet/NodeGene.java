@@ -1,7 +1,7 @@
 package elasticnet;
 import java.util.ArrayList;
 
-public class NodeGene {
+public class NodeGene implements INode {
 	// just a real baseline implementation of how i think a neat node would be implemented
 	boolean is_input;
 	boolean is_output;
@@ -18,6 +18,7 @@ public class NodeGene {
 		this.activation = act;
 	}
 	
+	@Override
 	public void set_current_val(double value)
 	{
 		this.current_val = value;
@@ -51,5 +52,23 @@ public class NodeGene {
 	public ArrayList<IConnection> get_connections()
 	{
 		return this.connections;
+	}
+
+	@Override
+	public int get_level() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double activate() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public boolean is_output()
+	{
+		return is_output;
 	}
 }

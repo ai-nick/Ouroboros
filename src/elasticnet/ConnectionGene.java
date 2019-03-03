@@ -40,4 +40,9 @@ public class ConnectionGene implements IConnection {
 	public int getInnoId() {
 		return this.inno_id;
 	}
+	
+	public INode get_next_node()
+	{
+		return to_node;
+	}
 }

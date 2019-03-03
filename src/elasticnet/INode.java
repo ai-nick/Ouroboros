@@ -7,7 +7,7 @@ public interface INode {
 	
 	public double get_current_val();
 	
-	public double set_current_val(double value);
+	public void set_current_val(double value);
 	
 	public int get_level();
 	
@@ -18,6 +18,8 @@ public interface INode {
 	public double activate();
 	
 	public int get_node_id();
+	
+	public boolean is_output();
 	
 	public ArrayList<IConnection> get_connections();
 }
