@@ -1,5 +1,6 @@
 package elasticnet;
-
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -92,6 +93,12 @@ public class Population {
 		}
 	}
 	
+	public void set_config(String conf)
+	{
+		Gson g = new Gson();
+		Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+		this.config = g.fromJson(g.toJson(conf), type);
+	}
 	public String as_json()
 	{
 		Gson gson = new Gson();

@@ -4,17 +4,17 @@ import java.util.HashMap;
 
 public class NeuralNetwork implements INeuralNet {
 
-	public int current_layer = 0;
+	//no comment
 	public int num_activations = 0;
 	ArrayList<Integer> input_ids;
 	ArrayList<INode> activation_nodes;
 	public boolean fully_activated;
 	HashMap<Integer, INode> nodes = new HashMap<Integer, INode>();
-	//public boolean is_recurrent;
 	public boolean feed_forward;
 	
 	public NeuralNetwork(ArrayList<Integer> in_nodes_ids, ArrayList<INode> nodes_incoming)
 	{
+		//no comment
 		this.input_ids = in_nodes_ids;
 		for(int ix = 0; ix < nodes_incoming.size(); ix++)
 		{
@@ -24,8 +24,7 @@ public class NeuralNetwork implements INeuralNet {
 	
 	@Override
 	public void Activate() {
-		// inputs needs to be same length as 
-		// recursive feed forward
+		//no comment
 		ArrayList<INode> next_actives = new ArrayList<INode>();
 		int outs_count = 0;
 		for(int ix = 0; ix < next_actives.size(); ix++)
@@ -42,7 +41,7 @@ public class NeuralNetwork implements INeuralNet {
 					{
 						next_actives.add(next_node);	
 					}
-				}	
+				}
 			}
 			else
 			{
@@ -58,6 +57,7 @@ public class NeuralNetwork implements INeuralNet {
 		else
 		{
 			this.activation_nodes = next_actives;
+			this.num_activations++;
 			if(this.feed_forward == true)
 			{
 				this.Activate();				

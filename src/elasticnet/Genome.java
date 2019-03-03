@@ -1,6 +1,7 @@
 package elasticnet;
 import java.util.HashMap;
 import java.util.List;
+import com.google.gson.*;
 
 public class Genome {
 
@@ -9,8 +10,6 @@ public class Genome {
 	int[] gene_ids;
 	int population_hash;
 	int species_id;
-	String nodeGeneType;
-	String connectionGeneType;
 	public double fitness;
 	public int avg_w;
 	List<ConnectionGene> conn_genes;
@@ -21,8 +20,6 @@ public class Genome {
 	HashMap<Integer, Double> fit_dists;
 	
 	public Genome(int p_hash) {
-		this.nodeGeneType = "default";
-		this.connectionGeneType = "default";
 		this.population_hash = p_hash;
 		this.fitness = 0.0;
 	}
@@ -30,11 +27,6 @@ public class Genome {
 	public double get_prime(int num_others)
 	{
 		return this.fitness/num_others;
-	}
-	
-	public void ingestConfig(HashMap<String, String> config) {
-		this.nodeGeneType = config.get("nGeneType");
-		this.connectionGeneType = config.get("cGeneType");
 	}
 	
 	public void set_nodes(List<NodeGene> ngs)
@@ -75,5 +67,11 @@ public class Genome {
 	public int get_pop_id()
 	{
 		return this.population_hash;
+	}
+	
+	public String to_gson()
+	{
+		Gson g = new Gson();
+		return g.toJson(this);
 	}
 }
