@@ -10,7 +10,7 @@ public class NodeGene implements INode {
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
 	ArrayList<IConnection> connections = new ArrayList<IConnection>();
-	double current_val;
+	double current_val = 0.0;
 	
 	
 	public NodeGene(int inno_id, String act) {
@@ -22,6 +22,12 @@ public class NodeGene implements INode {
 	public void set_current_val(double value)
 	{
 		this.current_val = value;
+	}
+	
+	@Override
+	public void add_to_current_value(double val)
+	{
+		this.current_val += val;
 	}
 	
 	public double get_current_val()

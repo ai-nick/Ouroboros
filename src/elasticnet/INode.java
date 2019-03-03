@@ -22,4 +22,6 @@ public interface INode {
 	public boolean is_output();
 	
 	public ArrayList<IConnection> get_connections();
+	
+	public void add_to_current_value(double val);
 }

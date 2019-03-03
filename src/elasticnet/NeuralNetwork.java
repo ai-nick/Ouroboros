@@ -24,6 +24,7 @@ public class NeuralNetwork implements INeuralNet {
 	@Override
 	public void Activate() {
 		// inputs needs to be same length as 
+		// recursive feed forward
 		ArrayList<INode> next_actives = new ArrayList<INode>();
 		int outs_count = 0;
 		for(int ix = 0; ix < next_actives.size(); ix++)
@@ -35,7 +36,7 @@ public class NeuralNetwork implements INeuralNet {
 				for(int x = 0; ix < current.get_connections().size(); x++)
 				{
 					INode next_node = current.get_connections().get(x).get_next_node();
-					next_node.set_current_val(current.get_current_val() * current.get_connections().get(x).get_weight());
+					next_node.add_to_current_value(current.get_current_val() * current.get_connections().get(x).get_weight());
 					if(!next_actives.contains(next_node))
 					{
 						next_actives.add(next_node);	
@@ -49,6 +50,7 @@ public class NeuralNetwork implements INeuralNet {
 		}
 		if(outs_count == this.activation_nodes.size())
 		{
+			this.fully_activated = true;
 			this.activation_nodes = next_actives;
 			return;
 		}
@@ -77,7 +79,7 @@ public class NeuralNetwork implements INeuralNet {
 	}
 
 	@Override
-	public ArrayList<Inode> get_output() {
+	public ArrayList<INode> get_output() {
 		// TODO Auto-generated method stub
 		if(this.fully_activated)
 		{
