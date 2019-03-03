@@ -10,7 +10,8 @@ public class NeuralNetwork implements INeuralNet {
 	ArrayList<INode> activation_nodes;
 	public boolean fully_activated;
 	HashMap<Integer, INode> nodes = new HashMap<Integer, INode>();
-	public boolean is_recurrent;
+	//public boolean is_recurrent;
+	public boolean feed_forward;
 	
 	public NeuralNetwork(ArrayList<Integer> in_nodes_ids, ArrayList<INode> nodes_incoming)
 	{
@@ -57,7 +58,14 @@ public class NeuralNetwork implements INeuralNet {
 		else
 		{
 			this.activation_nodes = next_actives;
-			this.Activate();
+			if(this.feed_forward == true)
+			{
+				this.Activate();				
+			}
+			else
+			{
+				return;
+			}
 		}
 	}
 
