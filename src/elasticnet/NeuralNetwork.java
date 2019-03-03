@@ -8,8 +8,9 @@ public class NeuralNetwork implements INeuralNet {
 	public int num_activations = 0;
 	ArrayList<Integer> input_ids;
 	ArrayList<INode> activation_nodes;
-	
+	public boolean fully_activated;
 	HashMap<Integer, INode> nodes = new HashMap<Integer, INode>();
+	public boolean is_recurrent;
 	
 	public NeuralNetwork(ArrayList<Integer> in_nodes_ids, ArrayList<INode> nodes_incoming)
 	{
@@ -48,10 +49,12 @@ public class NeuralNetwork implements INeuralNet {
 		}
 		if(outs_count == this.activation_nodes.size())
 		{
+			this.activation_nodes = next_actives;
 			return;
 		}
 		else
 		{
+			this.activation_nodes = next_actives;
 			this.Activate();
 		}
 	}
@@ -67,13 +70,23 @@ public class NeuralNetwork implements INeuralNet {
 	@Override
 	public void Reset() {
 		// TODO Auto-generated method stub
-
+		for(int key : this.nodes.keySet())
+		{
+			this.nodes.get(key).set_current_val(0.0);
+		}
 	}
 
 	@Override
-	public void get_output() {
+	public ArrayList<Inode> get_output() {
 		// TODO Auto-generated method stub
-
+		if(this.fully_activated)
+		{
+			return this.activation_nodes;
+		}
+		else
+		{
+			return new ArrayList<INode>();
+		}
 	}
 
 }
