@@ -1,7 +1,6 @@
 package elasticnet;
 import java.util.HashMap;
 import java.util.List;
-import com.google.gson.*;
 
 public class Genome {
 
@@ -67,11 +66,5 @@ public class Genome {
 	public int get_pop_id()
 	{
 		return this.population_hash;
-	}
-	
-	public String to_gson()
-	{
-		Gson g = new Gson();
-		return g.toJson(this);
 	}
 }

@@ -87,9 +87,25 @@ public class Population {
 	{
 		if (this.pop_species.size() == 0)
 		{
+			ArrayList<Integer> speciated = new ArrayList<Integer>();
+			double compat_t = Double.parseDouble(this.config.get("compatability_threshold"));
 			Random rnd = new Random();
 			int first_rep_index = rnd.nextInt(this.genomes.size());
-			
+			Genome first_rep = this.genomes.get(first_rep_index);
+			this.pop_species.add(new Species(first_rep.id));
+			speciated.add(first_rep_index);
+			for(int x = 0; x < this.num_genomes; x++)
+			{
+				boolean species_found = false;
+				if(!speciated.contains(x))
+				{
+					int num_species = this.pop_species.size();
+					for(int i = 0; i < num_species; i++)
+					{
+						
+					}
+				}
+			}
 		}
 	}
 	

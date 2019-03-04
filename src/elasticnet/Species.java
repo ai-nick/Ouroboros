@@ -6,4 +6,9 @@ public class Species {
 	ArrayList<Integer> member_ids;
 	int rep_id;
 	int pop_id;
+	
+	public Species(int id)
+	{
+		this.speciesID = id;
+	}
 }
