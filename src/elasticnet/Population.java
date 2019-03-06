@@ -19,6 +19,7 @@ public class Population {
 	int num_gens;
 	int hash_id;
 	int generations = 0;
+	int min_species_size = 5;
 	String fitness_function = "";
 	String ts = "";
 	int current_gen = 0;
@@ -127,13 +128,15 @@ public class Population {
 	
 	public void the_reproduction_function()
 	{
-		ArrayList<Double> adj_fit_sums = new ArrayList<Double>();
+		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
 			current.get_adjusted_fitness_sum(this.genomes);
+			adj_fit_sums.put(x, current.get_adjust_sum());
 		}
+		
 	}
 	
 	public void set_config(String conf)
