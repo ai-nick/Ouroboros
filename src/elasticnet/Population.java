@@ -125,6 +125,17 @@ public class Population {
 		}
 	}
 	
+	public void the_reproduction_function()
+	{
+		ArrayList<Double> adj_fit_sums = new ArrayList<Double>();
+		int num_species = this.pop_species.size();
+		for(int x = 0; x < num_species; x++)
+		{
+			Species current = this.pop_species.get(x);
+			current.get_adjusted_fitness_sum(this.genomes);
+		}
+	}
+	
 	public void set_config(String conf)
 	{
 		Gson g = new Gson();
