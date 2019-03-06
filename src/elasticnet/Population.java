@@ -39,7 +39,7 @@ public class Population {
 		this.config = config_in;
 	}
 	
-	public double speciate_genomes(Genome one, Genome two, int[] speciation_coefficients) {
+	public double compat_distance(Genome one, Genome two, Double[] speciation_coefficients) {
 		double w = (one.avg_w + two.avg_w) / 2;
 		double s = 0.0;
 		int e = 0,d = 0;
@@ -85,25 +85,41 @@ public class Population {
 	
 	public void speciate_population()
 	{
+		ArrayList<Integer> speciated = new ArrayList<Integer>();
+		
+		double compat_t = Double.parseDouble(this.config.get("compatability_threshold"));
+		
 		if (this.pop_species.size() == 0)
 		{
-			ArrayList<Integer> speciated = new ArrayList<Integer>();
-			double compat_t = Double.parseDouble(this.config.get("compatability_threshold"));
 			Random rnd = new Random();
 			int first_rep_index = rnd.nextInt(this.genomes.size());
 			Genome first_rep = this.genomes.get(first_rep_index);
 			this.pop_species.add(new Species(first_rep.id));
 			speciated.add(first_rep_index);
-			for(int x = 0; x < this.num_genomes; x++)
+		}
+		for(int x = 0; x < this.num_genomes; x++)
+		{
+			boolean species_found = false;
+			//check if its first species rep_index, not elegant but have to handle
+			if(!speciated.contains(x)) 
 			{
-				boolean species_found = false;
-				if(!speciated.contains(x))
+				Genome current_genome = this.genomes.get(x);
+				int num_species = this.pop_species.size();
+				for(int i = 0; i < num_species; i++)
 				{
-					int num_species = this.pop_species.size();
-					for(int i = 0; i < num_species; i++)
+					Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
+							current_genome,
+							new Double[3]);
+					if( dist < compat_t)
 					{
-						
+						this.pop_species.get(i).member_ids.add(current_genome.id);
+						speciated.add(current_genome.id);
 					}
+				}
+				if(!speciated.contains(current_genome.id))
+				{
+					this.pop_species.add(new Species(current_genome.id));
+					speciated.add(current_genome.id);
 				}
 			}
 		}
