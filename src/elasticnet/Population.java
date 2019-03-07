@@ -136,7 +136,7 @@ public class Population {
 			current.get_adjusted_fitness_sum(this.genomes);
 			adj_fit_sums.put(x, current.get_adjust_sum());
 		}
-		
+		int num_cross_breed = this.genomes.size() / 2;
 	}
 	
 	public void set_config(String conf)
