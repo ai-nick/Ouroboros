@@ -137,6 +137,11 @@ public class Population {
 			adj_fit_sums.put(x, current.get_adjust_sum());
 		}
 		int num_cross_breed = this.genomes.size() / 2;
+		List<Genome> new_pop = new ArrayList<Genome>();
+		while(new_pop.size() != num_cross_breed)
+		{
+			
+		}
 	}
 	
 	public void set_config(String conf)
