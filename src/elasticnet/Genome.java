@@ -22,7 +22,10 @@ public class Genome {
 		this.population_hash = p_hash;
 		this.fitness = 0.0;
 	}
-	
+	public Genome(double test_fit)
+	{
+		fitness = test_fit;
+	}
 	public double get_prime(int num_others)
 	{
 		return this.fitness/num_others;
