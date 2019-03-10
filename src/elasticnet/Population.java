@@ -143,7 +143,73 @@ public class Population {
 			
 		}
 	}
-	
+	public void quick_sort_big_dumb(int[] sort_array, int left, int right)
+	{
+		int pivot = right;
+		right--;
+		while(left<right)
+		{
+			if(this.genomes.get(sort_array[left]).fitness > this.genomes.get(sort_array[pivot]).fitness)
+			{
+				if(this.genomes.get(right).fitness < this.genomes.get(sort_array[pivot]).fitness)
+				{
+					int t = sort_array[left];
+					sort_array[left] = sort_array[right];
+					sort_array[right] = t;
+					right--;
+					left++;
+				}
+				else
+				{
+					right--;
+				}
+			}
+			else
+			{
+				if(this.genomes.get(right).fitness < this.genomes.get(sort_array[pivot]).fitness)
+				{
+					left++;
+				}
+			}
+			left++;
+			right--;
+		}
+		int t = sort_array[left];
+		sort_array[left] = sort_array[sort_array.length-1];
+		sort_array[sort_array.length-1] = t;
+		quick_sort_big_dumb(sort_array, 0, right);
+		quick_sort_big_dumb(sort_array, left, pivot);
+	}
+	/*
+	public int[] sort_genomes_by_shared_fitness_myway(int[] sort_array)
+	{
+		int p_idx = sort_array.length;
+		int[] return_array = sort_array;
+		int scan_id = p_idx - 1;
+		while(scan_id != 0)
+		{
+			if(this.genomes.get(scan_id).fitness >= this.genomes.get(p_idx).fitness)
+			{
+				int place_hold = 
+				return_array[p_idx] = sort_array[scan_id];
+				return_array[p_idx-1] = sort_array[p_idx];
+				if(scan_id < p_idx-1)
+				{
+					return_array[scan_id] = sort_array[]
+				}
+				p_idx--;
+				scan_id--;
+			}
+			else
+			{
+				scan_id--;
+			}
+			
+			return return_array;
+		}
+
+	}
+	*/
 	public void set_config(String conf)
 	{
 		Gson g = new Gson();
