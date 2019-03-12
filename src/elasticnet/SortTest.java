@@ -22,20 +22,20 @@ public class SortTest {
 		}
 	}
 
-	public void quick_sort_big_dumb(int left, int right)
+	public void quick_sort_big_dumb(int[] sort_array, int left, int right)
 	{
 		int left_start = left;
 		int pivot = right;
 		right--;
 		while(left<right)
 		{
-			if(this.genomes.get(this.index_array[left]).fitness > this.genomes.get(this.index_array[pivot]).fitness)
+			if(this.genomes.get(sort_array[left]).fitness > this.genomes.get(sort_array[pivot]).fitness)
 			{
-				if(this.genomes.get(this.index_array[right]).fitness < this.genomes.get(this.index_array[pivot]).fitness)
+				if(this.genomes.get(sort_array[right]).fitness < this.genomes.get(sort_array[pivot]).fitness)
 				{
-					int t = this.index_array[left];
-					this.index_array[left] = this.index_array[right];
-					this.index_array[right] = t;
+					int t = sort_array[left];
+					sort_array[left] = sort_array[right];
+					sort_array[right] = t;
 					right--;
 					left++;
 				}
@@ -46,7 +46,7 @@ public class SortTest {
 			}
 			else
 			{
-				if(this.genomes.get(this.index_array[right]).fitness < this.genomes.get(this.index_array[pivot]).fitness)
+				if(this.genomes.get(sort_array[right]).fitness < this.genomes.get(sort_array[pivot]).fitness)
 				{
 					left++;
 				}
@@ -57,17 +57,17 @@ public class SortTest {
 				}
 			}
 		}
-		if(this.genomes.get(this.index_array[left]).fitness > this.genomes.get(this.index_array[pivot]).fitness)
+		if(this.genomes.get(sort_array[left]).fitness > this.genomes.get(sort_array[pivot]).fitness)
 		{
-			int t = this.index_array[left];
-			this.index_array[left] = this.index_array[pivot];
-			this.index_array[pivot] = t;
+			int t = sort_array[left];
+			sort_array[left] = sort_array[pivot];
+			sort_array[pivot] = t;
 		}
 		else
 		{
-			int t = this.index_array[left+1];
-			this.index_array[left+1] = this.index_array[pivot];
-			this.index_array[pivot] = t;
+			int t = sort_array[left+1];
+			sort_array[left+1] = sort_array[pivot];
+			sort_array[pivot] = t;
 			left++;
 		}
 		if(left == right)
@@ -77,11 +77,11 @@ public class SortTest {
 		}
 		if(right > left_start+1)
 		{
-			quick_sort_big_dumb(left_start, right);	
+			quick_sort_big_dumb(sort_array, left_start, right);	
 		}
 		if(left < pivot-1)
 		{
-			quick_sort_big_dumb(left, pivot);	
+			quick_sort_big_dumb(sort_array, left, pivot);	
 		}
 	}
 	
@@ -93,7 +93,7 @@ public class SortTest {
 			System.out.println(test.index_array[x]);
 		}
 		System.out.println("starting sort");
-		test.quick_sort_big_dumb(0, test.index_array.length-1);
+		test.quick_sort_big_dumb(test.index_array, 0, test.index_array.length-1);
 		
 		for(int x = 0; x < 155; x++)
 		{

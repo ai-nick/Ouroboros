@@ -145,13 +145,14 @@ public class Population {
 	}
 	public void quick_sort_big_dumb(int[] sort_array, int left, int right)
 	{
+		int left_start = left;
 		int pivot = right;
 		right--;
 		while(left<right)
 		{
 			if(this.genomes.get(sort_array[left]).fitness > this.genomes.get(sort_array[pivot]).fitness)
 			{
-				if(this.genomes.get(right).fitness < this.genomes.get(sort_array[pivot]).fitness)
+				if(this.genomes.get(sort_array[right]).fitness < this.genomes.get(sort_array[pivot]).fitness)
 				{
 					int t = sort_array[left];
 					sort_array[left] = sort_array[right];
@@ -166,19 +167,43 @@ public class Population {
 			}
 			else
 			{
-				if(this.genomes.get(right).fitness < this.genomes.get(sort_array[pivot]).fitness)
+				if(this.genomes.get(sort_array[right]).fitness < this.genomes.get(sort_array[pivot]).fitness)
 				{
 					left++;
 				}
+				else
+				{
+					left++;
+					right--;
+				}
 			}
+		}
+		if(this.genomes.get(sort_array[left]).fitness > this.genomes.get(sort_array[pivot]).fitness)
+		{
+			int t = sort_array[left];
+			sort_array[left] = sort_array[pivot];
+			sort_array[pivot] = t;
+		}
+		else
+		{
+			int t = sort_array[left+1];
+			sort_array[left+1] = sort_array[pivot];
+			sort_array[pivot] = t;
+			left++;
+		}
+		if(left == right)
+		{
 			left++;
 			right--;
 		}
-		int t = sort_array[left];
-		sort_array[left] = sort_array[sort_array.length-1];
-		sort_array[sort_array.length-1] = t;
-		quick_sort_big_dumb(sort_array, 0, right);
-		quick_sort_big_dumb(sort_array, left, pivot);
+		if(right > left_start+1)
+		{
+			quick_sort_big_dumb(sort_array, left_start, right);	
+		}
+		if(left < pivot-1)
+		{
+			quick_sort_big_dumb(sort_array, left, pivot);	
+		}
 	}
 	/*
 	public int[] sort_genomes_by_shared_fitness_myway(int[] sort_array)
