@@ -133,8 +133,7 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
-			current.get_adjusted_fitness_sum(this.genomes);
-			adj_fit_sums.put(x, current.get_adjust_sum());
+			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 		}
 		int num_cross_breed = this.genomes.size() / 2;
 		List<Genome> new_pop = new ArrayList<Genome>();
