@@ -15,6 +15,7 @@ import java.util.Arrays;
 public class Population {
 	
 	ArrayList<Genome> genomes = new ArrayList<Genome>();
+	int[] sorted_index_list;
 	int num_genomes;
 	int num_gens;
 	int hash_id;
@@ -38,6 +39,11 @@ public class Population {
 		this.num_genomes = num_genomes;
 		this.num_gens = gens;
 		this.config = config_in;
+		this.sorted_index_list = new int[num_genomes];
+		for(int i = 0; i < num_genomes; i++)
+		{
+			this.sorted_index_list[i] = i;
+		}
 	}
 	
 	public double compat_distance(Genome one, Genome two, Double[] speciation_coefficients) {
@@ -87,6 +93,8 @@ public class Population {
 	public void speciate_population()
 	{
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
+		
+		this.quick_sort_big_dumb(this.sorted_index_list, 0, this.sorted_index_list.length-1);
 		
 		double compat_t = Double.parseDouble(this.config.get("compatability_threshold"));
 		
