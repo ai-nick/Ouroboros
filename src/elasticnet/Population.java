@@ -126,7 +126,7 @@ public class Population {
 		}
 	}
 	
-	public void the_reproduction_function()
+	public void the_reproduction_function(int save_top_and_mutate)
 	{
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
@@ -139,7 +139,10 @@ public class Population {
 		List<Genome> new_pop = new ArrayList<Genome>();
 		while(new_pop.size() != num_cross_breed)
 		{
-			
+			for (int ix = 0; ix < save_top_and_mutate; ix++)
+			{
+				new_pop.add(this.genomes.get(ix));
+			}
 		}
 	}
 	public void quick_sort_big_dumb(int[] sort_array, int left, int right)
