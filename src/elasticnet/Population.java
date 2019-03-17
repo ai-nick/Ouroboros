@@ -34,18 +34,25 @@ public class Population {
 		this.hash_id = this.ts.hashCode();
 	}
 	
-	public Population(int num_genomes, int gens, HashMap<String, String> config_in) 
+	public Population(int num_genomes, int gens, int gen,  HashMap<String, String> config_in) 
 	{
 		this.num_genomes = num_genomes;
 		this.num_gens = gens;
 		this.config = config_in;
 		this.sorted_index_list = new int[num_genomes];
+		if (gen == 0) {
+			this.set_up_first_pop();
+		}
 		for(int i = 0; i < num_genomes; i++)
 		{
 			this.sorted_index_list[i] = i;
 		}
 	}
 	
+	public void set_up_first_pop()
+	{
+		
+	}
 	public double compat_distance(Genome one, Genome two, Double[] speciation_coefficients) {
 		double w = (one.avg_w + two.avg_w) / 2;
 		double s = 0.0;
@@ -93,8 +100,6 @@ public class Population {
 	public void speciate_population()
 	{
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
-		
-		this.quick_sort_big_dumb(this.sorted_index_list, 0, this.sorted_index_list.length-1);
 		
 		double compat_t = Double.parseDouble(this.config.get("compatability_threshold"));
 		
@@ -153,16 +158,17 @@ public class Population {
 			}
 		}
 	}
-	public void quick_sort_big_dumb(int[] sort_array, int left, int right)
+	
+	public void quick_sort_big_dumb(int[] sort_array, HashMap<Integer, Double> sort_dict, int left, int right)
 	{
 		int left_start = left;
 		int pivot = right;
 		right--;
 		while(left<right)
 		{
-			if(this.genomes.get(sort_array[left]).fitness > this.genomes.get(sort_array[pivot]).fitness)
+			if(sort_dict.get(sort_array[left]) > sort_dict.get(sort_array[pivot]))
 			{
-				if(this.genomes.get(sort_array[right]).fitness < this.genomes.get(sort_array[pivot]).fitness)
+				if(sort_dict.get(sort_array[right]) < sort_dict.get(sort_array[pivot]))
 				{
 					int t = sort_array[left];
 					sort_array[left] = sort_array[right];
@@ -177,7 +183,7 @@ public class Population {
 			}
 			else
 			{
-				if(this.genomes.get(sort_array[right]).fitness < this.genomes.get(sort_array[pivot]).fitness)
+				if(sort_dict.get(sort_array[right]) < sort_dict.get(sort_array[pivot]))
 				{
 					left++;
 				}
@@ -188,7 +194,7 @@ public class Population {
 				}
 			}
 		}
-		if(this.genomes.get(sort_array[left]).fitness > this.genomes.get(sort_array[pivot]).fitness)
+		if(sort_dict.get(sort_array[left]) > sort_dict.get(sort_array[pivot]))
 		{
 			int t = sort_array[left];
 			sort_array[left] = sort_array[pivot];
@@ -208,11 +214,11 @@ public class Population {
 		}
 		if(right > left_start+1)
 		{
-			quick_sort_big_dumb(sort_array, left_start, right);	
+			quick_sort_big_dumb(sort_array, sort_dict, left_start, right);	
 		}
 		if(left < pivot-1)
 		{
-			quick_sort_big_dumb(sort_array, left, pivot);	
+			quick_sort_big_dumb(sort_array, sort_dict, left, pivot);	
 		}
 	}
 	/*
