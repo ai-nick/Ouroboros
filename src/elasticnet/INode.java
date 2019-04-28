@@ -24,4 +24,6 @@ public interface INode {
 	public ArrayList<IConnection> get_connections();
 	
 	public void add_to_current_value(double val);
+	
+	public String get_activation();
 }

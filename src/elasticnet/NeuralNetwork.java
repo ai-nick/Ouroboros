@@ -13,8 +13,10 @@ public class NeuralNetwork implements INeuralNet {
 	public boolean feed_forward;
 	int num_output = 0;
 	int outs_count = 0;
+	
 	public NeuralNetwork(ArrayList<Integer> in_nodes_ids, ArrayList<INode> nodes_incoming, int n_outputs)
 	{
+		
 		//no comment
 		this.num_output = n_outputs;
 		this.input_ids = in_nodes_ids;

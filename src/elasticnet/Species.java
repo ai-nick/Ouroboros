@@ -9,6 +9,8 @@ public class Species {
 	int pop_id;
 	double adjust_fit_sum = 0.0;
 	int num_genomes = 0;
+	double best_fitness = 0.0;
+	int best_genome_index;
 	
 	public Species(int id)
 	{
@@ -24,8 +26,12 @@ public class Species {
 		return this.adjust_fit_sum;
 	}
 	
-	public void add_genome(int genomeId)
+	public void add_genome(int genomeId, double fitness)
 	{
+		if(fitness > this.best_fitness)
+		{
+			
+		}
 		this.member_ids.add(genomeId);
 		this.num_genomes++;
 	}
@@ -35,4 +41,8 @@ public class Species {
 		return this.num_genomes;
 	}
 	
+	public int get_best_genome_idx()
+	{
+		return 0;
+	}
 }
