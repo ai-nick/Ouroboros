@@ -159,6 +159,11 @@ public class Population {
 		}
 	}
 	
+	public void cross_breed_(int a, int b)
+	{
+		
+	}
+	
 	public void quick_sort_big_dumb(int[] sort_array, HashMap<Integer, Double> sort_dict, int left, int right)
 	{
 		int left_start = left;
@@ -257,6 +262,7 @@ public class Population {
 		Type type = new TypeToken<HashMap<String, String>>(){}.getType();
 		this.config = g.fromJson(g.toJson(conf), type);
 	}
+	
 	public String as_json()
 	{
 		Gson gson = new Gson();

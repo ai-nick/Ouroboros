@@ -11,11 +11,20 @@ public class NodeGene implements INode {
 	boolean is_recurrent;
 	ArrayList<IConnection> connections = new ArrayList<IConnection>();
 	double current_val = 0.0;
+	int level;
 	
 	
 	public NodeGene(int inno_id, String act) {
 		this.inno_id = inno_id;
 		this.activation = act;
+		this.level = 0;
+	}
+	
+	public NodeGene(int inno_id, String act, int level)
+	{
+		this.inno_id = inno_id;
+		this.activation = act;
+		this.level = level;
 	}
 	
 	@Override
@@ -63,7 +72,7 @@ public class NodeGene implements INode {
 	@Override
 	public int get_level() {
 		// TODO Auto-generated method stub
-		return 0;
+		return level; 
 	}
 
 	@Override
