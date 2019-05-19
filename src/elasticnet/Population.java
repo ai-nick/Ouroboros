@@ -53,6 +53,7 @@ public class Population {
 	{
 		
 	}
+	
 	public double compat_distance(Genome one, Genome two, Double[] speciation_coefficients) {
 		double w = (one.avg_w + two.avg_w) / 2;
 		double s = 0.0;
@@ -97,6 +98,9 @@ public class Population {
 		return s;
 	}
 	
+	
+	// split genomes into species using compat dists
+	
 	public void speciate_population()
 	{
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
@@ -139,6 +143,8 @@ public class Population {
 		}
 	}
 	
+	// determine the number of genomes each species should reproduce
+	
 	public void the_reproduction_function(int save_top_and_mutate)
 	{
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
@@ -159,10 +165,18 @@ public class Population {
 		}
 	}
 	
-	public void cross_breed_(int a, int b)
+	// breed two genomes, params are the ids
+	
+	public void cross_breed(int a, int b)
 	{
+		Genome GenomeA = this.genomes.get(a);
+		
+		Genome GenomeB = this.genomes.get(b);
+		
 		
 	}
+	
+	//sort genomes by fitness
 	
 	public void quick_sort_big_dumb(int[] sort_array, HashMap<Integer, Double> sort_dict, int left, int right)
 	{
@@ -226,6 +240,7 @@ public class Population {
 			quick_sort_big_dumb(sort_array, sort_dict, left, pivot);	
 		}
 	}
+	
 	/*
 	public int[] sort_genomes_by_shared_fitness_myway(int[] sort_array)
 	{
@@ -256,6 +271,7 @@ public class Population {
 
 	}
 	*/
+	
 	public void set_config(String conf)
 	{
 		Gson g = new Gson();
