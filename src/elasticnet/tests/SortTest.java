@@ -1,7 +1,9 @@
-package elasticnet;
+package elasticnet.tests;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import elasticnet.Genome;
 
 public class SortTest {
 	

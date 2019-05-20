@@ -144,36 +144,69 @@ public class Population {
 	}
 	
 	// determine the number of genomes each species should reproduce
-	
+	// TODO need to hash out how to let species grow, target the desired pop_size
 	public void the_reproduction_function(int save_top_and_mutate)
 	{
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
+		double min_species_size = Integer.parseInt(this.config.get("min_species_size"));
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 		}
-		int num_cross_breed = this.genomes.size() / 2;
 		List<Genome> new_pop = new ArrayList<Genome>();
-		while(new_pop.size() != num_cross_breed)
-		{
-			for (int ix = 0; ix < save_top_and_mutate; ix++)
-			{
-				new_pop.add(this.genomes.get(ix));
-			}
-		}
+		
 	}
 	
 	// breed two genomes, params are the ids
 	
-	public void cross_breed(int a, int b)
+	public void cross_breed(Genome a, Genome b)
 	{
-		Genome GenomeA = this.genomes.get(a);
+		Genome GenomeA;
+		Genome GenomeB;
+		if(a.fitness > b.fitness)
+		{
+			GenomeA = a;
+			
+			GenomeB = b;			
+		}
+		else
+		{
+			GenomeA = b;
+			
+			GenomeB = a;
+		}
+		Genome offspring = new Genome(this.hash_id);
 		
-		Genome GenomeB = this.genomes.get(b);
+		// get the max num of genes for hidden nodes and connections 
 		
+		int conn_gene_counter = 0;
 		
+		int node_gene_counter = 0;
+		
+		if (GenomeA.hidden_nodes.size() > GenomeB.hidden_nodes.size())
+		{
+			node_gene_counter = GenomeA.output_nodes.size()+GenomeA.input_nodes.size()+GenomeA.hidden_nodes.size();
+		}
+		else
+		{
+			node_gene_counter = GenomeB.output_nodes.size()+GenomeB.input_nodes.size()+GenomeB.hidden_nodes.size();
+		}
+		
+		if(GenomeA.conn_genes.size() > GenomeB.conn_genes.size())
+		{
+			conn_gene_counter = GenomeA.conn_genes.size();
+		}
+		else
+		{
+			conn_gene_counter = GenomeB.conn_genes.size();
+		}
+		
+		for (int i = 0; i < conn_gene_counter; i++)
+		{
+			
+		}
 	}
 	
 	//sort genomes by fitness
