@@ -27,6 +27,8 @@ public class Population {
 	int inno_num = 0;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	HashMap<String, String> config;
+	HashMap<Integer, IConnection> conn_genes;
+	HashMap<Integer, INode> node_genes;
 	
 	public Population() 
 	{
@@ -163,6 +165,7 @@ public class Population {
 	
 	public void cross_breed(Genome a, Genome b)
 	{
+		// genome a will be the fitter of the two mates
 		Genome GenomeA;
 		Genome GenomeB;
 		if(a.fitness > b.fitness)
