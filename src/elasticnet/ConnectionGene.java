@@ -18,6 +18,10 @@ public class ConnectionGene implements IConnection {
 		this.weight = w;
 	}
 	
+	public int get_id()
+	{
+		return inno_id;
+	}
 	public double get_weight() {
 		return this.weight;
 	}
