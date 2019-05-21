@@ -209,7 +209,10 @@ public class Population {
 		for (int i = 0; i < conn_gene_counter; i++)
 		{
 			IConnection gA = this.conn_genes.get(GenomeA.get_connection_gene(i));
-			if(gA.get_id() )
+			if(!GenomeB.conn_genes.contains(gA.get_id()))
+			{
+				offspring.conn_genes.add(gA.get_id());
+			}
 		}
 	}
 	
