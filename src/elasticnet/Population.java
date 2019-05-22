@@ -208,10 +208,10 @@ public class Population {
 		
 		for (int i = 0; i < conn_gene_counter; i++)
 		{
-			IConnection gA = this.conn_genes.get(GenomeA.get_connection_gene(i));
-			if(!GenomeB.conn_genes.contains(gA.get_id()))
+			IConnection gA = GenomeA.conn_genes.get(i);
+			if(!GenomeB.conn_genes.contains(gA))
 			{
-				offspring.conn_genes.add(gA.get_id());
+				offspring.conn_genes.add(gA);
 			}
 			else
 			{
@@ -344,7 +344,7 @@ public class Population {
 		
 		for(String key : a.atts.keySet())
 		{
-			if(Math.Random() > .5)
+			if(Math.random() > .5)
 			{
 				new_gene.put(key, a.atts.get(key));
 			}
