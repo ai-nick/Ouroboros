@@ -213,6 +213,10 @@ public class Population {
 			{
 				offspring.conn_genes.add(gA.get_id());
 			}
+			else
+			{
+				
+			}
 		}
 	}
 	
@@ -324,5 +328,18 @@ public class Population {
 		Gson gson = new Gson();
 		String json_string = gson.toJson(this);
 		return json_string;
+	}
+	
+	
+	// private methods ie cant imagine neededing to call these anywhere other
+	// than public methods above, feel free to tell me im wrong if i am
+	
+	private ConnectionGene _cross_over_genes(ConnectionGene a, ConnectionGene b)
+	{
+		ConnectionGene new_gene = new ConnectionGene(this.inno_num, a.get_id());
+		
+		new_gene.activation_level = a.activation_level;
+		
+		int att_count = a.atts.size();
 	}
 }

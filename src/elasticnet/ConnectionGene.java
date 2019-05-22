@@ -1,4 +1,5 @@
 package elasticnet;
+import java.util.HashMap;
 
 public class ConnectionGene implements IConnection {
 
@@ -6,7 +7,8 @@ public class ConnectionGene implements IConnection {
 	NodeGene from_node;
 	NodeGene to_node;
 	int activation_level;
-	double weight;
+	HashMap<String, Double> atts = new HashMap<String, Double>();
+	int gene_id;
 	
 	public ConnectionGene(NodeGene f, NodeGene t, int inno) {
 		this.inno_id = inno;
@@ -14,8 +16,13 @@ public class ConnectionGene implements IConnection {
 		this.to_node = t;
 	}
 	
+	public ConnectionGene(int inno_id, int gene_id) {
+		this.inno_id = inno_id;
+		this.gene_id = gene_id;
+	}
+	
 	public void set_weight(double w) {
-		this.weight = w;
+		this.atts.put("weight", w);
 	}
 	
 	public int get_id()
@@ -23,7 +30,7 @@ public class ConnectionGene implements IConnection {
 		return inno_id;
 	}
 	public double get_weight() {
-		return this.weight;
+		return this.atts.get("weight");
 	}
 	public NodeGene get_from() {
 		return this.from_node;
