@@ -341,5 +341,17 @@ public class Population {
 		new_gene.activation_level = a.activation_level;
 		
 		int att_count = a.atts.size();
+		
+		for(String key : a.atts.keySet())
+		{
+			if(Math.Random() > .5)
+			{
+				new_gene.put(key, a.atts.get(key));
+			}
+			else
+			{
+				new_gene.put(key, b.atts.get(key));
+			}
+		}
 	}
 }
