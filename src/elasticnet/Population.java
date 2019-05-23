@@ -183,6 +183,7 @@ public class Population {
 		Genome offspring = new Genome(this.hash_id);
 		
 		// get the max num of genes for hidden nodes and connections 
+		boolean use_a;
 		
 		int conn_gene_counter = 0;
 		
@@ -196,28 +197,35 @@ public class Population {
 		{
 			node_gene_counter = GenomeB.output_nodes.size()+GenomeB.input_nodes.size()+GenomeB.hidden_nodes.size();
 		}
-		
+		/*
 		if(GenomeA.conn_genes.size() > GenomeB.conn_genes.size())
 		{
 			conn_gene_counter = GenomeA.conn_genes.size();
+			use_a = true;
 		}
 		else
 		{
 			conn_gene_counter = GenomeB.conn_genes.size();
+			use_a = false;
 		}
-		
-		for (int i = 0; i < conn_gene_counter; i++)
+		*/
+		for (Integer k : GenomeA.conn_genes.keySet())
 		{
-			IConnection gA = GenomeA.conn_genes.get(i);
-			if(!GenomeB.conn_genes.contains(gA))
+			ConnectionGene gA = GenomeA.conn_genes.get(k);
+			if(!GenomeB.conn_genes.containsValue(gA))
 			{
-				offspring.conn_genes.add(gA);
+				offspring.conn_genes.put(k, gA);
 			}
 			else
 			{
-				
+				ConnectionGene gB = GenomeB.conn_genes.get(k);
+				offspring.conn_genes.put(k, _cross_over_genes(gA, gB));
 			}
 		}
+		
+		// now the connection genes have been handled, on to nodes
+		
+		
 	}
 	
 	//sort genomes by fitness

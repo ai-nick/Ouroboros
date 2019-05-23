@@ -11,7 +11,7 @@ public class Genome {
 	int species_id;
 	public double fitness;
 	public int avg_w;
-	List<IConnection> conn_genes;
+	HashMap<Integer, ConnectionGene> conn_genes;
 	List<NodeGene> input_nodes;
 	List<NodeGene> hidden_nodes;
 	List<NodeGene> output_nodes;
@@ -36,7 +36,7 @@ public class Genome {
 		this.input_nodes = ngs;
 	}
 	
-	public void set_connections(List<IConnection> conngs)
+	public void set_connections(HashMap<Integer, ConnectionGene> conngs)
 	{
 		this.conn_genes = conngs;
 	}
@@ -46,7 +46,7 @@ public class Genome {
 		return input_nodes.get(idx);
 	}
 	
-	public IConnection get_connection_gene(int idx)
+	public ConnectionGene get_connection_gene(int idx)
 	{
 		return conn_genes.get(idx);
 	}
