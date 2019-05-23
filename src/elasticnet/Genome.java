@@ -70,4 +70,13 @@ public class Genome {
 	{
 		return this.population_hash;
 	}
+	
+	public List<NodeGene> get_all_nodes()
+	{
+		List<NodeGene> all = new List<NodeGene>();
+		all.addAll(input_nodes);
+		all.addAll(hidden_nodes);
+		all.addAll(output_nodes);
+		return all;
+	}
 }

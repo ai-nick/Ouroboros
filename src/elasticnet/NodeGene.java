@@ -10,6 +10,7 @@ public class NodeGene implements INode {
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
 	ArrayList<IConnection> connections = new ArrayList<IConnection>();
+	HashMap<String, Object> atts = new HashMap<String, Object>();
 	double current_val = 0.0;
 	int level;
 	
