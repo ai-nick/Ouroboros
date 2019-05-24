@@ -1,5 +1,6 @@
 package elasticnet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class NodeGene implements INode {
 	// just a real baseline implementation of how i think a neat node would be implemented

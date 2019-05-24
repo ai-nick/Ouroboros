@@ -1,4 +1,5 @@
 package elasticnet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,9 +13,9 @@ public class Genome {
 	public double fitness;
 	public int avg_w;
 	HashMap<Integer, ConnectionGene> conn_genes;
-	List<NodeGene> input_nodes;
-	List<NodeGene> hidden_nodes;
-	List<NodeGene> output_nodes;
+	ArrayList<NodeGene> input_nodes;
+	ArrayList<NodeGene> hidden_nodes;
+	ArrayList<NodeGene> output_nodes;
 	public int gene_id_min, gene_id_max;
 	HashMap<Integer, Double> fit_dists;
 	
@@ -31,7 +32,7 @@ public class Genome {
 		return this.fitness/num_others;
 	}
 	
-	public void set_nodes(List<NodeGene> ngs)
+	public void set_nodes(ArrayList<NodeGene> ngs)
 	{
 		this.input_nodes = ngs;
 	}
@@ -71,12 +72,24 @@ public class Genome {
 		return this.population_hash;
 	}
 	
-	public List<NodeGene> get_all_nodes()
+	public HashMap<Integer, NodeGene> get_all_nodes()
 	{
-		List<NodeGene> all = new List<NodeGene>();
-		all.addAll(input_nodes);
-		all.addAll(hidden_nodes);
-		all.addAll(output_nodes);
-		return all;
+		HashMap<Integer, NodeGene> all_nodes = new HashMap<Integer, NodeGene>();
+		int in_count = input_nodes.size();
+		for (int i = 0; i < in_count; i++)
+		{
+			all_nodes.put(input_nodes.get(i).inno_id, input_nodes.get(i));
+		}
+		int hidden_count = hidden_nodes.size();
+		for (int i = 0; i < hidden_count; i++)
+		{
+			all_nodes.put(hidden_nodes.get(i).inno_id, hidden_nodes.get(i));
+		}
+		int out_count = output_nodes.size();
+		for (int i = 0; i < out_count; i++)
+		{
+			all_nodes.put(output_nodes.get(i).inno_id, output_nodes.get(i));
+		}
+		return all_nodes;
 	}
 }

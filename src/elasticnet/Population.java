@@ -224,7 +224,10 @@ public class Population {
 		}
 		
 		// now the connection genes have been handled, on to nodes
-		
+		for (Integer ik: GenomeA.get_all_nodes().keySet())
+		{
+			
+		}
 		
 	}
 	
