@@ -15,6 +15,10 @@ public class NodeGene implements INode {
 	double current_val = 0.0;
 	int level;
 	
+	public NodeGene(int inno_id)
+	{
+		this.inno_id = inno_id;
+	}
 	
 	public NodeGene(int inno_id, String act) {
 		this.inno_id = inno_id;

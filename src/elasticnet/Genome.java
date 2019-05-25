@@ -37,6 +37,22 @@ public class Genome {
 		this.input_nodes = ngs;
 	}
 	
+	public void set_node(NodeGene ng)
+	{
+		if(ng.is_input)
+		{
+			input_nodes.add(ng);
+		}
+		else if (ng.is_output)
+		{
+			output_nodes.add(ng);
+		}
+		else
+		{
+			hidden_nodes.add(ng);
+		}
+	}
+	
 	public void set_connections(HashMap<Integer, ConnectionGene> conngs)
 	{
 		this.conn_genes = conngs;

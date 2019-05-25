@@ -226,7 +226,16 @@ public class Population {
 		// now the connection genes have been handled, on to nodes
 		for (Integer ik: GenomeA.get_all_nodes().keySet())
 		{
-			
+			NodeGene gA = GenomeA.get_all_nodes().get(ik);
+			if(!GenomeB.get_all_nodes().containsKey(ik))
+			{
+				offspring.conn_genes.put(ik, gA);
+			}
+			else
+			{
+				NodeGene gB = GenomeB.get_all_nodes().get(ik);
+				offspring.set_node()
+			}
 		}
 		
 	}
@@ -345,7 +354,7 @@ public class Population {
 	// private methods ie cant imagine neededing to call these anywhere other
 	// than public methods above, feel free to tell me im wrong if i am
 	
-	private ConnectionGene _cross_over_genes(ConnectionGene a, ConnectionGene b)
+	private ConnectionGene _cross_over_conns(ConnectionGene a, ConnectionGene b)
 	{
 		ConnectionGene new_gene = new ConnectionGene(this.inno_num, a.get_id());
 		
@@ -357,12 +366,18 @@ public class Population {
 		{
 			if(Math.random() > .5)
 			{
-				new_gene.put(key, a.atts.get(key));
+				new_gene.atts.put(key, a.atts.get(key));
 			}
 			else
 			{
-				new_gene.put(key, b.atts.get(key));
+				new_gene.atts.put(key, b.atts.get(key));
 			}
 		}
+		return new_gene;
+	}
+	
+	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b)
+	{
+		NodeGene new_node = new NodeGene()
 	}
 }
