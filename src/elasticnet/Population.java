@@ -219,7 +219,7 @@ public class Population {
 			else
 			{
 				ConnectionGene gB = GenomeB.conn_genes.get(k);
-				offspring.conn_genes.put(k, _cross_over_genes(gA, gB));
+				offspring.conn_genes.put(k, _cross_over_conns(gA, gB));
 			}
 		}
 		
@@ -229,12 +229,12 @@ public class Population {
 			NodeGene gA = GenomeA.get_all_nodes().get(ik);
 			if(!GenomeB.get_all_nodes().containsKey(ik))
 			{
-				offspring.conn_genes.put(ik, gA);
+				offspring.set_node(gA);
 			}
 			else
 			{
 				NodeGene gB = GenomeB.get_all_nodes().get(ik);
-				offspring.set_node()
+				offspring.set_node(_cross_over_nodes(gA, gB));
 			}
 		}
 		
@@ -360,8 +360,6 @@ public class Population {
 		
 		new_gene.activation_level = a.activation_level;
 		
-		int att_count = a.atts.size();
-		
 		for(String key : a.atts.keySet())
 		{
 			if(Math.random() > .5)
@@ -378,6 +376,20 @@ public class Population {
 	
 	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b)
 	{
-		NodeGene new_node = new NodeGene()
+		NodeGene new_node = new NodeGene(this.hash_id, a.get_node_id());
+		new_node.level = a.level;
+		
+		for(String key : a.atts.keySet())
+		{
+			if(Math.random() > .5)
+			{
+				new_node.atts.put(key, a.atts.get(key));
+			}
+			else
+			{
+				new_node.atts.put(key, b.atts.get(key));
+			}
+		}
+		return new_node;
 	}
 }

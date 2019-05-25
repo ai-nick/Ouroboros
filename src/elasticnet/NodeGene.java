@@ -8,6 +8,7 @@ public class NodeGene implements INode {
 	boolean is_output;
 	String activation = "";
 	int inno_id;
+	int pop_id;
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
 	ArrayList<IConnection> connections = new ArrayList<IConnection>();
@@ -15,8 +16,9 @@ public class NodeGene implements INode {
 	double current_val = 0.0;
 	int level;
 	
-	public NodeGene(int inno_id)
+	public NodeGene(int pop_id, int inno_id)
 	{
+		this.pop_id = pop_id;
 		this.inno_id = inno_id;
 	}
 	
