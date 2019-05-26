@@ -27,8 +27,9 @@ public class Population {
 	int inno_num = 0;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	HashMap<String, String> config;
-	HashMap<Integer, IConnection> conn_genes;
-	HashMap<Integer, INode> node_genes;
+	// elected to store this in the genomes themselves
+	//HashMap<Integer, IConnection> conn_genes;
+	//HashMap<Integer, INode> node_genes;
 	
 	public Population() 
 	{
@@ -151,13 +152,19 @@ public class Population {
 	{
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
-		double min_species_size = Integer.parseInt(this.config.get("min_species_size"));
+		double elitism_percent = Double.parseDouble(this.config.get("elite_percent"));
+		int saved_sum = 0;
+		// next we will reduce each species by this elitism percent
+		// and add the new amount of the species to our save_sum
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
+			int keep_top = (int)((double)current.num_genomes * elitism_percent);
+			saved_sum += keep_top;
+			current.have_mercy(keep_top);
 		}
-		List<Genome> new_pop = new ArrayList<Genome>();
+		ArrayList<Genome> new_pop = new ArrayList<Genome>();
 		
 	}
 	

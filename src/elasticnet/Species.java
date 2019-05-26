@@ -1,7 +1,8 @@
 package elasticnet;
 import java.util.ArrayList;
 
-
+// keeping this lightweight, only storing indexes into the "population"
+// array list of genomes
 public class Species {
 	int speciesID;
 	ArrayList<Integer> member_ids;
@@ -28,21 +29,17 @@ public class Species {
 	
 	public void add_genome(int genomeId, double fitness)
 	{
-		if(fitness > this.best_fitness)
-		{
-			
-		}
 		this.member_ids.add(genomeId);
 		this.num_genomes++;
-	}
-	
-	public int get_num_genomes()
-	{
-		return this.num_genomes;
 	}
 	
 	public int get_best_genome_idx()
 	{
 		return 0;
+	}
+	
+	public void have_mercy(int num_elites)
+	{
+		
 	}
 }
