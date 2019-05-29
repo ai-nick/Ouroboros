@@ -162,15 +162,30 @@ public class Population {
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 			int keep_top = (int)((double)current.num_genomes * elitism_percent);
 			saved_sum += keep_top;
-			current.have_mercy(keep_top);
+			current.have_mercy(keep_top, this.genomes);
+			breed_all_remaining(current);
 		}
 		ArrayList<Genome> new_pop = new ArrayList<Genome>();
 		
 	}
 	
+	public void breed_all_remaining(Species the_species)
+	{
+		for (int i = 0; i < the_species.num_genomes; i++)
+		{
+			for (int x = 0; x < the_species.num_genomes; x++)
+			{
+				if (i != x)
+				{
+					cross_breed(this.genomes.get(the_species.member_ids.get(i)), this.genomes.get(the_species.member_ids.get(x)));
+				}
+			}
+		}
+	}
+	
 	// breed two genomes, params are the ids
 	
-	public void cross_breed(Genome a, Genome b)
+	public Genome cross_breed(Genome a, Genome b)
 	{
 		// genome a will be the fitter of the two mates
 		Genome GenomeA;
@@ -244,6 +259,8 @@ public class Population {
 				offspring.set_node(_cross_over_nodes(gA, gB));
 			}
 		}
+		
+		return offspring;
 		
 	}
 	

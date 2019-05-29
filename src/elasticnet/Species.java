@@ -38,8 +38,9 @@ public class Species {
 		return 0;
 	}
 	
-	public void have_mercy(int num_elites)
+	public void have_mercy(int num_elites, ArrayList<Genome> genomes)
 	{
 		
 	}
+	
 }
