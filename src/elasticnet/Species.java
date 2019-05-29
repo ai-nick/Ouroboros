@@ -43,8 +43,15 @@ public class Species {
 		
 	}
 	
-	public Genome mutate_genome(Genome g)
+	public Genome mutate_genome(Genome g, int new_id, HashMap<String, String> config)
 	{
-		Genome new_g = clone(g);
+		Genome new_g = new Genome(g, new_id);
+		// get our innovation probabilities from the config dictionary
+		Double add_conn_prob = Double.parseDouble(config.get("prob_add_con"));
+		Double delete_conn_prob = Double.parseDouble(config.get("prob_delete_con"));
+		Double add_node_prob = Double.parseDouble(config.get("prob_add_node"));
+		Double delete_node_prob = Double.parseDouble(config.get("prob_delete_con"));
+		
+		
 	}
 }
