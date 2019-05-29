@@ -43,4 +43,8 @@ public class Species {
 		
 	}
 	
+	public Genome mutate_genome(Genome g)
+	{
+		Genome new_g = clone(g);
+	}
 }

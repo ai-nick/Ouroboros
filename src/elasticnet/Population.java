@@ -165,8 +165,6 @@ public class Population {
 			current.have_mercy(keep_top, this.genomes);
 			breed_all_remaining(current);
 		}
-		ArrayList<Genome> new_pop = new ArrayList<Genome>();
-		
 	}
 	
 	public void breed_all_remaining(Species the_species)
@@ -185,7 +183,7 @@ public class Population {
 	
 	// breed two genomes, params are the ids
 	
-	public Genome cross_breed(Genome a, Genome b)
+	public void cross_breed(Genome a, Genome b)
 	{
 		// genome a will be the fitter of the two mates
 		Genome GenomeA;
@@ -260,7 +258,7 @@ public class Population {
 			}
 		}
 		
-		return offspring;
+		this.genomes.add(offspring);
 		
 	}
 	

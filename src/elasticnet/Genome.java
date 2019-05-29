@@ -27,6 +27,18 @@ public class Genome {
 	{
 		fitness = test_fit;
 	}
+	
+	public Genome(Genome cloner, int id)
+	{
+		id = id;
+		gen_born = cloner.gen_born + 1;
+		gene_ids = cloner.gene_ids;
+		population_hash = cloner.population_hash;
+		species_id = cloner.species_id;
+		fitness = 0;
+		//stop cloning here, the rest will be done in the mutate method of the population class
+	}
+	
 	public double get_prime(int num_others)
 	{
 		return this.fitness/num_others;
