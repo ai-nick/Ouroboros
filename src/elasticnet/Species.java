@@ -1,5 +1,6 @@
 package elasticnet;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 // keeping this lightweight, only storing indexes into the "population"
 // array list of genomes
@@ -52,6 +53,6 @@ public class Species {
 		Double add_node_prob = Double.parseDouble(config.get("prob_add_node"));
 		Double delete_node_prob = Double.parseDouble(config.get("prob_delete_con"));
 		
-		
+		return new_g;
 	}
 }

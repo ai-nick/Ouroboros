@@ -28,15 +28,19 @@ public class Genome {
 		fitness = test_fit;
 	}
 	
+	// used when mutating this genome, leaves the original alone 
 	public Genome(Genome cloner, int id)
 	{
-		id = id;
+		this.id = id;
 		gen_born = cloner.gen_born + 1;
 		gene_ids = cloner.gene_ids;
 		population_hash = cloner.population_hash;
 		species_id = cloner.species_id;
 		fitness = 0;
-		//stop cloning here, the rest will be done in the mutate method of the population class
+		conn_genes = new HashMap<Integer, ConnectionGene>(cloner.conn_genes);
+		input_nodes = new ArrayList<NodeGene>(cloner.input_nodes);
+		hidden_nodes = new ArrayList<NodeGene>(cloner.hidden_nodes);
+		output_nodes = new ArrayList<NodeGene>(cloner.output_nodes);
 	}
 	
 	public double get_prime(int num_others)
