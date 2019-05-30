@@ -66,7 +66,7 @@ public class Species {
 				{
 					if (math.random() < (add_conn_prob/prob_sum))
 					{
-						
+						int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];	
 					}	
 				}
 			}
