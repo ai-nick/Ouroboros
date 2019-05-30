@@ -1,6 +1,7 @@
 package elasticnet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 // keeping this lightweight, only storing indexes into the "population"
 // array list of genomes
@@ -52,6 +53,24 @@ public class Species {
 		Double delete_conn_prob = Double.parseDouble(config.get("prob_delete_con"));
 		Double add_node_prob = Double.parseDouble(config.get("prob_add_node"));
 		Double delete_node_prob = Double.parseDouble(config.get("prob_delete_con"));
+		
+		Double prob_sum = add_conn_prob + delete_conn_prob + add_node_prob + delete_node_prob;
+		
+		if (Math.random() < (add_conn_prob/prob_sum))
+		{
+			HashMap<Integer, NodeGene> all_the_nodes = new_g.get_all_nodes();
+			
+			for (Integer k : all_the_nodes.keySet())
+			{
+				if (all_the_nodes.get(k).is_output == false)
+				{
+					if (math.random() < (add_conn_prob/prob_sum))
+					{
+						
+					}	
+				}
+			}
+		}
 		
 		return new_g;
 	}
