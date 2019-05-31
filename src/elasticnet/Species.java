@@ -66,7 +66,18 @@ public class Species {
 				{
 					if (math.random() < (add_conn_prob/prob_sum))
 					{
-						int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];	
+						int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+						
+						int from_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+						
+						NodeGene from_node = all_the_nodes.get(from_node_key);
+						NodeGene to_node = all_the_nodes.get(to_node_key);
+						
+						if(new_g.input_nodes.contains(to_node) && new_g.input_nodes.contains(from_node))
+						{
+							return new_g;
+						}
+						if(new_g.input_nodes.contains(from_node_key))
 					}	
 				}
 			}
