@@ -63,7 +63,7 @@ public class Species {
 		}
 		if (Math.random() < (add_node_prob/prob_sum))
 		{
-			
+			mutate_add_node(new_g, add_conn_prob, prob_sum, new_id, default_activation);
 		}
 		
 		return new_g;
@@ -108,6 +108,22 @@ public class Species {
 		ConnectionGene connection_to_split = new_g.conn_genes.get(connection_to_split_index);
 		
 		NodeGene new_node = new NodeGene(new_id, activation);
+		
+		new_id++;
+		
+		ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, new_id);
+		
+		new_g.conn_genes.put(new_id, new_conn_a);
+		
+		new_id++;
+		
+		ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.from_node, new_id);
+		
+		new_g.conn_genes.put(new_id, new_conn_b);
+		
+		new_g.hidden_nodes.add(new_node);
+		
+		return;
 	}
 	
 }
