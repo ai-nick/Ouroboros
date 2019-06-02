@@ -53,36 +53,61 @@ public class Species {
 		Double delete_conn_prob = Double.parseDouble(config.get("prob_delete_con"));
 		Double add_node_prob = Double.parseDouble(config.get("prob_add_node"));
 		Double delete_node_prob = Double.parseDouble(config.get("prob_delete_con"));
+		String default_activation = config.get("default_activation");
 		
 		Double prob_sum = add_conn_prob + delete_conn_prob + add_node_prob + delete_node_prob;
 		
 		if (Math.random() < (add_conn_prob/prob_sum))
 		{
-			HashMap<Integer, NodeGene> all_the_nodes = new_g.get_all_nodes();
+			mutate_add_conn(new_g, add_conn_prob, prob_sum, new_id);
+		}
+		if (Math.random() < (add_node_prob/prob_sum))
+		{
 			
-			for (Integer k : all_the_nodes.keySet())
-			{
-				if (all_the_nodes.get(k).is_output == false)
-				{
-					if (math.random() < (add_conn_prob/prob_sum))
-					{
-						int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
-						
-						int from_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
-						
-						NodeGene from_node = all_the_nodes.get(from_node_key);
-						NodeGene to_node = all_the_nodes.get(to_node_key);
-						
-						if(new_g.input_nodes.contains(to_node) && new_g.input_nodes.contains(from_node))
-						{
-							return new_g;
-						}
-						if(new_g.input_nodes.contains(from_node_key))
-					}	
-				}
-			}
 		}
 		
 		return new_g;
 	}
+	
+	private void mutate_add_conn(Genome new_g, Double add_conn_prob, Double prob_sum, int new_id)
+	{
+		HashMap<Integer, NodeGene> all_the_nodes = new_g.get_all_nodes();
+		
+		for (Integer k : all_the_nodes.keySet())
+		{
+			if (all_the_nodes.get(k).is_output == false)
+			{
+				if (Math.random() < (add_conn_prob/prob_sum))
+				{
+					int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+					
+					int from_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+					
+					NodeGene from_node = all_the_nodes.get(from_node_key);
+					NodeGene to_node = all_the_nodes.get(to_node_key);
+					
+					if(new_g.output_nodes.contains(to_node) && new_g.output_nodes.contains(from_node))
+					{
+						return;
+					}
+					if(new_g.input_nodes.contains(from_node_key) && new_g.input_nodes.contains(to_node))
+					{
+						return;
+					}
+					ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
+					new_g.conn_genes.put(new_id, new_gene);
+				}	
+			}
+		}
+	}
+	
+	private void mutate_add_node(Genome new_g, Double add_node_prob, Double prob_sum, int new_id, String activation)
+	{
+		int connection_to_split_index = (int)new_g.conn_genes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, new_g.conn_genes.size())];
+		
+		ConnectionGene connection_to_split = new_g.conn_genes.get(connection_to_split_index);
+		
+		NodeGene new_node = new NodeGene(new_id, activation);
+	}
+	
 }
