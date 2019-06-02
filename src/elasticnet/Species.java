@@ -65,7 +65,14 @@ public class Species {
 		{
 			mutate_add_node(new_g, add_conn_prob, prob_sum, new_id, default_activation);
 		}
-		
+		if (Math.random() < (delete_node_prob/prob_sum))
+		{
+			mutate_delete_node();
+		}
+		if (Math.random() < (delete_conn_prob/prob_sum))
+		{
+			mutate_delete_conn();
+		}
 		return new_g;
 	}
 	
@@ -126,4 +133,14 @@ public class Species {
 		return;
 	}
 	
+	
+	private void mutate_delete_node()
+	{
+		return;
+	}
+	
+	private void mutate_delete_conn()
+	{
+		return;
+	}
 }
