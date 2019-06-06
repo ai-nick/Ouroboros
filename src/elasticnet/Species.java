@@ -1,6 +1,7 @@
 package elasticnet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 // keeping this lightweight, only storing indexes into the "population"
@@ -80,32 +81,26 @@ public class Species {
 	{
 		HashMap<Integer, NodeGene> all_the_nodes = new_g.get_all_nodes();
 		
-		for (Integer k : all_the_nodes.keySet())
+		int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+		
+		int from_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+		
+		NodeGene from_node = all_the_nodes.get(from_node_key);
+		NodeGene to_node = all_the_nodes.get(to_node_key);
+		
+		if(new_g.output_nodes.contains(to_node) && new_g.output_nodes.contains(from_node))
 		{
-			if (all_the_nodes.get(k).is_output == false)
-			{
-				if (Math.random() < (add_conn_prob/prob_sum))
-				{
-					int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
-					
-					int from_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
-					
-					NodeGene from_node = all_the_nodes.get(from_node_key);
-					NodeGene to_node = all_the_nodes.get(to_node_key);
-					
-					if(new_g.output_nodes.contains(to_node) && new_g.output_nodes.contains(from_node))
-					{
-						return;
-					}
-					if(new_g.input_nodes.contains(from_node_key) && new_g.input_nodes.contains(to_node))
-					{
-						return;
-					}
-					ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
-					new_g.conn_genes.put(new_id, new_gene);
-				}	
-			}
+			return;
 		}
+		if(new_g.input_nodes.contains(from_node_key) && new_g.input_nodes.contains(to_node))
+		{
+			return;
+		}
+		ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
+		
+		new_g.conn_genes.put(new_id, new_gene);
+		
+		return;
 	}
 	
 	private void mutate_add_node(Genome new_g, Double add_node_prob, Double prob_sum, int new_id, String activation)
@@ -134,8 +129,21 @@ public class Species {
 	}
 	
 	
-	private void mutate_delete_node()
+	private void mutate_delete_node(Genome new_g, Double delete_node_prob, Double prob_sum)
 	{
+		int num_nodes = new_g.hidden_nodes.size();
+		
+		Random dice = new Random();
+		
+		NodeGene delete_node = new_g.hidden_nodes.get(dice.nextInt(num_nodes));
+		
+		int conn_counter = delete_node.connections.size();
+		
+		for (int ix = 0; ix < conn_counter; ix++)
+		{
+			new_g.conn_genes.remove(delete_node.connections.get(ix).get_id());
+		}
+		
 		return;
 	}
 	
