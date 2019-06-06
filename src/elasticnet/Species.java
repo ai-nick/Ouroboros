@@ -60,24 +60,24 @@ public class Species {
 		
 		if (Math.random() < (add_conn_prob/prob_sum))
 		{
-			mutate_add_conn(new_g, add_conn_prob, prob_sum, new_id);
+			mutate_add_conn(new_g, new_id);
 		}
 		if (Math.random() < (add_node_prob/prob_sum))
 		{
-			mutate_add_node(new_g, add_conn_prob, prob_sum, new_id, default_activation);
+			mutate_add_node(new_g, new_id, default_activation);
 		}
 		if (Math.random() < (delete_node_prob/prob_sum))
 		{
-			mutate_delete_node();
+			mutate_delete_node(new_g);
 		}
 		if (Math.random() < (delete_conn_prob/prob_sum))
 		{
-			mutate_delete_conn();
+			mutate_delete_conn(new_g);
 		}
 		return new_g;
 	}
 	
-	private void mutate_add_conn(Genome new_g, Double add_conn_prob, Double prob_sum, int new_id)
+	private void mutate_add_conn(Genome new_g, int new_id)
 	{
 		HashMap<Integer, NodeGene> all_the_nodes = new_g.get_all_nodes();
 		
@@ -103,7 +103,7 @@ public class Species {
 		return;
 	}
 	
-	private void mutate_add_node(Genome new_g, Double add_node_prob, Double prob_sum, int new_id, String activation)
+	private void mutate_add_node(Genome new_g, int new_id, String activation)
 	{
 		int connection_to_split_index = (int)new_g.conn_genes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, new_g.conn_genes.size())];
 		
@@ -129,7 +129,7 @@ public class Species {
 	}
 	
 	
-	private void mutate_delete_node(Genome new_g, Double delete_node_prob, Double prob_sum)
+	private void mutate_delete_node(Genome new_g)
 	{
 		int num_nodes = new_g.hidden_nodes.size();
 		
@@ -144,11 +144,17 @@ public class Species {
 			new_g.conn_genes.remove(delete_node.connections.get(ix).get_id());
 		}
 		
+		new_g.hidden_nodes.remove(delete_node.inno_id);
+		
 		return;
 	}
 	
-	private void mutate_delete_conn()
+	private void mutate_delete_conn(Genome gBaby)
 	{
-		return;
+		Random dice = new Random();
+		
+		int delete_key = dice.nextInt(gBaby.conn_genes.size());
+		
+		gBaby.conn_genes.remove(delete_key);
 	}
 }
