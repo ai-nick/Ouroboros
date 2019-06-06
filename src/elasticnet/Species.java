@@ -43,7 +43,10 @@ public class Species {
 	
 	public void have_mercy(int num_elites, ArrayList<Genome> genomes)
 	{
-		
+		for(int i = num_elites-1; i < this.num_genomes; i++)
+		{
+			genomes.remove(i);
+		}
 	}
 	
 	public Genome mutate_genome(Genome g, int new_id, HashMap<String, String> config)
