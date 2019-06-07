@@ -33,14 +33,10 @@ public class Population {
 	//HashMap<Integer, IConnection> conn_genes;
 	//HashMap<Integer, INode> node_genes;
 	
-	public Population() 
+	public Population(int num_genomes, int gens, int gen,  HashMap<String, String> config_in, int pop_size) 
 	{
 		this.ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		this.hash_id = this.ts.hashCode();
-	}
-	
-	public Population(int num_genomes, int gens, int gen,  HashMap<String, String> config_in, int pop_size) 
-	{
 		this.pop_size = pop_size;
 		this.num_genomes = num_genomes;
 		this.num_gens = gens;
@@ -66,6 +62,7 @@ public class Population {
 				
 				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config);
 			}
+			this.next_genome_id = this.pop_size+next_genome_id;
 		}
 	}
 	
