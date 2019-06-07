@@ -15,6 +15,7 @@ public class NodeGene implements INode {
 	HashMap<String, Object> atts = new HashMap<String, Object>();
 	double current_val = 0.0;
 	int level;
+	//String layer = "";
 	
 	public NodeGene(int pop_id, int inno_id)
 	{

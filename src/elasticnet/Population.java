@@ -25,8 +25,10 @@ public class Population {
 	String ts = "";
 	int current_gen = 0;
 	int inno_num = 0;
+	int next_genome_id = 0;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	HashMap<String, String> config;
+	int pop_size = 0;
 	// elected to store this in the genomes themselves
 	//HashMap<Integer, IConnection> conn_genes;
 	//HashMap<Integer, INode> node_genes;
@@ -37,8 +39,9 @@ public class Population {
 		this.hash_id = this.ts.hashCode();
 	}
 	
-	public Population(int num_genomes, int gens, int gen,  HashMap<String, String> config_in) 
+	public Population(int num_genomes, int gens, int gen,  HashMap<String, String> config_in, int pop_size) 
 	{
+		this.pop_size = pop_size;
 		this.num_genomes = num_genomes;
 		this.num_gens = gens;
 		this.config = config_in;
@@ -54,7 +57,16 @@ public class Population {
 	
 	public void set_up_first_pop()
 	{
-		
+		// if no genomes are loaded we will start by creating a fresh population
+		if(pop_size != 0)
+		{
+			for (int ix = next_genome_id; ix < this.pop_size+next_genome_id; ix++)
+			{
+				Genome gBaby = new Genome(ix);
+				
+				
+			}
+		}
 	}
 	
 	public double compat_distance(Genome one, Genome two, Double[] speciation_coefficients) {
@@ -165,8 +177,6 @@ public class Population {
 			current.have_mercy(keep_top, this.genomes);
 			breed_all_remaining(current);
 		}
-		
-		
 	}
 	
 	public void breed_all_remaining(Species the_species)

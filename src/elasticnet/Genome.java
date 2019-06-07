@@ -23,11 +23,44 @@ public class Genome {
 		this.population_hash = p_hash;
 		this.fitness = 0.0;
 	}
+	
 	public Genome(double test_fit)
 	{
 		fitness = test_fit;
 	}
 	
+	
+	public int create_from_scratch(int num_in, int num_hidden, int num_out, int inno_id)
+	{
+		for (int ix = 0; ix < num_in; ix++)
+		{
+			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
+			new_node.is_input = true;
+			new_node.is_output = false;
+			inno_id++;
+			this.input_nodes.add(new_node);
+		}
+		
+		for (int ix = 0; ix < num_hidden; ix++)
+		{
+			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
+			new_node.is_input = false;
+			new_node.is_output = false;
+			inno_id++;
+			this.hidden_nodes.add(new_node);
+		}
+		
+		for (int ix = 0; ix < num_out; ix++)
+		{
+			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
+			new_node.is_input = false;
+			new_node.is_output = true;
+			inno_id++;
+			this.output_nodes.add(new_node);
+		}
+		
+		return inno_id;
+	}
 	// used when mutating this genome, leaves the original alone 
 	public Genome(Genome cloner, int id)
 	{
