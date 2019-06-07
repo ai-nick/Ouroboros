@@ -64,7 +64,7 @@ public class Population {
 			{
 				Genome gBaby = new Genome(ix);
 				
-				
+				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config);
 			}
 		}
 	}
