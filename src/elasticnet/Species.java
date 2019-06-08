@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 // array list of genomes
 public class Species {
 	int speciesID;
-	ArrayList<Integer> member_ids;
+	ArrayList<Integer> member_ids;	
 	int rep_id;
 	int pop_id;
 	double adjust_fit_sum = 0.0;
