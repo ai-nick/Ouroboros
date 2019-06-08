@@ -18,9 +18,9 @@ public class NeatConfig {
 		add("square");
 			}};
 	
-	int num_inputs = 0;
+	int num_input = 4;
 	
-	int num_output = 0;
+	int num_output = 1;
 	
 	int num_hidden = 0;
 	
@@ -42,4 +42,5 @@ public class NeatConfig {
 	
 	Double bias_min = -30.0;
 	Double bias_max = 30.0;
+	
 }

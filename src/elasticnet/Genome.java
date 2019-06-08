@@ -47,11 +47,11 @@ public class Genome {
 		output_nodes = new ArrayList<NodeGene>(cloner.output_nodes);
 	}
 	
-	public int create_from_scratch(int inno_id, HashMap<String, String> config)
+	public int create_from_scratch(int inno_id, NeatConfig config)
 	{
-		int num_in = Integer.parseInt(config.get("num_in"));
-		int num_hidden = Integer.parseInt(config.get("num_hidden"));
-		int num_out = Integer.parseInt(config.get("num_out"));
+		int num_in = config.num_input;
+		int num_hidden = config.num_hidden;
+		int num_out = config.num_output;
 		for (int ix = 0; ix < num_in; ix++)
 		{
 			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
@@ -163,30 +163,25 @@ public class Genome {
 		}
 		return all_nodes;
 	}
-	public void mutate_genome(int new_id, HashMap<String, String> config)
+	public void mutate_genome(int new_id, NeatConfig config)
 	{
-		// get our innovation probabilities from the config dictionary
-		Double add_conn_prob = Double.parseDouble(config.get("prob_add_con"));
-		Double delete_conn_prob = Double.parseDouble(config.get("prob_delete_con"));
-		Double add_node_prob = Double.parseDouble(config.get("prob_add_node"));
-		Double delete_node_prob = Double.parseDouble(config.get("prob_delete_con"));
-		String default_activation = config.get("default_activation");
+		String default_activation = config.defaultActivation;
 		
-		Double prob_sum = add_conn_prob + delete_conn_prob + add_node_prob + delete_node_prob;
+		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
 		
-		if (Math.random() < (add_conn_prob/prob_sum))
+		if (Math.random() < (config.add_conn_prob/prob_sum))
 		{
 			mutate_add_conn(new_id);
 		}
-		if (Math.random() < (add_node_prob/prob_sum))
+		if (Math.random() < (config.add_node_prob/prob_sum))
 		{
-			mutate_add_node(new_id, default_activation);
+			mutate_add_node(new_id, config.defaultActivation);
 		}
-		if (Math.random() < (delete_node_prob/prob_sum))
+		if (Math.random() < (config.delete_node_prob/prob_sum))
 		{
 			mutate_delete_node();
 		}
-		if (Math.random() < (delete_conn_prob/prob_sum))
+		if (Math.random() < (config.delete_conn_prob/prob_sum))
 		{
 			mutate_delete_conn();
 		}
