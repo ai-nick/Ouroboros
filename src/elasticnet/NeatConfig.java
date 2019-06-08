@@ -1,11 +1,22 @@
 package elasticnet;
 
+import java.util.ArrayList;
 
 // oi at a neat config ye ot theh
 // ew ot ay loiscence fo at? 
 public class NeatConfig {
 	
 	String defaultActivation = "sigmoid";
+	
+	ArrayList<String> possible_activations = new ArrayList<String>()
+			{{
+		add("tanh");
+		add("relu");
+		add("sin");
+		add("cosine");
+		add("cube");
+		add("square");
+			}};
 	
 	int num_inputs = 0;
 	

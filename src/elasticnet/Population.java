@@ -27,13 +27,13 @@ public class Population {
 	int inno_num = 0;
 	int next_genome_id = 0;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
-	HashMap<String, String> config;
+	NeatConfig config;
 	int pop_size = 0;
 	// elected to store this in the genomes themselves
 	//HashMap<Integer, IConnection> conn_genes;
 	//HashMap<Integer, INode> node_genes;
 	
-	public Population(int num_genomes, int gens, int gen,  HashMap<String, String> config_in, int pop_size) 
+	public Population(int num_genomes, int gens, int gen,  NeatConfig config_in, int pop_size) 
 	{
 		this.ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		this.hash_id = this.ts.hashCode();
@@ -117,7 +117,7 @@ public class Population {
 	{
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
 		
-		double compat_t = Double.parseDouble(this.config.get("compatability_threshold"));
+		double compat_t = this.config.compat_threshold;
 		
 		if (this.pop_species.size() == 0)
 		{
@@ -161,7 +161,7 @@ public class Population {
 	{
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
-		double elitism_percent = Double.parseDouble(this.config.get("elite_percent"));
+		double elitism_percent = this.config.elitism;
 		int saved_sum = 0;
 		// next we will reduce each species by this elitism percent
 		// and add the new amount of the species to our save_sum
