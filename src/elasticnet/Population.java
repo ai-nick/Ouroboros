@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Population {
 	
 	ArrayList<Genome> genomes = new ArrayList<Genome>();
-	int[] sorted_index_list;
+	
 	int num_genomes;
 	int num_gens;
 	int hash_id;
@@ -33,21 +33,15 @@ public class Population {
 	//HashMap<Integer, IConnection> conn_genes;
 	//HashMap<Integer, INode> node_genes;
 	
-	public Population(int num_genomes, int gens, int gen,  NeatConfig config_in, int pop_size) 
+	public Population(int gens, int gen,  NeatConfig config_in, int pop_size) 
 	{
 		this.ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		this.hash_id = this.ts.hashCode();
 		this.pop_size = pop_size;
-		this.num_genomes = num_genomes;
 		this.num_gens = gens;
 		this.config = config_in;
-		this.sorted_index_list = new int[num_genomes];
 		if (gen == 0) {
 			this.set_up_first_pop();
-		}
-		for(int i = 0; i < num_genomes; i++)
-		{
-			this.sorted_index_list[i] = i;
 		}
 	}
 	
