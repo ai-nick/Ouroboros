@@ -24,6 +24,8 @@ public class TestGenome {
 		}
 		
 		System.out.println(test_genome.as_json());
+		
+		NeuralNetwork test_net = new NeuralNetWork(test_genome.get_all_nodes(), )
 	}
 
 }

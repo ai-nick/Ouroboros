@@ -8,25 +8,38 @@ public class NeuralNetwork implements INeuralNet {
 
 	//no comment
 	public int num_activations = 0;
-	ArrayList<Integer> input_ids;
+	ArrayList<Integer> input_ids = new ArrayList<Integer>();
 	ArrayList<INode> activation_nodes;
 	public boolean fully_activated;
-	HashMap<Integer, INode> nodes = new HashMap<Integer, INode>();
+	HashMap<Integer, NodeGene> nodes = new HashMap<Integer, NodeGene>();
 	public boolean feed_forward;
 	int num_output = 0;
 	int outs_count = 0;
 	
-	public NeuralNetwork(ArrayList<Integer> in_nodes_ids, ArrayList<INode> nodes_incoming, int n_outputs)
+	
+	public NeuralNetwork(Genome g)
 	{
+		this.nodes = g.get_all_nodes();
 		
-		//no comment
-		this.num_output = n_outputs;
-		this.input_ids = in_nodes_ids;
-		for(int ix = 0; ix < nodes_incoming.size(); ix++)
+		int num_in = g.input_nodes.size();
+		
+		for(int ix = 0; ix < num_in; ix++)
 		{
-			nodes.put(nodes_incoming.get(ix).get_node_id(), nodes_incoming.get(ix));
+			this.input_ids.add(g.input_nodes.get(ix).inno_id);
+		}
+		
+		this.num_output = g.output_nodes.size();
+		
+		//NeuralNetworkSetup(g.hidden_nodes);
+		
+		int num_hidden = g.hidden_nodes.size();
+		
+		for(int ix = 0; ix < num_hidden; ix++)
+		{
+			nodes.put(g.hidden_nodes.get(ix).get_node_id(), g.hidden_nodes.get(ix));
 		}
 	}
+	
 	
 	@Override
 	public void set_input(double[] input)
