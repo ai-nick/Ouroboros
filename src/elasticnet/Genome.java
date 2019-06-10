@@ -165,6 +165,7 @@ public class Genome {
 		}
 		return all_nodes;
 	}
+	
 	public void mutate_genome(int new_id, NeatConfig config)
 	{
 		String default_activation = config.defaultActivation;
@@ -194,11 +195,14 @@ public class Genome {
 	{
 		HashMap<Integer, NodeGene> all_the_nodes = this.get_all_nodes();
 		
-		int to_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+		Random dice = new Random();
 		
-		int from_node_key = (int)all_the_nodes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, all_the_nodes.size())];
+		int to_node_key = (int)all_the_nodes.keySet().toArray()[dice.nextInt(all_the_nodes.size())];
+		
+		int from_node_key = (int)all_the_nodes.keySet().toArray()[dice.nextInt(all_the_nodes.size())];
 		
 		NodeGene from_node = all_the_nodes.get(from_node_key);
+		
 		NodeGene to_node = all_the_nodes.get(to_node_key);
 		
 		if(this.output_nodes.contains(to_node) && this.output_nodes.contains(from_node))
@@ -218,7 +222,14 @@ public class Genome {
 	
 	private void mutate_add_node(int new_id, String activation)
 	{
-		int connection_to_split_index = (int)this.conn_genes.keySet().toArray()[ThreadLocalRandom.current().nextInt(0, this.conn_genes.size())];
+		Random dice = new Random();
+		
+		if (this.conn_genes.size() == 0)
+		{
+			return;
+		}
+		
+		int connection_to_split_index = (int)this.conn_genes.keySet().toArray()[dice.nextInt(this.conn_genes.size())];
 		
 		ConnectionGene connection_to_split = this.conn_genes.get(connection_to_split_index);
 		
@@ -246,7 +257,14 @@ public class Genome {
 	{
 		int num_nodes = this.hidden_nodes.size();
 		
+		if (num_nodes == 0)
+		{
+			return;
+		}
+		
 		Random dice = new Random();
+		
+		int node_idx = dice.nextInt(num_nodes);
 		
 		NodeGene delete_node = this.hidden_nodes.get(dice.nextInt(num_nodes));
 		
@@ -257,7 +275,7 @@ public class Genome {
 			this.conn_genes.remove(delete_node.connections.get(ix).get_id());
 		}
 		
-		this.hidden_nodes.remove(delete_node.inno_id);
+		this.hidden_nodes.remove(dice.nextInt(num_nodes));
 		
 		return;
 	}
@@ -265,6 +283,11 @@ public class Genome {
 	private void mutate_delete_conn()
 	{
 		Random dice = new Random();
+		
+		if (this.conn_genes.size() == 0)
+		{
+			return;
+		}
 		
 		int delete_key = dice.nextInt(this.conn_genes.size());
 		

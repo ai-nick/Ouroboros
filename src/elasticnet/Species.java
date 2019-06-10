@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.google.gson.Gson;
+
 // keeping this lightweight, only storing indexes into the "population"
 // array list of genomes
 public class Species {
@@ -45,7 +47,7 @@ public class Species {
 	
 	public int get_best_genome_idx()
 	{
-		return 0;
+		return this.member_ids.get(this.sorted_idx_array[0]);
 	}
 	
 	public void have_mercy(int num_elites, ArrayList<Genome> genomes)
@@ -118,5 +120,12 @@ public class Species {
 		{
 			quick_sort_big_dumb(sort_array, sort_dict, left, pivot);	
 		}
+	}
+	
+	public String as_json()
+	{
+		Gson gson = new Gson();
+		String json_string = gson.toJson(this);
+		return json_string;
 	}
 }

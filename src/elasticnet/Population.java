@@ -55,6 +55,10 @@ public class Population {
 				Genome gBaby = new Genome(ix);
 				
 				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config, this.hash_id);
+				
+				this.genomes.add(gBaby);
+				
+				this.num_genomes++;
 			}
 			this.next_genome_id = this.pop_size+next_genome_id;
 		}
@@ -302,7 +306,7 @@ public class Population {
 	public void set_config(String conf)
 	{
 		Gson g = new Gson();
-		Type type = new TypeToken<HashMap<String, String>>(){}.getType();
+		Type type = new TypeToken<NeatConfig>(){}.getType();
 		this.config = g.fromJson(g.toJson(conf), type);
 	}
 	

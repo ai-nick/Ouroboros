@@ -2,6 +2,8 @@ package elasticnet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 public class NodeGene implements INode {
 	// just a real baseline implementation of how i think a neat node would be implemented
 	boolean is_input;
@@ -17,7 +19,7 @@ public class NodeGene implements INode {
 	int level;
 	//String layer = "";
 	
-	public NodeGene(int pop_id, int inno_id)
+	public NodeGene(int inno_id, int pop_id)
 	{
 		this.pop_id = pop_id;
 		this.inno_id = inno_id;
@@ -94,5 +96,12 @@ public class NodeGene implements INode {
 	public boolean is_output()
 	{
 		return is_output;
+	}
+	
+	public String as_json()
+	{
+		Gson gson = new Gson();
+		String json_string = gson.toJson(this);
+		return json_string;
 	}
 }

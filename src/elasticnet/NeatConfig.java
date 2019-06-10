@@ -2,6 +2,8 @@ package elasticnet;
 
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+
 // oi at a neat config ye ot theh
 // ew ot ay loiscence fo at? 
 public class NeatConfig {
@@ -45,5 +47,12 @@ public class NeatConfig {
 	
 	public NeatConfig()
 	{	
+	}
+	
+	public String as_json()
+	{
+		Gson gson = new Gson();
+		String json_string = gson.toJson(this);
+		return json_string;
 	}
 }

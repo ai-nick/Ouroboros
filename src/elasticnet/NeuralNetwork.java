@@ -2,6 +2,8 @@ package elasticnet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 public class NeuralNetwork implements INeuralNet {
 
 	//no comment
@@ -108,5 +110,11 @@ public class NeuralNetwork implements INeuralNet {
 			return new ArrayList<INode>();
 		}
 	}
-
+	
+	public String as_json()
+	{
+		Gson gson = new Gson();
+		String json_string = gson.toJson(this);
+		return json_string;
+	}
 }
