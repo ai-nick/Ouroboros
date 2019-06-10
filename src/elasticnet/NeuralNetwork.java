@@ -33,7 +33,6 @@ public class NeuralNetwork implements INeuralNet {
 		//NeuralNetworkSetup(g.hidden_nodes);
 		
 		int num_hidden = g.hidden_nodes.size();
-		
 		for(int ix = 0; ix < num_hidden; ix++)
 		{
 			nodes.put(g.hidden_nodes.get(ix).get_node_id(), g.hidden_nodes.get(ix));
