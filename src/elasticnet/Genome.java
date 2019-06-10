@@ -5,26 +5,27 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.google.gson.Gson;
+
 public class Genome {
 
-	public int id;
-	int gen_born;
+	public int id = 0;
+	int gen_born = 0;
 	int[] gene_ids;
-	int population_hash;
-	int species_id;
-	public double fitness;
-	public int avg_w;
-	HashMap<Integer, ConnectionGene> conn_genes;
-	ArrayList<NodeGene> input_nodes;
-	ArrayList<NodeGene> hidden_nodes;
-	ArrayList<NodeGene> output_nodes;
-	public int gene_id_min, gene_id_max;
-	HashMap<Integer, Double> fit_dists;
+	int population_hash = 0;
+	int species_id = 0;
+	public double fitness = 0.0;
+	public int avg_w = 0;
+	HashMap<Integer, ConnectionGene> conn_genes = new HashMap<Integer, ConnectionGene>();
+	ArrayList<NodeGene> input_nodes = new ArrayList<NodeGene>();
+	ArrayList<NodeGene> hidden_nodes = new ArrayList<NodeGene>();
+	ArrayList<NodeGene> output_nodes = new ArrayList<NodeGene>();
+	public int gene_id_min, gene_id_max = 0;
+	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
 	
 	public Genome(int p_hash) {
 		this.population_hash = p_hash;
 		this.fitness = 0.0;
-		
 	}
 	
 	public Genome(double test_fit)
@@ -47,11 +48,12 @@ public class Genome {
 		output_nodes = new ArrayList<NodeGene>(cloner.output_nodes);
 	}
 	
-	public int create_from_scratch(int inno_id, NeatConfig config)
+	public int create_from_scratch(int inno_id, NeatConfig config, int populationHash)
 	{
 		int num_in = config.num_input;
 		int num_hidden = config.num_hidden;
 		int num_out = config.num_output;
+		this.population_hash = populationHash;
 		for (int ix = 0; ix < num_in; ix++)
 		{
 			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
@@ -267,5 +269,12 @@ public class Genome {
 		int delete_key = dice.nextInt(this.conn_genes.size());
 		
 		this.conn_genes.remove(delete_key);
+	}
+	
+	public String as_json()
+	{
+		Gson gson = new Gson();
+		String json_string = gson.toJson(this);
+		return json_string;
 	}
 }
