@@ -52,7 +52,7 @@ public class ConnectionGene implements IConnection {
 		return this.inno_id;
 	}
 	
-	public INode get_next_node()
+	public NodeGene get_next_node()
 	{
 		return to_node;
 	}

@@ -27,6 +27,13 @@ public class TestGenome {
 		
 		NeuralNetwork test_net = new NeuralNetwork(test_genome);
 		
+		double[] test_input = {1.0, 1.0, 1.0, 1.0};
+		
+		test_net.set_input(test_input);
+		
+		test_net.Activate();
+		
+		System.out.println(test_net.get_output().toString());
 		System.out.println(test_net.as_json());
 	}
 
