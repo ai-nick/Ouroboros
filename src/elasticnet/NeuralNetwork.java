@@ -109,7 +109,7 @@ public class NeuralNetwork implements INeuralNet {
 				this.outs_count++;
 			}
 		}
-		if(this.num_activations == this.activation_nodes.size())
+		if(this.outs_count == this.num_output)
 		{
 			this.fully_activated = true;
 			this.activation_nodes = next_actives;

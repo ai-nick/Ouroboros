@@ -22,7 +22,7 @@ public class NeatConfig {
 	
 	int num_input = 4;
 	
-	int num_output = 1;
+	int num_output = 2;
 	
 	int num_hidden = 0;
 	
