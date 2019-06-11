@@ -6,5 +6,5 @@ public interface INeuralNet {
 	public void set_input(double[] input);
 	public void Activate();
 	public void Reset();
-	public ArrayList<NodeGene> get_output();
+	public ArrayList<Double> get_output();
 }

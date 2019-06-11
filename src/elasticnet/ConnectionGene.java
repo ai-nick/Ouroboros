@@ -1,19 +1,24 @@
 package elasticnet;
 import java.util.HashMap;
 
+import io.netty.util.internal.ThreadLocalRandom;
+
 public class ConnectionGene implements IConnection {
 
 	int inno_id;
 	NodeGene from_node;
 	NodeGene to_node;
-	int activation_level;
+	int activation_level = 0;
 	HashMap<String, Double> atts = new HashMap<String, Double>();
 	int gene_id;
+	double min = -3.0;
+	double max = 3.0;
 	
 	public ConnectionGene(NodeGene f, NodeGene t, int inno) {
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;
+		this.set_weight(ThreadLocalRandom.current().nextDouble(min, max));
 	}
 	
 	public ConnectionGene(int inno_id, int gene_id) {

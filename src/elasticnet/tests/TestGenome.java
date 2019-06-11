@@ -15,26 +15,20 @@ public class TestGenome {
 		
 		test_genome.create_from_scratch(0, new NeatConfig(), fake_pop_hash);
 		
-		try (PrintWriter out = new PrintWriter("genome.json")) {
-		    out.println(test_genome.as_json());
-		}
-		catch ( IOException e)
-		{
-			System.out.println(e.toString());
-		}
 		
-		System.out.println(test_genome.as_json());
+		//System.out.println(test_genome.as_json());
 		
 		NeuralNetwork test_net = new NeuralNetwork(test_genome);
 		
 		double[] test_input = {1.0, 1.0, 1.0, 1.0};
+		
+		test_net.feed_forward = true;
 		
 		test_net.set_input(test_input);
 		
 		test_net.Activate();
 		
 		System.out.println(test_net.get_output().toString());
-		System.out.println(test_net.as_json());
 	}
 
 }

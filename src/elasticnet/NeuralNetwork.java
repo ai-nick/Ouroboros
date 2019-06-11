@@ -2,6 +2,8 @@ package elasticnet;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.omg.CORBA.SystemException;
+
 import com.google.gson.Gson;
 
 public class NeuralNetwork implements INeuralNet {
@@ -15,6 +17,7 @@ public class NeuralNetwork implements INeuralNet {
 	public boolean feed_forward;
 	int num_output = 0;
 	int outs_count = 0;
+	ArrayList<Integer> output_ids = new ArrayList<Integer>();
 	
 	
 	public NeuralNetwork(Genome g)
@@ -24,12 +27,17 @@ public class NeuralNetwork implements INeuralNet {
 		int num_in = g.input_nodes.size();
 		
 		for(int ix = 0; ix < num_in; ix++)
-		{
-			this.input_ids.add(g.input_nodes.get(ix).inno_id);
+		{	
+			int in_id = g.input_nodes.get(ix).inno_id;
+			this.input_ids.add(in_id);
+			this.nodes.put(in_id, g.input_nodes.get(ix));
 		}
 		
 		this.num_output = g.output_nodes.size();
-		
+		for(int x = 0; x < this.num_output; x++)
+		{
+			this.output_ids.add(g.output_nodes.get(x).inno_id);
+		}
 		//NeuralNetworkSetup(g.hidden_nodes);
 		
 		int num_hidden = g.hidden_nodes.size();
@@ -44,10 +52,13 @@ public class NeuralNetwork implements INeuralNet {
 	public void set_input(double[] input)
 	{
 		int number_inputs = this.input_ids.size();
+		
 		for(int ix = 0; ix < number_inputs; ix++)
 		{
 			NodeGene current = this.nodes.get(this.input_ids.get(ix));
+			
 			current.set_current_val(input[ix]);
+			
 			this.activation_nodes.add(current);
 		}
 	}
@@ -56,21 +67,40 @@ public class NeuralNetwork implements INeuralNet {
 	public void Activate() {
 		//no comment
 		ArrayList<NodeGene> next_actives = new ArrayList<NodeGene>();
+		
 		int loop_count = this.activation_nodes.size();
+		
 		for(int ix = 0; ix < loop_count; ix++)
 		{
 			NodeGene current = this.activation_nodes.get(ix);
-			current.activate();
+			
+			//current.current_val = Activator.activate(current.activation, current.current_val);
+			
 			if (current.is_output() != true)
 			{
-				int num_connections = current.get_connections().size();
-				for(int x = 0; ix < num_connections; x++)
+				int num_connections = current.connections.size();
+				
+				for(int x = 0; x < num_connections; x++)
 				{
 					NodeGene next_node = current.get_connections().get(x).get_next_node();
+					
 					next_node.add_to_current_value(current.get_current_val() * current.get_connections().get(x).get_weight());
+					
+					next_node.current_val = Activator.activate(next_node.activation, next_node.current_val);
+					
+					this.num_activations++;
+					
 					if(!next_actives.contains(next_node))
 					{
-						next_actives.add(next_node);	
+						System.out.println("wtf how");
+						
+						next_actives.add(next_node);
+						
+						if(next_node.is_output == true && next_node.visits == 0)
+						{
+							this.outs_count++;
+							next_node.visits++;
+						}
 					}
 				}
 			}
@@ -79,7 +109,7 @@ public class NeuralNetwork implements INeuralNet {
 				this.outs_count++;
 			}
 		}
-		if(this.outs_count == this.num_output)
+		if(this.num_activations == this.activation_nodes.size())
 		{
 			this.fully_activated = true;
 			this.activation_nodes = next_actives;
@@ -91,7 +121,8 @@ public class NeuralNetwork implements INeuralNet {
 			this.num_activations++;
 			if(this.feed_forward == true)
 			{
-				this.Activate();				
+				this.Activate();
+				return;
 			}
 			else
 			{
@@ -111,16 +142,15 @@ public class NeuralNetwork implements INeuralNet {
 	}
 
 	@Override
-	public ArrayList<NodeGene> get_output() {
+	public ArrayList<Double> get_output() {
 		// TODO Auto-generated method stub
-		if(this.fully_activated)
+		ArrayList<Double> outs = new ArrayList<Double>();
+		int loop_count = this.output_ids.size();
+		for(int i = 0; i < loop_count; i++)
 		{
-			return this.activation_nodes;
+			outs.add(this.nodes.get(this.output_ids.get(i)).current_val);
 		}
-		else
-		{
-			return new ArrayList<NodeGene>();
-		}
+		return outs;
 	}
 	
 	public String as_json()

@@ -1,6 +1,6 @@
 package elasticnet;
 
-public class Activations {
+public class Activator {
 	
 	public static double sin_activation(double in_val)
 	{

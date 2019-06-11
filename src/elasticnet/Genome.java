@@ -314,6 +314,7 @@ public class Genome {
 				ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
 				
 				this.conn_genes.put(new_id, new_gene);
+				from_node.connections.add(new_gene);
 			}
 		}
 		return;

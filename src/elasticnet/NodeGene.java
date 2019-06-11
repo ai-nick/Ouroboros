@@ -8,15 +8,16 @@ public class NodeGene implements INode {
 	// just a real baseline implementation of how i think a neat node would be implemented
 	boolean is_input;
 	boolean is_output;
-	String activation = "";
+	String activation = "sigmoid";
 	int inno_id;
 	int pop_id;
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
-	ArrayList<IConnection> connections = new ArrayList<IConnection>();
+	ArrayList<ConnectionGene> connections = new ArrayList<ConnectionGene>();
 	HashMap<String, Object> atts = new HashMap<String, Object>();
 	double current_val = 0.0;
 	int level;
+	int visits = 0;
 	//String layer = "";
 	
 	public NodeGene(int inno_id, int pop_id)
@@ -75,7 +76,7 @@ public class NodeGene implements INode {
 		return inno_id;
 	}
 	
-	public ArrayList<IConnection> get_connections()
+	public ArrayList<ConnectionGene> get_connections()
 	{
 		return this.connections;
 	}
