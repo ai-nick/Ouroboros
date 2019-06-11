@@ -62,16 +62,6 @@ public class Genome {
 			inno_id++;
 			this.input_nodes.add(new_node);
 		}
-		
-		for (int ix = 0; ix < num_hidden; ix++)
-		{
-			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
-			new_node.is_input = false;
-			new_node.is_output = false;
-			inno_id++;
-			this.hidden_nodes.add(new_node);
-		}
-		
 		for (int ix = 0; ix < num_out; ix++)
 		{
 			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
@@ -79,6 +69,21 @@ public class Genome {
 			new_node.is_output = true;
 			inno_id++;
 			this.output_nodes.add(new_node);
+		}
+		if (num_hidden > 0)
+		{
+			for (int ix = 0; ix < num_hidden; ix++)
+			{
+				NodeGene new_node = new NodeGene(inno_id, this.population_hash);
+				new_node.is_input = false;
+				new_node.is_output = false;
+				inno_id++;
+				this.hidden_nodes.add(new_node);
+			}			
+		}
+		else 
+		{
+			this.connect_full_initial(inno_id);
 		}
 		this.mutate_genome(inno_id, config);
 		return inno_id;
@@ -292,6 +297,26 @@ public class Genome {
 		int delete_key = dice.nextInt(this.conn_genes.size());
 		
 		this.conn_genes.remove(delete_key);
+	}
+	
+	private void connect_full_initial(int new_id)
+	{
+		int num_in = this.input_nodes.size();
+		int num_out = this.output_nodes.size();
+		for(int ix = 0; ix < num_in; ix++)
+		{
+			for (int ixx = 0; ixx < num_out; ixx++)
+			{
+				// do we really need to pass in the whole node, seems like just the ids out suffice
+				NodeGene from_node = this.input_nodes.get(ix);
+				NodeGene to_node = this.output_nodes.get(ixx);
+				
+				ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
+				
+				this.conn_genes.put(new_id, new_gene);
+			}
+		}
+		return;
 	}
 	
 	public String as_json()
