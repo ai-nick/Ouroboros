@@ -11,7 +11,7 @@ public class Genome {
 
 	public int id = 0;
 	int gen_born = 0;
-	int[] gene_ids;
+	ArrayList<Integer> gene_ids = new ArrayList<Integer>();
 	int population_hash = 0;
 	int species_id = 0;
 	public double fitness = 0.0;
@@ -61,6 +61,7 @@ public class Genome {
 			new_node.is_output = false;
 			inno_id++;
 			this.input_nodes.add(new_node);
+			this.gene_ids.add(inno_id);
 		}
 		for (int ix = 0; ix < num_out; ix++)
 		{
@@ -69,6 +70,7 @@ public class Genome {
 			new_node.is_output = true;
 			inno_id++;
 			this.output_nodes.add(new_node);
+			this.gene_ids.add(inno_id);
 		}
 		if (num_hidden > 0)
 		{
@@ -79,6 +81,7 @@ public class Genome {
 				new_node.is_output = false;
 				inno_id++;
 				this.hidden_nodes.add(new_node);
+				this.gene_ids.add(inno_id);
 			}			
 		}
 		else 
@@ -222,6 +225,8 @@ public class Genome {
 		
 		this.conn_genes.put(new_id, new_gene);
 		
+		this.gene_ids.add(new_id);
+		
 		return;
 	}
 	
@@ -240,11 +245,15 @@ public class Genome {
 		
 		NodeGene new_node = new NodeGene(new_id, activation);
 		
+		this.gene_ids.add(new_id);
+		
 		new_id++;
 		
 		ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, new_id);
 		
 		this.conn_genes.put(new_id, new_conn_a);
+		
+		this.gene_ids.add(new_id);
 		
 		new_id++;
 		
@@ -253,6 +262,8 @@ public class Genome {
 		this.conn_genes.put(new_id, new_conn_b);
 		
 		this.hidden_nodes.add(new_node);
+		
+		this.gene_ids.add(new_id);
 		
 		return;
 	}
@@ -271,16 +282,19 @@ public class Genome {
 		
 		int node_idx = dice.nextInt(num_nodes);
 		
-		NodeGene delete_node = this.hidden_nodes.get(dice.nextInt(num_nodes));
+		NodeGene delete_node = this.hidden_nodes.get(node_idx);
 		
 		int conn_counter = delete_node.connections.size();
 		
 		for (int ix = 0; ix < conn_counter; ix++)
 		{
 			this.conn_genes.remove(delete_node.connections.get(ix).get_id());
+			this.gene_ids.remove(delete_node.connections.get(ix).get_id());
 		}
 		
-		this.hidden_nodes.remove(dice.nextInt(num_nodes));
+		this.hidden_nodes.remove(node_idx);
+		
+		this.gene_ids.remove(Integer.valueOf(node_idx));
 		
 		return;
 	}
@@ -297,6 +311,8 @@ public class Genome {
 		int delete_key = dice.nextInt(this.conn_genes.size());
 		
 		this.conn_genes.remove(delete_key);
+		
+		this.gene_ids.remove(Integer.valueOf(delete_key));
 	}
 	
 	private void connect_full_initial(int new_id)
@@ -314,6 +330,7 @@ public class Genome {
 				ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
 				
 				this.conn_genes.put(new_id, new_gene);
+				this.gene_ids.add(new_id);
 				from_node.connections.add(new_gene);
 			}
 		}

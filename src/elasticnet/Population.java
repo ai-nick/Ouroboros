@@ -66,12 +66,12 @@ public class Population {
 		double w = (one.avg_w + two.avg_w) / 2;
 		double s = 0.0;
 		int e = 0,d = 0;
-		int[] j = null;
-		for(int idx = 0; idx < one.gene_ids.length; idx++)
+		int[] j = new int[one.gene_ids.size()];
+		for(int idx = 0; idx < one.gene_ids.size(); idx++)
 		{
 			if(Arrays.asList(two).contains(one.gene_ids))
 			{
-				j[idx] = one.gene_ids[idx];
+				j[idx] = one.gene_ids.get(idx);
 			}
 			else
 			{

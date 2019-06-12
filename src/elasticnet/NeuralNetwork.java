@@ -92,7 +92,7 @@ public class NeuralNetwork implements INeuralNet {
 					
 					if(!next_actives.contains(next_node))
 					{
-						System.out.println("wtf how");
+						//System.out.println("wtf how");
 						
 						next_actives.add(next_node);
 						
