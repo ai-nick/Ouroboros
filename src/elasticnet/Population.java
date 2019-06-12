@@ -17,9 +17,7 @@ public class Population {
 	ArrayList<Genome> genomes = new ArrayList<Genome>();
 	
 	int num_genomes;
-	int num_gens;
 	int hash_id;
-	int generations = 0;
 	int min_species_size = 5;
 	String fitness_function = "";
 	String ts = "";
@@ -33,13 +31,13 @@ public class Population {
 	//HashMap<Integer, IConnection> conn_genes;
 	//HashMap<Integer, INode> node_genes;
 	
-	public Population(int gens, int gen,  NeatConfig config_in, int pop_size) 
+	public Population(int gen,  NeatConfig config_in, int pop_size) 
 	{
 		this.ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		this.hash_id = this.ts.hashCode();
 		this.pop_size = pop_size;
-		this.num_gens = gens;
 		this.config = config_in;
+		this.current_gen = gen;
 		if (gen == 0) {
 			this.set_up_first_pop();
 		}
@@ -302,6 +300,15 @@ public class Population {
 
 	}
 	*/
+	
+	public int get_num_genomes()
+	{
+		return this.genomes.size();
+	}
+	
+	public Genome get_genome(int key) {
+		return this.genomes.get(key);
+	}
 	
 	public void set_config(String conf)
 	{
