@@ -162,7 +162,7 @@ public class Population {
 	
 	// determine the number of genomes each species should reproduce
 	// TODO need to hash out how to let species grow, target the desired pop_size
-	public void the_reproduction_function(int save_top_and_mutate)
+	public void the_reproduction_function()
 	{
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();

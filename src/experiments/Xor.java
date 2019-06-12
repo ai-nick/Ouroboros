@@ -81,6 +81,8 @@ public class Xor {
 				System.out.println(current_genome.fitness);
 			}
 			test_pop.speciate_population();
+			
+			test_pop.the_reproduction_function();
 		}		
 	}
 	
