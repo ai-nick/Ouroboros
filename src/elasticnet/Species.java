@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 // array list of genomes
 public class Species {
 	int speciesID;
-	ArrayList<Integer> member_ids;	
+	ArrayList<Integer> member_ids = new ArrayList<Integer>();	
 	int rep_id;
 	int pop_id;
 	double adjust_fit_sum = 0.0;
@@ -18,9 +18,10 @@ public class Species {
 	double best_fitness = 0.0;
 	int best_genome_index;
 	int[] sorted_idx_array;
-	public Species(int id)
+	public Species(int id, int first_id)
 	{
 		this.speciesID = id;
+		this.member_ids.add(first_id);
 	}
 	
 	public double get_adjusted_fitness_sum(ArrayList<Genome> genomes)

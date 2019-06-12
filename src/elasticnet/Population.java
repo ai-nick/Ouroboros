@@ -24,6 +24,7 @@ public class Population {
 	int current_gen = 0;
 	int inno_num = 0;
 	int next_genome_id = 0;
+	int next_species_id = 0;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	int pop_size = 0;
@@ -62,20 +63,20 @@ public class Population {
 		}
 	}
 	
-	public double compat_distance(Genome one, Genome two, Double[] speciation_coefficients) {
+	public double compat_distance(Genome one, Genome two, double[] speciation_coefficients) {
 		double w = (one.avg_w + two.avg_w) / 2;
 		double s = 0.0;
 		int e = 0,d = 0;
 		int[] j = new int[one.gene_ids.size()];
 		for(int idx = 0; idx < one.gene_ids.size(); idx++)
 		{
-			if(Arrays.asList(two).contains(one.gene_ids))
+			if(two.gene_ids.contains(one.gene_ids))
 			{
 				j[idx] = one.gene_ids.get(idx);
 			}
 			else
 			{
-				if(one.gene_ids[idx] >= two.gene_id_min && one.gene_ids[idx] <= two.gene_id_max)
+				if(one.gene_ids.get(idx) >= two.gene_id_min && one.gene_ids.get(idx) <= two.gene_id_max)
 				{
 					d += 1;
 				}
@@ -85,11 +86,14 @@ public class Population {
 				}
 			}
 		}
-		for(int ix = 0; ix < two.gene_ids.length; ix++)
+		
+		int loop_count = two.gene_ids.size();
+		
+		for(int ix = 0; ix < loop_count; ix++)
 		{
-			if(!Arrays.asList(j).contains(two.gene_ids[ix]))
+			if(!Arrays.asList(j).contains(two.gene_ids.get(ix)))
 			{
-				if(two.gene_ids[ix] >= one.gene_id_min && two.gene_ids[ix] <= one.gene_id_max)
+				if(two.gene_ids.get(ix) >= one.gene_id_min && two.gene_ids.get(ix) <= one.gene_id_max)
 				{
 					d += 1;
 				}
@@ -114,6 +118,8 @@ public class Population {
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
 		
 		double compat_t = this.config.compat_threshold;
+		
+		double[] speciation_coeff = { 1.0, 1.0, 1.0 };
 		// check if its the first round of speciation
 		// if it is we will have an empty array 
 		// and can just choose a random genome to represent 
@@ -123,7 +129,7 @@ public class Population {
 			Random rnd = new Random();
 			int first_rep_index = rnd.nextInt(this.genomes.size());
 			Genome first_rep = this.genomes.get(first_rep_index);
-			this.pop_species.add(new Species(first_rep.id));
+			this.pop_species.add(new Species(next_species_id, first_rep.id));
 			speciated.add(first_rep_index);
 		}
 		for(int x = 0; x < this.num_genomes; x++)
@@ -138,7 +144,7 @@ public class Population {
 				{
 					Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
 							current_genome,
-							new Double[3]);
+							speciation_coeff);
 					if( dist < compat_t)
 					{
 						this.pop_species.get(i).member_ids.add(current_genome.id);
@@ -147,7 +153,7 @@ public class Population {
 				}
 				if(!speciated.contains(current_genome.id))
 				{
-					this.pop_species.add(new Species(current_genome.id));
+					this.pop_species.add(new Species(next_species_id, current_genome.id));
 					speciated.add(current_genome.id);
 				}
 			}
