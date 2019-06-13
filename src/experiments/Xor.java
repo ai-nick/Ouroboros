@@ -90,9 +90,12 @@ public class Xor {
 			}
 			test_pop.speciate_population();
 			
+			System.out.println(test_pop.get_species().size());
+			
 			test_pop.the_reproduction_function();
 		}
 		System.out.println("best genome id: ");
+		
 		System.out.println(test_pop.get_best_genome_id());
 	}
 	

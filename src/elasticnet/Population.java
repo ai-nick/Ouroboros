@@ -44,6 +44,11 @@ public class Population {
 		}
 	}
 	
+	public ArrayList<Species> get_species()
+	{
+		return this.pop_species;
+	}
+	
 	public void set_best_genome_id(int id)
 	{
 		this.best_genome_id = id;
@@ -208,7 +213,7 @@ public class Population {
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 			int keep_top = (int)((double)current.num_genomes * elitism_percent);
 			saved_sum += keep_top;
-			if(keep_top > 1)
+			if(keep_top > 0)
 			{
 				current.have_mercy(keep_top, this.genomes);
 				breed_all_remaining(current);				
