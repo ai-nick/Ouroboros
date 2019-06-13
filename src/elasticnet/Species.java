@@ -38,7 +38,10 @@ public class Species {
 			fit_sort_dict.put(this.member_ids.get(x), fit_genome.fitness);
 			this.sorted_idx_array[x] = this.member_ids.get(x);
 		}
-		this.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length);
+		if(this.member_ids.size() > 1)
+		{
+			this.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length);	
+		}
 		return this.adjust_fit_sum;
 	}
 	

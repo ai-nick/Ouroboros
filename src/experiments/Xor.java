@@ -23,8 +23,6 @@ public class Xor {
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
-		test_pop.set_up_first_pop();
-		
 		int num_gens = 10;
 		
 		for(int i = 0; i < num_gens; i++)

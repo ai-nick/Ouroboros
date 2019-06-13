@@ -127,34 +127,39 @@ public class Population {
 		if (this.pop_species.size() == 0)
 		{
 			Random rnd = new Random();
-			int first_rep_index = rnd.nextInt(this.genomes.size());
-			Genome first_rep = this.genomes.get(first_rep_index);
+			int randindex = rnd.nextInt(this.genomes.size());
+			Genome first_rep = this.genomes.get(randindex);
 			this.pop_species.add(new Species(next_species_id, first_rep.id));
-			speciated.add(first_rep_index);
+			speciated.add(first_rep.id);
 		}
 		for(int x = 0; x < this.num_genomes; x++)
 		{
-			boolean species_found = false;
 			//check if its first species rep_index, not elegant but have to handle
-			if(!speciated.contains(x)) 
+			if(!speciated.contains(this.genomes.get(x).id)) 
 			{
+				boolean species_found = false;
 				Genome current_genome = this.genomes.get(x);
 				int num_species = this.pop_species.size();
 				for(int i = 0; i < num_species; i++)
 				{
-					Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
-							current_genome,
-							speciation_coeff);
-					if( dist < compat_t)
+					if(!species_found)
 					{
-						this.pop_species.get(i).member_ids.add(current_genome.id);
-						speciated.add(current_genome.id);
+						Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
+								current_genome,
+								speciation_coeff);
+						if( dist < compat_t)
+						{
+							this.pop_species.get(i).member_ids.add(current_genome.id);
+							speciated.add(current_genome.id);
+							species_found = true;
+						}	
 					}
 				}
 				if(!speciated.contains(current_genome.id))
 				{
 					this.pop_species.add(new Species(next_species_id, current_genome.id));
 					speciated.add(current_genome.id);
+					species_found = true;
 				}
 			}
 		}
@@ -176,8 +181,11 @@ public class Population {
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 			int keep_top = (int)((double)current.num_genomes * elitism_percent);
 			saved_sum += keep_top;
-			current.have_mercy(keep_top, this.genomes);
-			breed_all_remaining(current);
+			if(keep_top > 1)
+			{
+				current.have_mercy(keep_top, this.genomes);
+				breed_all_remaining(current);				
+			}
 		}
 	}
 	
