@@ -74,47 +74,53 @@ public class Population {
 	}
 	
 	public double compat_distance(Genome one, Genome two, double[] speciation_coefficients) {
-		double w = (one.avg_w + two.avg_w) / 2;
+		double w = 0.0;
+		double d = 0.0;
 		double s = 0.0;
-		int e = 0,d = 0;
-		int[] j = new int[one.gene_ids.size()];
-		for(int idx = 0; idx < one.gene_ids.size(); idx++)
+		double e = 0.0;
+		int loop_count = one.gene_ids.size();
+		int[] j = new int[loop_count];
+		for(int idx = 0; idx < loop_count; idx++)
 		{
-			if(two.gene_ids.contains(one.gene_ids))
+			if(two.gene_ids.contains(one.gene_ids.get(idx)))
 			{
-				j[idx] = one.gene_ids.get(idx);
+				if(one.conn_genes.containsKey(idx))
+				{
+					w = Math.abs((one.conn_genes.get(idx).atts.get("weight") - two.conn_genes.get(idx).atts.get("weight")));
+				}
 			}
 			else
 			{
 				if(one.gene_ids.get(idx) >= two.gene_id_min && one.gene_ids.get(idx) <= two.gene_id_max)
 				{
-					d += 1;
+					d += 1.0;
 				}
 				else
 				{
-					e += 1;
+					e += 1.0;
 				}
 			}
 		}
 		
-		int loop_count = two.gene_ids.size();
+		loop_count = two.gene_ids.size();
 		
 		for(int ix = 0; ix < loop_count; ix++)
 		{
-			if(!Arrays.asList(j).contains(two.gene_ids.get(ix)))
+			if(two.gene_ids.get(ix) >= one.gene_id_min && two.gene_ids.get(ix) <= one.gene_id_max)
 			{
-				if(two.gene_ids.get(ix) >= one.gene_id_min && two.gene_ids.get(ix) <= one.gene_id_max)
-				{
-					d += 1;
-				}
-				else
-				{
-					e += 1;
-				}
+				d += 1.0;
+			}
+			else
+			{
+				e += 1.0;
 			}
 		}
-		s += e*speciation_coefficients[0]/10;
-		s += d*speciation_coefficients[1]/10;
+		if(loop_count < one.gene_ids.size())
+		{
+			loop_count = one.gene_ids.size();
+		}
+		s += (e*speciation_coefficients[0])/loop_count;
+		s += (d*speciation_coefficients[1])/loop_count;
 		s += w*speciation_coefficients[2];
 		one.fit_dists.put(two.id, s);
 		return s;
@@ -158,7 +164,7 @@ public class Population {
 						Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
 								current_genome,
 								speciation_coeff);
-						System.out.println(dist);
+						//System.out.println(dist);
 						if( dist < compat_t)
 						{
 							//System.out.println("adding species id: ");
