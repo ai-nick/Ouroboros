@@ -26,15 +26,17 @@ public class Species {
 	
 	public double get_adjusted_fitness_sum(ArrayList<Genome> genomes)
 	{
-		this.sorted_idx_array = new int[genomes.size()];
+		this.sorted_idx_array = new int[this.member_ids.size()];
 		
 		HashMap<Integer, Double> fit_sort_dict = new HashMap<Integer, Double>();
 		
-		for(int x = 0; x < genomes.size(); x++)
+		for(int x = 0; x < this.member_ids.size(); x++)
 		{
-			this.adjust_fit_sum += genomes.get(this.member_ids.get(x)).get_prime(this.member_ids.size());
-			fit_sort_dict.put(genomes.get(x).id, genomes.get(x).fitness);
-			this.sorted_idx_array[x] = genomes.get(x).id;
+			int member_id = this.member_ids.get(x);
+			Genome fit_genome = genomes.get(member_id);
+			this.adjust_fit_sum += fit_genome.get_prime(this.member_ids.size());
+			fit_sort_dict.put(this.member_ids.get(x), fit_genome.fitness);
+			this.sorted_idx_array[x] = this.member_ids.get(x);
 		}
 		this.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length);
 		return this.adjust_fit_sum;
