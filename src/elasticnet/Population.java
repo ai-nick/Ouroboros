@@ -14,8 +14,8 @@ import java.util.Arrays;
 
 public class Population {
 	
-	ArrayList<Genome> genomes = new ArrayList<Genome>();
-	
+	public ArrayList<Genome> genomes = new ArrayList<Genome>();
+	int best_genome_id;
 	int num_genomes;
 	int hash_id;
 	int min_species_size = 5;
@@ -44,6 +44,16 @@ public class Population {
 		}
 	}
 	
+	public void set_best_genome_id(int id)
+	{
+		this.best_genome_id = id;
+	}
+	
+	public int get_best_genome_id()
+	{
+		return this.best_genome_id;
+	}
+	
 	public void set_up_first_pop()
 	{
 		// if no genomes are loaded we will start by creating a fresh population
@@ -51,7 +61,7 @@ public class Population {
 		{
 			for (int ix = 0; ix < this.pop_size; ix++)
 			{
-				Genome gBaby = new Genome(ix);
+				Genome gBaby = new Genome(this.hash_id, ix);
 				
 				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config, this.hash_id);
 				
@@ -59,7 +69,7 @@ public class Population {
 				
 				this.num_genomes++;
 			}
-			this.next_genome_id = this.pop_size+next_genome_id;
+			this.next_genome_id = this.pop_size;
 		}
 	}
 	
@@ -130,6 +140,7 @@ public class Population {
 			int randindex = rnd.nextInt(this.genomes.size());
 			Genome first_rep = this.genomes.get(randindex);
 			this.pop_species.add(new Species(next_species_id, first_rep.id));
+			next_species_id++;
 			speciated.add(first_rep.id);
 		}
 		for(int x = 0; x < this.num_genomes; x++)
@@ -147,8 +158,13 @@ public class Population {
 						Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
 								current_genome,
 								speciation_coeff);
+						System.out.println(dist);
 						if( dist < compat_t)
 						{
+							//System.out.println("adding species id: ");
+							//System.out.println(current_genome.id);
+							//System.out.println("to species : ");
+							//System.out.println(this.pop_species.get(i).speciesID);
 							this.pop_species.get(i).member_ids.add(current_genome.id);
 							speciated.add(current_genome.id);
 							species_found = true;
@@ -157,7 +173,12 @@ public class Population {
 				}
 				if(!speciated.contains(current_genome.id))
 				{
+					//System.out.println("adding species id: ");
+					//System.out.println(current_genome.id);
+					//System.out.println("to species : ");
+					//System.out.println(next_species_id);
 					this.pop_species.add(new Species(next_species_id, current_genome.id));
+					next_species_id++;
 					speciated.add(current_genome.id);
 					species_found = true;
 				}

@@ -12,6 +12,8 @@ public class TestPopInit {
 		Population test_pop = new Population(0, new NeatConfig(), 100);
 		
 		test_pop.set_up_first_pop();
+		
+		System.out.println(test_pop.genomes.get(34).id);
 
 	}
 

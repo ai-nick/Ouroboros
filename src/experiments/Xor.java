@@ -25,9 +25,12 @@ public class Xor {
 		
 		int num_gens = 10;
 		
+		double best_fitness = 0.0;
+		
 		for(int i = 0; i < num_gens; i++)
 		{
 			System.out.println("new gen");
+			
 			int num_genomes = test_pop.get_num_genomes();
 			
 			for(int x = 0; x < num_genomes; x++)
@@ -71,6 +74,12 @@ public class Xor {
 					
 					current_genome.fitness -= Math.pow(test_net.get_output().get(0) - output, 2);
 					
+					if(current_genome.fitness > best_fitness)
+					{
+						best_fitness = current_genome.fitness;
+						test_pop.set_best_genome_id(current_genome.id);
+					}
+					
 					test_net.Reset();
 					
 					output = 0.0;	
@@ -81,6 +90,8 @@ public class Xor {
 			test_pop.speciate_population();
 			
 			test_pop.the_reproduction_function();
+			System.out.println("best genome id: ");
+			System.out.println(test_pop.get_best_genome_id());
 		}		
 	}
 	
