@@ -49,7 +49,7 @@ public class Population {
 		// if no genomes are loaded we will start by creating a fresh population
 		if(pop_size != 0)
 		{
-			for (int ix = next_genome_id; ix < this.pop_size+next_genome_id; ix++)
+			for (int ix = 0; ix < this.pop_size; ix++)
 			{
 				Genome gBaby = new Genome(ix);
 				
