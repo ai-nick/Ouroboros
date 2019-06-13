@@ -26,7 +26,7 @@ public class Species {
 	
 	public double get_adjusted_fitness_sum(ArrayList<Genome> genomes)
 	{
-		System.out.println(this.member_ids);
+		//System.out.println(this.member_ids);
 		this.sorted_idx_array = new int[this.member_ids.size()];
 		
 		HashMap<Integer, Double> fit_sort_dict = new HashMap<Integer, Double>();

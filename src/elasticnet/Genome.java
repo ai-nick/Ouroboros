@@ -223,7 +223,6 @@ public class Genome {
 			return;
 		}
 		ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
-		
 		this.conn_genes.put(new_id, new_gene);
 		
 		this.gene_ids.add(new_id);
