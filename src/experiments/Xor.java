@@ -23,7 +23,7 @@ public class Xor {
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
-		int num_gens = 10;
+		int num_gens = 88;
 		
 		double best_fitness = 0.0;
 		
@@ -80,7 +80,10 @@ public class Xor {
 						best_fitness = current_genome.fitness;
 						test_pop.set_best_genome_id(current_genome.id);
 					}
-					
+					else
+					{
+						System.out.println(current_genome.fitness);
+					}
 					test_net.Reset();
 					
 					output = 0.0;	

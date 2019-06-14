@@ -183,18 +183,22 @@ public class Genome {
 		
 		if (Math.random() < (config.add_conn_prob/prob_sum))
 		{
+			System.out.println("adding conn here");
 			mutate_add_conn(new_id);
 		}
 		if (Math.random() < (config.add_node_prob/prob_sum))
 		{
+			System.out.println("adding node here");
 			mutate_add_node(new_id, config.defaultActivation);
 		}
 		if (Math.random() < (config.delete_node_prob/prob_sum))
 		{
+			System.out.println("deleting node here");
 			mutate_delete_node();
 		}
 		if (Math.random() < (config.delete_conn_prob/prob_sum))
 		{
+			System.out.println("deleting conn here");
 			mutate_delete_conn();
 		}
 		return;
