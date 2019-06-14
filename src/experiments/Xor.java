@@ -82,7 +82,7 @@ public class Xor {
 					}
 					else
 					{
-						System.out.println(current_genome.fitness);
+						//System.out.println(current_genome.fitness);
 					}
 					test_net.Reset();
 					
@@ -93,7 +93,7 @@ public class Xor {
 			}
 			test_pop.speciate_population();
 			
-			System.out.println(test_pop.get_species().size());
+			//System.out.println(test_pop.get_species().size());
 			
 			test_pop.the_reproduction_function();
 		}

@@ -218,6 +218,10 @@ public class Population {
 				current.have_mercy(keep_top, this.genomes);
 				breed_all_remaining(current);				
 			}
+			else
+			{
+				this.pop_species.remove(x);
+			}
 		}
 	}
 	
@@ -232,6 +236,9 @@ public class Population {
 					cross_breed(this.genomes.get(the_species.member_ids.get(i)), this.genomes.get(the_species.member_ids.get(x)));
 				}
 			}
+			Genome mutated_genome = new Genome(this.genomes.get(i), this.next_genome_id);
+			mutated_genome.mutate_genome(this.inno_num, config);
+			this.genomes.add(mutated_genome);
 		}
 	}
 	

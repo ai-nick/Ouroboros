@@ -177,26 +177,28 @@ public class Genome {
 	
 	public void mutate_genome(int new_id, NeatConfig config)
 	{
+		Random rand = new Random();
+		
 		String default_activation = config.defaultActivation;
 		
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
 		
-		if (Math.random() < (config.add_conn_prob/prob_sum))
+		if (rand.nextFloat() < (config.add_conn_prob))
 		{
 			System.out.println("adding conn here");
 			mutate_add_conn(new_id);
 		}
-		if (Math.random() < (config.add_node_prob/prob_sum))
+		if (rand.nextFloat() < (config.add_node_prob))
 		{
 			System.out.println("adding node here");
 			mutate_add_node(new_id, config.defaultActivation);
 		}
-		if (Math.random() < (config.delete_node_prob/prob_sum))
+		if (rand.nextFloat() < (config.delete_node_prob))
 		{
 			System.out.println("deleting node here");
 			mutate_delete_node();
 		}
-		if (Math.random() < (config.delete_conn_prob/prob_sum))
+		if (rand.nextFloat() < (config.delete_conn_prob))
 		{
 			System.out.println("deleting conn here");
 			mutate_delete_conn();
