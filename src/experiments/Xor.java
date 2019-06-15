@@ -12,6 +12,11 @@ public class Xor {
 	{
 	}
 	
+	public void generate_data()
+	{
+		
+	}
+	
 	public void run_pop() {
 		this.permute_signs(2);
 		
@@ -19,7 +24,7 @@ public class Xor {
 		
 		int num_epochs = this.signs.length/2;
 		
-		int pop_size = 1000;
+		int pop_size = 10;
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
@@ -74,32 +79,23 @@ public class Xor {
 					
 					current_genome.fitness -= Math.pow(test_net.get_output().get(0) - output, 2);
 					
-					if(current_genome.fitness > best_fitness)
-					{
-						System.out.println(current_genome.fitness);
-						best_fitness = current_genome.fitness;
-						test_pop.set_best_genome_id(current_genome.id);
-					}
-					else
-					{
-						//System.out.println(current_genome.fitness);
-					}
 					test_net.Reset();
 					
 					output = 0.0;	
 				}
 				
 				//System.out.println(current_genome.fitness);
+				//System.out.println(test_net.as_json());
 			}
 			test_pop.speciate_population();
 			
-			//System.out.println(test_pop.get_species().size());
-			
 			test_pop.the_reproduction_function();
+			
+			System.out.println(test_pop.get_species().size());
 		}
-		System.out.println("best genome id: ");
+		//System.out.println("best genome id: ");
 		
-		System.out.println(test_pop.get_best_genome_id());
+		//System.out.println(test_pop.get_best_genome_id());
 	}
 	
 	public void permute_signs(int coord_len) {

@@ -1,6 +1,8 @@
 package elasticnet;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 import io.netty.util.internal.ThreadLocalRandom;
 
 public class ConnectionGene implements IConnection {
@@ -67,5 +69,12 @@ public class ConnectionGene implements IConnection {
 	public NodeGene get_next_node()
 	{
 		return to_node;
+	}
+	
+	public String as_json()
+	{
+		Gson gson = new Gson();
+		String json_string = gson.toJson(this);
+		return json_string;
 	}
 }
