@@ -218,10 +218,6 @@ public class Population {
 				current.have_mercy(keep_top, this.genomes);
 				breed_all_remaining(current);				
 			}
-			else
-			{
-				this.pop_species.remove(x);
-			}
 		}
 	}
 	

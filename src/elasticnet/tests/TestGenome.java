@@ -23,7 +23,7 @@ public class TestGenome {
 		double[] test_input = {1.0, 1.0, 1.0, 1.0};
 		
 		test_net.feed_forward = true;
-		
+	
 		test_net.set_input(test_input);
 		
 		test_net.Activate();

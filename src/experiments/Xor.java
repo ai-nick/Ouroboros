@@ -20,17 +20,26 @@ public class Xor {
 	public void run_pop() {
 		this.permute_signs(2);
 		
-		double[] inputs = new double[2];
+		double[][] inputs = {
+				{0.0, 0.0},
+				{1.0, 0.0},
+				{0.0, 1.0},
+				{1.0, 1.0}
+		};
+		
+		double[] outputs = {0.0, 1.0, 1.0, 0.0};
 		
 		int num_epochs = this.signs.length/2;
 		
-		int pop_size = 10;
+		int pop_size = 100;
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
-		int num_gens = 88;
+		int num_gens = 100;
 		
 		double best_fitness = 0.0;
+		
+		int best_genome_id = 0;
 		
 		for(int i = 0; i < num_gens; i++)
 		{
@@ -48,42 +57,25 @@ public class Xor {
 				
 				test_net.feed_forward = true;
 				
-				for(int z = 0; z < this.signs.length; z++)
-				{
-					String sign_patt = signs[z];
-					
-					double output = 0.0;
-					
-					for(int f = 0; f < num_epochs; f++)
-					{	
-						char x_or_char = sign_patt.charAt(f);
-						
-						if (x_or_char == '1')
-						{
-							inputs[f] = 1.0;
-						}
-						else
-						{
-							inputs[f] = 0.0;
-						}
-						
-						if (inputs[f] + inputs[f] == 1.0)
-						{
-							output = 1.0;
-						}
-					}
-					
-					test_net.set_input(inputs);
+				for(int z = 0; z < 4; z++)
+				{	
+					test_net.set_input(inputs[z]);
 					
 					test_net.Activate();
 					
-					current_genome.fitness -= Math.pow(test_net.get_output().get(0) - output, 2);
+					current_genome.fitness -= Math.pow(test_net.get_output().get(0) - outputs[z], 2);
 					
-					test_net.Reset();
-					
-					output = 0.0;	
+					test_net.Reset();	
 				}
 				
+				if(current_genome.fitness > best_fitness)
+				{
+					best_genome_id = current_genome.id;
+					best_fitness = current_genome.fitness;
+					System.out.println(" new best fitness ");
+					System.out.println(best_genome_id);
+					System.out.println(best_fitness);
+				}
 				//System.out.println(current_genome.fitness);
 				//System.out.println(test_net.as_json());
 			}
@@ -91,7 +83,7 @@ public class Xor {
 			
 			test_pop.the_reproduction_function();
 			
-			System.out.println(test_pop.get_species().size());
+			//System.out.println(test_pop.get_species().size());
 		}
 		//System.out.println("best genome id: ");
 		
