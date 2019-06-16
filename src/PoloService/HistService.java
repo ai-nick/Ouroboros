@@ -27,7 +27,8 @@ public class HistService {
 			this.get_hist(current_sym);
 		}
 		*/
-		System.out.println(String.format("pulled %d symbols of data", this.histdata.size()));
+		System.out.print(this.histdata.get(this.symbols.get(0)).get(0));
+		System.out.println(String.format("pulled %d symbols of data", this.symbols.size()));
 	}
 
 	private void get_hist(String symbol) {
