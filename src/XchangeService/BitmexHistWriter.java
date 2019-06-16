@@ -23,7 +23,7 @@ public class BitmexHistWriter {
 	{
 	}
 	
-	public void write_hist_to_csv() throws IOException
+	public void get_live_tickers() throws IOException
 	{
 		int pair_count = all_pairs.size();
 		ArrayList<Ticker> all_hist = new ArrayList<Ticker>();
@@ -32,6 +32,16 @@ public class BitmexHistWriter {
 			Ticker ticker = marketDataService.getTicker(all_pairs.get(ix));
 			System.out.println(ticker.toString());
 			all_hist.add(ticker);
+		}
+	}
+	
+	public void write_hist_to_csv()
+	{
+		int pair_count = all_pairs.size();
+
+		for (int ix = 0; ix < pair_count; ix++)
+		{
+			this.marketDataService
 		}
 	}
 	
