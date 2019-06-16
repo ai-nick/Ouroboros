@@ -1,5 +1,6 @@
 package XchangeService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,15 +19,31 @@ public class BitmexHistWriter {
 	
 	MarketDataService marketDataService = bitmex.getMarketDataService();
 	
-	public void write_hist_to_csv()
+	public BitmexHistWriter()
+	{
+	}
+	
+	public void write_hist_to_csv() throws IOException
 	{
 		int pair_count = all_pairs.size();
 		ArrayList<Ticker> all_hist = new ArrayList<Ticker>();
 		for (int ix = 0; ix < pair_count; ix++)
 		{
 			Ticker ticker = marketDataService.getTicker(all_pairs.get(ix));
+			System.out.println(ticker.toString());
 			all_hist.add(ticker);
 		}
 	}
 	
+	public void try_get_tickers()
+	{
+		try
+		{
+			this.write_hist_to_csv();	
+		}
+		catch(IOException ex)
+		{
+			System.out.println(ex.toString());
+		}
+	}
 }
