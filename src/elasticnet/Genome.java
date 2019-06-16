@@ -346,7 +346,8 @@ public class Genome {
 	public String as_json()
 	{
 		Gson gson = new Gson();
-		String json_string = gson.toJson(this);
-		return json_string;
+		Genome empty_self = new Genome(this.id, this.population_hash);
+		String empty_json = gson.toJson(this);
+		return empty_json;
 	}
 }

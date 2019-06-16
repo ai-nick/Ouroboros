@@ -16,7 +16,7 @@ public class TestGenome {
 		test_genome.create_from_scratch(0, new NeatConfig(), fake_pop_hash);
 		
 		
-		//System.out.println(test_genome.as_json());
+		System.out.println(test_genome.as_json());
 		
 		NeuralNetwork test_net = new NeuralNetwork(test_genome);
 		
