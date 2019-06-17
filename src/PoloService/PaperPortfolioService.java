@@ -21,6 +21,16 @@ public class PaperPortfolioService {
 		return this.num_buys;
 	}
 	
+	public String buy_long_leveraged(String coin, double amnt, double leverage, double price)
+	{
+		return "";
+	}
+	
+	public String sell_short_leveraged(String coin, double amnt, double leverage, double price)
+	{
+		return "";
+	}
+	
 	public String buy_coin(String coin, double amnt, double price) {
 		if((amnt*price)*.01 > this.bal_sheet.get("BTC")) {
 			return "error not enough btc";
