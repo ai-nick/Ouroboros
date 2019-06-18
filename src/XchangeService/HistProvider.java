@@ -46,10 +46,19 @@ public class HistProvider {
 				total_volume += this.hist_list[i-look_back].volume;
 			}
 			ann_input[i-look_back][input_array_idx] += total_weight/total_volume;
+			System.out.println("vwap = ");
+			System.out.println(ann_input[i-look_back][input_array_idx]);
 		}
-		System.out.println(ann_input[0][0]);
 	}
 	
+	public void macd(int look_back, int input_array_idx)
+	{
+		return;
+	}
 	
+	public void ema(int look_back, int input_array_idx)
+	{
+		return;
+	}
 
 }
