@@ -15,7 +15,7 @@ public class HistProvider {
 	
 	HistDataBar[] hist_list = new HistDataBar[400];
 	
-	double[][] ann_input = new double[10][400-21];
+	double[][] ann_input = new double[400-10][10];
 	
 	int num_bars;
 	
@@ -47,6 +47,9 @@ public class HistProvider {
 			}
 			ann_input[i-look_back][input_array_idx] += total_weight/total_volume;
 		}
+		System.out.println(ann_input[0][0]);
 	}
+	
+	
 
 }
