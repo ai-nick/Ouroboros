@@ -19,6 +19,10 @@ public class HistProvider {
 	
 	int num_bars;
 	
+	double smooth = 2.0;
+	
+	int long_look_back;
+	
 	public HistProvider() throws FileNotFoundException, IOException
 	{
 		try(FileInputStream inputStream = new FileInputStream("xbtusd.json")) {     
@@ -53,12 +57,26 @@ public class HistProvider {
 	
 	public void macd(int look_back, int input_array_idx)
 	{
-		return;
+		for (int i = look_back; i < num_bars; i++)
+		{
+			
+		}
 	}
 	
 	public void ema(int look_back, int input_array_idx)
 	{
-		return;
+		double smoother = smooth / (double)(look_back+1);
+		
+		for (int i = look_back+1; i < num_bars; i++)
+		{
+			double close_total = 0.0;
+			
+			for(int ix = 0; ix < look_back; ix++)
+			{
+				close_total += this.hist_list[i-look_back].close;
+			}
+			close_total = close_total / look_back;
+		}
 	}
 
 }
