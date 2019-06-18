@@ -52,7 +52,7 @@ public class BitmexHistWriter {
 	
 	public String get_from_mex(String sym)
 	{
-		String hist_endpoint = "https://www.bitmex.com/api/v1/trade/bucketed?binSize=1h&symbol=XBTUSD&partial=false&count=100&reverse=false";
+		String hist_endpoint = "https://www.bitmex.com/api/v1/trade/bucketed?binSize=1h&symbol=XBTUSD&partial=false&count=400&reverse=false";
 		/*
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -5);
