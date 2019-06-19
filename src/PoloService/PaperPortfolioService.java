@@ -4,6 +4,8 @@ import java.util.*;
 
 public class PaperPortfolioService {
 	// these maps will also contain base pair balances
+	// the double array will be structured as this
+	// {pos_amnt, price, liq_price}
 	Map<String,Double[]> long_positions = new HashMap<String, Double[]>();
 	Map<String, Double[]> short_positions = new HashMap<String, Double[]>();
 	int num_sells;
@@ -36,7 +38,15 @@ public class PaperPortfolioService {
 		}
 		else
 		{
-			double loss = 
+			if(price < position[2])
+			{
+				this.long_positions.remove(coin);
+				return 0.0;
+			}
+			else
+			{
+				return percent_change;
+			}
 		}
 	}
 	
