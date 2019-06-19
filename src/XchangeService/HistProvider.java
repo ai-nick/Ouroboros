@@ -17,6 +17,8 @@ public class HistProvider {
 	
 	double[][] ann_input = new double[400-10][10];
 	
+	double[][] simple_input = new double[400][5];
+	
 	int num_bars;
 	
 	double smooth = 2.0;
@@ -35,6 +37,14 @@ public class HistProvider {
 		System.out.println(hist_list.length);
 	}
 	
+	public void build_simple_input()
+	{
+		for(int i = 0; i < num_bars; i++)
+		{
+			HistDataBar current = this.hist_list[i];
+			simple_input[i] = current.get_simple();
+		}
+	}
 	
 	public void calc_vwap(int look_back, int input_array_idx)
 	{
