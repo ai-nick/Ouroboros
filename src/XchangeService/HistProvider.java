@@ -63,11 +63,12 @@ public class HistProvider {
 		}
 	}
 	
+	// will need to burn a day
 	public void ema(int look_back, int input_array_idx)
 	{
 		double smoother = smooth / (double)(look_back+1);
 		
-		for (int i = look_back+1; i < num_bars; i++)
+		for (int i = look_back; i < num_bars; i++)
 		{
 			double close_total = 0.0;
 			
@@ -76,6 +77,8 @@ public class HistProvider {
 				close_total += this.hist_list[i-look_back].close;
 			}
 			close_total = close_total / look_back;
+			//put it at the predetermined index int he input array
+			this.ann_input[i-look_back][input_array_idx] = close_total;
 		}
 	}
 

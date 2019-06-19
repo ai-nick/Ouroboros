@@ -3,12 +3,14 @@ import java.util.*;
 
 
 public class PaperPortfolioService {
-	
-	Map<String,Double> bal_sheet = new HashMap<String, Double>();
+	// these maps will also contain base pair balances
+	Map<String,Double[]> long_positions = new HashMap<String, Double[]>();
+	Map<String, Double[]> short_positions = new HashMap<String, Double[]>();
 	int num_sells;
 	int num_buys;
 	double start_amount;
 	double full_balance;
+	double liq_level;
 	
 	public PaperPortfolioService(int stamnt) {
 		this.start_amount = stamnt;
@@ -23,31 +25,39 @@ public class PaperPortfolioService {
 	
 	public String buy_long_leveraged(String coin, double amnt, double leverage, double price)
 	{
-		return "";
+		double lev_amnt = amnt * leverage;
+		double qty_less_fees = (lev_amnt/price)*.99;
+		this.long_positions.put(coin, new Double[] {qty_less_fees, price});
+		this.liq_level = qty_less_fees - amnt;
+		return "bought : " + coin;
 	}
 	
 	public String sell_short_leveraged(String coin, double amnt, double leverage, double price)
 	{
-		return "";
+		double lev_amnt = amnt * leverage;
+		double qty_less_fees = (lev_amnt/price)*.99;
+		this.long_positions.put(coin, new Double[] {qty_less_fees, price});
+		this.liq_level = qty_less_fees - amnt;
+		return "bought : " + coin;
 	}
 	
-	public String buy_coin(String coin, double amnt, double price) {
-		if((amnt*price)*.01 > this.bal_sheet.get("BTC")) {
+	public String buy_coin(String coin, double amnt, double price, String base) {
+		if((amnt*price)*.01 > this.long_positions.get(base)[0]) {
 			return "error not enough btc";
 		} else {
-			this.bal_sheet.put("BTC", this.bal_sheet.get("BTC") - (amnt*price)*.01);
-			this.bal_sheet.put(coin, amnt-(amnt*.01));
-			return String.format("bought: %d of %s", this.bal_sheet.get(coin), coin);
+			this.long_positions.put("BTC", new Double[] {this.long_positions.get(base)[0] - (amnt*price)*.01, price});
+			this.long_positions.put(coin, new Double[]{amnt-(amnt*.01), price});
+			return String.format("bought: %d of %s", this.long_positions.get(coin), coin);
 		}
 	}
 	
 	public String sell_coin(String coin, double price) {
-		double amnt = this.bal_sheet.get(coin);
+		double amnt = this.long_positions.get(coin);
 		if(amnt == 0.0) {
 			return String.format("cant sell current $s balance = 0.0", coin);
 		}else {
-			this.bal_sheet.put("BTC", amnt*price*.01);
-			this.bal_sheet.put(coin, 0.0);
+			this.bal_sheet.put("BTC", new Double[] {amnt*price*.01});
+			this.bal_sheet.put(coin, new0.0);
 			return String.format("sold %d %s at %d", amnt, coin, price);
 		}
 	}
