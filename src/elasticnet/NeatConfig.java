@@ -10,6 +10,8 @@ public class NeatConfig {
 	
 	String defaultActivation = "sigmoid";
 	
+	String output_activation = "tanh";
+	
 	ArrayList<String> possible_activations = new ArrayList<String>()
 			{{
 		add("tanh");
@@ -47,6 +49,19 @@ public class NeatConfig {
 	
 	public NeatConfig()
 	{	
+	}
+	
+	public NeatConfig(int inputs, int outputs)
+	{
+		this.num_input = inputs;
+		this.num_output = outputs;
+	}
+	
+	public NeatConfig(int inputs, int outputs, String output_active)
+	{
+		this.num_input = inputs;
+		this.num_output = outputs;
+		this.output_activation = output_activation;
 	}
 	
 	public String as_json()
