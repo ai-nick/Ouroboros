@@ -27,7 +27,7 @@ public class PaperPortfolioService {
 		return this.num_buys;
 	}
 	
-	public double check_margin_position(String coin, double price)
+	public double check_margin_position_long(String coin, double price)
 	{
 		Double[] position = this.long_positions.get(coin);
 		Double change = price - position[1];
@@ -41,6 +41,29 @@ public class PaperPortfolioService {
 			if(percent_change < position[2])
 			{
 				this.long_positions.remove(coin);
+				return 0.0;
+			}
+			else
+			{
+				return percent_change;
+			}
+		}
+	}
+	
+	public double check_margin_position_short(String coin, double price)
+	{
+		Double[] position = this.short_positions.get(coin);
+		Double change = price - position[1];
+		Double percent_change = (change/position[1])*100;
+		if (change < 0)
+		{
+			return percent_change;
+		}
+		else
+		{
+			if(percent_change > position[2])
+			{
+				this.short_positions.remove(coin);
 				return 0.0;
 			}
 			else
