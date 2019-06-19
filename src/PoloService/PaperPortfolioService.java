@@ -38,7 +38,7 @@ public class PaperPortfolioService {
 		}
 		else
 		{
-			if(price < position[2])
+			if(percent_change < position[2])
 			{
 				this.long_positions.remove(coin);
 				return 0.0;
@@ -54,7 +54,8 @@ public class PaperPortfolioService {
 	{
 		double lev_amnt = amnt * leverage;
 		double qty_less_fees = (lev_amnt/price)*.99;
-		this.long_positions.put(coin, new Double[] {qty_less_fees, price});
+		double liq_percent = ((-amnt/price)/qty_less_fees);
+		this.long_positions.put(coin, new Double[] {qty_less_fees, price, qty_less_fees-(amnt/price)});
 		this.liq_level = qty_less_fees - amnt;
 		return "bought : " + coin;
 	}
@@ -63,7 +64,8 @@ public class PaperPortfolioService {
 	{
 		double lev_amnt = amnt * leverage;
 		double qty_less_fees = (lev_amnt/price)*.99;
-		this.long_positions.put(coin, new Double[] {qty_less_fees, price});
+		double liq_percent = ((amnt/price)/qty_less_fees);
+		this.long_positions.put(coin, new Double[] {qty_less_fees, price, liq_percent});
 		this.liq_level = qty_less_fees - amnt;
 		return "bought : " + coin;
 	}
