@@ -11,9 +11,11 @@ public class PaperPortfolioService {
 	double start_amount;
 	double full_balance;
 	double liq_level;
+	String base_currency;
 	
-	public PaperPortfolioService(int stamnt) {
+	public PaperPortfolioService(int stamnt, String base_currency) {
 		this.start_amount = stamnt;
+		this.base_currency = base_currency;
 	}
 	
 	public int get_sells() {
@@ -21,6 +23,21 @@ public class PaperPortfolioService {
 	}
 	public int get_buys() {
 		return this.num_buys;
+	}
+	
+	public double check_margin_position(String coin, double price)
+	{
+		Double[] position = this.long_positions.get(coin);
+		Double change = price - position[1];
+		Double percent_change = (change/position[1])*100;
+		if (change > 0)
+		{
+			return percent_change;
+		}
+		else
+		{
+			double loss = 
+		}
 	}
 	
 	public String buy_long_leveraged(String coin, double amnt, double leverage, double price)
@@ -51,13 +68,13 @@ public class PaperPortfolioService {
 		}
 	}
 	
-	public String sell_coin(String coin, double price) {
-		double amnt = this.long_positions.get(coin);
+	public String sell_coin_long(String coin, double price) {
+		double amnt = this.long_positions.get(coin)[0];
 		if(amnt == 0.0) {
 			return String.format("cant sell current $s balance = 0.0", coin);
 		}else {
-			this.bal_sheet.put("BTC", new Double[] {amnt*price*.01});
-			this.bal_sheet.put(coin, new0.0);
+			this.long_positions.put("BTC", new Double[] {amnt*price*.01, 0.0});
+			this.long_positions.remove(coin);
 			return String.format("sold %d %s at %d", amnt, coin, price);
 		}
 	}
