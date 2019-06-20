@@ -37,14 +37,14 @@ public class MarginMex {
 		
 		this.hs.build_simple_input();
 		
-		this.pop = new Population(this.num_gens, new NeatConfig(this.hs.get_simple()[0].length, 3, "tanh"), this.pop_size);
+		this.pop = new Population(0, new NeatConfig(this.hs.get_simple()[0].length, 3, "tanh"), this.pop_size);
 		
 		double best = 1000.0;
 		
 		for (int ix = 0; ix < this.num_gens; ix++)
 		{
 			for(int x = 0; x < this.pop_size; x++)
-			{
+			{	
 				Genome current = this.pop.get_genome(x);
 				
 				this.port = new PaperPortfolio(1000.0, "usdt");
@@ -64,6 +64,7 @@ public class MarginMex {
 					net.set_input(this.hs.get_simple()[ix]);
 					
 					net.Activate();
+					System.out.println(net.get_output().size());
 					double buy_sell = net.get_output().get(0);
 					if (buy_sell > .5)
 					{

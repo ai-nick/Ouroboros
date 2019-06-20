@@ -12,6 +12,7 @@ public class TestLoadHist {
 
 	public static void main(String[] args) throws IOException {
 		HistProvider hs = new HistProvider();
-		hs.calc_vwap(10, 0);
+		hs.build_simple_input();
+		System.out.println(hs.get_simple()[0].length);
 	}
 }
