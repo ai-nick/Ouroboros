@@ -15,10 +15,17 @@ public class PaperPortfolio {
 	double full_balance;
 	double liq_level;
 	String base_currency;
+	double balance;
 	
 	public PaperPortfolio(double stamnt, String base_currency) {
 		this.start_amount = stamnt;
 		this.base_currency = base_currency;
+		this.balance = stamnt;
+	}
+	
+	public double get_balance()
+	{
+		return this.balance;
 	}
 	
 	public double get_start_amount()
@@ -98,11 +105,12 @@ public class PaperPortfolio {
 		return "bought : " + coin;
 	}
 	
-	public String buy_coin(String coin, double amnt, double price, String base) {
-		if((amnt*price)*.01 > this.long_positions.get(base)[0]) {
+	public String buy_coin(String coin, double amnt, double price) {
+		if(amnt > this.balance) {
 			return "error not enough btc";
 		} else {
-			this.long_positions.put("BTC", new Double[] {this.long_positions.get(base)[0] - (amnt*price)*.01, price});
+			amnt = amnt/price;
+			this.long_positions.put(coin, new Double[] {this.balance - (amnt*.01), price});
 			this.long_positions.put(coin, new Double[]{amnt-(amnt*.01), price});
 			return String.format("bought: %d of %s", this.long_positions.get(coin), coin);
 		}
@@ -113,7 +121,7 @@ public class PaperPortfolio {
 		if(amnt == 0.0) {
 			return String.format("cant sell current $s balance = 0.0", coin);
 		}else {
-			this.long_positions.put("BTC", new Double[] {amnt*price*.01, 0.0});
+			this.balance = amnt*price*.01;
 			this.long_positions.remove(coin);
 			return String.format("sold %d %s at %d", amnt, coin, price);
 		}

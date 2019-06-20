@@ -4,11 +4,11 @@ public class HistDataBar {
 	
 	String timestamp;
 	
-	String symbol;
+	public String symbol;
 	double high;
 	double open;
 	double low;
-	double close;
+	public double close;
 	int trades;
 	double volume;
 	double vwap;
