@@ -13,7 +13,7 @@ public class HistProvider {
 	// so TODO allow dynamic array instantiation
 	int look_back = 21;
 	
-	HistDataBar[] hist_list = new HistDataBar[400];
+	public HistDataBar[] hist_list = new HistDataBar[400];
 	
 	double[][] ann_input = new double[400-10][10];
 	

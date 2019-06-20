@@ -21,6 +21,10 @@ public class PaperPortfolio {
 		this.base_currency = base_currency;
 	}
 	
+	public double get_start_amount()
+	{
+		return this.start_amount;
+	}
 	public int get_sells() {
 		return this.num_sells;
 	}
