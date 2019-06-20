@@ -28,7 +28,7 @@ public class MarginMex {
 		}
 		catch (Exception ex)
 		{
-			System.out.println(ex.toString());
+			ex.printStackTrace(System.out);
 		}
 	}
 	
