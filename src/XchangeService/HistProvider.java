@@ -37,6 +37,10 @@ public class HistProvider {
 		System.out.println(hist_list.length);
 	}
 	
+	public double[][] get_simple(){
+		return this.simple_input;
+	}
+	
 	public void build_simple_input()
 	{
 		for(int i = 0; i < num_bars; i++)

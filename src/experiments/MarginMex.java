@@ -27,5 +27,9 @@ public class MarginMex {
 	public void run_experiment() throws FileNotFoundException, IOException {
 		this.hs = new HistProvider();
 		
+		this.hs.build_simple_input();
+		
+		this.pop = new Population(this.num_gens, new NeatConfig(this.hs.get_simple()[0].length, 3, "tanh"), this.pop_size);
+		
 	}
 }
