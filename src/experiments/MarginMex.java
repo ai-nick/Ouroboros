@@ -64,8 +64,8 @@ public class MarginMex {
 					net.set_input(this.hs.get_simple()[ix]);
 					
 					net.Activate();
-					System.out.println(net.get_output().size());
 					double buy_sell = net.get_output().get(0);
+					System.out.println(buy_sell);
 					if (buy_sell > .5)
 					{
 						this.port.buy_coin(this.hs.hist_list[i].symbol, fixed_order_size, this.hs.hist_list[i].close);
