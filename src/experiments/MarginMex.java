@@ -61,7 +61,7 @@ public class MarginMex {
 				
 				for (int i = 0; i < count; i++)
 				{
-					net.set_input(this.hs.get_simple()[ix]);
+					net.set_input(this.hs.get_simple()[i]);
 					
 					net.Activate();
 					double buy_sell = net.get_output().get(0);

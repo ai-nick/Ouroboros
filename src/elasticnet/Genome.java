@@ -66,7 +66,7 @@ public class Genome {
 		}
 		for (int ix = 0; ix < num_out; ix++)
 		{
-			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
+			NodeGene new_node = new NodeGene(inno_id, this.population_hash, config.output_activation);
 			new_node.is_input = false;
 			new_node.is_output = true;
 			inno_id++;
