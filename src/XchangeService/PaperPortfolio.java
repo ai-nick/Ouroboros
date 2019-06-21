@@ -11,11 +11,11 @@ public class PaperPortfolio {
 	Map<String, Double[]> short_positions = new HashMap<String, Double[]>();
 	int num_sells;
 	int num_buys;
-	double start_amount;
-	double full_balance;
+	Double start_amount;
+	Double full_balance;
 	double liq_level;
 	String base_currency;
-	double balance;
+	Double balance;
 	
 	public PaperPortfolio(double stamnt, String base_currency) {
 		this.start_amount = stamnt;
@@ -105,25 +105,31 @@ public class PaperPortfolio {
 		return "bought : " + coin;
 	}
 	
-	public String buy_coin(String coin, double amnt, double price) {
+	public String buy_coin(String coin, Double amnt, Double price) {
 		if(amnt > this.balance) {
 			return "error not enough btc";
 		} else {
 			amnt = amnt/price;
 			this.long_positions.put(coin, new Double[] {this.balance - (amnt*.01), price});
 			this.long_positions.put(coin, new Double[]{amnt-(amnt*.01), price});
-			return String.format("bought: %d of %s", this.long_positions.get(coin), coin);
+			return "bought: " + coin + "here";
 		}
 	}
 	
-	public String sell_coin_long(String coin, double price) {
-		double amnt = this.long_positions.get(coin)[0];
-		if(amnt == 0.0) {
-			return String.format("cant sell current $s balance = 0.0", coin);
-		}else {
-			this.balance = amnt*price*.01;
-			this.long_positions.remove(coin);
-			return String.format("sold %d %s at %d", amnt, coin, price);
+	public String sell_coin_long(String coin, Double price) {
+		if (this.long_positions.keySet().contains(coin) && price != null){
+			double amnt = this.long_positions.get(coin)[0];
+			if(amnt == 0.0) {
+				return String.format("cant sell current $s balance = 0.0", coin);
+			}else {
+				this.balance += amnt*price*.01;
+				this.long_positions.remove(coin);
+				return "sold: " + coin;
+			}	
+		}
+		else
+		{
+			return "shit";
 		}
 	}
 }

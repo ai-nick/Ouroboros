@@ -65,19 +65,22 @@ public class MarginMex {
 					
 					net.Activate();
 					double buy_sell = net.get_output().get(0);
-					System.out.println(buy_sell);
+					//System.out.println(buy_sell);
+					//System.out.println(this.hs.hist_list[i].symbol);
 					if (buy_sell > .5)
 					{
 						this.port.buy_coin(this.hs.hist_list[i].symbol, fixed_order_size, this.hs.hist_list[i].close);
 					}
 					else if (buy_sell < -.5)
 					{
+						//ystem.out.println(this.hs.hist_list[i].symbol);
 						this.port.sell_coin_long(this.hs.hist_list[i].symbol, this.hs.hist_list[i].close);
 					}
 					net.Reset();
 				}
 				this.port.sell_coin_long(this.hs.hist_list[count-1].symbol, this.hs.hist_list[count-1].close);
 				current.fitness = this.port.get_balance();
+				System.out.println(current.fitness);
 				if (current.fitness > best) {
 					best = current.fitness;
 					System.out.println(best);
