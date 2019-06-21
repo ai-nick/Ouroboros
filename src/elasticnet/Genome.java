@@ -76,6 +76,7 @@ public class Genome {
 			this.output_nodes.add(new_node);
 			this.gene_ids.add(inno_id);
 		}
+		gene_index++;
 		if (num_hidden > 0)
 		{
 			for (int ix = 0; ix < num_hidden; ix++)

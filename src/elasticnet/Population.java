@@ -28,10 +28,8 @@ public class Population {
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	int pop_size = 0;
-	ArrayList<Integer> gene_ids = new ArrayList<Integer>();
-	// elected to store this in the genomes themselves
-	//HashMap<Integer, IConnection> conn_genes;
-	//HashMap<Integer, INode> node_genes;
+	ArrayList<NodeGene> hidden_nodes = new ArrayList<NodeGene>();
+	ArrayList<ConnectionGene> connection_genes = new ArrayList<ConnectionGene>();
 	
 	public Population(int gen,  NeatConfig config_in, int pop_size) 
 	{
