@@ -55,6 +55,7 @@ public class Genome {
 		int num_hidden = config.num_hidden;
 		int num_out = config.num_output;
 		this.population_hash = populationHash;
+		int gene_index = 0;
 		for (int ix = 0; ix < num_in; ix++)
 		{
 			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
@@ -63,10 +64,12 @@ public class Genome {
 			inno_id++;
 			this.input_nodes.add(new_node);
 			this.gene_ids.add(inno_id);
+			gene_index = ix;
 		}
+		gene_index++;
 		for (int ix = 0; ix < num_out; ix++)
 		{
-			NodeGene new_node = new NodeGene(inno_id, this.population_hash, config.output_activation);
+			NodeGene new_node = new NodeGene(gene_index+ix, this.population_hash, config.output_activation);
 			new_node.is_input = false;
 			new_node.is_output = true;
 			inno_id++;
