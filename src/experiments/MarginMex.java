@@ -89,6 +89,7 @@ public class MarginMex {
 			this.pop.speciate_population();
 			
 			this.pop.the_reproduction_function();
+			System.out.println(this.pop.get_species().size());
 		}
 	}
 }

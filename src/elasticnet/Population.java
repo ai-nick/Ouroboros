@@ -28,6 +28,7 @@ public class Population {
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	int pop_size = 0;
+	ArrayList<Integer> gene_ids = new ArrayList<Integer>();
 	// elected to store this in the genomes themselves
 	//HashMap<Integer, IConnection> conn_genes;
 	//HashMap<Integer, INode> node_genes;
@@ -160,10 +161,15 @@ public class Population {
 			if(!speciated.contains(this.genomes.get(x).id)) 
 			{
 				boolean species_found = false;
+				
 				Genome current_genome = this.genomes.get(x);
+				
 				int num_species = this.pop_species.size();
+				//loop through species and see if the genome is compatible with any
 				for(int i = 0; i < num_species; i++)
 				{
+					//check if we added it to one already, could be better and 
+					//break loop once on is found, TODO 
 					if(!species_found)
 					{
 						Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
@@ -172,10 +178,6 @@ public class Population {
 						//System.out.println(dist);
 						if( dist < compat_t)
 						{
-							//System.out.println("adding species id: ");
-							//System.out.println(current_genome.id);
-							//System.out.println("to species : ");
-							//System.out.println(this.pop_species.get(i).speciesID);
 							this.pop_species.get(i).member_ids.add(current_genome.id);
 							speciated.add(current_genome.id);
 							species_found = true;
@@ -184,10 +186,6 @@ public class Population {
 				}
 				if(!speciated.contains(current_genome.id))
 				{
-					//System.out.println("adding species id: ");
-					//System.out.println(current_genome.id);
-					//System.out.println("to species : ");
-					//System.out.println(next_species_id);
 					this.pop_species.add(new Species(next_species_id, current_genome.id));
 					next_species_id++;
 					speciated.add(current_genome.id);
