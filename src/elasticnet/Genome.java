@@ -49,7 +49,7 @@ public class Genome {
 		output_nodes = new ArrayList<NodeGene>(cloner.output_nodes);
 	}
 	
-	public int create_from_scratch(int inno_id, NeatConfig config, int populationHash)
+	public int create_from_scratch(int inno_id, NeatConfig config, int populationHash, ArrayList<NodeGene> hidden_node_genes, ArrayList<ConnectionGene> conn_genes)
 	{
 		int num_in = config.num_input;
 		int num_hidden = config.num_hidden;
@@ -91,9 +91,9 @@ public class Genome {
 		}
 		else 
 		{
-			this.connect_full_initial(inno_id);
+			inno_id = this.connect_full_initial(inno_id, conn_genes);
 		}
-		this.mutate_genome(inno_id, config);
+		inno_id = this.mutate_genome(inno_id, config, hidden_node_genes, conn_genes);
 		return inno_id;
 	}
 	
@@ -179,7 +179,7 @@ public class Genome {
 		return all_nodes;
 	}
 	
-	public void mutate_genome(int new_id, NeatConfig config)
+	public int mutate_genome(int new_id, NeatConfig config, ArrayList<NodeGene> pop_nodes, ArrayList<ConnectionGene> pop_conns)
 	{
 		Random rand = new Random();
 		
@@ -190,12 +190,12 @@ public class Genome {
 		if (rand.nextFloat() < (config.add_conn_prob))
 		{
 			System.out.println("adding conn here");
-			mutate_add_conn(new_id);
+			new_id = mutate_add_conn(new_id, pop_conns);
 		}
 		if (rand.nextFloat() < (config.add_node_prob))
 		{
 			System.out.println("adding node here");
-			mutate_add_node(new_id, config.defaultActivation);
+			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.delete_node_prob))
 		{
@@ -207,10 +207,10 @@ public class Genome {
 			System.out.println("deleting conn here");
 			mutate_delete_conn();
 		}
-		return;
+		return new_id;
 	}
 	
-	private void mutate_add_conn(int new_id)
+	private void mutate_add_conn(int new_id, ArrayList<ConnectionGene> pop_conns)
 	{
 		HashMap<Integer, NodeGene> all_the_nodes = this.get_all_nodes();
 		
@@ -240,7 +240,7 @@ public class Genome {
 		return;
 	}
 	
-	private void mutate_add_node(int new_id, String activation)
+	private void mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes)
 	{
 		Random dice = new Random();
 		
@@ -325,7 +325,7 @@ public class Genome {
 		this.gene_ids.remove(Integer.valueOf(delete_key));
 	}
 	
-	private void connect_full_initial(int new_id)
+	private int connect_full_initial(int new_id, ArrayList<ConnectionGene> pop_conns)
 	{
 		int num_in = this.input_nodes.size();
 		int num_out = this.output_nodes.size();
@@ -338,13 +338,14 @@ public class Genome {
 				NodeGene to_node = this.output_nodes.get(ixx);
 				
 				ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
-				
+				pop_conns.add(new_gene);
 				this.conn_genes.put(new_id, new_gene);
 				this.gene_ids.add(new_id);
 				from_node.connections.add(new_gene);
+				new_id++;
 			}
 		}
-		return;
+		return new_id;
 	}
 	
 	public String as_json()
