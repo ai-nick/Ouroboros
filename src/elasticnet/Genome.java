@@ -255,7 +255,7 @@ public class Genome {
 	
 	private int mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes, ArrayList<ConnectionGene> pop_conns)
 	{
-		boolean has_hist_id;
+		//boolean has_hist_id;
 		
 		int gene_id = new_id;
 		
@@ -276,28 +276,29 @@ public class Genome {
 		{
 			NodeGene pop_node = pop_nodes.get(i);
 			int num_conns = pop_node.connections.size();
-			boolean has_to = false;
-			boolean has_from = false;
+			int has_to = -1;
+			int has_from = -1;
 			for (int ix = 0; ix < num_conns; ix++)
 			{
 				ConnectionGene this_conn = pop_node.connections.get(ix);
 				if (this_conn.from_node.inno_id == connection_to_split.from_node.inno_id)
 				{
-					has_from = true;
+					has_from = this_conn.inno_id;
 				}
 				if (this_conn.to_node.inno_id == connection_to_split.to_node.inno_id)
 				{
-					has_to = true;
+					has_to = this_conn.inno_id;
 				}
-				if (has_to == true && has_from == true)
+				if (has_to > -1 && has_from > -1)
 				{
-					has_hist_id = true;
 					gene_id = pop_node.inno_id;
+					NodeGene new_node = new NodeGene(gene_id, activation);
+					this.gene_ids.add(gene_id);
 				}
 			}
 		}
 		
-		NodeGene new_node = new NodeGene(gene_id, activation);
+		NodeGene new_node = new NodeGene(new_id, activation);
 		
 		this.gene_ids.add(new_id);
 		
