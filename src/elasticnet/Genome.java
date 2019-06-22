@@ -195,7 +195,7 @@ public class Genome {
 		if (rand.nextFloat() < (config.add_node_prob))
 		{
 			System.out.println("adding node here");
-			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes);
+			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
 		}
 		if (rand.nextFloat() < (config.delete_node_prob))
 		{
@@ -227,11 +227,11 @@ public class Genome {
 		
 		if(this.output_nodes.contains(to_node) && this.output_nodes.contains(from_node))
 		{
-			return;
+			return new_id;
 		}
 		if(this.input_nodes.contains(from_node_key) && this.input_nodes.contains(to_node))
 		{
-			return;
+			return new_id;
 		}
 		int pop_conn_count = pop_conns.size();
 		for(int p = 0; p < pop_conn_count; p++)
