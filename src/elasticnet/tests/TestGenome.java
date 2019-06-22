@@ -2,6 +2,7 @@ package elasticnet.tests;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import elasticnet.*;
@@ -12,8 +13,9 @@ public class TestGenome {
 		Genome test_genome = new Genome(0);
 		
 		int fake_pop_hash = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()).hashCode();
-		
-		test_genome.create_from_scratch(0, new NeatConfig(), fake_pop_hash);
+		ArrayList<ConnectionGene> pop_conns = new ArrayList<ConnectionGene>();
+		ArrayList<NodeGene> pop_nodes = new ArrayList<NodeGene>();
+		test_genome.create_from_scratch(0, new NeatConfig(), fake_pop_hash, pop_nodes, pop_conns);
 		
 		
 		System.out.println(test_genome.as_json());

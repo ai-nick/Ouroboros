@@ -306,6 +306,8 @@ public class Genome {
 					this.conn_genes.put(has_to, new_conn_b);
 					
 					this.gene_ids.add(has_to);
+					
+					return new_id;
 				}
 			}
 		}
