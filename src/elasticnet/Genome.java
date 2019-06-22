@@ -288,7 +288,7 @@ public class Genome {
 		
 		this.gene_ids.add(new_id);
 		
-		pop_conns.addAll(new_conn_b);
+		pop_conns.add(new_conn_b);
 		
 		this.hidden_nodes.add(new_node);
 		
