@@ -67,7 +67,7 @@ public class Population {
 			{
 				Genome gBaby = new Genome(this.hash_id, ix);
 				
-				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config, this.hash_id);
+				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config, this.hash_id, this.hidden_nodes, this.connection_genes);
 				
 				this.genomes.add(gBaby);
 				
@@ -229,7 +229,9 @@ public class Population {
 				}
 			}
 			Genome mutated_genome = new Genome(this.genomes.get(i), this.next_genome_id);
-			mutated_genome.mutate_genome(this.inno_num, config);
+			
+			mutated_genome.mutate_genome(this.inno_num, config, this.hidden_nodes, this.connection_genes);
+			
 			this.genomes.add(mutated_genome);
 		}
 	}
@@ -240,7 +242,9 @@ public class Population {
 	{
 		// genome a will be the fitter of the two mates
 		Genome GenomeA;
+		
 		Genome GenomeB;
+		
 		if(a.fitness > b.fitness)
 		{
 			GenomeA = a;

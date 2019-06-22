@@ -282,7 +282,7 @@ public class Genome {
 		
 		new_id++;
 		
-		ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.from_node, new_id);
+		ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.to_node, new_id);
 		
 		this.conn_genes.put(new_id, new_conn_b);
 		
