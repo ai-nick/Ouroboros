@@ -294,6 +294,18 @@ public class Genome {
 					gene_id = pop_node.inno_id;
 					NodeGene new_node = new NodeGene(gene_id, activation);
 					this.gene_ids.add(gene_id);
+					
+					ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, has_from);
+					
+					this.conn_genes.put(has_from, new_conn_a);
+					
+					this.gene_ids.add(has_from);
+					
+					ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.to_node, has_to);
+					
+					this.conn_genes.put(has_to, new_conn_b);
+					
+					this.gene_ids.add(has_to);
 				}
 			}
 		}
