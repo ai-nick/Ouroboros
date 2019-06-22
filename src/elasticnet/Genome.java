@@ -255,6 +255,10 @@ public class Genome {
 	
 	private int mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes, ArrayList<ConnectionGene> pop_conns)
 	{
+		boolean has_hist_id;
+		
+		int gene_id = new_id;
+		
 		Random dice = new Random();
 		
 		if (this.conn_genes.size() == 0)
@@ -265,6 +269,32 @@ public class Genome {
 		int connection_to_split_index = (int)this.conn_genes.keySet().toArray()[dice.nextInt(this.conn_genes.size())];
 		
 		ConnectionGene connection_to_split = this.conn_genes.get(connection_to_split_index);
+		
+		int hidden_count = pop_nodes.size();
+		
+		for(int i = 0; i < hidden_count; i++)
+		{
+			NodeGene pop_node = pop_nodes.get(i);
+			int num_conns = pop_node.connections.size();
+			boolean has_to = false;
+			boolean has_from = false;
+			for (int ix = 0; ix < num_conns; ix++)
+			{
+				ConnectionGene this_conn = pop_node.connections.get(ix);
+				if (this_conn.from_node.inno_id == connection_to_split.from_node.inno_id)
+				{
+					has_from = true;
+				}
+				if (this_conn.to_node.inno_id == connection_to_split.to_node.inno_id)
+				{
+					has_to = true;
+				}
+				if (has_to == true && has_from == true)
+				{
+					has_hist_id = true;
+				}
+			}
+		}
 		
 		NodeGene new_node = new NodeGene(new_id, activation);
 		
