@@ -210,7 +210,7 @@ public class Genome {
 		return new_id;
 	}
 	
-	private void mutate_add_conn(int new_id, ArrayList<ConnectionGene> pop_conns)
+	private int mutate_add_conn(int new_id, ArrayList<ConnectionGene> pop_conns)
 	{
 		int conn_id = new_id;
 		HashMap<Integer, NodeGene> all_the_nodes = this.get_all_nodes();
@@ -244,22 +244,22 @@ public class Genome {
 		}
 		ConnectionGene new_gene = new ConnectionGene(from_node, to_node, conn_id);
 		
-		this.conn_genes.put(new_id, conn_id);
+		this.conn_genes.put(conn_id, new_gene);
 		
 		this.gene_ids.add(conn_id);
 		
 		pop_conns.add(new_gene);
 		
-		return;
+		return new_id;
 	}
 	
-	private void mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes)
+	private int mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes)
 	{
 		Random dice = new Random();
 		
 		if (this.conn_genes.size() == 0)
 		{
-			return;
+			return new_id;
 		}
 		
 		int connection_to_split_index = (int)this.conn_genes.keySet().toArray()[dice.nextInt(this.conn_genes.size())];
@@ -288,7 +288,7 @@ public class Genome {
 		
 		this.gene_ids.add(new_id);
 		
-		return;
+		return new_id;
 	}
 	
 	
