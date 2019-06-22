@@ -37,6 +37,7 @@ public class Population {
 		this.hash_id = this.ts.hashCode();
 		this.pop_size = pop_size;
 		this.config = config_in;
+		this.inno_num = (config_in.num_input * config_in.num_output)+config_in.num_input+config_in.num_output;
 		this.current_gen = gen;
 		if (gen == 0) {
 			this.set_up_first_pop();

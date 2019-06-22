@@ -292,11 +292,12 @@ public class Genome {
 				if (has_to == true && has_from == true)
 				{
 					has_hist_id = true;
+					gene_id = pop_node.inno_id;
 				}
 			}
 		}
 		
-		NodeGene new_node = new NodeGene(new_id, activation);
+		NodeGene new_node = new NodeGene(gene_id, activation);
 		
 		this.gene_ids.add(new_id);
 		
