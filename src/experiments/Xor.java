@@ -35,7 +35,7 @@ public class Xor {
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
-		int num_gens = 100;
+		int num_gens = 1000;
 		
 		double best_fitness = 0.0;
 		
@@ -43,7 +43,7 @@ public class Xor {
 		
 		for(int i = 0; i < num_gens; i++)
 		{
-			//System.out.println("new gen");
+			System.out.println("new gen");
 			
 			int num_genomes = test_pop.get_num_genomes();
 			
