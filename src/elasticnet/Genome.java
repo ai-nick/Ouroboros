@@ -91,7 +91,7 @@ public class Genome {
 		}
 		else 
 		{
-			inno_id = this.connect_full_initial(gene_index++, conn_genes);
+			inno_id = this.connect_full_initial(gene_index, conn_genes);
 		}
 		inno_id = this.mutate_genome(inno_id, config, hidden_node_genes, conn_genes);
 		return inno_id;
@@ -253,7 +253,7 @@ public class Genome {
 		return new_id;
 	}
 	
-	private int mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes)
+	private int mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes, ArrayList<ConnectionGene> pop_conns)
 	{
 		Random dice = new Random();
 		
@@ -278,11 +278,17 @@ public class Genome {
 		
 		this.gene_ids.add(new_id);
 		
+		pop_conns.add(new_conn_a);
+		
 		new_id++;
 		
 		ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.from_node, new_id);
 		
 		this.conn_genes.put(new_id, new_conn_b);
+		
+		this.gene_ids.add(new_id);
+		
+		pop_conns.addAll(new_conn_b);
 		
 		this.hidden_nodes.add(new_node);
 		
