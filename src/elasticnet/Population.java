@@ -89,9 +89,9 @@ public class Population {
 		{
 			if(two.gene_ids.contains(one.gene_ids.get(idx)))
 			{
-				if(one.conn_genes.containsKey(idx))
+				if(one.conn_genes.containsKey(idx) && two.conn_genes.containsKey(idx))
 				{
-					w = Math.abs((one.conn_genes.get(idx).atts.get("weight") - two.conn_genes.get(idx).atts.get("weight")));
+					w = Math.abs(one.conn_genes.get(idx).atts.get("weight") - two.conn_genes.get(idx).atts.get("weight"));
 				}
 			}
 			else
