@@ -207,8 +207,10 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
+			num_genomes = current.member_ids.size();
+			System.out.println(current);
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
-			int keep_top = (int)((double)current.num_genomes * elitism_percent);
+			int keep_top = (int)((double)num_genomes * elitism_percent);
 			saved_sum += keep_top;
 			if(keep_top > 0)
 			{
@@ -220,9 +222,10 @@ public class Population {
 	
 	public void breed_all_remaining(Species the_species)
 	{
-		for (int i = 0; i < the_species.num_genomes; i++)
+		int num_genomes = the_species.member_ids.size();
+		for (int i = 0; i < num_genomes; i++)
 		{
-			for (int x = 0; x < the_species.num_genomes; x++)
+			for (int x = 0; x < num_genomes; x++)
 			{
 				if (i != x)
 				{
