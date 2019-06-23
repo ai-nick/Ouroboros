@@ -290,7 +290,8 @@ public class Population {
 		for (Integer k : GenomeA.conn_genes.keySet())
 		{
 			ConnectionGene gA = GenomeA.conn_genes.get(k);
-			if(!GenomeB.conn_genes.containsValue(gA))
+
+			if(!GenomeB.conn_genes.keySet().contains(k))
 			{
 				offspring.conn_genes.put(k, gA);
 			}

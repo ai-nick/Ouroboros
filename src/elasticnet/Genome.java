@@ -187,22 +187,26 @@ public class Genome {
 		
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
 		
-		if (rand.nextFloat() < (config.add_conn_prob))
+		if (prob_sum < 1.0)
+		{
+			prob_sum = 1.0;
+		}
+		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
 		{
 			System.out.println("adding conn here");
 			new_id = mutate_add_conn(new_id, pop_conns);
 		}
-		if (rand.nextFloat() < (config.add_node_prob))
+		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
 		{
 			System.out.println("adding node here");
 			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
 		}
-		if (rand.nextFloat() < (config.delete_node_prob))
+		if (rand.nextFloat() < (config.delete_node_prob/prob_sum))
 		{
 			System.out.println("deleting node here");
 			mutate_delete_node();
 		}
-		if (rand.nextFloat() < (config.delete_conn_prob))
+		if (rand.nextFloat() < (config.delete_conn_prob/prob_sum))
 		{
 			System.out.println("deleting conn here");
 			mutate_delete_conn();
