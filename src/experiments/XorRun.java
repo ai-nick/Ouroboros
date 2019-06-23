@@ -7,7 +7,6 @@ public class XorRun {
 		Xor experiment = new Xor();
 		
 		experiment.run_pop();
-		
 	}
 
 }

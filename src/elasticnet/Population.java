@@ -321,37 +321,7 @@ public class Population {
 		
 	}
 	
-	/*
-	public int[] sort_genomes_by_shared_fitness_myway(int[] sort_array)
-	{
-		int p_idx = sort_array.length;
-		int[] return_array = sort_array;
-		int scan_id = p_idx - 1;
-		while(scan_id != 0)
-		{
-			if(this.genomes.get(scan_id).fitness >= this.genomes.get(p_idx).fitness)
-			{
-				int place_hold = 
-				return_array[p_idx] = sort_array[scan_id];
-				return_array[p_idx-1] = sort_array[p_idx];
-				if(scan_id < p_idx-1)
-				{
-					return_array[scan_id] = sort_array[]
-				}
-				p_idx--;
-				scan_id--;
-			}
-			else
-			{
-				scan_id--;
-			}
-			
-			return return_array;
-		}
 
-	}
-	*/
-	
 	public int get_num_genomes()
 	{
 		return this.genomes.size();
@@ -381,7 +351,7 @@ public class Population {
 	
 	private ConnectionGene _cross_over_conns(ConnectionGene a, ConnectionGene b)
 	{
-		ConnectionGene new_gene = new ConnectionGene(this.inno_num, a.get_id());
+		ConnectionGene new_gene = new ConnectionGene(a.inno_id);
 		
 		new_gene.activation_level = a.activation_level;
 		
@@ -401,7 +371,7 @@ public class Population {
 	
 	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b)
 	{
-		NodeGene new_node = new NodeGene(this.hash_id, a.get_node_id());
+		NodeGene new_node = new NodeGene(a.inno_id, this.hash_id);
 		new_node.level = a.level;
 		
 		for(String key : a.atts.keySet())

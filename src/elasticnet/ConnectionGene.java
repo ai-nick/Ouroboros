@@ -30,9 +30,8 @@ public class ConnectionGene implements IConnection {
 		this.set_weight(weight);
 	}
 	
-	public ConnectionGene(int inno_id, int gene_id) {
+	public ConnectionGene(int inno_id) {
 		this.inno_id = inno_id;
-		this.gene_id = gene_id;
 	}
 	
 	public void set_weight(double w) {

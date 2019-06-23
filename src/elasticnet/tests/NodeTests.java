@@ -8,7 +8,7 @@ public class NodeTests {
 		
 		System.out.println(test_node.as_json());
 		
-		ConnectionGene test_conn = new ConnectionGene(0, 0);
+		ConnectionGene test_conn = new ConnectionGene(0);
 		
 		System.out.println(test_conn.as_json());
 	}
