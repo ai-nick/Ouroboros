@@ -58,9 +58,14 @@ public class Species {
 	public void have_mercy(int num_elites, ArrayList<Genome> genomes)
 	{
 		int num_members = this.sorted_idx_array.length;
-		for(int i = num_elites-1; i < num_members; i++)
+		
+		double cut_off_fitness = genomes.get(this.member_ids.get(num_elites-1)).fitness; 
+		for(int x = 0; x < genomes.size(); x++)
 		{
-			genomes.remove(this.sorted_idx_array[i]);
+			if(genomes.get(x).fitness == cut_off_fitness)
+			{
+				genomes.remove(x);
+			}
 		}
 	}
 	
