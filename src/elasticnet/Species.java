@@ -64,7 +64,9 @@ public class Species {
 		{
 			if(genomes.get(x).fitness == cut_off_fitness)
 			{
+				int member_count = 
 				genomes.remove(x);
+				
 			}
 		}
 	}
