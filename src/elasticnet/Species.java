@@ -59,12 +59,12 @@ public class Species {
 	{
 		int num_members = this.sorted_idx_array.length;
 		
-		double cut_off_fitness = genomes.get(this.member_ids.get(num_elites-1)).fitness; 
+		double cut_off_fitness = genomes.get(this.member_ids.get(this.sorted_idx_array[num_elites-1])).fitness; 
 		for(int x = 0; x < genomes.size(); x++)
 		{
 			if(genomes.get(x).fitness == cut_off_fitness)
 			{
-				int member_count = 
+				int member_count = this.member_ids.size(); 
 				genomes.remove(x);
 				
 			}
