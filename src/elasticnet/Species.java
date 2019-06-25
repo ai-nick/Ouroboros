@@ -61,7 +61,9 @@ public class Species {
 		
 		for(int x = num_elites-1; x < num_members; x++)
 		{
-			this.member_ids.remove(this.sorted_idx_array[x]);
+			int remove_id = this.sorted_idx_array[x];
+			
+			this.member_ids.remove(this.member_ids.indexOf(remove_id));
 			
 			for(int ix = 0; ix < genomes.size(); ix ++)
 			{
