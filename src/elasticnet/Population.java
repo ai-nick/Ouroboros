@@ -223,9 +223,9 @@ public class Population {
 	public void breed_all_remaining(Species the_species)
 	{
 		int num_genomes = the_species.member_ids.size();
-		for (int i = 0; i < num_genomes; i++)
+		for (int i = 0; i < num_genomes-1; i++)
 		{
-			for (int x = 0; x < num_genomes; x++)
+			for (int x = 0; x < num_genomes-1; x++)
 			{
 				if (i != x)
 				{
