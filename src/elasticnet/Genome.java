@@ -363,11 +363,6 @@ public class Genome {
 		
 		NodeGene delete_node = this.hidden_nodes.get(node_idx);
 		
-		if (delete_node.is_output == true)
-		{
-			return;
-		}
-		
 		int conn_counter = delete_node.connections.size();
 		
 		for (int ix = 0; ix < conn_counter; ix++)
