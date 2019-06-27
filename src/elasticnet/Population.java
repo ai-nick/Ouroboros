@@ -222,7 +222,10 @@ public class Population {
 	
 	public void breed_all_remaining(Species the_species)
 	{
-		int num_genomes = the_species.genomes.size();
+		int num_genomes = the_species.member_ids.size();
+		if(num_genomes > this.genomes.size()){
+			System.out.println("species has more members than population, error");
+		}
 		for (int i = 0; i < num_genomes; i++)
 		{
 			for (int x = 0; x < num_genomes; x++)
