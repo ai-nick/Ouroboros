@@ -222,10 +222,10 @@ public class Population {
 	
 	public void breed_all_remaining(Species the_species)
 	{
-		int num_genomes = the_species.member_ids.size();
-		for (int i = 0; i < num_genomes-1; i++)
+		int num_genomes = the_species.genomes.size();
+		for (int i = 0; i < num_genomes; i++)
 		{
-			for (int x = 0; x < num_genomes-1; x++)
+			for (int x = 0; x < num_genomes; x++)
 			{
 				if (i != x)
 				{
@@ -233,6 +233,8 @@ public class Population {
 				}
 			}
 			Genome mutated_genome = new Genome(this.genomes.get(i), this.next_genome_id);
+			
+			this.genomes.remove(i);
 			
 			mutated_genome.mutate_genome(this.inno_num, config, this.hidden_nodes, this.connection_genes);
 			
@@ -319,7 +321,10 @@ public class Population {
 				offspring.set_node(_cross_over_nodes(gA, gB));
 			}
 		}
-		
+		if(offspring.output_nodes.size() == 0)
+		{
+			return;
+		}
 		this.genomes.add(offspring);
 		
 	}
