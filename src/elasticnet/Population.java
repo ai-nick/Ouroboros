@@ -326,6 +326,7 @@ public class Population {
 		}
 		if(offspring.output_nodes.size() == 0)
 		{
+			System.out.println("offspring has no output");
 			return;
 		}
 		this.genomes.add(offspring);
