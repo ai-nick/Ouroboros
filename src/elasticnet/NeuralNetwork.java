@@ -34,11 +34,7 @@ public class NeuralNetwork implements INeuralNet {
 		}
 		
 		this.num_output = g.output_nodes.size();
-		if(this.num_output == 0)
-		{
-			System.out.println("no output nodes");
-			System.out.println(this.num_output);
-		}
+		
 		for(int x = 0; x < this.num_output; x++)
 		{
 			this.output_ids.add(g.output_nodes.get(x).inno_id);
@@ -95,7 +91,7 @@ public class NeuralNetwork implements INeuralNet {
 					
 					this.num_activations++;
 					
-					if(!next_actives.contains(next_node))
+					if(!next_actives.contains(next_node) && next_node.is_output == false)
 					{
 						//System.out.println("wtf how");
 						
