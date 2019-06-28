@@ -246,7 +246,7 @@ public class Population {
 	}
 	
 	// breed two genomes, params are the ids
-	
+	// TODO we are losing hidden nodes here needs to be fixed
 	public void cross_breed(Genome a, Genome b)
 	{
 		// genome a will be the fitter of the two mates
@@ -324,11 +324,8 @@ public class Population {
 				offspring.set_node(_cross_over_nodes(gA, gB));
 			}
 		}
-		if(offspring.output_nodes.size() == 0)
-		{
-			System.out.println("offspring has no output");
-			return;
-		}
+		//for (Integer ik: GenomeB.get_al)
+		
 		this.genomes.add(offspring);
 		
 	}
@@ -385,7 +382,8 @@ public class Population {
 	{
 		NodeGene new_node = new NodeGene(a.inno_id, this.hash_id);
 		new_node.level = a.level;
-		
+		new_node.is_input = a.is_input;
+		new_node.is_output = a.is_output;
 		for(String key : a.atts.keySet())
 		{
 			if(Math.random() > .5)
