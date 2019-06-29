@@ -75,8 +75,6 @@ public class NeuralNetwork implements INeuralNet {
 		{
 			NodeGene current = this.activation_nodes.get(ix);
 			
-			//current.current_val = Activator.activate(current.activation, current.current_val);
-			
 			if (current.is_output() != true)
 			{
 				int num_connections = current.connections.size();
