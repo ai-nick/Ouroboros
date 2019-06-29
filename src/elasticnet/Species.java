@@ -58,17 +58,17 @@ public class Species {
 	public void have_mercy(int num_elites, ArrayList<Genome> genomes)
 	{
 		int num_members = this.sorted_idx_array.length;
-		
-		for(int x = num_elites-1; x < num_members; x++)
+		if (num_elites == 0)
 		{
-			int remove_id = this.sorted_idx_array[x];
-			
-			this.member_ids.remove(this.member_ids.indexOf(remove_id));
-			
+			return;
+		}
+		for(int x = num_elites; x < num_members; x++)
+		{	
 			for(int ix = 0; ix < genomes.size(); ix ++)
 			{
 				if(genomes.get(ix).id == this.sorted_idx_array[x])
 				{
+					this.member_ids.remove((Integer)genomes.get(ix).id);
 					genomes.remove(ix);
 				}
 			}

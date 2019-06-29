@@ -241,7 +241,7 @@ public class Genome {
 		for(int p = 0; p < pop_conn_count; p++)
 		{
 			ConnectionGene p_conn = pop_conns.get(p);
-			if (p_conn.to_node.inno_id == to_node.inno_id && p_conn.from_node.inno_id == from_node.inno_id)
+			if ((p_conn.to_node.inno_id == to_node.inno_id) && (p_conn.from_node.inno_id == from_node.inno_id))
 			{
 				conn_id = p_conn.inno_id;
 			}
