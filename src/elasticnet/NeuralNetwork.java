@@ -89,13 +89,13 @@ public class NeuralNetwork implements INeuralNet {
 					
 					this.num_activations++;
 					
-					if(!next_actives.contains(next_node) && next_node.is_output == false)
+					if(!next_actives.contains(next_node))
 					{
 						//System.out.println("wtf how");
 						
 						next_actives.add(next_node);
 						
-						if(next_node.is_output == true && next_node.visits == 0)
+						if(next_node.is_output == true)
 						{
 							this.outs_count++;
 							next_node.visits++;
@@ -103,30 +103,18 @@ public class NeuralNetwork implements INeuralNet {
 					}
 				}
 			}
-			else
-			{
-				this.outs_count++;
-			}
 		}
-		if(this.outs_count == this.num_output)
+
+		this.activation_nodes = next_actives;
+		this.num_activations++;
+		if(this.activation_nodes.size() != 0)
 		{
-			this.fully_activated = true;
-			this.activation_nodes = next_actives;
+			this.Activate();
 			return;
 		}
 		else
 		{
-			this.activation_nodes = next_actives;
-			this.num_activations++;
-			if(this.feed_forward == true)
-			{
-				this.Activate();
-				return;
-			}
-			else
-			{
-				return;
-			}
+			return;
 		}
 	}
 
