@@ -235,13 +235,13 @@ public class Population {
 					cross_breed(this.genomes.get(the_species.member_ids.get(i)), this.genomes.get(the_species.member_ids.get(x)));
 				}
 			}
-			Genome mutated_genome = new Genome(this.genomes.get(i), this.next_genome_id);
+			Genome mutated_genome = new Genome(this.genomes.get(i), this.genomes.get(i).id);
 			
 			this.genomes.remove(i);
 			
 			mutated_genome.mutate_genome(this.inno_num, config, this.hidden_nodes, this.connection_genes);
 			
-			this.genomes.add(mutated_genome);
+			this.genomes.put(mutated_genome.id, mutated_genome);
 		}
 	}
 	
