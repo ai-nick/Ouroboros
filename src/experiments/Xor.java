@@ -43,14 +43,8 @@ public class Xor {
 		
 		for(int i = 0; i < num_gens; i++)
 		{
-			//System.out.println("new gen");
-			
-			int num_genomes = test_pop.get_num_genomes();
-			
-			for(int x = 0; x < num_genomes; x++)
-			{
-				Genome current_genome = test_pop.get_genome(x);
-				
+			for(Genome current_genome : test_pop.genomes.values())
+			{	
 				current_genome.fitness = 4.0;
 				
 				NeuralNetwork test_net = new NeuralNetwork(current_genome);
