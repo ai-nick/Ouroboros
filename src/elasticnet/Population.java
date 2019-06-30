@@ -210,7 +210,6 @@ public class Population {
 		{
 			Species current = this.pop_species.get(x);
 			num_genomes = current.member_ids.size();
-			System.out.println(current);
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 			int keep_top = (int)((double)num_genomes * elitism_percent);
 			saved_sum += keep_top;

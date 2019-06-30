@@ -57,6 +57,7 @@ public class Species {
 	
 	public void have_mercy(int num_elites, HashMap<Integer, Genome> genomes)
 	{
+		System.out.println(this.sorted_idx_array);
 		int num_members = this.sorted_idx_array.length;
 		if (num_elites == 0)
 		{
