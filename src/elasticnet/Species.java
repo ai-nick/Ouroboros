@@ -36,7 +36,7 @@ public class Species {
 			Genome fit_genome = genomes.get(member_id);
 			this.adjust_fit_sum += fit_genome.get_prime(this.member_ids.size());
 			fit_sort_dict.put(fit_genome.id, fit_genome.fitness);
-			this.sorted_idx_array[x] = fit_genome.id;
+			this.sorted_idx_array[x] = x;
 		}
 		if(this.member_ids.size() > 1)
 		{
