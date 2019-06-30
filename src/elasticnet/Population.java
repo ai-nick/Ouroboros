@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 public class Population {
 	
-	public ArrayList<Genome> genomes = new ArrayList<Genome>();
+	public HashMap<Integer, Genome> genomes = new HashMap<Integer, Genome>();
 	int best_genome_id;
 	int num_genomes;
 	int hash_id;
