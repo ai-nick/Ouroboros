@@ -70,10 +70,10 @@ public class Population {
 				
 				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config, this.hash_id, this.hidden_nodes, this.connection_genes);
 				
-				this.genomes.add(gBaby);
-				
-				this.num_genomes++;
+				this.genomes.put(ix,gBaby);
 			}
+			this.num_genomes = pop_size;
+			
 			this.next_genome_id = this.pop_size;
 		}
 	}
@@ -149,7 +149,7 @@ public class Population {
 		{
 			Random rnd = new Random();
 			int randindex = rnd.nextInt(this.genomes.size());
-			Genome first_rep = this.genomes.get(randindex);
+			Genome first_rep = this.genomes.get(this.genomes.keySet().toArray()[randindex]);
 			this.pop_species.add(new Species(next_species_id, first_rep.id));
 			next_species_id++;
 			speciated.add(first_rep.id);

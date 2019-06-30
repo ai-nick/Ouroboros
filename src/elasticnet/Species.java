@@ -23,7 +23,7 @@ public class Species {
 		this.member_ids.add(first_id);
 	}
 	
-	public double get_adjusted_fitness_sum(ArrayList<Genome> genomes)
+	public double get_adjusted_fitness_sum(HashMap<Integer,Genome> genomes)
 	{
 		//System.out.println(this.member_ids);
 		this.sorted_idx_array = new int[this.member_ids.size()];
@@ -55,7 +55,7 @@ public class Species {
 		return this.member_ids.get(this.sorted_idx_array[0]);
 	}
 	
-	public void have_mercy(int num_elites, ArrayList<Genome> genomes)
+	public void have_mercy(int num_elites, HashMap<Integer, Genome> genomes)
 	{
 		int num_members = this.sorted_idx_array.length;
 		if (num_elites == 0)
