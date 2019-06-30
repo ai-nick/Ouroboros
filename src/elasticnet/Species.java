@@ -63,16 +63,17 @@ public class Species {
 			return;
 		}
 		for(int x = num_elites; x < num_members; x++)
-		{	
-			for(int ix = 0; ix < genomes.size(); ix ++)
-			{
-				if(genomes.get(ix).id == this.sorted_idx_array[x])
-				{
-					this.member_ids.remove((Integer)genomes.get(ix).id);
-					genomes.remove(ix);
-				}
-			}
+		{
+			int g_id = this.member_ids.get(this.sorted_idx_array[x]);
+			genomes.remove(g_id);
 		}
+		ArrayList<Integer> new_member_ids = new ArrayList<Integer>();
+		
+		for(int x = 0; x < num_elites; x++)
+		{
+			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[x]));
+		}
+		this.member_ids = new_member_ids;
 	}
 	
 	//quick sort on fitness 
