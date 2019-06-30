@@ -74,6 +74,8 @@ public class Population {
 			}
 			this.num_genomes = pop_size;
 			
+			this.next_genome_id = pop_size;
+			
 			this.next_genome_id = this.pop_size;
 		}
 	}
@@ -266,7 +268,11 @@ public class Population {
 			
 			GenomeB = a;
 		}
-		Genome offspring = new Genome(this.hash_id);
+		
+		// give the offspring a new id and increment our next id property
+		Genome offspring = new Genome(this.hash_id, this.next_genome_id);
+		
+		this.next_genome_id++;
 		
 		// get the max num of genes for hidden nodes and connections 
 		boolean use_a;
@@ -326,7 +332,7 @@ public class Population {
 		}
 		//for (Integer ik: GenomeB.get_al)
 		
-		this.genomes.add(offspring);
+		this.genomes.put(offspring.id, offspring);
 		
 	}
 	
