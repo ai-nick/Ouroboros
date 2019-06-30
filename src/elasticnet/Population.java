@@ -216,9 +216,12 @@ public class Population {
 			if(keep_top > 0)
 			{
 				current.have_mercy(keep_top, this.genomes);
-				breed_all_remaining(current);				
+				//breed_all_remaining(current);				
 			}
 		}
+		// now we handle reproducing the correct amount of genomes
+		int need_new = this.pop_size - saved_sum;
+		
 	}
 	
 	public void breed_all_remaining(Species the_species)
