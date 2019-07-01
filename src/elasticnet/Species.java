@@ -45,6 +45,10 @@ public class Species {
 		return this.adjust_fit_sum;
 	}
 	
+	public void breed_single(Genome a) {
+		return;
+	}
+	
 	public void add_genome(int genomeId, double fitness)
 	{
 		this.member_ids.add(genomeId);

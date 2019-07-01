@@ -221,11 +221,12 @@ public class Population {
 		}
 		// now we handle reproducing the correct amount of genomes
 		int need_new = this.pop_size - saved_sum;
+		int elite_iterator = 0;
 		while(need_new != 0)
 		{
 			for(int ix = 0; ix < num_species; ix++)
 			{
-				
+				this.pop_species.get(ix).breed_single(this.genomes.get(this.pop_species.get(ix).sorted_idx_array[elite_iterator]));
 			}
 		}
 	}
