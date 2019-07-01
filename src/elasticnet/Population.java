@@ -221,7 +221,13 @@ public class Population {
 		}
 		// now we handle reproducing the correct amount of genomes
 		int need_new = this.pop_size - saved_sum;
-		
+		while(need_new != 0)
+		{
+			for(int ix = 0; ix < num_species; ix++)
+			{
+				
+			}
+		}
 	}
 	
 	public void breed_all_remaining(Species the_species)
