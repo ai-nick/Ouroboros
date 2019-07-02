@@ -226,7 +226,8 @@ public class Population {
 		{
 			for(int ix = 0; ix < num_species; ix++)
 			{
-				this.pop_species.get(ix).breed_single(this.genomes.get(this.pop_species.get(ix).sorted_idx_array[elite_iterator]));
+				int genome_id = this.pop_species.get(ix).sorted_idx_array[elite_iterator];
+				this.pop_species.get(ix).breed_single(this.genomes.get(genome_id));
 			}
 		}
 	}
