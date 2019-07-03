@@ -45,7 +45,8 @@ public class Species {
 		return this.adjust_fit_sum;
 	}
 	
-	public void breed_single(Genome a) {
+	public void breed_single(Genome a, int breed_with) {
+		
 		return;
 	}
 	

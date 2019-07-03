@@ -227,7 +227,14 @@ public class Population {
 			for(int ix = 0; ix < num_species; ix++)
 			{
 				int genome_id = this.pop_species.get(ix).sorted_idx_array[elite_iterator];
-				this.pop_species.get(ix).breed_single(this.genomes.get(genome_id));
+				// lines 231 - 235:  
+				// if we have reached least fit we will just mutate the asexually reproduce the fittest
+				int next_genome_id = 0;
+				if(this.pop_species.get(ix).sorted_idx_array.length > elite_iterator+1)
+				{
+					next_genome_id = this.pop_species.get(ix).sorted_idx_array[elite_iterator+1];	
+				}
+				this.pop_species.get(ix).breed_single(this.genomes.get(genome_id), next_genome_id);
 				need_new--;
 			}
 			elite_iterator++;
