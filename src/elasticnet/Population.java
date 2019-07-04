@@ -226,7 +226,7 @@ public class Population {
 		{
 			for(int ix = 0; ix < num_species; ix++)
 			{
-				if(this.pop_species.get(ix).sorted_idx_array.length <= elite_iterator) {
+				if(this.pop_species.get(ix).member_ids.size() <= elite_iterator) {
 					int spec_size = this.pop_species.get(ix).sorted_idx_array.length;
 					int reset_iter_idx = elite_iterator - ((elite_iterator/spec_size)*spec_size);
 					int genome_id = this.pop_species.get(ix).sorted_idx_array[reset_iter_idx];
@@ -251,7 +251,7 @@ public class Population {
 					// lines 231 - 235:  
 					// if we have reached least fit we will just mutate the asexually reproduce the fittest
 					int next_genome_id = 0;
-					if(this.pop_species.get(ix).sorted_idx_array.length > elite_iterator+1)
+					if(this.pop_species.get(ix).member_ids.size() > elite_iterator+1)
 					{
 						next_genome_id = this.pop_species.get(ix).sorted_idx_array[elite_iterator+1];	
 					}
