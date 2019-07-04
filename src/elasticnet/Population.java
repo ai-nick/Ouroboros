@@ -229,11 +229,11 @@ public class Population {
 				if(this.pop_species.get(ix).member_ids.size() <= elite_iterator) {
 					int spec_size = this.pop_species.get(ix).sorted_idx_array.length;
 					int reset_iter_idx = elite_iterator - ((elite_iterator/spec_size)*spec_size);
-					int genome_id = this.pop_species.get(ix).sorted_idx_array[reset_iter_idx];
+					int genome_id = reset_iter_idx;
 					int next_genome_id = 0;
 					if(this.pop_species.get(ix).sorted_idx_array.length > reset_iter_idx+1)
 					{
-						next_genome_id = this.pop_species.get(ix).sorted_idx_array[reset_iter_idx+1];	
+						next_genome_id = reset_iter_idx+1;	
 					}
 					if(next_genome_id == 0)
 					{
@@ -253,7 +253,7 @@ public class Population {
 					int next_genome_id = 0;
 					if(this.pop_species.get(ix).member_ids.size() > elite_iterator+1)
 					{
-						next_genome_id = this.pop_species.get(ix).sorted_idx_array[elite_iterator+1];	
+						next_genome_id = elite_iterator + 1;	
 					}
 					if(next_genome_id == 0)
 					{
