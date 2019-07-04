@@ -255,7 +255,7 @@ public class Population {
 					{
 						next_genome_id = this.pop_species.get(ix).sorted_idx_array[elite_iterator+1];	
 					}
-					if(next_genome_id == 0 || !this.genomes.containsKey(next_genome_id))
+					if(next_genome_id == 0 || this.genomes.get(next_genome_id).fitness == -1)
 					{
 						this.breed_asexual(this.genomes.get(next_genome_id));		
 					} 

@@ -14,7 +14,7 @@ public class Genome {
 	ArrayList<Integer> gene_ids = new ArrayList<Integer>();
 	int population_hash = 0;
 	int species_id = 0;
-	public double fitness = 0.0;
+	public double fitness = -1.0;
 	public int avg_w = 0;
 	HashMap<Integer, ConnectionGene> conn_genes = new HashMap<Integer, ConnectionGene>();
 	ArrayList<NodeGene> input_nodes = new ArrayList<NodeGene>();
@@ -26,7 +26,6 @@ public class Genome {
 	public Genome(int p_hash, int genome_id) {
 		this.id = genome_id;
 		this.population_hash = p_hash;
-		this.fitness = 0.0;
 	}
 	
 	public Genome(double test_fit)
@@ -42,7 +41,6 @@ public class Genome {
 		gene_ids = cloner.gene_ids;
 		population_hash = cloner.population_hash;
 		species_id = cloner.species_id;
-		fitness = 0;
 		conn_genes = new HashMap<Integer, ConnectionGene>(cloner.conn_genes);
 		input_nodes = new ArrayList<NodeGene>(cloner.input_nodes);
 		hidden_nodes = new ArrayList<NodeGene>(cloner.hidden_nodes);
