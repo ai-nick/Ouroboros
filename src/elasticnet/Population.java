@@ -235,7 +235,14 @@ public class Population {
 					{
 						next_genome_id = this.pop_species.get(ix).sorted_idx_array[reset_iter_idx+1];	
 					}
-					this.pop_species.get(ix).breed_single(this.genomes.get(genome_id), next_genome_id);
+					if(next_genome_id == 0)
+					{
+						this.breed_asexual(this.genomes.get(next_genome_id));		
+					} 
+					else
+					{
+						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(next_genome_id));
+					}
 					need_new--;
 				}
 				else
@@ -248,12 +255,25 @@ public class Population {
 					{
 						next_genome_id = this.pop_species.get(ix).sorted_idx_array[elite_iterator+1];	
 					}
-					this.pop_species.get(ix).breed_single(this.genomes.get(genome_id), next_genome_id);
+					if(next_genome_id == 0)
+					{
+						this.breed_asexual(this.genomes.get(next_genome_id));		
+					} 
+					else
+					{
+						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(next_genome_id));
+					}
 					need_new--;	
 				}
 			}
 			elite_iterator++;
 		}
+	}
+	
+	public void breed_asexual(Genome single_parent)
+	{
+		
+		return;
 	}
 	
 	public void breed_all_remaining(Species the_species)
