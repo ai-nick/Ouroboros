@@ -226,12 +226,12 @@ public class Population {
 		{
 			for(int ix = 0; ix < num_species; ix++)
 			{
-				if(this.pop_species.get(ix).member_ids.size() <= elite_iterator) {
+				if(this.pop_species.get(ix).member_ids.size() <= elite_iterator+2) {
 					int spec_size = this.pop_species.get(ix).member_ids.size();
 					int reset_iter_idx = elite_iterator - ((elite_iterator/spec_size)*spec_size);
 					int genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx);
 					int next_genome_id = this.pop_species.get(ix).member_ids.get(0);
-					if(this.pop_species.get(ix).sorted_idx_array.length > reset_iter_idx+2)
+					if(this.pop_species.get(ix).member_ids.size() > reset_iter_idx+2)
 					{
 						next_genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx+1);	
 					}
