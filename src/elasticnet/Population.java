@@ -68,7 +68,7 @@ public class Population {
 			{
 				Genome gBaby = new Genome(this.hash_id, ix);
 				
-				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config, this.hash_id, this.hidden_nodes, this.connection_genes);
+				this.inno_num = gBaby.create_from_scratch(this.inno_num, this.config, this.hash_id, this.node_genes, this.connection_genes);
 				
 				this.genomes.put(ix,gBaby);
 			}
@@ -85,16 +85,13 @@ public class Population {
 		double d = 0.0;
 		double s = 0.0;
 		double e = 0.0;
-		int loop_count = one.gene_ids.size();
+		int loop_count = one.conn_genes.size();
 		int[] j = new int[loop_count];
 		for(int idx = 0; idx < loop_count; idx++)
 		{
-			if(two.gene_ids.contains(one.gene_ids.get(idx)))
+			if(two.conn_genes.contains(one.conn_genes.get(idx)))
 			{
-				if(one.conn_genes.containsKey(idx) && two.conn_genes.containsKey(idx))
-				{
-					w = Math.abs(one.conn_genes.get(idx).atts.get("weight") - two.conn_genes.get(idx).atts.get("weight"));
-				}
+				w = Math.abs(one.conn_genes.get(idx).atts.get("weight") - two.conn_genes.get(idx).atts.get("weight"));
 			}
 			else
 			{

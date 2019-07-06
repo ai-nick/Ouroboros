@@ -48,11 +48,9 @@ public class Genome {
 	
 	public int create_from_scratch(int inno_id, 
 			NeatConfig config, 
-			int populationHash, 
-			ArrayList<Integer> hidden_node_genes, 
-			ArrayList<Integer> conn_genes,
-			ArrayList<Integer> input_node_genes,
-			ArrayList<Integer> output_node_genes
+			int populationHash,
+			HashMap<Integer, HashMap<Integer,NodeGene>> node_gene_list,
+			HashMap<Integer, HashMap<Integer,ConnectionGene>> conn_gene_list
 			)
 	{
 		int num_in = config.num_input;
