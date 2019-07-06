@@ -46,7 +46,14 @@ public class Genome {
 		output_nodes = new ArrayList<Integer>(cloner.output_nodes);
 	}
 	
-	public int create_from_scratch(int inno_id, NeatConfig config, int populationHash, ArrayList<NodeGene> hidden_node_genes, ArrayList<ConnectionGene> conn_genes)
+	public int create_from_scratch(int inno_id, 
+			NeatConfig config, 
+			int populationHash, 
+			ArrayList<Integer> hidden_node_genes, 
+			ArrayList<Integer> conn_genes,
+			ArrayList<Integer> input_node_genes,
+			ArrayList<Integer> output_node_genes
+			)
 	{
 		int num_in = config.num_input;
 		int num_hidden = config.num_hidden;
