@@ -75,8 +75,6 @@ public class Xor {
 			}
 			test_pop.speciate_population();
 			
-			//System.out.println(test_pop.genomes.size());
-			
 			test_pop.the_reproduction_function();
 			
 			System.out.println(test_pop.genomes.size());

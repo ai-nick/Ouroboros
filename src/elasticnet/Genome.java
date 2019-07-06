@@ -11,15 +11,15 @@ public class Genome {
 
 	public int id = 0;
 	int gen_born = 0;
-	ArrayList<Integer> gene_ids = new ArrayList<Integer>();
+	//ArrayList<Integer> gene_ids = new ArrayList<Integer>();
 	int population_hash = 0;
 	int species_id = 0;
 	public double fitness = -1.0;
 	public int avg_w = 0;
-	HashMap<Integer, ConnectionGene> conn_genes = new HashMap<Integer, ConnectionGene>();
-	ArrayList<NodeGene> input_nodes = new ArrayList<NodeGene>();
-	ArrayList<NodeGene> hidden_nodes = new ArrayList<NodeGene>();
-	ArrayList<NodeGene> output_nodes = new ArrayList<NodeGene>();
+	ArrayList<Integer> conn_genes = new ArrayList<Integer>();
+	ArrayList<Integer> input_nodes = new ArrayList<Integer>();
+	ArrayList<Integer> hidden_nodes = new ArrayList<Integer>();
+	ArrayList<Integer> output_nodes = new ArrayList<Integer>();
 	public int gene_id_min, gene_id_max = 0;
 	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
 	
@@ -250,7 +250,7 @@ public class Genome {
 		}
 		ConnectionGene new_gene = new ConnectionGene(from_node, to_node, conn_id);
 		
-		this.conn_genes.put(conn_id, new_gene);
+		pop_conns.put(conn_id, new_gene);
 		
 		this.gene_ids.add(conn_id);
 		
