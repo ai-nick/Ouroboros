@@ -45,6 +45,7 @@ public class MarginMex {
 		{
 			for(int x = 0; x < this.pop_size; x++)
 			{	
+				System.out.println(x);
 				Genome current = this.pop.get_genome(x);
 				
 				this.port = new PaperPortfolio(1000.0, "usdt");
@@ -89,7 +90,6 @@ public class MarginMex {
 			this.pop.speciate_population();
 			
 			this.pop.the_reproduction_function();
-			System.out.println(this.pop.get_species().size());
 		}
 	}
 }

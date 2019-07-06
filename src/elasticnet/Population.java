@@ -230,18 +230,18 @@ public class Population {
 					int spec_size = this.pop_species.get(ix).member_ids.size();
 					int reset_iter_idx = elite_iterator - ((elite_iterator/spec_size)*spec_size);
 					int genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx);
-					int next_genome_id = this.pop_species.get(ix).member_ids.get(0);
+					int other_genome_id = this.pop_species.get(ix).member_ids.get(0);
 					if(this.pop_species.get(ix).member_ids.size() > reset_iter_idx+2)
 					{
-						next_genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx+1);	
+						other_genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx+1);	
 					}
-					if(next_genome_id == 0)
+					if(other_genome_id == 0)
 					{
-						this.breed_asexual(this.genomes.get(next_genome_id));		
+						this.breed_asexual(this.genomes.get(other_genome_id));		
 					} 
 					else
 					{
-						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(next_genome_id));
+						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
 					}
 					need_new--;
 				}
@@ -250,19 +250,19 @@ public class Population {
 					int genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator);
 					// lines 231 - 235:  
 					// if we have reached least fit we will just mutate the asexually reproduce the fittest
-					int next_genome_id = this.pop_species.get(ix).member_ids.get(0);
+					int other_genome_id = this.pop_species.get(ix).member_ids.get(0);
 					
 					if(this.pop_species.get(ix).member_ids.size() > elite_iterator+2)
 					{
-						next_genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator+1);;	
+						other_genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator+1);;	
 					}
-					if(next_genome_id == 0)
+					if(other_genome_id == 0)
 					{
-						this.breed_asexual(this.genomes.get(next_genome_id));		
+						this.breed_asexual(this.genomes.get(other_genome_id));		
 					} 
 					else
 					{
-						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(next_genome_id));
+						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
 					}
 					need_new--;	
 				}
@@ -273,6 +273,8 @@ public class Population {
 	
 	public void breed_asexual(Genome single_parent)
 	{
+		Genome offspring = new Genome(single_parent, this.next_genome_id);
+		this.next_genome_id++;
 		
 		return;
 	}
