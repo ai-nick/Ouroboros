@@ -28,8 +28,8 @@ public class Population {
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	int pop_size = 0;
-	ArrayList<NodeGene> hidden_nodes = new ArrayList<NodeGene>();
-	ArrayList<ConnectionGene> connection_genes = new ArrayList<ConnectionGene>();
+	HashMap<Integer, HashMap<Integer,NodeGene>> node_genes = new HashMap<Integer, HashMap<Integer, NodeGene>>();
+	HashMap<Integer, HashMap<Integer,ConnectionGene>> connection_genes = new HashMap<Integer, HashMap<Integer,ConnectionGene>>();
 	
 	public Population(int gen,  NeatConfig config_in, int pop_size) 
 	{
