@@ -275,7 +275,7 @@ public class Population {
 	{
 		Genome offspring = new Genome(single_parent, this.next_genome_id);
 		this.next_genome_id++;
-		
+		offspring.mutate_genome(this.inno_num, this.config, this.hidden_nodes, this.connection_genes);
 		return;
 	}
 	
