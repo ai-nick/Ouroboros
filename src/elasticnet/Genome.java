@@ -38,13 +38,12 @@ public class Genome {
 	{
 		this.id = id;
 		gen_born = cloner.gen_born + 1;
-		gene_ids = cloner.gene_ids;
 		population_hash = cloner.population_hash;
 		species_id = cloner.species_id;
-		conn_genes = new HashMap<Integer, ConnectionGene>(cloner.conn_genes);
-		input_nodes = new ArrayList<NodeGene>(cloner.input_nodes);
-		hidden_nodes = new ArrayList<NodeGene>(cloner.hidden_nodes);
-		output_nodes = new ArrayList<NodeGene>(cloner.output_nodes);
+		conn_genes = new ArrayList<Integer>(cloner.conn_genes);
+		input_nodes = new ArrayList<Integer>(cloner.input_nodes);
+		hidden_nodes = new ArrayList<Integer>(cloner.hidden_nodes);
+		output_nodes = new ArrayList<Integer>(cloner.output_nodes);
 	}
 	
 	public int create_from_scratch(int inno_id, NeatConfig config, int populationHash, ArrayList<NodeGene> hidden_node_genes, ArrayList<ConnectionGene> conn_genes)
@@ -60,8 +59,7 @@ public class Genome {
 			new_node.is_input = true;
 			new_node.is_output = false;
 			inno_id++;
-			this.input_nodes.add(new_node);
-			this.gene_ids.add(inno_id);
+			this.input_nodes.add(new_node.inno_id);
 			gene_index = ix;
 		}
 		gene_index++;
@@ -71,8 +69,7 @@ public class Genome {
 			new_node.is_input = false;
 			new_node.is_output = true;
 			inno_id++;
-			this.output_nodes.add(new_node);
-			this.gene_ids.add(inno_id);
+			this.output_nodes.add(new_node.inno_id);
 		}
 		gene_index++;
 		if (num_hidden > 0)
@@ -83,8 +80,7 @@ public class Genome {
 				new_node.is_input = false;
 				new_node.is_output = false;
 				inno_id++;
-				this.hidden_nodes.add(new_node);
-				this.gene_ids.add(inno_id);
+				this.hidden_nodes.add(new_node.inno_id);
 			}			
 		}
 		else 
