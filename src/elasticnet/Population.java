@@ -89,8 +89,10 @@ public class Population {
 		int[] j = new int[loop_count];
 		for(int idx = 0; idx < loop_count; idx++)
 		{
-			if(two.conn_genes.contains(one.conn_genes.get(idx)))
+			int one_id = one.conn_genes.get(idx);
+			if(two.conn_genes.contains(one_id))
 			{
+				int two_id = two.conn_genes.get(two.conn_genes.indexOf(one_id));
 				w = Math.abs(this.connection_genes.get(one.conn_genes.get(idx)).get(one.id).atts.get("weight") - this.connection_genes.get(two.conn_genes.get(idx)).get(two.id).atts.get("weight"));
 			}
 			else
