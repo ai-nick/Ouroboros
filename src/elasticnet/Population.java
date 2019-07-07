@@ -225,10 +225,14 @@ public class Population {
 		{
 			for(int ix = 0; ix < num_species; ix++)
 			{
-				if(this.pop_species.get(ix).member_ids.size() <= elite_iterator+2) {
+				Species current_species = this.pop_species.get(ix)
+				if(current_species.member_ids.size() <= elite_iterator+2) {
 					int spec_size = this.pop_species.get(ix).member_ids.size();
+					
 					int reset_iter_idx = elite_iterator - ((elite_iterator/spec_size)*spec_size);
+					
 					int genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx);
+					
 					int other_genome_id = this.pop_species.get(ix).member_ids.get(0);
 					if(this.pop_species.get(ix).member_ids.size() > reset_iter_idx+2)
 					{
@@ -236,7 +240,7 @@ public class Population {
 					}
 					if(other_genome_id == 0)
 					{
-						this.breed_asexual(this.genomes.get(other_genome_id));		
+						this.breed_asexual(this.genomes.get(other_genome_id), current_species);		
 					} 
 					else
 					{
@@ -270,14 +274,16 @@ public class Population {
 		}
 	}
 	
-	public void breed_asexual(Genome single_parent)
+	public void breed_asexual(Genome single_parent, Species the_species)
 	{
 		Genome offspring = new Genome(single_parent, this.next_genome_id);
 		this.next_genome_id++;
 		offspring.mutate_genome(this.inno_num, this.config, this.hidden_nodes, this.connection_genes);
+		the_species.member_ids.add(offspring.id);
 		return;
 	}
 	
+	//TODO validate the new reproduction logic works and remove this
 	public void breed_all_remaining(Species the_species)
 	{
 		int num_genomes = the_species.member_ids.size();

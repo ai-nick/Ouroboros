@@ -12,7 +12,6 @@ public class ConnectionGene implements IConnection {
 	NodeGene to_node;
 	int activation_level = 0;
 	HashMap<String, Double> atts = new HashMap<String, Double>();
-	int gene_id;
 	double min = -3.0;
 	double max = 3.0;
 	

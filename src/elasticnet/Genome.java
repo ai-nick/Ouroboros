@@ -94,6 +94,7 @@ public class Genome {
 			inno_id = this.connect_full_initial(gene_index, conn_genes);
 		}
 		inno_id = this.mutate_genome(inno_id, config, hidden_node_genes, conn_genes);
+		this.set_max_and_min();
 		return inno_id;
 	}
 	
