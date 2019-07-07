@@ -259,7 +259,9 @@ public class Genome {
 		int pop_conn_count = pop_conns.size();
 		for(int p = 0; p < pop_conn_count; p++)
 		{
-			ConnectionGene p_conn = pop_conns.get(p);
+			int key = (int)pop_conns.keySet().toArray()[p];
+			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(key);
+			ConnectionGene p_conn = gene_list.get(gene_list.keySet().toArray()[0]);
 			if (p_conn.to_node != null && p_conn.from_node != null)
 			{
 				
