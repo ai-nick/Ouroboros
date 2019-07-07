@@ -112,7 +112,7 @@ public class Population {
 		
 		for(int ix = 0; ix < loop_count; ix++)
 		{
-			if(two.gene_ids.get(ix) >= one.gene_id_min && two.gene_ids.get(ix) <= one.gene_id_max)
+			if(two.conn_genes.get(ix) >= one.gene_id_min && two.conn_genes.get(ix) <= one.gene_id_max)
 			{
 				d += 1.0;
 			}

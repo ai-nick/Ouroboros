@@ -1,5 +1,6 @@
 package elasticnet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -96,6 +97,30 @@ public class Genome {
 		return inno_id;
 	}
 	
+	public void set_max_and_min() {
+		ArrayList<Integer> all_nodes = this.get_all_nodes();
+		int min_node_id = Collections.min(all_nodes);
+		int min_conn_id = Collections.min(this.conn_genes);
+		int max_conn_id = Collections.max(this.conn_genes);
+		int max_node_id = Collections.max(all_nodes);
+		if (min_node_id < min_conn_id)
+		{
+			this.gene_id_min = min_node_id;
+		}
+		else
+		{
+			this.gene_id_min = min_conn_id;
+		}
+		if(max_node_id > max_conn_id)
+		{
+			this.gene_id_max = max_node_id;
+		}
+		else
+		{
+			this.gene_id_max = max_conn_id;
+		}
+	}
+	
 	public double get_prime(int num_others)
 	{
 		return this.fitness/num_others;
@@ -157,24 +182,11 @@ public class Genome {
 		return this.population_hash;
 	}
 	
-	public HashMap<Integer, NodeGene> get_all_nodes()
+	public ArrayList<Integer> get_all_nodes()
 	{
-		HashMap<Integer, NodeGene> all_nodes = new HashMap<Integer, NodeGene>();
-		int in_count = input_nodes.size();
-		for (int i = 0; i < in_count; i++)
-		{
-			all_nodes.put(input_nodes.get(i).inno_id, input_nodes.get(i));
-		}
-		int hidden_count = hidden_nodes.size();
-		for (int i = 0; i < hidden_count; i++)
-		{
-			all_nodes.put(hidden_nodes.get(i).inno_id, hidden_nodes.get(i));
-		}
-		int out_count = output_nodes.size();
-		for (int i = 0; i < out_count; i++)
-		{
-			all_nodes.put(output_nodes.get(i).inno_id, output_nodes.get(i));
-		}
+		ArrayList<Integer> all_nodes = new ArrayList<Integer>(this.hidden_nodes);
+		all_nodes.addAll(this.input_nodes);
+		all_nodes.addAll(this.output_nodes);
 		return all_nodes;
 	}
 	
