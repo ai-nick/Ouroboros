@@ -191,7 +191,11 @@ public class Genome {
 		return all_nodes;
 	}
 	
-	public int mutate_genome(int new_id, NeatConfig config, ArrayList<NodeGene> pop_nodes, ArrayList<ConnectionGene> pop_conns)
+	public int mutate_genome(int new_id, 
+			NeatConfig config,
+			HashMap<Integer, HashMap<Integer,NodeGene>> pop_nodes, 
+			HashMap<Integer, HashMap<Integer,ConnectionGene>>pop_conns
+			)
 	{
 		Random rand = new Random();
 		
@@ -229,7 +233,7 @@ public class Genome {
 	private int mutate_add_conn(int new_id, ArrayList<ConnectionGene> pop_conns)
 	{
 		int conn_id = new_id;
-		HashMap<Integer, NodeGene> all_the_nodes = this.get_all_nodes();
+		ArrayList<Integer> all_the_nodes = this.get_all_nodes();
 		
 		Random dice = new Random();
 		

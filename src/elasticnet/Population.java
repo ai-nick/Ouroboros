@@ -278,8 +278,9 @@ public class Population {
 	{
 		Genome offspring = new Genome(single_parent, this.next_genome_id);
 		this.next_genome_id++;
-		offspring.mutate_genome(this.inno_num, this.config, this.hidden_nodes, this.connection_genes);
+		offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
 		the_species.member_ids.add(offspring.id);
+		this.genomes.put(offspring.id, offspring);
 		return;
 	}
 	
