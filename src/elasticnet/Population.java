@@ -261,7 +261,7 @@ public class Population {
 					}
 					if(other_genome_id == 0)
 					{
-						this.breed_asexual(this.genomes.get(other_genome_id));		
+						this.breed_asexual(this.genomes.get(other_genome_id), current_species);		
 					} 
 					else
 					{

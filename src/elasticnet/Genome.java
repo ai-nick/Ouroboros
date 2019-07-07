@@ -93,7 +93,7 @@ public class Genome {
 		{
 			inno_id = this.connect_full_initial(gene_index, conn_genes);
 		}
-		inno_id = this.mutate_genome(inno_id, config, hidden_node_genes, conn_genes);
+		inno_id = this.mutate_genome(inno_id, config, node_gene_list, conn_gene_list);
 		this.set_max_and_min();
 		return inno_id;
 	}
@@ -129,28 +129,36 @@ public class Genome {
 	
 	public void set_nodes(ArrayList<NodeGene> ngs)
 	{
-		this.input_nodes = ngs;
+		int num_in = ngs.size();
+		for(int i = 0; i < num_in; i++)
+		{
+			this.input_nodes.add(ngs.get(i).inno_id);
+		}
 	}
 	
 	public void set_node(NodeGene ng)
 	{
 		if(ng.is_input)
 		{
-			input_nodes.add(ng);
+			input_nodes.add(ng.inno_id);
 		}
 		else if (ng.is_output)
 		{
-			output_nodes.add(ng);
+			output_nodes.add(ng.inno_id);
 		}
 		else
 		{
-			hidden_nodes.add(ng);
+			hidden_nodes.add(ng.inno_id);
 		}
 	}
 	
-	public void set_connections(HashMap<Integer, ConnectionGene> conngs)
+	public void set_connections(ArrayList<ConnectionGene> conns)
 	{
-		this.conn_genes = conngs;
+		int conn_count = conns.size();
+		for(int i = 0; i < conn_count; i++)
+		{
+			this.conn_genes.add(conns.get(i).inno_id);
+		}
 	}
 	
 	public NodeGene get_node_gene(int idx)
@@ -194,7 +202,7 @@ public class Genome {
 	public int mutate_genome(int new_id, 
 			NeatConfig config,
 			HashMap<Integer, HashMap<Integer,NodeGene>> pop_nodes, 
-			HashMap<Integer, HashMap<Integer,ConnectionGene>>pop_conns
+			HashMap<Integer, HashMap<Integer,ConnectionGene>> pop_conns
 			)
 	{
 		Random rand = new Random();
