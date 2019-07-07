@@ -108,7 +108,7 @@ public class Population {
 			}
 		}
 		
-		loop_count = two.gene_ids.size();
+		loop_count = two.conn_genes.size();
 		
 		for(int ix = 0; ix < loop_count; ix++)
 		{
