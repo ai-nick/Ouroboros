@@ -121,9 +121,9 @@ public class Population {
 				e += 1.0;
 			}
 		}
-		if(loop_count < one.gene_ids.size())
+		if(loop_count < one.conn_genes.size())
 		{
-			loop_count = one.gene_ids.size();
+			loop_count = one.conn_genes.size();
 		}
 		s += (e*speciation_coefficients[0])/loop_count;
 		s += (d*speciation_coefficients[1])/loop_count;
@@ -304,7 +304,6 @@ public class Population {
 	}
 	
 	// breed two genomes, params are the ids
-	// TODO we are losing hidden nodes here needs to be fixed
 	public void cross_breed(Genome a, Genome b)
 	{
 		// genome a will be the fitter of the two mates

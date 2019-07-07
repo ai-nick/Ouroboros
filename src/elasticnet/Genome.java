@@ -228,26 +228,31 @@ public class Genome {
 		return new_id;
 	}
 	
-	private int mutate_add_conn(int new_id, HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns)
+	private int mutate_add_conn(int new_id, 
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns,
+			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes
+			)
 	{
 		int conn_id = new_id;
 		ArrayList<Integer> all_the_nodes = this.get_all_nodes();
 		
 		Random dice = new Random();
 		
-		int to_node_key = (int)all_the_nodes.keySet().toArray()[dice.nextInt(all_the_nodes.size())];
+		int to_node_key = (int)all_the_nodes.get(dice.nextInt(all_the_nodes.size()));
 		
-		int from_node_key = (int)all_the_nodes.keySet().toArray()[dice.nextInt(all_the_nodes.size())];
+		int from_node_key = (int)all_the_nodes.get(dice.nextInt(all_the_nodes.size()));
 		
-		NodeGene from_node = all_the_nodes.get(from_node_key);
+		NodeGene from_node = pop_nodes.get(from_node_key).get(this.id);
 		
-		NodeGene to_node = all_the_nodes.get(to_node_key);
+		NodeGene to_node = pop_nodes.get(from_node_key).get(this.id);
 		
-		if(this.output_nodes.contains(to_node) && this.output_nodes.contains(from_node))
+		// the next to if statements ensure we dont add conns that are either output -> output
+		// of input->input
+		if(this.output_nodes.contains(to_node_key) && this.output_nodes.contains(from_node_key))
 		{
 			return new_id;
 		}
-		if(this.input_nodes.contains(from_node_key) && this.input_nodes.contains(to_node))
+		if(this.input_nodes.contains(from_node_key) && this.input_nodes.contains(to_node_key))
 		{
 			return new_id;
 		}
