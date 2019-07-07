@@ -161,16 +161,6 @@ public class Genome {
 		}
 	}
 	
-	public NodeGene get_node_gene(int idx)
-	{
-		return input_nodes.get(idx);
-	}
-	
-	public ConnectionGene get_connection_gene(int idx)
-	{
-		return conn_genes.get(idx);
-	}
-	
 	public void set_species(int id)
 	{
 		this.species_id = id;
@@ -238,7 +228,7 @@ public class Genome {
 		return new_id;
 	}
 	
-	private int mutate_add_conn(int new_id, ArrayList<ConnectionGene> pop_conns)
+	private int mutate_add_conn(int new_id, HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns)
 	{
 		int conn_id = new_id;
 		ArrayList<Integer> all_the_nodes = this.get_all_nodes();
@@ -285,7 +275,7 @@ public class Genome {
 		return new_id;
 	}
 	
-	private int mutate_add_node(int new_id, String activation, ArrayList<NodeGene> pop_nodes, ArrayList<ConnectionGene> pop_conns)
+	private int mutate_add_node(int new_id, String activation, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes, HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns)
 	{
 		//boolean has_hist_id;
 		

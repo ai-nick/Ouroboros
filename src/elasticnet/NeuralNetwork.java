@@ -19,7 +19,7 @@ public class NeuralNetwork implements INeuralNet {
 	int outs_count = 0;
 	ArrayList<Integer> output_ids = new ArrayList<Integer>();
 	
-	
+	/*
 	public NeuralNetwork(Genome g)
 	{
 		this.nodes = g.get_all_nodes();
@@ -47,7 +47,13 @@ public class NeuralNetwork implements INeuralNet {
 			nodes.put(g.hidden_nodes.get(ix).get_node_id(), g.hidden_nodes.get(ix));
 		}
 	}
+	*/
 	
+	public NeuralNetwork(ArrayList<Integer> input_ids, HashMap<Integer, NodeGene> net_nodes)
+	{
+		this.input_ids = input_ids;
+		this.nodes = net_nodes;
+	}
 	
 	@Override
 	public void set_input(double[] input)
