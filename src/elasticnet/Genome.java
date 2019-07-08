@@ -235,7 +235,7 @@ public class Genome {
 	{
 		int conn_id = new_id;
 		ArrayList<Integer> all_the_nodes = this.get_all_nodes();
-		
+		boolean new_structure = true;
 		Random dice = new Random();
 		
 		int to_node_key = (int)all_the_nodes.get(dice.nextInt(all_the_nodes.size()));
@@ -268,16 +268,21 @@ public class Genome {
 				if ((p_conn.to_node.inno_id == to_node.inno_id) && (p_conn.from_node.inno_id == from_node.inno_id))
 				{
 					conn_id = p_conn.inno_id;
+					new_structure = false;
 				}	
 			}
 		}
 		ConnectionGene new_gene = new ConnectionGene(from_node, to_node, conn_id);
 		
-		pop_conns.put(conn_id, new_gene);
+		if (new_structure == true)
+		{
+			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
+			new_map.put(conn_id, new_gene);
+			pop_conns.put(conn_id, new_map);
+		}
+		pop_conns.get(key);
 		
 		this.gene_ids.add(conn_id);
-		
-		pop_conns.add(new_gene);
 		
 		return new_id;
 	}
