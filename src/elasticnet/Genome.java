@@ -287,7 +287,11 @@ public class Genome {
 		return new_id;
 	}
 	
-	private int mutate_add_node(int new_id, String activation, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes, HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns)
+	private int mutate_add_node(int new_id, 
+			String activation, 
+			HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes, 
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns
+			)
 	{
 		//boolean has_hist_id;
 		
@@ -378,7 +382,7 @@ public class Genome {
 	}
 	
 	
-	private void mutate_delete_node()
+	private void mutate_delete_node(HashMap<Integer,HashMap<Integer, ConnectionGene>> pop_conns, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		int num_nodes = this.hidden_nodes.size();
 		
@@ -398,7 +402,6 @@ public class Genome {
 		for (int ix = 0; ix < conn_counter; ix++)
 		{
 			this.conn_genes.remove(delete_node.connections.get(ix).get_id());
-			this.gene_ids.remove(delete_node.connections.get(ix).get_id());
 		}
 		
 		this.hidden_nodes.remove(node_idx);
