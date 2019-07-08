@@ -406,8 +406,6 @@ public class Genome {
 		
 		this.hidden_nodes.remove(node_idx);
 		
-		this.gene_ids.remove(Integer.valueOf(node_idx));
-		
 		return;
 	}
 	
