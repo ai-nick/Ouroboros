@@ -277,12 +277,12 @@ public class Genome {
 		if (new_structure == true)
 		{
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
-			new_map.put(conn_id, new_gene);
+			new_map.put(this.id, new_gene);
 			pop_conns.put(conn_id, new_map);
 		}
-		pop_conns.get(key);
+		pop_conns.get(conn_id).put(this.id, new_gene);
 		
-		this.gene_ids.add(conn_id);
+		this.conn_genes.add(conn_id);
 		
 		return new_id;
 	}
