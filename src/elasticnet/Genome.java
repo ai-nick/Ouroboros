@@ -395,7 +395,7 @@ public class Genome {
 		
 		int node_idx = dice.nextInt(num_nodes);
 		
-		NodeGene delete_node = this.hidden_nodes.get(node_idx);
+		NodeGene delete_node = pop_nodes.get(node_idx).get(this.id);
 		
 		int conn_counter = delete_node.connections.size();
 		
