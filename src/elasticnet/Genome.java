@@ -310,7 +310,7 @@ public class Genome {
 		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
-		int hidden_count = pop_nodes.size();
+		int hidden_count = this.hidden_nodes.size();
 		
 		for(int i = 0; i < hidden_count; i++)
 		{
