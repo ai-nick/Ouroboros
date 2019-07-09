@@ -306,15 +306,16 @@ public class Genome {
 			return new_id;
 		}
 		
-		int connection_to_split_index = (int)this.conn_genes.keySet().toArray()[dice.nextInt(this.conn_genes.size())];
+		int connection_to_split_index = this.conn_genes.get(dice.nextInt(this.conn_genes.size()));
 		
-		ConnectionGene connection_to_split = this.conn_genes.get(connection_to_split_index);
+		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
 		int hidden_count = pop_nodes.size();
 		
 		for(int i = 0; i < hidden_count; i++)
 		{
-			NodeGene pop_node = pop_nodes.get(i);
+			int hid_idx = this.hidden_nodes.get(i);
+			NodeGene pop_node = pop_nodes.get(hid_idx).get(this.id);
 			int num_conns = pop_node.connections.size();
 			int has_to = -1;
 			int has_from = -1;
