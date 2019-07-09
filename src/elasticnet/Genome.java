@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.xml.soap.Node;
+
 import com.google.gson.Gson;
 
 public class Genome {
@@ -421,11 +423,11 @@ public class Genome {
 		int delete_key = dice.nextInt(this.conn_genes.size());
 		
 		this.conn_genes.remove(delete_key);
-		
-		this.gene_ids.remove(Integer.valueOf(delete_key));
 	}
 	
-	private int connect_full_initial(int new_id, ArrayList<ConnectionGene> pop_conns)
+	private int connect_full_initial(int new_id, 
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns, 
+			HashMap<Integer, HashMap<Integer, NodeGene>> node_conns)
 	{
 		int num_in = this.input_nodes.size();
 		int num_out = this.output_nodes.size();
@@ -434,8 +436,8 @@ public class Genome {
 			for (int ixx = 0; ixx < num_out; ixx++)
 			{
 				// do we really need to pass in the whole node, seems like just the ids out suffice
-				NodeGene from_node = this.input_nodes.get(ix);
-				NodeGene to_node = this.output_nodes.get(ixx);
+				NodeGene from_node = node_conns.get(this.input_nodes.get(ix)).get(this.id);
+				NodeGene to_node = node_conns.get(this.output_nodes.get(ixx)).get(this.id);
 				
 				ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
 				pop_conns.add(new_gene);
