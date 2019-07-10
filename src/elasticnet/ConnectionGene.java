@@ -8,21 +8,21 @@ import io.netty.util.internal.ThreadLocalRandom;
 public class ConnectionGene implements IConnection {
 
 	int inno_id;
-	int from_node_id;
-	int to_node_id;
+	int from_node;
+	int to_node;
 	int activation_level = 0;
 	HashMap<String, Double> atts = new HashMap<String, Double>();
 	double min = -3.0;
 	double max = 3.0;
 	
-	public ConnectionGene(NodeGene f, NodeGene t, int inno) {
+	public ConnectionGene(int f, int t, int inno) {
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;
 		this.set_weight(ThreadLocalRandom.current().nextDouble(min, max));
 	}
 	
-	public ConnectionGene(NodeGene f, NodeGene t, int inno, double weight) {
+	public ConnectionGene(int f, int t, int inno, double weight) {
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;

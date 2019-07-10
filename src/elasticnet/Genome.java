@@ -312,6 +312,13 @@ public class Genome {
 		
 		int hidden_count = this.hidden_nodes.size();
 		
+		if (pop_nodes.containsKey(connection_to_split.from_node) && pop_nodes.containsKey(connection_to_split.to_node))l
+		{
+			// structure exists use the current innovation num
+			
+		}
+		
+		/*
 		for(int i = 0; i < hidden_count; i++)
 		{
 			int hid_idx = this.hidden_nodes.get(i);
@@ -352,7 +359,7 @@ public class Genome {
 				}
 			}
 		}
-		
+		*/
 		NodeGene new_node = new NodeGene(new_id, activation);
 		
 		this.gene_ids.add(new_id);
