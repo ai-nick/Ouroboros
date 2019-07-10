@@ -310,18 +310,11 @@ public class Genome {
 		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
-		int hidden_count = this.hidden_nodes.size();
+		int hidden_count = pop_nodes.size();
 		
-		if (pop_nodes.containsKey(connection_to_split.from_node) && pop_nodes.containsKey(connection_to_split.to_node))l
+		for(Integer i : pop_nodes.keySet())
 		{
-			// structure exists use the current innovation num
-			
-		}
-		
-		/*
-		for(int i = 0; i < hidden_count; i++)
-		{
-			int hid_idx = this.hidden_nodes.get(i);
+			NodeGene hid_idx = pop_nodes.get(i);
 			NodeGene pop_node = pop_nodes.get(hid_idx).get(this.id);
 			int num_conns = pop_node.connections.size();
 			int has_to = -1;
@@ -359,7 +352,7 @@ public class Genome {
 				}
 			}
 		}
-		*/
+		
 		NodeGene new_node = new NodeGene(new_id, activation);
 		
 		this.gene_ids.add(new_id);
