@@ -8,8 +8,8 @@ import io.netty.util.internal.ThreadLocalRandom;
 public class ConnectionGene implements IConnection {
 
 	int inno_id;
-	NodeGene from_node;
-	NodeGene to_node;
+	int from_node_id;
+	int to_node_id;
 	int activation_level = 0;
 	HashMap<String, Double> atts = new HashMap<String, Double>();
 	double min = -3.0;
