@@ -314,42 +314,55 @@ public class Genome {
 		
 		for(Integer i : pop_nodes.keySet())
 		{
-			NodeGene hid_idx = pop_nodes.get(i);
-			NodeGene pop_node = pop_nodes.get(hid_idx).get(this.id);
-			int num_conns = pop_node.connections.size();
-			int has_to = -1;
-			int has_from = -1;
-			for (int ix = 0; ix < num_conns; ix++)
+			NodeGene pop_node = pop_nodes.get(i).get(this.id);
+			//NodeGene pop_node = pop_nodes.get(hid_idx).get(this.id);
+			if(!pop_node.is_input && !pop_node.is_input)
 			{
-				ConnectionGene this_conn = pop_node.connections.get(ix);
-				if (this_conn.from_node.inno_id == connection_to_split.from_node.inno_id)
+				int num_conns = pop_node.connections.size();
+				int has_to = -1;
+				int has_from = -1;
+				for (int ix = 0; ix < num_conns; ix++)
 				{
-					has_from = this_conn.inno_id;
-				}
-				if (this_conn.to_node.inno_id == connection_to_split.to_node.inno_id)
-				{
-					has_to = this_conn.inno_id;
-				}
-				if (has_to > -1 && has_from > -1)
-				{
-					gene_id = pop_node.inno_id;
-					NodeGene new_node = new NodeGene(gene_id, activation);
-					this.gene_ids.add(gene_id);
-					
-					ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, has_from);
-					
-					this.conn_genes.put(has_from, new_conn_a);
-					
-					this.gene_ids.add(has_from);
-					
-					ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.to_node, has_to);
-					
-					this.conn_genes.put(has_to, new_conn_b);
-					
-					this.gene_ids.add(has_to);
-					
-					return new_id;
-				}
+					ConnectionGene this_conn= pop_node.connections.get(ix);
+					if (this_conn.from_node == connection_to_split.from_node)
+					{
+						has_from = this_conn.inno_id;
+						NodeGene new_node = pop_nodes.get(new_id).get(pop_node.genome_id);
+						int new_loop_count = new_node.connections.size();
+						for(int y = 0; y < new_loop_count; y++)
+						{
+							if(new_node.connections.get(ix).to_node == connection_to_split.to_node)
+							{
+								// mutation already exist and we will use the current inno id from the 
+								// master list of genomes
+							}
+						}
+					}
+					if (this_conn.from_node == connection_to_split.from_node && this_conn.to_node == new_id)
+					{
+						has_to = this_conn.inno_id;
+					}
+					if (has_to > -1 && has_from > -1)
+					{
+						gene_id = pop_node.inno_id;
+						NodeGene new_node = new NodeGene(gene_id, activation);
+						this.gene_ids.add(gene_id);
+						
+						ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, has_from);
+						
+						this.conn_genes.put(has_from, new_conn_a);
+						
+						this.gene_ids.add(has_from);
+						
+						ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.to_node, has_to);
+						
+						this.conn_genes.put(has_to, new_conn_b);
+						
+						this.gene_ids.add(has_to);
+						
+						return new_id;
+					}
+				}	
 			}
 		}
 		
