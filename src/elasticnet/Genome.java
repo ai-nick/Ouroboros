@@ -331,12 +331,14 @@ public class Genome {
 						int new_loop_count = new_node.connections.size();
 						for(int y = 0; y < new_loop_count; y++)
 						{
-							if(new_node.connections.get(ix).to_node == connection_to_split.to_node)
+							if(new_node.connections.get(y).to_node == connection_to_split.to_node)
 							{
 								// mutation already exist and we will use the current inno id from the 
 								// master list of genomes
-								
-								
+								NodeGene node_to_add = new NodeGene(new_node.inno_id, this.id);
+								pop_nodes.get(new_node.inno_id).put(this.id, node_to_add);
+								ConnectionGene conn_to_add = new ConnectionGene(node_to_add.inno_id, connection_to_split.to_node, new_node.connections.get(y).inno_id, this.id);
+								pop_conns.get(new_node.connections.get(y).inno_id).put(this.id, conn_to_add);
 							}
 						}
 					}

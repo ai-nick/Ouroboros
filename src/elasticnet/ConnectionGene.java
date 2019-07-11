@@ -11,14 +11,16 @@ public class ConnectionGene implements IConnection {
 	int from_node;
 	int to_node;
 	int activation_level = 0;
+	int genome_id;
 	HashMap<String, Double> atts = new HashMap<String, Double>();
 	double min = -3.0;
 	double max = 3.0;
 	
-	public ConnectionGene(int f, int t, int inno) {
+	public ConnectionGene(int f, int t, int inno, int genome_id) {
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;
+		this.genome_id = genome_id;
 		this.set_weight(ThreadLocalRandom.current().nextDouble(min, max));
 	}
 	
