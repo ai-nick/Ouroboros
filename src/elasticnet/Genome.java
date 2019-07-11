@@ -346,15 +346,11 @@ public class Genome {
 		
 		NodeGene new_node = new NodeGene(new_id, activation);
 		
-		this.gene_ids.add(new_id);
-		
 		new_id++;
 		
 		ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, new_id);
 		
 		this.conn_genes.put(new_id, new_conn_a);
-		
-		this.gene_ids.add(new_id);
 		
 		pop_conns.add(new_conn_a);
 		
@@ -364,13 +360,9 @@ public class Genome {
 		
 		this.conn_genes.put(new_id, new_conn_b);
 		
-		this.gene_ids.add(new_id);
-		
 		pop_conns.add(new_conn_b);
 		
 		this.hidden_nodes.add(new_node);
-		
-		this.gene_ids.add(new_id);
 		
 		return new_id;
 	}
