@@ -335,32 +335,10 @@ public class Genome {
 							{
 								// mutation already exist and we will use the current inno id from the 
 								// master list of genomes
+								
+								
 							}
 						}
-					}
-					if (this_conn.from_node == connection_to_split.from_node && this_conn.to_node == new_id)
-					{
-						has_to = this_conn.inno_id;
-					}
-					if (has_to > -1 && has_from > -1)
-					{
-						gene_id = pop_node.inno_id;
-						NodeGene new_node = new NodeGene(gene_id, activation);
-						this.gene_ids.add(gene_id);
-						
-						ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, has_from);
-						
-						this.conn_genes.put(has_from, new_conn_a);
-						
-						this.gene_ids.add(has_from);
-						
-						ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.to_node, has_to);
-						
-						this.conn_genes.put(has_to, new_conn_b);
-						
-						this.gene_ids.add(has_to);
-						
-						return new_id;
 					}
 				}	
 			}
