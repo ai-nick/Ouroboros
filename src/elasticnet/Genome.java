@@ -339,32 +339,52 @@ public class Genome {
 								pop_nodes.get(new_node.inno_id).put(this.id, node_to_add);
 								ConnectionGene conn_to_add = new ConnectionGene(node_to_add.inno_id, connection_to_split.to_node, new_node.connections.get(y).inno_id, this.id);
 								pop_conns.get(new_node.connections.get(y).inno_id).put(this.id, conn_to_add);
+								return new_id;
 							}
 						}
 					}
 				}	
 			}
 		}
-		
+		// if we make it here this structure hasnt occured yet
+		// so we will add the node and its two new connecitons
 		NodeGene new_node = new NodeGene(new_id, activation);
 		
-		new_id++;
+		HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
 		
-		ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node, new_id);
+		new_node_dict.put(this.id, new_node);
 		
-		this.conn_genes.put(new_id, new_conn_a);
-		
-		pop_conns.add(new_conn_a);
+		pop_nodes.put(new_id, new_node_dict);
 		
 		new_id++;
 		
-		ConnectionGene new_conn_b = new ConnectionGene(new_node, connection_to_split.to_node, new_id);
+		ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
 		
-		this.conn_genes.put(new_id, new_conn_b);
+		new_node.connections.add(new_conn_a);
 		
-		pop_conns.add(new_conn_b);
+		this.conn_genes.add(new_id);
 		
-		this.hidden_nodes.add(new_node);
+		HashMap<Integer, ConnectionGene> new_conn_dict_a = new HashMap<Integer, ConnectionGene>();
+		
+		new_conn_dict_a.put(this.id, new_conn_a);
+		
+		pop_conns.put(new_id, new_conn_dict_a);
+		
+		new_id++;
+		
+		ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, this.id);
+		
+		new_node.connections.add(new_conn_b);
+		
+		HashMap<Integer, ConnectionGene> new_conn_dict_b = new HashMap<Integer, ConnectionGene>();
+		
+		new_conn_dict_b.put(this.id, new_conn_b);
+		
+		pop_conns.put(new_id, new_conn_dict_b);
+		
+		this.hidden_nodes.add(new_node.inno_id);
+		
+		new_id++;
 		
 		return new_id;
 	}
