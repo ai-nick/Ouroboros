@@ -389,7 +389,7 @@ public class Genome {
 		return new_id;
 	}
 	
-	
+	// TODO remove genes from pop's nested hashmaps
 	private void mutate_delete_node(HashMap<Integer,HashMap<Integer, ConnectionGene>> pop_conns, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		int num_nodes = this.hidden_nodes.size();
@@ -416,7 +416,7 @@ public class Genome {
 		
 		return;
 	}
-	
+	//TODO pass in pops nested conn dictionary and remove the conns entry
 	private void mutate_delete_conn()
 	{
 		Random dice = new Random();
