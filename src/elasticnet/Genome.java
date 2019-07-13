@@ -425,7 +425,7 @@ public class Genome {
 		return;
 	}
 	//TODO pass in pops nested conn dictionary and remove the conns entry
-	private void mutate_delete_conn()
+	private void mutate_delete_conn(HashMap<Integer,HashMap<Integer, ConnectionGene>> pop_conns, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		Random dice = new Random();
 		
@@ -436,7 +436,24 @@ public class Genome {
 		
 		int delete_key = dice.nextInt(this.conn_genes.size());
 		
-		this.conn_genes.remove(delete_key);
+		int delete_id = this.conn_genes.get(delete_key);
+		
+		ConnectionGene delete_conn = pop_conns.get(delete_id).get(this.id);
+		
+		ArrayList<Integer> all_nodes = this.get_all_nodes();
+		
+		int count = all_nodes.size();
+		
+		for(int ix = 0; ix < count; ix++)
+		{
+			NodeGene current = pop_nodes.get(all_nodes.get(ix)).get(this.id);
+			
+			current.connections.remove(delete_conn);
+		}
+		
+		this.conn_genes.remove(this.conn_genes.indexOf(delete_key));
+		
+		pop_conns.get(delete_id).remove(this.id);
 	}
 	
 	private int connect_full_initial(int new_id, 
