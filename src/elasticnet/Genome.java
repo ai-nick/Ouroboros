@@ -403,15 +403,20 @@ public class Genome {
 		
 		int node_idx = dice.nextInt(num_nodes);
 		
-		NodeGene delete_node = pop_nodes.get(node_idx).get(this.id);
+		int delete_id = this.hidden_nodes.get(node_idx);
+		
+		NodeGene delete_node = pop_nodes.get(delete_id).get(this.id);
 		
 		int conn_counter = delete_node.connections.size();
 		
 		for (int ix = 0; ix < conn_counter; ix++)
 		{
-			this.conn_genes.remove(delete_node.connections.get(ix).get_id());
+			int conn_delete_id = this.conn_genes.get(ix);
+			
+			pop_conns.get(conn_delete_id).remove(this.id);
 		}
 		
+		pop_nodes.get(delete_id).remove(this.id);
 		this.hidden_nodes.remove(node_idx);
 		
 		return;
