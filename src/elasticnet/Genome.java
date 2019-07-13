@@ -411,12 +411,15 @@ public class Genome {
 		
 		for (int ix = 0; ix < conn_counter; ix++)
 		{
-			int conn_delete_id = this.conn_genes.get(ix);
+			ConnectionGene conn_delete = delete_node.connections.get(ix);
 			
-			pop_conns.get(conn_delete_id).remove(this.id);
+			pop_conns.get(conn_delete.inno_id).remove(this.id);
+			
+			this.conn_genes.remove(this.conn_genes.indexOf(conn_delete.inno_id));
 		}
 		
 		pop_nodes.get(delete_id).remove(this.id);
+		
 		this.hidden_nodes.remove(node_idx);
 		
 		return;
