@@ -274,7 +274,7 @@ public class Genome {
 				}	
 			}
 		}
-		ConnectionGene new_gene = new ConnectionGene(from_node, to_node, conn_id);
+		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, conn_id, this.id);
 		
 		if (new_structure == true)
 		{
