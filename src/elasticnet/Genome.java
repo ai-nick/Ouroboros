@@ -93,7 +93,7 @@ public class Genome {
 		}
 		else 
 		{
-			inno_id = this.connect_full_initial(gene_index, conn_genes);
+			inno_id = this.connect_full_initial(gene_index, conn_gene_list, node_gene_list);
 		}
 		inno_id = this.mutate_genome(inno_id, config, node_gene_list, conn_gene_list);
 		this.set_max_and_min();
