@@ -28,7 +28,7 @@ public class NodeGene implements INode {
 		this.inno_id = inno_id;
 	}
 	
-	public NodeGene(int inno_id, int pop_id, String activation)
+	public NodeGene(int inno_id, int g_id, String activation)
 	{
 		this.genome_id = g_id;
 		this.inno_id = inno_id;

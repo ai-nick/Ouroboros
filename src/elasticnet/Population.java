@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Population {
-	
-	public HashMap<Integer, Genome> genomes = new HashMap<Integer, Genome>();
 	int best_genome_id;
 	int num_genomes;
 	int hash_id;
@@ -28,8 +26,9 @@ public class Population {
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	int pop_size = 0;
-	HashMap<Integer, HashMap<Integer,NodeGene>> node_genes = new HashMap<Integer, HashMap<Integer, NodeGene>>();
-	HashMap<Integer, HashMap<Integer,ConnectionGene>> connection_genes = new HashMap<Integer, HashMap<Integer,ConnectionGene>>();
+	public HashMap<Integer, Genome> genomes = new HashMap<Integer, Genome>();
+	public HashMap<Integer, HashMap<Integer,NodeGene>> node_genes = new HashMap<Integer, HashMap<Integer, NodeGene>>();
+	public HashMap<Integer, HashMap<Integer,ConnectionGene>> connection_genes = new HashMap<Integer, HashMap<Integer,ConnectionGene>>();
 	
 	public Population(int gen,  NeatConfig config_in, int pop_size) 
 	{

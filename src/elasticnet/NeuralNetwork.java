@@ -55,6 +55,14 @@ public class NeuralNetwork implements INeuralNet {
 		this.nodes = net_nodes;
 	}
 	
+	public NeuralNetwork(Genome genome_in, 
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> conn_genes, 
+			HashMap<Integer, HashMap<Integer, NodeGene>> node_genes
+			)
+	{
+		
+	}
+	
 	@Override
 	public void set_input(double[] input)
 	{

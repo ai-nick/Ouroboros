@@ -46,19 +46,19 @@ public class ConnectionGene implements IConnection {
 	public double get_weight() {
 		return this.atts.get("weight");
 	}
-	public NodeGene get_from() {
+	public int get_from() {
 		return this.from_node;
 	}
 	
-	public NodeGene get_to() {
+	public int get_to() {
 		return this.to_node;
 	}
 	
-	public void set_from(NodeGene f) {
+	public void set_from(int f) {
 		this.from_node = f;
 	}
 	
-	public void set_to(NodeGene t) {
+	public void set_to(int t) {
 		this.to_node = t;
 	}
 	
@@ -66,7 +66,7 @@ public class ConnectionGene implements IConnection {
 		return this.inno_id;
 	}
 	
-	public NodeGene get_next_node()
+	public int get_next_node()
 	{
 		return to_node;
 	}

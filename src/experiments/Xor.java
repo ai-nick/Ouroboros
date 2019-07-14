@@ -47,7 +47,7 @@ public class Xor {
 			{	
 				current_genome.fitness = 4.0;
 				
-				NeuralNetwork test_net = new NeuralNetwork(current_genome);
+				NeuralNetwork test_net = new NeuralNetwork(current_genome, test_pop.connection_genes, test_pop.node_genes);
 				
 				test_net.feed_forward = true;
 				
