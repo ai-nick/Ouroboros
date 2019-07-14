@@ -267,7 +267,7 @@ public class Genome {
 			if (p_conn.to_node != -1 && p_conn.from_node != -1)
 			{
 				
-				if ((p_conn.to_node.inno_id == to_node.inno_id) && (p_conn.from_node.inno_id == from_node.inno_id))
+				if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
 				{
 					conn_id = p_conn.inno_id;
 					new_structure = false;
