@@ -264,7 +264,7 @@ public class Genome {
 			int key = (int)pop_conns.keySet().toArray()[p];
 			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(key);
 			ConnectionGene p_conn = gene_list.get(gene_list.keySet().toArray()[0]);
-			if (p_conn.to_node != null && p_conn.from_node != null)
+			if (p_conn.to_node != -1 && p_conn.from_node != -1)
 			{
 				
 				if ((p_conn.to_node.inno_id == to_node.inno_id) && (p_conn.from_node.inno_id == from_node.inno_id))
@@ -470,7 +470,7 @@ public class Genome {
 				NodeGene from_node = node_conns.get(this.input_nodes.get(ix)).get(this.id);
 				NodeGene to_node = node_conns.get(this.output_nodes.get(ixx)).get(this.id);
 				
-				ConnectionGene new_gene = new ConnectionGene(from_node, to_node, new_id);
+				ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, new_id, this.id);
 				if(pop_conns.keySet().contains(new_id))
 				{
 					pop_conns.get(new_id).put(this.id, new_gene);	
