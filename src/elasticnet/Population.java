@@ -387,11 +387,25 @@ public class Population {
 		for (int ik = 0; ik < full_node_count; ik++)
 		{
 			int gA_id = gA_all_node_ids.get(ik);
-			
+			NodeGene gA_node = this.node_genes.get(gA_id).get(GenomeA.id);
 			if(!gB_all_node_ids.contains(ik))
 			{
 				// retrieve gene from master dictionary
-				offspring.set_node(gA);
+				if(gA_node.is_input == true)
+				{
+					offspring.input_nodes.add(gA_id);
+					this.node_genes.get(gA_id).put(offspring.id, gA_node);
+				}
+				if(gA_node.is_output == true)
+				{
+					offspring.output_nodes.add(gA_id);
+					this.node_genes.get(gA_id).put(offspring.id, gA_node);					
+				}
+				if(gA_node.is_input == false && gA_node.is_output == false)
+				{
+					offspring.hidden_nodes.add(gA_id);
+					this.node_genes.get(gA_id).put(offspring.id, gA_node);
+				}
 			}
 			else
 			{
