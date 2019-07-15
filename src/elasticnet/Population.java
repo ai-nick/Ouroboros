@@ -355,20 +355,27 @@ public class Population {
 			use_a = false;
 		}
 		*/
-		for (Integer k : GenomeA.conn_genes.keySet())
+		int gA_conn_counter = GenomeA.conn_genes.size();
+		
+		for (int k = 0; k < gA_conn_counter; k++)
 		{
 			int gA_id = GenomeA.conn_genes.get(k);
 			
 			ConnectionGene gA = this.connection_genes.get(k).get(GenomeA.id);
 			
-			if(!GenomeB.conn_genes.keySet().contains(gA_id))
+			if(!GenomeB.conn_genes.contains(gA_id))
 			{
 				offspring.conn_genes.add(gA_id);
 			}
 			else
 			{
-				ConnectionGene gB = GenomeB.conn_genes.get(k);
-				offspring.conn_genes.put(k, _cross_over_conns(gA, gB));
+				int gB_id = GenomeB.conn_genes.get(GenomeB.conn_genes.indexOf(gA_id));
+				
+				ConnectionGene gB = this.connection_genes.get(gB_id).get(GenomeB.id);
+				
+				offspring.conn_genes.add(gB_id);
+				
+				this.connection_genes.get(gB_id).put(offspring.id, _cross_over_conns(gA, gB));
 			}
 		}
 		
