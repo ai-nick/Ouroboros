@@ -224,7 +224,7 @@ public class Population {
 		{
 			for(int ix = 0; ix < num_species; ix++)
 			{
-				Species current_species = this.pop_species.get(ix)
+				Species current_species = this.pop_species.get(ix);
 				if(current_species.member_ids.size() <= elite_iterator+2) {
 					int spec_size = this.pop_species.get(ix).member_ids.size();
 					

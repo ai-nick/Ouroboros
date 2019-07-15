@@ -49,8 +49,7 @@ public class Genome {
 		output_nodes = new ArrayList<Integer>(cloner.output_nodes);
 	}
 	
-	public int create_from_scratch(int inno_id, 
-			NeatConfig config, 
+	public int create_from_scratch(NeatConfig config, 
 			int populationHash,
 			HashMap<Integer, HashMap<Integer,NodeGene>> node_gene_list,
 			HashMap<Integer, HashMap<Integer,ConnectionGene>> conn_gene_list
@@ -60,7 +59,8 @@ public class Genome {
 		int num_hidden = config.num_hidden;
 		int num_out = config.num_output;
 		this.population_hash = populationHash;
-		int gene_index = 0;
+		//int gene_index = 0;
+		int inno_id = 0;
 		for (int ix = 0; ix < num_in; ix++)
 		{
 			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
@@ -68,18 +68,17 @@ public class Genome {
 			new_node.is_output = false;
 			inno_id++;
 			this.input_nodes.add(new_node.inno_id);
-			gene_index = ix;
 		}
-		gene_index++;
+		//gene_index++;
 		for (int ix = 0; ix < num_out; ix++)
 		{
-			NodeGene new_node = new NodeGene(gene_index+ix, this.population_hash, config.output_activation);
+			NodeGene new_node = new NodeGene(inno_id, this.population_hash, config.output_activation);
 			new_node.is_input = false;
 			new_node.is_output = true;
 			inno_id++;
 			this.output_nodes.add(new_node.inno_id);
 		}
-		gene_index++;
+		//gene_index++;
 		if (num_hidden > 0)
 		{
 			for (int ix = 0; ix < num_hidden; ix++)
@@ -93,7 +92,7 @@ public class Genome {
 		}
 		else 
 		{
-			inno_id = this.connect_full_initial(gene_index, conn_gene_list, node_gene_list);
+			inno_id = this.connect_full_initial(inno_id, conn_gene_list, node_gene_list);
 		}
 		inno_id = this.mutate_genome(inno_id, config, node_gene_list, conn_gene_list);
 		this.set_max_and_min();
