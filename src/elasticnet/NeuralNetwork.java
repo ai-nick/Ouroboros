@@ -125,7 +125,9 @@ public class NeuralNetwork implements INeuralNet {
 				
 				for(int x = 0; x < num_connections; x++)
 				{
-					NodeGene next_node = current.get_connections().get(x).get_next_node();
+					int next_node_id = current.get_connections().get(x).get_next_node();
+					
+					NodeGene next_node = this.nodes.get(next_node_id);
 					
 					next_node.add_to_current_value(current.get_current_val() * current.get_connections().get(x).get_weight());
 					
