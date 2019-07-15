@@ -55,12 +55,42 @@ public class NeuralNetwork implements INeuralNet {
 		this.nodes = net_nodes;
 	}
 	
-	public NeuralNetwork(Genome genome_in, 
-			HashMap<Integer, HashMap<Integer, ConnectionGene>> conn_genes, 
+	public NeuralNetwork(Genome genome_in,
 			HashMap<Integer, HashMap<Integer, NodeGene>> node_genes
 			)
 	{
+		this.fully_activated = false;
 		
+		this.input_ids = genome_in.input_nodes;
+		
+		int in_count = this.input_ids.size();
+		
+		for(int i = 0; i < in_count; i++)
+		{
+			int key = this.input_ids.get(i);
+			
+			this.nodes.put(key, node_genes.get(key).get(genome_in.id));
+		}
+		
+		this.output_ids = genome_in.output_nodes;
+		
+		this.outs_count = this.output_ids.size();
+		
+		for(int i = 0; i < this.outs_count; i++)
+		{
+			int out_key = genome_in.output_nodes.get(i);
+			
+			this.nodes.put(out_key, node_genes.get(out_key).get(genome_in.id));
+		}
+		
+		int hidden_count = genome_in.output_nodes.size();
+		
+		for(int i = 0; i < hidden_count; i++)
+		{
+			int hidden_key = genome_in.hidden_nodes.get(i);
+			
+			this.nodes.put(hidden_key, node_genes.get(hidden_key).get(genome_in.id));
+		}
 	}
 	
 	@Override
