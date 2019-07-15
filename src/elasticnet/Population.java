@@ -380,11 +380,17 @@ public class Population {
 		}
 		
 		// now the connection genes have been handled, on to nodes
-		for (Integer ik: GenomeA.get_all_nodes().keySet())
+		ArrayList<Integer> gA_all_node_ids = GenomeA.get_all_nodes();
+		ArrayList<Integer> gB_all_node_ids = GenomeB.get_all_nodes();
+		int full_node_count = GenomeA.get_all_nodes().size();
+		
+		for (int ik = 0; ik < full_node_count; ik++)
 		{
-			NodeGene gA = GenomeA.get_all_nodes().get(ik);
-			if(!GenomeB.get_all_nodes().containsKey(ik))
+			int gA_id = gA_all_node_ids.get(ik);
+			
+			if(!gB_all_node_ids.contains(ik))
 			{
+				// retrieve gene from master dictionary
 				offspring.set_node(gA);
 			}
 			else
