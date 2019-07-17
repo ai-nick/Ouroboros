@@ -450,7 +450,7 @@ public class Population {
 	
 	private ConnectionGene _cross_over_conns(ConnectionGene a, ConnectionGene b)
 	{
-		ConnectionGene new_gene = new ConnectionGene(a.inno_id);
+		ConnectionGene new_gene = new ConnectionGene(a.from_node, a.to_node, a.inno_id, a.genome_id);
 		
 		new_gene.activation_level = a.activation_level;
 		

@@ -31,10 +31,6 @@ public class ConnectionGene implements IConnection {
 		this.set_weight(weight);
 	}
 	
-	public ConnectionGene(int inno_id) {
-		this.inno_id = inno_id;
-	}
-	
 	public void set_weight(double w) {
 		this.atts.put("weight", w);
 	}

@@ -497,6 +497,8 @@ public class Genome {
 				NodeGene to_node = node_conns.get(this.output_nodes.get(ixx)).get(this.id);
 				
 				ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, new_id, this.id);
+				this.conn_genes.add(new_id);
+				from_node.connections.add(new_gene);
 				if(pop_conns.keySet().contains(new_id))
 				{
 					pop_conns.get(new_id).put(this.id, new_gene);	
@@ -506,8 +508,6 @@ public class Genome {
 					HashMap<Integer, ConnectionGene> new_dict = new HashMap<Integer, ConnectionGene>();
 					pop_conns.put(new_id, new_dict);
 				}
-				this.conn_genes.add(new_id);
-				from_node.connections.add(new_gene);
 				new_id++;
 			}
 		}
