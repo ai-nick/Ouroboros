@@ -336,13 +336,13 @@ public class Genome {
 		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
-		int hidden_count = pop_nodes.size();
+		int hidden_count = this.hidden_nodes.size();
 		
-		for(Integer i : pop_nodes.keySet())
+		for(int i = 0; i < hidden_count; i++)
 		{
-			NodeGene pop_node = pop_nodes.get(i).get(this.id);
+			NodeGene pop_node = pop_nodes.get(this.hidden_nodes.get(i)).get(this.id);
 			//NodeGene pop_node = pop_nodes.get(hid_idx).get(this.id);
-			if(!pop_node.is_input && !pop_node.is_input)
+			if(!pop_node.is_input && !pop_node.is_output)
 			{
 				int num_conns = pop_node.connections.size();
 				int has_to = -1;
