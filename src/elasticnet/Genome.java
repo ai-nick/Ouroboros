@@ -477,7 +477,7 @@ public class Genome {
 			current.connections.remove(delete_conn);
 		}
 		
-		this.conn_genes.remove(this.conn_genes.indexOf(delete_key));
+		this.conn_genes.remove(this.conn_genes.indexOf(delete_id));
 		
 		pop_conns.get(delete_id).remove(this.id);
 	}
