@@ -86,6 +86,15 @@ public class Genome {
 			new_node.is_output = true;
 			inno_id++;
 			this.output_nodes.add(new_node.inno_id);
+			if(node_gene_list.containsKey(inno_id)) {
+				node_gene_list.get(new_node.inno_id).put(this.id, new_node);
+			}
+			else
+			{
+				HashMap<Integer, NodeGene> initial_map = new HashMap<Integer, NodeGene>();
+				initial_map.put(this.id, new_node);
+				node_gene_list.put(new_node.inno_id, initial_map);
+			}
 		}
 		//gene_index++;
 		if (num_hidden > 0)
@@ -97,6 +106,15 @@ public class Genome {
 				new_node.is_output = false;
 				inno_id++;
 				this.hidden_nodes.add(new_node.inno_id);
+				if(node_gene_list.containsKey(inno_id)) {
+					node_gene_list.get(new_node.inno_id).put(this.id, new_node);
+				}
+				else
+				{
+					HashMap<Integer, NodeGene> initial_map = new HashMap<Integer, NodeGene>();
+					initial_map.put(this.id, new_node);
+					node_gene_list.put(new_node.inno_id, initial_map);
+				}
 			}			
 		}
 		else 
