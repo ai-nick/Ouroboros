@@ -284,33 +284,33 @@ public class Genome {
 		{
 			return new_id;
 		}
-		if(pop_conns.keySet().contains(new_id))
+		for(Integer p : pop_conns.keySet())
 		{
-			for(Integer p : pop_conns.keySet())
+			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
+			ConnectionGene p_conn = gene_list.get(gene_list.keySet().toArray()[0]);
+			if (p_conn.to_node != -1 && p_conn.from_node != -1)
 			{
-				HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
-				ConnectionGene p_conn = gene_list.get(gene_list.keySet().toArray()[0]);
-				if (p_conn.to_node != -1 && p_conn.from_node != -1)
+				
+				if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
 				{
-					
-					if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
-					{
-						conn_id = p_conn.inno_id;
-						new_structure = false;
-					}
-				}
+					conn_id = p_conn.inno_id;
+					new_structure = false;
+				}	
 			}
 		}
-		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, conn_id, this.id);
 		
+		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, conn_id, this.id);
 		if (new_structure == true)
 		{
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
 			pop_conns.put(conn_id, new_map);
+			new_id++;
 		}
-		pop_conns.get(conn_id).put(this.id, new_gene);
-		
+		else 
+		{
+			pop_conns.get(conn_id).put(this.id, new_gene);
+		}
 		this.conn_genes.add(conn_id);
 		
 		return new_id;
