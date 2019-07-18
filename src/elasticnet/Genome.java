@@ -284,20 +284,21 @@ public class Genome {
 		{
 			return new_id;
 		}
-		int pop_conn_count = pop_conns.size();
-		for(int p = 0; p < pop_conn_count; p++)
+		if(pop_conns.keySet().contains(new_id))
 		{
-			int key = (int)pop_conns.keySet().toArray()[p];
-			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(key);
-			ConnectionGene p_conn = gene_list.get(gene_list.keySet().toArray()[0]);
-			if (p_conn.to_node != -1 && p_conn.from_node != -1)
+			for(Integer p : pop_conns.keySet())
 			{
-				
-				if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
+				HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
+				ConnectionGene p_conn = gene_list.get(gene_list.keySet().toArray()[0]);
+				if (p_conn.to_node != -1 && p_conn.from_node != -1)
 				{
-					conn_id = p_conn.inno_id;
-					new_structure = false;
-				}	
+					
+					if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
+					{
+						conn_id = p_conn.inno_id;
+						new_structure = false;
+					}
+				}
 			}
 		}
 		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, conn_id, this.id);

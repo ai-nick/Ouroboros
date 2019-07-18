@@ -129,7 +129,7 @@ public class NeuralNetwork implements INeuralNet {
 					
 					NodeGene next_node = this.nodes.get(next_node_id);
 					
-					next_node.add_to_current_value(current.get_current_val() * this.nodes.get(current.get_connections().get(x)).get_weight());
+					next_node.add_to_current_value(current.get_current_val() * current.get_connections().get(x).get_weight());
 					
 					next_node.current_val = Activator.activate(next_node.activation, next_node.current_val);
 					
