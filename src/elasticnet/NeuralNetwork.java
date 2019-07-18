@@ -83,7 +83,7 @@ public class NeuralNetwork implements INeuralNet {
 			this.nodes.put(out_key, node_genes.get(out_key).get(genome_in.id));
 		}
 		
-		int hidden_count = genome_in.output_nodes.size();
+		int hidden_count = genome_in.hidden_nodes.size();
 		
 		for(int i = 0; i < hidden_count; i++)
 		{
