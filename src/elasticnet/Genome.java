@@ -312,7 +312,7 @@ public class Genome {
 			pop_conns.get(conn_id).put(this.id, new_gene);
 		}
 		this.conn_genes.add(conn_id);
-		
+		from_node.connections.add(new_gene);
 		return new_id;
 	}
 	
