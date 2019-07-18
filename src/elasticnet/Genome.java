@@ -350,7 +350,7 @@ public class Genome {
 				int has_from = -1;
 				for (int ix = 0; ix < num_conns; ix++)
 				{
-					ConnectionGene this_conn= pop_node.connections.get(ix);
+					ConnectionGene this_conn = pop_node.connections.get(ix);
 					if (this_conn.from_node == connection_to_split.from_node)
 					{
 						has_from = this_conn.inno_id;
@@ -366,6 +366,8 @@ public class Genome {
 								pop_nodes.get(new_node.inno_id).put(this.id, node_to_add);
 								ConnectionGene conn_to_add = new ConnectionGene(node_to_add.inno_id, connection_to_split.to_node, new_node.connections.get(y).inno_id, this.id);
 								pop_conns.get(new_node.connections.get(y).inno_id).put(this.id, conn_to_add);
+								this.hidden_nodes.add(node_to_add.inno_id);
+								this.conn_genes.add(conn_to_add.inno_id);
 								return new_id;
 							}
 						}
