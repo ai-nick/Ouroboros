@@ -343,6 +343,12 @@ public class Genome {
 		
 		boolean struct_exists = false;
 		
+		// will store the existing connection inno ids if 
+		// this genetic structure has already been evolved
+		// by a different genome
+		int conn_a_id = -1;
+		int conn_b_id = -1;
+		
 		for(int c : pop_conns.keySet())
 		{
 			HashMap<Integer, ConnectionGene> the_map = pop_conns.get(c);
@@ -387,7 +393,7 @@ public class Genome {
 			
 			this.conn_genes.add(new_id);
 			
-			//pop_conns.get()
+			pop_conns.get()
 		}
 		else
 		{
