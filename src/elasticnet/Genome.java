@@ -346,7 +346,7 @@ public class Genome {
 		for(int c : pop_conns.keySet())
 		{
 			HashMap<Integer, ConnectionGene> the_map = pop_conns.get(c);
-			if(if the_map != null && the_map.keySet().iterator().hasNext())
+			if(the_map != null && the_map.keySet().iterator().hasNext())
 			{
 				ConnectionGene cg = the_map.get(the_map.keySet().iterator().next());
 				if (cg.from_node == connection_to_split.from_node)
@@ -376,7 +376,9 @@ public class Genome {
 		NodeGene new_node;
 		if(struct_exists == true)
 		{
-			new_node = new NodeGene(gene_id, activation);	
+			new_node = new NodeGene(gene_id, activation);
+			pop_nodes.get(gene_id).put(this.id, new_node);
+			this.hidden_nodes.add(gene_id);
 		}
 		else
 		{
