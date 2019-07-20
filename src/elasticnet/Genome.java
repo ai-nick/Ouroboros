@@ -345,10 +345,10 @@ public class Genome {
 		
 		for(int c : pop_conns.keySet())
 		{
-			ConnectionGene cg = pop_conns.get(c).get(pop_conns.get(c).keySet().iterator());
+			ConnectionGene cg = pop_conns.get(c).get(pop_conns.get(c).keySet().iterator().next());
 			if (cg.from_node == connection_to_split.from_node)
 			{
-				NodeGene ng = pop_nodes.get(cg.to_node).get(pop_nodes.get(cg.to_node).keySet().iterator());
+				NodeGene ng = pop_nodes.get(cg.to_node).get(pop_nodes.get(cg.to_node).keySet().iterator().next());
 				
 				int node_conn_count = ng.connections.size();
 				

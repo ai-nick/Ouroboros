@@ -52,7 +52,8 @@ public class Xor {
 				test_net.feed_forward = true;
 				
 				for(int z = 0; z < 4; z++)
-				{	
+				{
+					System.out.println(z);
 					test_net.set_input(inputs[z]);
 					
 					test_net.Activate();
