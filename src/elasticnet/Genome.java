@@ -377,6 +377,8 @@ public class Genome {
 		
 		if(struct_exists == true)
 		{
+			//TODO need to use same conn ids in this spot
+			//as the ones that are used in the existing structure
 			new_node = new NodeGene(gene_id, activation);
 			pop_nodes.get(gene_id).put(this.id, new_node);
 			this.hidden_nodes.add(gene_id);
@@ -385,7 +387,7 @@ public class Genome {
 			
 			this.conn_genes.add(new_id);
 			
-			pop_conns.get()
+			//pop_conns.get()
 		}
 		else
 		{
