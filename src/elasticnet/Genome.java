@@ -551,42 +551,4 @@ public class Genome {
 		String empty_json = gson.toJson(this);
 		return empty_json;
 	}
-	/*
-	 		for(int i = 0; i < hidden_count; i++)
-		{
-			NodeGene pop_node = pop_nodes.get(this.hidden_nodes.get(i)).get(this.id);
-			//NodeGene pop_node = pop_nodes.get(hid_idx).get(this.id);
-			if(!pop_node.is_input && !pop_node.is_output)
-			{
-				int num_conns = pop_node.connections.size();
-				int has_to = -1;
-				int has_from = -1;
-				for (int ix = 0; ix < num_conns; ix++)
-				{
-					ConnectionGene this_conn = pop_node.connections.get(ix);
-					if (this_conn.from_node == connection_to_split.from_node)
-					{
-						has_from = this_conn.inno_id;
-						NodeGene new_node = pop_nodes.get(new_id).get(pop_node.genome_id);
-						int new_loop_count = new_node.connections.size();
-						for(int y = 0; y < new_loop_count; y++)
-						{
-							if(new_node.connections.get(y).to_node == connection_to_split.to_node)
-							{
-								// mutation already exist and we will use the current inno id from the 
-								// master list of genomes
-								NodeGene node_to_add = new NodeGene(new_node.inno_id, this.id);
-								pop_nodes.get(new_node.inno_id).put(this.id, node_to_add);
-								ConnectionGene conn_to_add = new ConnectionGene(node_to_add.inno_id, connection_to_split.to_node, new_node.connections.get(y).inno_id, this.id);
-								pop_conns.get(new_node.connections.get(y).inno_id).put(this.id, conn_to_add);
-								this.hidden_nodes.add(node_to_add.inno_id);
-								this.conn_genes.add(conn_to_add.inno_id);
-								return new_id;
-							}
-						}
-					}
-				}	
-			}
-		}
-	 */
 }
