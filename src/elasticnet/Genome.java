@@ -388,14 +388,16 @@ public class Genome {
 			//TODO need to use same conn ids in this spot
 			//as the ones that are used in the existing structure
 			new_node = new NodeGene(gene_id, activation);
+			
 			pop_nodes.get(gene_id).put(this.id, new_node);
+			
 			this.hidden_nodes.add(gene_id);
 			
-			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
+			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, conn_a_id, this.id);
 			
 			this.conn_genes.add(new_id);
 			
-			pop_conns.get(conn_a_id);
+			pop_conns.get(conn_a_id).put(this.id, new_conn_a);
 		}
 		else
 		{
@@ -406,6 +408,8 @@ public class Genome {
 			new_node_dict.put(this.id, new_node);
 			
 			pop_nodes.put(new_id, new_node_dict);
+			
+			this.hidden_nodes.add(new_id);
 			
 			new_id++;
 		}
