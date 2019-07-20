@@ -341,14 +341,40 @@ public class Genome {
 		
 		int pop_conn_count = pop_conns.size();
 		
+		boolean struct_exists = false;
+		
 		for(int c : pop_conns.keySet())
 		{
-			
+			ConnectionGene cg = pop_conns.get(c).get(pop_conns.get(c).keySet().iterator());
+			if (cg.from_node == connection_to_split.from_node)
+			{
+				NodeGene ng = pop_nodes.get(cg.to_node).get(pop_nodes.get(cg.to_node).keySet().iterator());
+				
+				int node_conn_count = ng.connections.size();
+				
+				for(int i = 0; i < node_conn_count; i++)
+				{
+					if(ng.connections.get(i).to_node == connection_to_split.to_node)
+					{
+						struct_exists = true;
+						gene_id = ng.inno_id;
+					}
+				}
+			}
 		}
 
 		// if we make it here this structure hasnt occured yet
 		// so we will add the node and its two new connecitons
-		NodeGene new_node = new NodeGene(new_id, activation);
+		NodeGene new_node;
+		if(struct_exists == true)
+		{
+			new_node = new NodeGene(gene_id, activation);	
+		}
+		else
+		{
+			new_node = new NodeGene(gene_id, activation);
+			new_id++;
+		}
 		
 		HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
 		
