@@ -407,15 +407,15 @@ public class Genome {
 			
 			new_node_dict.put(this.id, new_node);
 			
-			pop_nodes.put(new_id, new_node_dict);
+			pop_nodes.put(gene_id, new_node_dict);
 			
-			this.hidden_nodes.add(new_id);
+			this.hidden_nodes.add(gene_id);
 			
 			new_id++;
 			
 			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
 			
-			new_node.connections.add(new_conn_a);
+			//new_node.connections.add(new_conn_a);
 			
 			this.conn_genes.add(new_id);
 			
@@ -436,8 +436,6 @@ public class Genome {
 			new_conn_dict_b.put(this.id, new_conn_b);
 			
 			pop_conns.put(new_id, new_conn_dict_b);
-			
-			this.hidden_nodes.add(new_node.inno_id);
 			
 			new_id++;
 		}
