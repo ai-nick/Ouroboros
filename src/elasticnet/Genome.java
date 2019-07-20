@@ -412,35 +412,35 @@ public class Genome {
 			this.hidden_nodes.add(new_id);
 			
 			new_id++;
+			
+			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
+			
+			new_node.connections.add(new_conn_a);
+			
+			this.conn_genes.add(new_id);
+			
+			HashMap<Integer, ConnectionGene> new_conn_dict_a = new HashMap<Integer, ConnectionGene>();
+			
+			new_conn_dict_a.put(this.id, new_conn_a);
+			
+			pop_conns.put(new_id, new_conn_dict_a);
+			
+			new_id++;
+			
+			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, this.id);
+			
+			new_node.connections.add(new_conn_b);
+			
+			HashMap<Integer, ConnectionGene> new_conn_dict_b = new HashMap<Integer, ConnectionGene>();
+			
+			new_conn_dict_b.put(this.id, new_conn_b);
+			
+			pop_conns.put(new_id, new_conn_dict_b);
+			
+			this.hidden_nodes.add(new_node.inno_id);
+			
+			new_id++;
 		}
-		
-		ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
-		
-		new_node.connections.add(new_conn_a);
-		
-		this.conn_genes.add(new_id);
-		
-		HashMap<Integer, ConnectionGene> new_conn_dict_a = new HashMap<Integer, ConnectionGene>();
-		
-		new_conn_dict_a.put(this.id, new_conn_a);
-		
-		pop_conns.put(new_id, new_conn_dict_a);
-		
-		new_id++;
-		
-		ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, this.id);
-		
-		new_node.connections.add(new_conn_b);
-		
-		HashMap<Integer, ConnectionGene> new_conn_dict_b = new HashMap<Integer, ConnectionGene>();
-		
-		new_conn_dict_b.put(this.id, new_conn_b);
-		
-		pop_conns.put(new_id, new_conn_dict_b);
-		
-		this.hidden_nodes.add(new_node.inno_id);
-		
-		new_id++;
 		
 		return new_id;
 	}
