@@ -380,7 +380,12 @@ public class Genome {
 			new_node = new NodeGene(gene_id, activation);
 			pop_nodes.get(gene_id).put(this.id, new_node);
 			this.hidden_nodes.add(gene_id);
-			new_id++;
+			
+			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
+			
+			this.conn_genes.add(new_id);
+			
+			pop_conns.get()
 		}
 		else
 		{
