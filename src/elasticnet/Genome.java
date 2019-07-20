@@ -370,6 +370,8 @@ public class Genome {
 							{
 								struct_exists = true;
 								gene_id = ng.inno_id;
+								conn_a_id = cg.inno_id;
+								conn_b_id = ng.connections.get(i).inno_id;
 							}
 						}	
 					}
@@ -393,7 +395,7 @@ public class Genome {
 			
 			this.conn_genes.add(new_id);
 			
-			pop_conns.get()
+			pop_conns.get(conn_a_id);
 		}
 		else
 		{
