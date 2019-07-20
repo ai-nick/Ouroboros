@@ -339,6 +339,12 @@ public class Genome {
 		
 		int hidden_count = this.hidden_nodes.size();
 		
+		int pop_conn_count = pop_conns.size();
+		
+		for(int c : pop_conns.keySet())
+		{
+			
+		}
 
 		// if we make it here this structure hasnt occured yet
 		// so we will add the node and its two new connecitons
