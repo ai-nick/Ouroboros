@@ -345,21 +345,29 @@ public class Genome {
 		
 		for(int c : pop_conns.keySet())
 		{
-			ConnectionGene cg = pop_conns.get(c).get(pop_conns.get(c).keySet().iterator().next());
-			if (cg.from_node == connection_to_split.from_node)
+			HashMap<Integer, ConnectionGene> the_map = pop_conns.get(c);
+			if(if the_map != null && the_map.keySet().iterator().hasNext())
 			{
-				NodeGene ng = pop_nodes.get(cg.to_node).get(pop_nodes.get(cg.to_node).keySet().iterator().next());
-				
-				int node_conn_count = ng.connections.size();
-				
-				for(int i = 0; i < node_conn_count; i++)
+				ConnectionGene cg = the_map.get(the_map.keySet().iterator().next());
+				if (cg.from_node == connection_to_split.from_node)
 				{
-					if(ng.connections.get(i).to_node == connection_to_split.to_node)
+					HashMap<Integer, NodeGene> node_map = pop_nodes.get(cg.to_node);
+					if(node_map != null && node_map.keySet().iterator().hasNext() == true)
 					{
-						struct_exists = true;
-						gene_id = ng.inno_id;
+						NodeGene ng = node_map.get(node_map.keySet().iterator().next());
+						
+						int node_conn_count = ng.connections.size();
+						
+						for(int i = 0; i < node_conn_count; i++)
+						{
+							if(ng.connections.get(i).to_node == connection_to_split.to_node)
+							{
+								struct_exists = true;
+								gene_id = ng.inno_id;
+							}
+						}	
 					}
-				}
+				}	
 			}
 		}
 
