@@ -374,25 +374,26 @@ public class Genome {
 		// if we make it here this structure hasnt occured yet
 		// so we will add the node and its two new connecitons
 		NodeGene new_node;
+		
 		if(struct_exists == true)
 		{
 			new_node = new NodeGene(gene_id, activation);
 			pop_nodes.get(gene_id).put(this.id, new_node);
 			this.hidden_nodes.add(gene_id);
+			new_id++;
 		}
 		else
 		{
 			new_node = new NodeGene(gene_id, activation);
+			
+			HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
+			
+			new_node_dict.put(this.id, new_node);
+			
+			pop_nodes.put(new_id, new_node_dict);
+			
 			new_id++;
 		}
-		
-		HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
-		
-		new_node_dict.put(this.id, new_node);
-		
-		pop_nodes.put(new_id, new_node_dict);
-		
-		new_id++;
 		
 		ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
 		
