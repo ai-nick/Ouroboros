@@ -224,7 +224,7 @@ public class Population {
 			saved_sum += keep_top;
 			if(keep_top > 0)
 			{
-				current.have_mercy(keep_top, this.genomes);
+				current.have_mercy(keep_top, this.genomes, this.connection_genes, this.node_genes);
 				//breed_all_remaining(current);				
 			}
 		}
