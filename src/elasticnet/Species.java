@@ -55,7 +55,10 @@ public class Species {
 		return this.member_ids.get(this.sorted_idx_array[0]);
 	}
 	
-	public void have_mercy(int num_elites, HashMap<Integer, Genome> genomes)
+	public void have_mercy(int num_elites, 
+			HashMap<Integer, Genome> genomes, 
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns, 
+			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		System.out.println(this.sorted_idx_array);
 		int num_members = this.sorted_idx_array.length;
