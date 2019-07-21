@@ -545,6 +545,11 @@ public class Genome {
 		return new_id;
 	}
 	
+	public void remove_genes_from_pop(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes, HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns)
+	{
+		
+	}
+	
 	public String as_json()
 	{
 		Gson gson = new Gson();
