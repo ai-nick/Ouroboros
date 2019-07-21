@@ -545,6 +545,9 @@ public class Genome {
 		return new_id;
 	}
 	
+	
+	// removes the genomes genes from the master map passed in from the population class
+	
 	public void remove_genes_from_pop(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes, HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns)
 	{
 		ArrayList<Integer> all_node_ids = this.get_all_nodes();
