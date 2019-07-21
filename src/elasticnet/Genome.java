@@ -287,14 +287,17 @@ public class Genome {
 		for(Integer p : pop_conns.keySet())
 		{
 			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
-			ConnectionGene p_conn = gene_list.get(gene_list.keySet().toArray()[0]);
-			if (p_conn.to_node != -1 && p_conn.from_node != -1)
+			if(gene_list.keySet().iterator().hasNext())
 			{
-				
-				if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
+				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());
+				if (p_conn.to_node != -1 && p_conn.from_node != -1)
 				{
-					conn_id = p_conn.inno_id;
-					new_structure = false;
+					
+					if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
+					{
+						conn_id = p_conn.inno_id;
+						new_structure = false;
+					}	
 				}	
 			}
 		}
@@ -515,21 +518,24 @@ public class Genome {
 	
 	private int connect_full_initial(int new_id, 
 			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns, 
-			HashMap<Integer, HashMap<Integer, NodeGene>> node_conns)
+			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		int num_in = this.input_nodes.size();
 		int num_out = this.output_nodes.size();
 		for(int ix = 0; ix < num_in; ix++)
 		{
+			NodeGene from_node = pop_nodes.get(this.input_nodes.get(ix)).get(this.id);
 			for (int ixx = 0; ixx < num_out; ixx++)
 			{
 				// do we really need to pass in the whole node, seems like just the ids out suffice
-				NodeGene from_node = node_conns.get(this.input_nodes.get(ix)).get(this.id);
-				NodeGene to_node = node_conns.get(this.output_nodes.get(ixx)).get(this.id);
+				NodeGene to_node = pop_nodes.get(this.output_nodes.get(ixx)).get(this.id);
 				
 				ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, new_id, this.id);
+				
 				this.conn_genes.add(new_id);
+				
 				from_node.connections.add(new_gene);
+				
 				if(pop_conns.keySet().contains(new_id))
 				{
 					pop_conns.get(new_id).put(this.id, new_gene);	
@@ -539,6 +545,7 @@ public class Genome {
 					HashMap<Integer, ConnectionGene> new_dict = new HashMap<Integer, ConnectionGene>();
 					pop_conns.put(new_id, new_dict);
 				}
+				
 				new_id++;
 			}
 		}
