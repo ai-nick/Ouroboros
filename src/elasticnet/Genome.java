@@ -547,7 +547,27 @@ public class Genome {
 	
 	public void remove_genes_from_pop(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes, HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns)
 	{
+		ArrayList<Integer> all_node_ids = this.get_all_nodes();
 		
+		int num_nodes = all_node_ids.size();
+		
+		for(int d = 0; d < num_nodes; d++)
+		{
+			int gene_key = all_node_ids.get(d);
+			
+			pop_nodes.get(gene_key).remove(this.id);
+		}
+		
+		int num_conns = this.conn_genes.size();
+		
+		for(int d = 0; d < num_conns; d++)
+		{
+			int gene_key = this.conn_genes.get(d);
+			
+			pop_conns.get(gene_key).remove(this.id);
+		}
+		
+		return;
 	}
 	
 	public String as_json()

@@ -69,6 +69,11 @@ public class Species {
 		for(int x = num_elites; x < num_members; x++)
 		{
 			int g_id = this.member_ids.get(this.sorted_idx_array[x]);
+			
+			Genome removing = genomes.get(g_id);
+			
+			removing.remove_genes_from_pop(pop_nodes, pop_conns);
+			
 			genomes.remove(g_id);
 		}
 		ArrayList<Integer> new_member_ids = new ArrayList<Integer>();
