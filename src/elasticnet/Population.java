@@ -12,6 +12,19 @@ import com.google.gson.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * 
+ * @author nick5
+ * The population class is the main 
+ * cohesive class for our neuroevolution 
+ * algorithm, it is responsible for generating
+ * new genomes, keeping hashmaps of genes and 
+ * their historical id's as well
+ * as storing the species and genomes 
+ * 
+ *
+ */
+
 public class Population {
 	int best_genome_id;
 	int num_genomes;
@@ -38,7 +51,7 @@ public class Population {
 		this.config = config_in;
 		this.inno_num = (config_in.num_input * config_in.num_output)+config_in.num_input+config_in.num_output;
 		this.current_gen = gen;
-		if (gen == 0) {
+		if (this.current_gen == 0) {
 			this.set_up_first_pop();
 		}
 	}

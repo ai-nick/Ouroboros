@@ -501,8 +501,11 @@ public class Genome {
 		for(int ix = 0; ix < count; ix++)
 		{
 			NodeGene current = pop_nodes.get(all_nodes.get(ix)).get(this.id);
-			
-			current.connections.remove(delete_conn);
+			int delete_index = current.connections.indexOf(delete_conn);
+			if (delete_index != -1)
+			{
+				current.connections.remove(delete_index);	
+			}
 		}
 		
 		this.conn_genes.remove(this.conn_genes.indexOf(delete_id));
