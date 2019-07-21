@@ -86,8 +86,6 @@ public class Population {
 			}
 			this.num_genomes = pop_size;
 			
-			this.next_genome_id = pop_size;
-			
 			this.next_genome_id = this.pop_size;
 		}
 	}
