@@ -401,6 +401,12 @@ public class Genome {
 			this.conn_genes.add(new_id);
 			
 			pop_conns.get(conn_a_id).put(this.id, new_conn_a);
+			
+			ConnectionGene new_conn_b = new ConnectionGene(connection_to_split.to_node, new_node.inno_id, conn_b_id, this.id);
+			
+			this.conn_genes.add(conn_b_id);
+			
+			pop_conns.get(conn_b_id).put(this.id, new_conn_b);
 		}
 		else
 		{
@@ -431,6 +437,8 @@ public class Genome {
 			new_id++;
 			
 			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, this.id);
+			
+			this.conn_genes.add(new_id);
 			
 			new_node.connections.add(new_conn_b);
 			
