@@ -314,7 +314,7 @@ public class Genome {
 		{
 			pop_conns.get(conn_id).put(this.id, new_gene);
 		}
-		this.conn_genes.add(conn_id);
+		this.conn_genes.add(new_gene.inno_id);
 		from_node.connections.add(new_gene);
 		return new_id;
 	}
@@ -551,6 +551,7 @@ public class Genome {
 				else
 				{
 					HashMap<Integer, ConnectionGene> new_dict = new HashMap<Integer, ConnectionGene>();
+					new_dict.put(this.id, new_gene);
 					pop_conns.put(new_id, new_dict);
 				}
 				
