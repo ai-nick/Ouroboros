@@ -69,7 +69,7 @@ public class NeuralNetwork implements INeuralNet {
 		
 		for(int i = 0; i < node_count; i++)
 		{
-			int key = this.input_ids.get(i);
+			int key = all_ids.get(i);
 			
 			this.nodes.put(key, node_genes.get(key).get(genome_in.id));
 		}
@@ -77,22 +77,6 @@ public class NeuralNetwork implements INeuralNet {
 		this.output_ids = genome_in.output_nodes;
 		
 		this.outs_count = this.output_ids.size();
-		
-		for(int i = 0; i < this.outs_count; i++)
-		{
-			int out_key = genome_in.output_nodes.get(i);
-			
-			this.nodes.put(out_key, node_genes.get(out_key).get(genome_in.id));
-		}
-		
-		int hidden_count = genome_in.hidden_nodes.size();
-		
-		for(int i = 0; i < hidden_count; i++)
-		{
-			int hidden_key = genome_in.hidden_nodes.get(i);
-			
-			this.nodes.put(hidden_key, node_genes.get(hidden_key).get(genome_in.id));
-		}
 	}
 	
 	@Override
