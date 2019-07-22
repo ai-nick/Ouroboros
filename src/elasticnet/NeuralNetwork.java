@@ -123,9 +123,10 @@ public class NeuralNetwork implements INeuralNet {
 			{
 				int num_connections = current.connections.size();
 				
+				// next node is set to null 
 				for(int x = 0; x < num_connections; x++)
 				{
-					int next_node_id = current.get_connections().get(x).get_next_node();
+					int next_node_id = current.get_connections().get(x).to_node;
 					
 					NodeGene next_node = this.nodes.get(next_node_id);
 					
