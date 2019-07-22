@@ -63,9 +63,11 @@ public class NeuralNetwork implements INeuralNet {
 		
 		this.input_ids = genome_in.input_nodes;
 		
-		int in_count = this.input_ids.size();
+		ArrayList<Integer> all_ids = genome_in.get_all_nodes();
 		
-		for(int i = 0; i < in_count; i++)
+		int node_count = all_ids.size();
+		
+		for(int i = 0; i < node_count; i++)
 		{
 			int key = this.input_ids.get(i);
 			
