@@ -37,6 +37,8 @@ public class Genome {
 	}
 	
 	// used when mutating this genome, leaves the original alone 
+	// pretty sure we need to pass in pops master map of genes here and
+	// add entries for this id
 	public Genome(Genome cloner, int id)
 	{
 		this.id = id;
@@ -68,7 +70,7 @@ public class Genome {
 			new_node.is_output = false;
 			inno_id++;
 			this.input_nodes.add(new_node.inno_id);
-			if(node_gene_list.containsKey(inno_id)) {
+			if(node_gene_list.containsKey(new_node.inno_id)) {
 				node_gene_list.get(new_node.inno_id).put(this.id, new_node);
 			}
 			else
@@ -86,7 +88,7 @@ public class Genome {
 			new_node.is_output = true;
 			inno_id++;
 			this.output_nodes.add(new_node.inno_id);
-			if(node_gene_list.containsKey(inno_id)) {
+			if(node_gene_list.containsKey(new_node.inno_id)) {
 				node_gene_list.get(new_node.inno_id).put(this.id, new_node);
 			}
 			else
@@ -106,7 +108,7 @@ public class Genome {
 				new_node.is_output = false;
 				inno_id++;
 				this.hidden_nodes.add(new_node.inno_id);
-				if(node_gene_list.containsKey(inno_id)) {
+				if(node_gene_list.containsKey(new_node.inno_id)) {
 					node_gene_list.get(new_node.inno_id).put(this.id, new_node);
 				}
 				else
