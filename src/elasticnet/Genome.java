@@ -235,16 +235,6 @@ public class Genome {
 		{
 			prob_sum = 1.0;
 		}
-		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
-		{
-			System.out.println("adding conn here");
-			new_id = mutate_add_conn(new_id, pop_conns, pop_nodes);
-		}
-		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
-		{
-			System.out.println("adding node here");
-			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
-		}
 		if (rand.nextFloat() < (config.delete_node_prob/prob_sum))
 		{
 			System.out.println("deleting node here");
@@ -254,6 +244,16 @@ public class Genome {
 		{
 			System.out.println("deleting conn here");
 			mutate_delete_conn(pop_conns, pop_nodes);
+		}
+		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
+		{
+			System.out.println("adding conn here");
+			new_id = mutate_add_conn(new_id, pop_conns, pop_nodes);
+		}
+		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
+		{
+			System.out.println("adding node here");
+			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
 		}
 		return new_id;
 	}
@@ -292,7 +292,7 @@ public class Genome {
 			if(gene_list.keySet().iterator().hasNext())
 			{
 				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());
-				if (p_conn.to_node != -1 && p_conn.from_node != -1)
+				if (p_conn.to_node != -1 && p_conn.from_node != -1 )
 				{
 					
 					if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
@@ -343,8 +343,6 @@ public class Genome {
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
 		int hidden_count = this.hidden_nodes.size();
-		
-		int pop_conn_count = pop_conns.size();
 		
 		boolean struct_exists = false;
 		
@@ -400,7 +398,7 @@ public class Genome {
 			
 			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, conn_a_id, this.id);
 			
-			this.conn_genes.add(new_id);
+			this.conn_genes.add(conn_a_id);
 			
 			pop_conns.get(conn_a_id).put(this.id, new_conn_a);
 			
