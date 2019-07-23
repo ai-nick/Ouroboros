@@ -103,11 +103,11 @@ public class Population {
 			if(two.conn_genes.contains(one_id))
 			{
 				int two_id = two.conn_genes.get(two.conn_genes.indexOf(one_id));
-				w = Math.abs(this.connection_genes.get(one.conn_genes.get(idx)).get(one.id).atts.get("weight") - this.connection_genes.get(two.conn_genes.get(idx)).get(two.id).atts.get("weight"));
+				w = Math.abs(this.connection_genes.get(one_id).get(one.id).atts.get("weight") - this.connection_genes.get(two_id).get(two.id).atts.get("weight"));
 			}
 			else
 			{
-				if(one.conn_genes.get(idx) >= two.gene_id_min && one.conn_genes.get(idx) <= two.gene_id_max)
+				if(one_id >= two.gene_id_min && one_id <= two.gene_id_max)
 				{
 					d += 1.0;
 				}
