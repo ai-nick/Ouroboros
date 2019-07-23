@@ -519,7 +519,7 @@ public class Genome {
 			}
 		}
 		
-		this.conn_genes.remove(this.conn_genes.indexOf(delete_id));
+		this.conn_genes.remove(delete_key);
 		
 		pop_conns.get(delete_id).remove(this.id);
 	}
