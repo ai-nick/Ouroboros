@@ -154,6 +154,7 @@ public class NeuralNetwork implements INeuralNet {
 	@Override
 	public void Reset() {
 		// TODO Auto-generated method stub
+		// somehow getting here with null nodes
 		for(Integer key : this.nodes.keySet())
 		{
 			this.nodes.get(key).current_val = 0.0;
