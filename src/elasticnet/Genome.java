@@ -213,7 +213,15 @@ public class Genome {
 	
 	public ArrayList<Integer> get_all_nodes()
 	{
-		ArrayList<Integer> all_nodes = new ArrayList<Integer>(this.hidden_nodes);
+		ArrayList<Integer> all_nodes;
+		if(this.hidden_nodes != null && this.hidden_nodes.isEmpty() == false)
+		{
+			all_nodes = new ArrayList<Integer>(this.hidden_nodes);	
+		}
+		else
+		{
+			all_nodes = new ArrayList<Integer>();
+		}
 		all_nodes.addAll(this.input_nodes);
 		all_nodes.addAll(this.output_nodes);
 		return all_nodes;
