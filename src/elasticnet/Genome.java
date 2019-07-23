@@ -157,14 +157,6 @@ public class Genome {
 		return this.fitness/num_others;
 	}
 	
-	public void set_nodes(ArrayList<NodeGene> ngs)
-	{
-		int num_in = ngs.size();
-		for(int i = 0; i < num_in; i++)
-		{
-			this.input_nodes.add(ngs.get(i).inno_id);
-		}
-	}
 	
 	public void set_node(NodeGene ng)
 	{
@@ -493,7 +485,7 @@ public class Genome {
 		
 		pop_nodes.get(delete_id).remove(this.id);
 		
-		this.hidden_nodes.remove(node_idx);
+		this.hidden_nodes.remove(this.hidden_nodes.indexOf(delete_id));
 		
 		return;
 	}
