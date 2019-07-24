@@ -126,12 +126,14 @@ public class NeuralNetwork implements INeuralNet {
 					{
 						//System.out.println("wtf how");
 						
-						next_actives.add(next_node);
-						
 						if(next_node.is_output == true)
 						{
 							this.outs_count++;
 							next_node.visits++;
+						}
+						else
+						{
+							next_actives.add(next_node);
 						}
 					}
 				}
