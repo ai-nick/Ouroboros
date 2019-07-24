@@ -142,13 +142,15 @@ public class NeuralNetwork implements INeuralNet {
 
 		this.activation_nodes = next_actives;
 		this.num_activations++;
-		if(this.activation_nodes.size() != 0)
+		if(this.activation_nodes.size() != 0 || this.outs_count != this.num_output)
 		{
 			this.Activate();
 			return;
 		}
 		else
 		{
+			this.outs_count = 0;
+			this.num_activations = 0;
 			return;
 		}
 	}
@@ -159,7 +161,14 @@ public class NeuralNetwork implements INeuralNet {
 		// somehow getting here with null nodes
 		for(Integer key : this.nodes.keySet())
 		{
-			this.nodes.get(key).current_val = 0.0;
+			if(this.nodes.get(key) != null)
+			{
+				this.nodes.get(key).current_val = 0.0;	
+			}
+			else
+			{
+				this.nodes.remove(key);
+			}
 		}
 		this.outs_count = 0;
 	}
