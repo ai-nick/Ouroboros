@@ -124,7 +124,7 @@ public class NeuralNetwork implements INeuralNet {
 					
 					if(!next_actives.contains(next_node))
 					{
-						//System.out.println("wtf how");
+						System.out.println(next_actives.size());
 						
 						if(next_node.is_output == true)
 						{
@@ -139,11 +139,11 @@ public class NeuralNetwork implements INeuralNet {
 				}
 			}
 		}
-
-		this.activation_nodes = next_actives;
+		this.activation_nodes.clear();
 		this.num_activations++;
-		if(this.activation_nodes.size() != 0 || this.outs_count != this.num_output)
+		if(next_actives.size() != 0)
 		{
+			this.activation_nodes = next_actives;
 			this.Activate();
 			return;
 		}
