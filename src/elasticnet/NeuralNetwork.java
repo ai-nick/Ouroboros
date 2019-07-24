@@ -141,7 +141,7 @@ public class NeuralNetwork implements INeuralNet {
 		}
 		this.activation_nodes.clear();
 		this.num_activations++;
-		if(next_actives.size() != 0)
+		if(next_actives.isEmpty() == false && this.outs_count != this.num_output)
 		{
 			this.activation_nodes = next_actives;
 			this.Activate();
