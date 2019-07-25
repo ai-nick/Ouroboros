@@ -379,14 +379,12 @@ public class Population {
 				offspring.conn_genes.add(gA_id);
 			}
 			else
-			{
-				int gB_id = GenomeB.conn_genes.get(GenomeB.conn_genes.indexOf(gA_id));
+			{	
+				ConnectionGene gB = this.connection_genes.get(gA_id).get(GenomeB.id);
 				
-				ConnectionGene gB = this.connection_genes.get(gB_id).get(GenomeB.id);
+				offspring.conn_genes.add(gA_id);
 				
-				offspring.conn_genes.add(gB_id);
-				
-				this.connection_genes.get(gB_id).put(offspring.id, _cross_over_conns(gA, gB));
+				this.connection_genes.get(gA_id).put(offspring.id, _cross_over_conns(gA, gB));
 			}
 		}
 		
