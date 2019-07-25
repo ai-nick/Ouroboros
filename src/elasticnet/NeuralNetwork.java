@@ -19,36 +19,6 @@ public class NeuralNetwork implements INeuralNet {
 	int outs_count = 0;
 	ArrayList<Integer> output_ids = new ArrayList<Integer>();
 	
-	/*
-	public NeuralNetwork(Genome g)
-	{
-		this.nodes = g.get_all_nodes();
-		
-		int num_in = g.input_nodes.size();
-		
-		for(int ix = 0; ix < num_in; ix++)
-		{	
-			int in_id = g.input_nodes.get(ix).inno_id;
-			this.input_ids.add(in_id);
-			this.nodes.put(in_id, g.input_nodes.get(ix));
-		}
-		
-		this.num_output = g.output_nodes.size();
-		
-		for(int x = 0; x < this.num_output; x++)
-		{
-			this.output_ids.add(g.output_nodes.get(x).inno_id);
-		}
-		//NeuralNetworkSetup(g.hidden_nodes);
-		
-		int num_hidden = g.hidden_nodes.size();
-		for(int ix = 0; ix < num_hidden; ix++)
-		{
-			nodes.put(g.hidden_nodes.get(ix).get_node_id(), g.hidden_nodes.get(ix));
-		}
-	}
-	*/
-	
 	public NeuralNetwork(ArrayList<Integer> input_ids, HashMap<Integer, NodeGene> net_nodes)
 	{
 		this.input_ids = input_ids;
@@ -141,9 +111,9 @@ public class NeuralNetwork implements INeuralNet {
 		}
 		this.activation_nodes.clear();
 		this.num_activations++;
-		if(next_actives.isEmpty() == false && this.outs_count != this.num_output)
+		if(next_actives.isEmpty() == false)
 		{
-			this.activation_nodes = next_actives;
+			this.activation_nodes.addAll(next_actives);
 			this.Activate();
 			return;
 		}
