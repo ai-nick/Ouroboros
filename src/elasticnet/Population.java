@@ -372,7 +372,7 @@ public class Population {
 		{
 			int gA_id = GenomeA.conn_genes.get(k);
 			
-			ConnectionGene gA = this.connection_genes.get(k).get(GenomeA.id);
+			ConnectionGene gA = this.connection_genes.get(gA_id).get(GenomeA.id);
 			
 			if(!GenomeB.conn_genes.contains(gA_id))
 			{

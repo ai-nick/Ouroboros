@@ -10,9 +10,6 @@ public class NodeGene implements INode {
 	boolean is_output;
 	String activation = "sigmoid";
 	int inno_id;
-	// makes it much easier to get genes from pop dict 
-	// during mutation
-	int genome_id;
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
 	ArrayList<ConnectionGene> connections = new ArrayList<ConnectionGene>();
@@ -24,13 +21,11 @@ public class NodeGene implements INode {
 	
 	public NodeGene(int inno_id, int g_id)
 	{
-		this.genome_id = g_id;
 		this.inno_id = inno_id;
 	}
 	
 	public NodeGene(int inno_id, int g_id, String activation)
 	{
-		this.genome_id = g_id;
 		this.inno_id = inno_id;
 		this.activation = activation;
 	}
