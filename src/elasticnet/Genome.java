@@ -339,6 +339,10 @@ public class Genome {
 		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
+		this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
+		
+		pop_conns.get(connection_to_split_index).remove(this.id);
+		
 		int hidden_count = this.hidden_nodes.size();
 		
 		boolean struct_exists = false;
@@ -385,8 +389,7 @@ public class Genome {
 		
 		if(struct_exists == true)
 		{
-			//TODO need to use same conn ids in this spot
-			//as the ones that are used in the existing structure
+			// uses ids of the existing structure to build our node and connections
 			new_node = new NodeGene(gene_id, activation);
 			
 			pop_nodes.get(gene_id).put(this.id, new_node);
