@@ -391,7 +391,7 @@ public class Population {
 		// now the connection genes have been handled, on to nodes
 		ArrayList<Integer> gA_all_node_ids = GenomeA.get_all_nodes();
 		ArrayList<Integer> gB_all_node_ids = GenomeB.get_all_nodes();
-		int full_node_count = GenomeA.get_all_nodes().size();
+		int full_node_count = gA_all_node_ids.size();
 		
 		for (int ik = 0; ik < full_node_count; ik++)
 		{

@@ -432,6 +432,8 @@ public class Genome {
 			
 			new_conn_dict_a.put(this.id, new_conn_a);
 			
+			pop_nodes.get(connection_to_split.from_node).get(this.id).connections.add(new_conn_a);
+			
 			pop_conns.put(new_id, new_conn_dict_a);
 			
 			new_id++;
