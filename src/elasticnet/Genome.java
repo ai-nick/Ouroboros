@@ -283,6 +283,10 @@ public class Genome {
 		{
 			return new_id;
 		}
+		if(this.output_nodes.contains(from_node_key) || this.input_nodes.contains(to_node_key))
+		{
+			return new_id;
+		}
 		for(Integer p : pop_conns.keySet())
 		{
 			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
