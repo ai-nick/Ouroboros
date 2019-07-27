@@ -1,6 +1,8 @@
 package elasticnet.tests;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,29 +10,12 @@ import java.util.Date;
 import elasticnet.*;
 public class TestGenome {
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Genome test_genome = new Genome(0);
+	public static void main(String[] args) throws IOException {
 		
-		int fake_pop_hash = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date()).hashCode();
-		ArrayList<ConnectionGene> pop_conns = new ArrayList<ConnectionGene>();
-		ArrayList<NodeGene> pop_nodes = new ArrayList<NodeGene>();
-		test_genome.create_from_scratch(0, new NeatConfig(), fake_pop_hash, pop_nodes, pop_conns);
+		int pop_size = 50;
 		
+		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
-		System.out.println(test_genome.as_json());
-		
-		NeuralNetwork test_net = new NeuralNetwork(test_genome);
-		
-		double[] test_input = {1.0, 1.0, 1.0, 1.0};
-		
-		test_net.feed_forward = true;
-	
-		test_net.set_input(test_input);
-		
-		test_net.Activate();
-		
-		System.out.println(test_net.get_output().toString());
 	}
 
 }
