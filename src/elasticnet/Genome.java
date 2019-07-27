@@ -552,7 +552,7 @@ public class Genome {
 				
 				if(pop_conns.keySet().contains(new_id))
 				{
-					pop_conns.get(new_id).put(this.id, new_gene);	
+					pop_conns.get(new_id).put(this.id, new_gene);
 				}
 				else
 				{
@@ -560,7 +560,7 @@ public class Genome {
 					new_dict.put(this.id, new_gene);
 					pop_conns.put(new_id, new_dict);
 				}
-				
+				pop_nodes.get(from_node.inno_id).put(this.id, from_node);
 				new_id++;
 			}
 		}
