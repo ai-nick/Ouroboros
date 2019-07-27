@@ -478,15 +478,20 @@ public class Genome {
 		
 		NodeGene delete_node = pop_nodes.get(delete_id).get(this.id);
 		
-		int conn_counter = delete_node.connections.size();
+		//int conn_counter = delete_node.connections.size();
 		
-		for (int ix = 0; ix < conn_counter; ix++)
+		for (int ix : pop_conns.keySet())
 		{
-			ConnectionGene conn_delete = delete_node.connections.get(ix);
-			
-			pop_conns.get(conn_delete.inno_id).remove(this.id);
-			
-			this.conn_genes.remove(this.conn_genes.indexOf(conn_delete.inno_id));
+			if(pop_conns.get(ix).containsKey(this.id) == true)
+			{
+				ConnectionGene pop_conn = pop_conns.get(ix).get(this.id);
+				if(pop_conn.to_node == delete_node.inno_id || pop_conn.from_node == delete_node.inno_id)
+				{
+					pop_conns.get(ix).remove(this.id);
+					
+					this.conn_genes.remove(this.conn_genes.indexOf(ix));		
+				}
+			}
 		}
 		
 		pop_nodes.get(delete_id).remove(this.id);

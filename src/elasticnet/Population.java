@@ -397,7 +397,7 @@ public class Population {
 		{
 			int gA_id = gA_all_node_ids.get(ik);
 			NodeGene gA_node = this.node_genes.get(gA_id).get(GenomeA.id);
-			if(!gB_all_node_ids.contains(gA_id))
+			if(gB_all_node_ids.contains(gA_id) != true)
 			{
 				// retrieve gene from master dictionary
 				if(gA_node.is_input == true)
@@ -418,7 +418,6 @@ public class Population {
 			}
 			else
 			{
-				int gB_id = gB_all_node_ids.get(gA_id);
 				NodeGene gB_node = this.node_genes.get(gA_id).get(GenomeB.id);
 				offspring.set_node(_cross_over_nodes(gA_node, gB_node));
 			}
