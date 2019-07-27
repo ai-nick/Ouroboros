@@ -85,22 +85,23 @@ public class NeuralNetwork implements INeuralNet {
 					int next_node_id = current.connections.get(x).to_node;
 					
 					NodeGene next_node = this.nodes.get(next_node_id);
-					
-					next_node.add_to_current_value(current.get_current_val() * current.connections.get(x).get_weight());
-					
-					next_node.current_val = Activator.activate(next_node.activation, next_node.current_val);
-					
-					if(!next_actives.contains(next_node))
-					{	
-						if(next_node.is_output == true || next_node.is_input == true)
-						{
-							this.outs_count++;
-							next_node.visits++;
-						}
-						else
-						{
-							next_actives.add(next_node);
-						}
+					if(next_node != null) {
+						next_node.add_to_current_value(current.get_current_val() * current.connections.get(x).get_weight());
+						
+						next_node.current_val = Activator.activate(next_node.activation, next_node.current_val);
+						
+						if(!next_actives.contains(next_node))
+						{	
+							if(next_node.is_output == true || next_node.is_input == true)
+							{
+								this.outs_count++;
+								next_node.visits++;
+							}
+							else
+							{
+								next_actives.add(next_node);
+							}
+						}	
 					}
 				}
 			}
