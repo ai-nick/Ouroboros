@@ -16,6 +16,21 @@ public class TestGenome {
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
+		for (int i = 0; i < pop_size; i++)
+		{
+			Genome next = test_pop.genomes.get(i);
+			
+			int num_conns = next.conn_genes.size();
+			
+			for(int x = 0; x < num_conns; x++)
+			{
+				ConnectionGene next_conn = test_pop.connection_genes.get(next.conn_genes.get(x)).get(next.id);
+				if(next_conn == null)
+				{
+					System.out.println("null conn encountered");
+				}
+			}
+		}
 	}
 
 }

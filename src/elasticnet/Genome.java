@@ -19,10 +19,10 @@ public class Genome {
 	int species_id = 0;
 	public double fitness = -1.0;
 	public int avg_w = 0;
-	ArrayList<Integer> conn_genes = new ArrayList<Integer>();
-	ArrayList<Integer> input_nodes = new ArrayList<Integer>();
-	ArrayList<Integer> hidden_nodes = new ArrayList<Integer>();
-	ArrayList<Integer> output_nodes = new ArrayList<Integer>();
+	public ArrayList<Integer> conn_genes = new ArrayList<Integer>();
+	public ArrayList<Integer> input_nodes = new ArrayList<Integer>();
+	public ArrayList<Integer> hidden_nodes = new ArrayList<Integer>();
+	public ArrayList<Integer> output_nodes = new ArrayList<Integer>();
 	public int gene_id_min, gene_id_max = 0;
 	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
 	
