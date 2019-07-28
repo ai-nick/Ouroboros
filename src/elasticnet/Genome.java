@@ -292,22 +292,22 @@ public class Genome {
 			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
 			if(gene_list.keySet().iterator().hasNext())
 			{
-				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());
-				if (p_conn.to_node != -1 && p_conn.from_node != -1 )
+				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());					
+				if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
 				{
-					
-					if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
-					{
-						conn_id = p_conn.inno_id;
-						new_structure = false;
-					}	
-				}	
+					conn_id = p_conn.inno_id;
+					new_structure = false;
+				}		
 			}
 		}
-		
 		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, conn_id, this.id);
 		if (new_structure == true)
 		{
+			while(pop_conns.containsKey(conn_id))
+			{
+				conn_id++;
+			}
+			new_gene.inno_id = conn_id;
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
 			pop_conns.put(conn_id, new_map);
@@ -319,7 +319,7 @@ public class Genome {
 		}
 		this.conn_genes.add(new_gene.inno_id);
 		from_node.connections.add(new_gene);
-		return new_id;
+		return conn_id;
 	}
 	
 	private int mutate_add_node(int new_id, 
@@ -346,8 +346,6 @@ public class Genome {
 		this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
 		
 		pop_conns.get(connection_to_split_index).remove(this.id);
-		
-		int hidden_count = this.hidden_nodes.size();
 		
 		boolean struct_exists = false;
 		
