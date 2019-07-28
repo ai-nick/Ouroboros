@@ -265,13 +265,13 @@ public class Genome {
 		boolean new_structure = true;
 		Random dice = new Random();
 		
-		int to_node_key = (int)all_the_nodes.get(dice.nextInt(all_the_nodes.size()));
+		int to_node_key = dice.nextInt(all_the_nodes.size());
 		
-		int from_node_key = (int)all_the_nodes.get(dice.nextInt(all_the_nodes.size()));
+		int from_node_key = dice.nextInt(all_the_nodes.size());
 		
-		NodeGene from_node = pop_nodes.get(from_node_key).get(this.id);
+		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
 		
-		NodeGene to_node = pop_nodes.get(from_node_key).get(this.id);
+		NodeGene to_node = pop_nodes.get(all_the_nodes.get(to_node_key)).get(this.id);
 		
 		// the next to if statements ensure we dont add conns that are either output -> output
 		// of input->input

@@ -27,10 +27,13 @@ public class TestGenome {
 				ConnectionGene next_conn = test_pop.connection_genes.get(next.conn_genes.get(x)).get(next.id);
 				if(next_conn == null)
 				{
-					System.out.println("null conn encountered");
+					System.out.println("genome: ");
+					System.out.println(next.id);
+					System.out.println("null conn encountered, id = " + next.conn_genes.get(x).toString());
 				}
 			}
 		}
+		System.out.println(test_pop.connection_genes.toString());
 	}
 
 }
