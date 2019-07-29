@@ -357,6 +357,10 @@ public class Genome {
 			if(the_map != null && the_map.keySet().iterator().hasNext() == true)
 			{
 				ConnectionGene cg = the_map.get(the_map.keySet().iterator().next());
+				if(cg == null)
+				{
+					System.out.println("null conn encountered");
+				}
 				if (cg.from_node == connection_to_split.from_node)
 				{
 					HashMap<Integer, NodeGene> node_map = pop_nodes.get(cg.to_node);
