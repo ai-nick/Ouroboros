@@ -33,7 +33,7 @@ public class TestGenome {
 				}
 			}
 		}
-		System.out.println(test_pop.connection_genes.toString());
+		System.out.println(test_pop.connection_genes.get(7).toString());
 	}
 
 }

@@ -303,7 +303,7 @@ public class Genome {
 		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, conn_id, this.id);
 		if (new_structure == true)
 		{
-			while(pop_conns.containsKey(conn_id))
+			while(pop_conns.containsKey(conn_id) || pop_nodes.containsKey(conn_id))
 			{
 				conn_id++;
 			}
@@ -343,10 +343,6 @@ public class Genome {
 		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
-		this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
-		
-		pop_conns.get(connection_to_split_index).remove(this.id);
-		
 		boolean struct_exists = false;
 		
 		// will store the existing connection inno ids if 
@@ -358,7 +354,7 @@ public class Genome {
 		for(int c : pop_conns.keySet())
 		{
 			HashMap<Integer, ConnectionGene> the_map = pop_conns.get(c);
-			if(the_map != null && the_map.keySet().iterator().hasNext())
+			if(the_map != null && the_map.keySet().iterator().hasNext() == true)
 			{
 				ConnectionGene cg = the_map.get(the_map.keySet().iterator().next());
 				if (cg.from_node == connection_to_split.from_node)
@@ -404,7 +400,7 @@ public class Genome {
 			
 			pop_conns.get(conn_a_id).put(this.id, new_conn_a);
 			
-			ConnectionGene new_conn_b = new ConnectionGene(connection_to_split.to_node, new_node.inno_id, conn_b_id, this.id);
+			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, conn_b_id, this.id);
 			
 			this.conn_genes.add(conn_b_id);
 			
@@ -412,15 +408,19 @@ public class Genome {
 		}
 		else
 		{
-			new_node = new NodeGene(gene_id, activation);
+			while(pop_conns.containsKey(new_id) == true || pop_nodes.containsKey(new_id) == true)
+			{
+				new_id++;
+			}
+			new_node = new NodeGene(new_id, activation);
 			
 			HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
 			
 			new_node_dict.put(this.id, new_node);
 			
-			pop_nodes.put(gene_id, new_node_dict);
+			pop_nodes.put(new_id, new_node_dict);
 			
-			this.hidden_nodes.add(gene_id);
+			this.hidden_nodes.add(new_id);
 			
 			new_id++;
 			
@@ -454,6 +454,13 @@ public class Genome {
 			
 			new_id++;
 		}
+		this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
+		
+		pop_conns.get(connection_to_split_index).remove(this.id);
+		
+		NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
+		
+		from_node.connections.remove(from_node.connections.indexOf(connection_to_split));
 		
 		return new_id;
 	}
