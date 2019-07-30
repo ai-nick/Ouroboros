@@ -12,7 +12,7 @@ public class NodeGene implements INode {
 	int inno_id;
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
-	ArrayList<ConnectionGene> connections = new ArrayList<ConnectionGene>();
+	ArrayList<Long> connections = new ArrayList<Long>();
 	HashMap<String, Object> atts = new HashMap<String, Object>();
 	double current_val = 0.0;
 	int level;
@@ -79,7 +79,7 @@ public class NodeGene implements INode {
 		return inno_id;
 	}
 	
-	public ArrayList<ConnectionGene> get_connections()
+	public ArrayList<Long> get_connections()
 	{
 		return this.connections;
 	}
