@@ -394,11 +394,9 @@ public class Genome {
 			// uses ids of the existing structure to build our node and connections
 			new_node = new NodeGene(gene_id, activation);
 			
-			pop_nodes.get(gene_id).put(this.id, new_node);
-			
-			this.hidden_nodes.add(gene_id);
-			
 			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, conn_a_id, this.id);
+			
+			pop_nodes.get(connection_to_split.from_node).get(this.id).connections.add(new_conn_a);
 			
 			this.conn_genes.add(conn_a_id);
 			
@@ -409,6 +407,12 @@ public class Genome {
 			this.conn_genes.add(conn_b_id);
 			
 			pop_conns.get(conn_b_id).put(this.id, new_conn_b);
+			
+			new_node.connections.add(new_conn_b);
+			
+			pop_nodes.get(gene_id).put(this.id, new_node);
+			
+			this.hidden_nodes.add(gene_id);
 		}
 		else
 		{
@@ -418,19 +422,9 @@ public class Genome {
 			}
 			new_node = new NodeGene(new_id, activation);
 			
-			HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
-			
-			new_node_dict.put(this.id, new_node);
-			
-			pop_nodes.put(new_id, new_node_dict);
-			
-			this.hidden_nodes.add(new_id);
-			
 			new_id++;
 			
 			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
-			
-			//new_node.connections.add(new_conn_a);
 			
 			this.conn_genes.add(new_id);
 			
@@ -448,13 +442,21 @@ public class Genome {
 			
 			this.conn_genes.add(new_id);
 			
-			new_node.connections.add(new_conn_b);
-			
 			HashMap<Integer, ConnectionGene> new_conn_dict_b = new HashMap<Integer, ConnectionGene>();
 			
 			new_conn_dict_b.put(this.id, new_conn_b);
 			
 			pop_conns.put(new_id, new_conn_dict_b);
+			
+			new_node.connections.add(new_conn_b);
+			
+			HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
+			
+			new_node_dict.put(this.id, new_node);
+			
+			pop_nodes.put(new_node.inno_id, new_node_dict);
+			
+			this.hidden_nodes.add(new_node.inno_id);
 			
 			new_id++;
 		}
