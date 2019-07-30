@@ -9,7 +9,7 @@ public class NodeGene implements INode {
 	boolean is_input;
 	boolean is_output;
 	String activation = "sigmoid";
-	int inno_id;
+	long inno_id;
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
 	ArrayList<Long> connections = new ArrayList<Long>();
