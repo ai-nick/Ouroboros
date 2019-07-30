@@ -436,6 +436,8 @@ public class Genome {
 			
 			pop_conns.put(new_id, new_conn_dict_a);
 			
+			System.out.println("add new conn gene with id: " + new_conn_a.inno_id);
+			
 			new_id++;
 			
 			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, this.id);
@@ -448,6 +450,8 @@ public class Genome {
 			
 			pop_conns.put(new_id, new_conn_dict_b);
 			
+			System.out.println("add new conn gene with id: " + new_conn_b.inno_id);
+			
 			new_node.connections.add(new_conn_b);
 			
 			HashMap<Integer, NodeGene> new_node_dict = new HashMap<Integer, NodeGene>();
@@ -457,6 +461,8 @@ public class Genome {
 			pop_nodes.put(new_node.inno_id, new_node_dict);
 			
 			this.hidden_nodes.add(new_node.inno_id);
+			
+			System.out.println("add node gene with id: " + new_node.inno_id);
 			
 			new_id++;
 		}
