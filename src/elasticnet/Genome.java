@@ -318,7 +318,7 @@ public class Genome {
 			pop_conns.get(conn_id).put(this.id, new_gene);
 		}
 		this.conn_genes.add(new_gene.inno_id);
-		from_node.connections.add(new_gene);
+		from_node.connections.add(new_gene.inno_id);
 		return conn_id;
 	}
 	
@@ -570,7 +570,7 @@ public class Genome {
 				
 				this.conn_genes.add(new_id);
 				
-				from_node.connections.add(new_gene);
+				from_node.connections.add(new_gene.inno_id);
 				
 				if(pop_conns.keySet().contains(new_id))
 				{
@@ -582,7 +582,7 @@ public class Genome {
 					new_dict.put(this.id, new_gene);
 					pop_conns.put(new_id, new_dict);
 				}
-				pop_nodes.get(from_node.inno_id).put(this.id, from_node);
+				pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 				new_id++;
 			}
 		}

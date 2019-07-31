@@ -92,11 +92,11 @@ public class NeuralNetwork implements INeuralNet {
 				// next node is set to null 
 				for(int x = 0; x < num_connections; x++)
 				{
-					int next_node_id = current.connections.get(x).to_node;
+					ConnectionGene next_conn = this.conns.get(current.connections.get(x));
 					
-					NodeGene next_node = this.nodes.get(next_node_id);
+					NodeGene next_node = this.nodes.get(next_conn.to_node);
 					if(next_node != null) {
-						next_node.add_to_current_value(current.get_current_val() * current.connections.get(x).get_weight());
+						next_node.add_to_current_value(current.get_current_val() * next_conn.get_weight());
 						
 						next_node.current_val = Activator.activate(next_node.activation, next_node.current_val);
 						
