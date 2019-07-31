@@ -349,17 +349,16 @@ public class Genome {
 			)
 	{
 		//boolean has_hist_id;
-		
-		int gene_id = new_id;
-		
-		Random dice = new Random();
-		
+
+		//we cant split a conn if we dont have any
 		if (this.conn_genes.size() == 0)
 		{
 			return new_id;
 		}
 		
-		int connection_to_split_index = this.conn_genes.get(dice.nextInt(this.conn_genes.size()));
+		int gene_id = new_id;
+		
+		int connection_to_split_index = this.conn_genes.get(this.get_random_in_range(this.conn_genes.size()));
 		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
@@ -376,7 +375,8 @@ public class Genome {
 			HashMap<Integer, ConnectionGene> the_map = pop_conns.get(c);
 			if(the_map != null && the_map.keySet().iterator().hasNext() == true)
 			{
-				ConnectionGene cg = the_map.get(the_map.keySet().iterator().next());
+				int g_id = the_map.keySet().iterator().next();
+				ConnectionGene cg = the_map.get(g_id);
 				if(cg == null)
 				{
 					System.out.println("null conn encountered");
@@ -392,12 +392,13 @@ public class Genome {
 						
 						for(int i = 0; i < node_conn_count; i++)
 						{
-							if(ng.connections.get(i).to_node == connection_to_split.to_node)
+							ConnectionGene next_cg = pop_conns.get(ng.connections.get(i)).get(g_id);
+							if(next_cg.to_node == connection_to_split.to_node)
 							{
 								struct_exists = true;
 								gene_id = ng.inno_id;
 								conn_a_id = cg.inno_id;
-								conn_b_id = ng.connections.get(i).inno_id;
+								conn_b_id = next_cg.inno_id;
 							}
 						}	
 					}
@@ -416,7 +417,7 @@ public class Genome {
 			
 			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, conn_a_id, this.id);
 			
-			pop_nodes.get(connection_to_split.from_node).get(this.id).connections.add(new_conn_a);
+			pop_nodes.get(connection_to_split.from_node).get(this.id).connections.add(new_conn_a.inno_id);
 			
 			this.conn_genes.add(conn_a_id);
 			
@@ -428,7 +429,7 @@ public class Genome {
 			
 			pop_conns.get(conn_b_id).put(this.id, new_conn_b);
 			
-			new_node.connections.add(new_conn_b);
+			new_node.connections.add(new_conn_b.inno_id);
 			
 			pop_nodes.get(gene_id).put(this.id, new_node);
 			
