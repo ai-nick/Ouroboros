@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.google.gson.*;
 
@@ -41,9 +39,9 @@ public class Population {
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	int pop_size = 0;
-	public ConcurrentHashMap<AtomicLong, Genome> genomes = new ConcurrentHashMap<AtomicLong, Genome>();
-	public ConcurrentHashMap<AtomicLong, HashMap<AtomicLong,NodeGene>> node_genes = new ConcurrentHashMap<AtomicLong, HashMap<AtomicLong, NodeGene>>();
-	public ConcurrentHashMap<AtomicLong, HashMap<AtomicLong,ConnectionGene>> connection_genes = new ConcurrentHashMap<AtomicLong, HashMap<AtomicLong,ConnectionGene>>();
+	public HashMap<Integer, Genome> genomes = new HashMap<Integer, Genome>();
+	public HashMap<Integer, HashMap<Integer,NodeGene>> node_genes = new HashMap<Integer, HashMap<Integer, NodeGene>>();
+	public HashMap<Integer, HashMap<Integer,ConnectionGene>> connection_genes = new HashMap<Integer, HashMap<Integer,ConnectionGene>>();
 	
 	public Population(int gen,  NeatConfig config_in, int pop_size) 
 	{

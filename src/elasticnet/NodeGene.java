@@ -1,7 +1,6 @@
 package elasticnet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 import com.google.gson.Gson;
 
@@ -10,33 +9,33 @@ public class NodeGene implements INode {
 	boolean is_input;
 	boolean is_output;
 	String activation = "sigmoid";
-	AtomicLong inno_id;
+	int inno_id;
 	ArrayList<Double> coordinate;
 	boolean is_recurrent;
-	ArrayList<Long> connections = new ArrayList<Long>();
+	ArrayList<Integer> connections = new ArrayList<Integer>();
 	HashMap<String, Object> atts = new HashMap<String, Object>();
 	double current_val = 0.0;
 	int level;
 	int visits = 0;
 	//String layer = "";
 	
-	public NodeGene(AtomicLong inno_id, int g_id)
+	public NodeGene(int inno_id, int g_id)
 	{
 		this.inno_id = inno_id;
 	}
 	
-	public NodeGene(AtomicLong inno_id, int g_id, String activation)
+	public NodeGene(int inno_id, int g_id, String activation)
 	{
 		this.inno_id = inno_id;
 		this.activation = activation;
 	}
-	public NodeGene(AtomicLong inno_id, String act) {
+	public NodeGene(int inno_id, String act) {
 		this.inno_id = inno_id;
 		this.activation = act;
 		this.level = 0;
 	}
 	
-	public NodeGene(AtomicLong inno_id, String act, int level)
+	public NodeGene(int inno_id, String act, int level)
 	{
 		this.inno_id = inno_id;
 		this.activation = act;
@@ -80,7 +79,7 @@ public class NodeGene implements INode {
 		return inno_id;
 	}
 	
-	public ArrayList<Long> get_connections()
+	public ArrayList<Integer> get_connections()
 	{
 		return this.connections;
 	}

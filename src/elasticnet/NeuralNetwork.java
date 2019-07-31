@@ -14,6 +14,7 @@ public class NeuralNetwork implements INeuralNet {
 	ArrayList<NodeGene> activation_nodes = new ArrayList<NodeGene>();
 	public boolean fully_activated;
 	HashMap<Integer, NodeGene> nodes = new HashMap<Integer, NodeGene>();
+	HashMap<Integer, ConnectionGene> conns = new HashMap<Integer, ConnectionGene>();
 	public boolean feed_forward;
 	int num_output = 0;
 	int outs_count = 0;
