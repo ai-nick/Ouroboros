@@ -291,7 +291,7 @@ public class Genome {
 		
 		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
 		
-		NodeGene to_node = pop_nodes.get(all_the_nodes.get(to_node_key)).get(this.id);
+		//NodeGene to_node = pop_nodes.get(all_the_nodes.get(to_node_key)).get(this.id);
 		
 		// the next to if statements ensure we dont add conns that are either output -> output
 		// of input->input
@@ -313,14 +313,14 @@ public class Genome {
 			if(gene_list.keySet().iterator().hasNext())
 			{
 				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());					
-				if ((p_conn.to_node == to_node.inno_id) && (p_conn.from_node == from_node.inno_id))
+				if ((p_conn.to_node == to_node_key) && (p_conn.from_node == from_node.inno_id))
 				{
 					conn_id = p_conn.inno_id;
 					new_structure = false;
 				}		
 			}
 		}
-		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, conn_id, this.id);
+		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node_key, conn_id, this.id);
 		if (new_structure == true)
 		{
 			while(pop_conns.containsKey(conn_id) || pop_nodes.containsKey(conn_id))
