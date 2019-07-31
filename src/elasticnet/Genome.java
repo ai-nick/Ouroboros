@@ -277,6 +277,18 @@ public class Genome {
 		
 		int from_node_key = this.get_random_in_range(all_the_nodes.size());
 		
+		int num_conns = this.conn_genes.size();
+		
+		for(int i = 0; i < num_conns; i++)
+		{
+			ConnectionGene next_gene = pop_conns.get(this.conn_genes.get(i)).get(this.id);
+			if(next_gene.to_node == to_node_key && next_gene.from_node == from_node_key)
+			{
+				//god doesnt play dice, this mutation wasnt meant to be
+				return new_id;
+			}
+		}
+		
 		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
 		
 		NodeGene to_node = pop_nodes.get(all_the_nodes.get(to_node_key)).get(this.id);
