@@ -27,7 +27,8 @@ public class NeuralNetwork implements INeuralNet {
 	}
 	
 	public NeuralNetwork(Genome genome_in,
-			HashMap<Integer, HashMap<Integer, NodeGene>> node_genes
+			HashMap<Integer, HashMap<Integer, NodeGene>> node_genes,
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> conn_genes
 			)
 	{
 		this.fully_activated = false;
@@ -43,6 +44,14 @@ public class NeuralNetwork implements INeuralNet {
 			int key = all_ids.get(i);
 			
 			this.nodes.put(key, node_genes.get(key).get(genome_in.id));
+		}
+		
+		int conn_count = genome_in.conn_genes.size();
+		
+		for(int i = 0; i < conn_count; i++)
+		{
+			int gene_id = genome_in.conn_genes.get(i);
+			this.conns.put(gene_id, conn_genes.get(gene_id).get(genome_in.id));
 		}
 		
 		this.output_ids = genome_in.output_nodes;
