@@ -260,14 +260,22 @@ public class Genome {
 			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes
 			)
 	{
+		// if we have no hidden nodes yet its already fully connected and 
+		// there is no where to add a conn
+		if(this.hidden_nodes.size() == 0)
+		{
+			return new_id;
+		}
+		
 		int conn_id = new_id;
+		
 		ArrayList<Integer> all_the_nodes = this.get_all_nodes();
+		
 		boolean new_structure = true;
-		Random dice = new Random();
 		
-		int to_node_key = dice.nextInt(all_the_nodes.size());
+		int to_node_key = this.get_random_in_range(all_the_nodes.size());
 		
-		int from_node_key = dice.nextInt(all_the_nodes.size());
+		int from_node_key = this.get_random_in_range(all_the_nodes.size());
 		
 		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
 		
@@ -615,6 +623,13 @@ public class Genome {
 		}
 		
 		return;
+	}
+	
+	private int get_random_in_range(int range_len)
+	{
+		Random dice = new Random();
+		
+		return dice.nextInt(range_len);
 	}
 	
 	public String as_json()
