@@ -16,7 +16,7 @@ public class ConnectionGene implements IConnection {
 	double min = -3.0;
 	double max = 3.0;
 	
-	public ConnectionGene(int f, int t, int inno, int genome_id) {
+	public ConnectionGene(int f, int t, int inno) {
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;

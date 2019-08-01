@@ -287,6 +287,12 @@ public class Population {
 	public void breed_asexual(Genome single_parent, Species the_species)
 	{
 		Genome offspring = new Genome(single_parent, this.next_genome_id);
+		ArrayList<Integer> all_nodes = offspring.get_all_nodes();
+		int nodes_count = all_nodes.size();
+		for(int i = 0; i < nodes_count; i++) {
+			NodeGene cloned = this.node_genes.get(all_nodes.get(i)).get(single_parent.id);
+			this.node_genes.get(all_nodes.get(i)).put(this.next_genome_id,cloned);
+		}
 		this.next_genome_id++;
 		offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
 		the_species.member_ids.add(offspring.id);
@@ -458,7 +464,7 @@ public class Population {
 	
 	private ConnectionGene _cross_over_conns(ConnectionGene a, ConnectionGene b)
 	{
-		ConnectionGene new_gene = new ConnectionGene(a.from_node, a.to_node, a.inno_id, a.genome_id);
+		ConnectionGene new_gene = new ConnectionGene(a.from_node, a.to_node, a.inno_id);
 		
 		new_gene.activation_level = a.activation_level;
 		

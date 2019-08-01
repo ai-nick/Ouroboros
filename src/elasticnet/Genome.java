@@ -376,6 +376,11 @@ public class Genome {
 			if(the_map != null && the_map.keySet().iterator().hasNext() == true)
 			{
 				int g_id = the_map.keySet().iterator().next();
+				if(g_id == this.id)
+				{
+					//if we hid this it aint it chief
+					return gene_id;
+				}
 				ConnectionGene cg = the_map.get(g_id);
 				if(cg == null)
 				{
@@ -486,14 +491,16 @@ public class Genome {
 			System.out.println("add node gene with id: " + new_node.inno_id);
 			
 			new_id++;
+			
+			NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
+			
+			from_node.connections.remove(from_node.connections.indexOf(connection_to_split_index));
+			
+			from_node.connections.add(new_conn_b.inno_id);
 		}
 		this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
 		
 		pop_conns.get(connection_to_split_index).remove(this.id);
-		
-		NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
-		
-		from_node.connections.remove(from_node.connections.indexOf(connection_to_split));
 		
 		return new_id;
 	}

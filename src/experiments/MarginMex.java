@@ -54,7 +54,7 @@ public class MarginMex {
 				
 				int count = this.hs.hist_list.length;
 				
-				NeuralNetwork net = new NeuralNetwork(current, this.pop.node_genes);
+				NeuralNetwork net = new NeuralNetwork(current, this.pop.node_genes, this.pop.connection_genes);
 				
 				net.feed_forward = true;
 				
