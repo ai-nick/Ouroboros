@@ -291,7 +291,7 @@ public class Population {
 		int nodes_count = all_nodes.size();
 		for(int i = 0; i < nodes_count; i++) {
 			NodeGene cloned = this.node_genes.get(all_nodes.get(i)).get(single_parent.id);
-			this.node_genes.get(all_nodes.get(i)).put(this.next_genome_id,cloned);
+			this.node_genes.get(all_nodes.get(i)).put(offspring.id, cloned);
 		}
 		int conn_count = offspring.conn_genes.size();
 		for(int i = 0; i < conn_count; i++)
