@@ -388,6 +388,7 @@ public class Population {
 			
 			if(!GenomeB.conn_genes.contains(gA_id))
 			{
+				this.connection_genes.get(gA_id).put(offspring.id, gA);
 				offspring.conn_genes.add(gA_id);
 			}
 			else
@@ -431,7 +432,9 @@ public class Population {
 			else
 			{
 				NodeGene gB_node = this.node_genes.get(gA_id).get(GenomeB.id);
-				offspring.set_node(_cross_over_nodes(gA_node, gB_node));
+				NodeGene crossed = _cross_over_nodes(gA_node, gB_node);
+				offspring.set_node(crossed);
+				this.node_genes.get(gA_id).put(offspring.id, crossed);
 			}
 		}
 		//for (Integer ik: GenomeB.get_al)
