@@ -32,6 +32,8 @@ public class Species {
 		
 		for(int x = 0; x < this.member_ids.size(); x++)
 		{
+			// suspect we are getting null genomes here, need to check sorting isnt
+			// modifying genome id values
 			int member_id = this.member_ids.get(x);
 			Genome fit_genome = genomes.get(member_id);
 			this.adjust_fit_sum += fit_genome.get_prime(this.member_ids.size());
