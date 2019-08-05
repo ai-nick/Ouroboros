@@ -240,7 +240,7 @@ public class Population {
 					int spec_size = current_species.member_ids.size();
 					
 					int reset_iter_idx = elite_iterator - spec_size;
-					
+					// need to figure out wtf i was even thinking here FUCKING STUPID ASS NICK AS MFER WTF VROTHEREN
 					int genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx);
 					
 					int other_genome_id = this.pop_species.get(ix).member_ids.get(0);
@@ -300,8 +300,8 @@ public class Population {
 			ConnectionGene cloned = this.connection_genes.get(offspring.conn_genes.get(i)).get(single_parent.id);
 			this.connection_genes.get(offspring.conn_genes.get(i)).put(offspring.id, cloned);
 		}
-		this.next_genome_id++;
 		offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
+		this.next_genome_id++;
 		the_species.member_ids.add(offspring.id);
 		this.genomes.put(offspring.id, offspring);
 		return;
