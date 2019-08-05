@@ -237,9 +237,9 @@ public class Population {
 			{
 				Species current_species = this.pop_species.get(ix);
 				if(current_species.member_ids.size() <= elite_iterator+2) {
-					int spec_size = this.pop_species.get(ix).member_ids.size();
+					int spec_size = current_species.member_ids.size();
 					
-					int reset_iter_idx = elite_iterator - ((elite_iterator/spec_size)*spec_size);
+					int reset_iter_idx = elite_iterator - spec_size;
 					
 					int genome_id = this.pop_species.get(ix).member_ids.get(reset_iter_idx);
 					
@@ -265,6 +265,7 @@ public class Population {
 					// if we have reached least fit we will just mutate the asexually reproduce the fittest
 					int other_genome_id = this.pop_species.get(ix).member_ids.get(0);
 					
+					//TODO this has to be where we are getting index's to null genomes
 					if(this.pop_species.get(ix).member_ids.size() > elite_iterator+2)
 					{
 						other_genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator+1);;	

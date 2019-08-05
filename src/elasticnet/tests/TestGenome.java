@@ -12,7 +12,7 @@ public class TestGenome {
 	
 	public static void main(String[] args) throws IOException {
 		
-		int pop_size = 10000;
+		int pop_size = 100000;
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
