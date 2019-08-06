@@ -236,44 +236,20 @@ public class Population {
 			for(int ix = 0; ix < num_species; ix++)
 			{
 				Species current_species = this.pop_species.get(ix);
-				if(current_species.member_ids.size() <= elite_iterator+2) {
-					int spec_size = current_species.member_ids.size();
-					// need to figure out wtf i was even thinking here FUCKING STUPID ASS NICK ASs MFER, WTF VROTHEREN
-					int genome_id = this.pop_species.get(ix).member_ids.get(i);
-					
-					int other_genome_id = this.pop_species.get(ix).member_ids.get(i+1);
-					if(i <= 2)
-					{
-						this.breed_asexual(this.genomes.get(other_genome_id), current_species);		
-					} 
-					else
-					{
-						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
-					}
-					need_new--;	
-				}
+
+				int spec_size = current_species.member_ids.size();
+				// need to figure out wtf i was even thinking here FUCKING STUPID ASS NICK ASs MFER, WTF VROTHEREN
+				int genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator);
+				if(elite_iterator <= 2)
+				{
+					this.breed_asexual(this.genomes.get(genome_id), current_species);	
+				} 
 				else
 				{
-					int genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator);
-					// lines 231 - 235:  
-					// if we have reached least fit we will just mutate the asexually reproduce the fittest
-					int other_genome_id = this.pop_species.get(ix).member_ids.get(0);
-					
-					//TODO this has to be where we are getting index's to null genomes
-					if(this.pop_species.get(ix).member_ids.size() > elite_iterator+2)
-					{
-						other_genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator+1);;	
-					}
-					if(other_genome_id == 0)
-					{
-						this.breed_asexual(this.genomes.get(other_genome_id), current_species);		
-					} 
-					else
-					{
-						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
-					}
-					need_new--;	
+					int other_genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator+1);
+					this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
 				}
+				need_new--;
 			}
 			elite_iterator++;
 		}
