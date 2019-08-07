@@ -36,13 +36,18 @@ public class Species {
 			// modifying genome id values
 			int member_id = this.member_ids.get(x);
 			Genome fit_genome = genomes.get(member_id);
+			if(fit_genome == null)
+			{
+				System.out.println("null genome");
+			}
 			this.adjust_fit_sum += fit_genome.get_prime(this.member_ids.size());
 			fit_sort_dict.put(x, fit_genome.fitness);
 			this.sorted_idx_array[x] = x;
 		}
 		if(this.member_ids.size() > 1)
 		{
-			this.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length-1);	
+			this.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length-1);
+			System.out.println(this.sorted_idx_array.toString());
 		}
 		return this.adjust_fit_sum;
 	}
