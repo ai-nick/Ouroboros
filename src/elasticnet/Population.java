@@ -158,9 +158,7 @@ public class Population {
 		// the "seed" species
 		if (this.pop_species.size() == 0)
 		{
-			Random rnd = new Random();
-			int randindex = rnd.nextInt(this.genomes.size());
-			Genome first_rep = this.genomes.get(this.genomes.keySet().toArray()[randindex]);
+			Genome first_rep = this.genomes.get(this.genomes.keySet().iterator().next());
 			this.pop_species.add(new Species(next_species_id, first_rep.id));
 			next_species_id++;
 			speciated.add(first_rep.id);
