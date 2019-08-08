@@ -71,18 +71,13 @@ public class Xor {
 					System.out.println(best_genome_id);
 					System.out.println(best_fitness);
 				}
-				//System.out.println(current_genome.fitness);
-				//System.out.println(test_net.as_json());
+				//System.out.println(best_fitness);
 			}
+			
 			test_pop.speciate_population();
 			
 			test_pop.the_reproduction_function();
-			
-			System.out.println(test_pop.genomes.size());
 		}
-		//System.out.println("best genome id: ");
-		
-		//System.out.println(test_pop.get_best_genome_id());
 	}
 	
 	public void permute_signs(int coord_len) {
