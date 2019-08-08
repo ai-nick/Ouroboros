@@ -15,7 +15,7 @@ public class TestGenome {
 		int pop_size = 100000;
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
-		
+		int num_nulls = 0;
 		for (int i = 0; i < pop_size; i++)
 		{
 			Genome next = test_pop.genomes.get(i);
@@ -30,10 +30,13 @@ public class TestGenome {
 					System.out.println("genome: ");
 					System.out.println(next.id);
 					System.out.println("null conn encountered, id = " + next.conn_genes.get(x).toString());
+					num_nulls++;
 				}
 			}
 		}
-		System.out.println(test_pop.connection_genes.get(7).toString());
+		System.out.println("number of null conns found");
+		System.out.println(num_nulls);
+		//System.out.println(test_pop.connection_genes.get(7).toString());
 	}
 
 }
