@@ -15,6 +15,7 @@ public class NeuralNetwork implements INeuralNet {
 	public boolean fully_activated;
 	HashMap<Integer, NodeGene> nodes = new HashMap<Integer, NodeGene>();
 	HashMap<Integer, ConnectionGene> conns = new HashMap<Integer, ConnectionGene>();
+	ArrayList<Integer> activated_conns = new ArrayList<Integer>();
 	public boolean feed_forward;
 	int num_output = 0;
 	int outs_count = 0;
@@ -92,32 +93,35 @@ public class NeuralNetwork implements INeuralNet {
 				// next node is set to null 
 				for(int x = 0; x < num_connections; x++)
 				{
-					ConnectionGene next_conn = this.conns.get(current.connections.get(x));
-					if(next_conn == null)
+					if(this.activated_conns.contains(current.connections.get(x)) != true)
 					{
-						System.out.println("null conn encountered");	
-					}
-					else
-					{
-						NodeGene next_node = this.nodes.get(next_conn.to_node);
-						if(next_node != null) {
-							next_node.add_to_current_value(current.get_current_val() * next_conn.get_weight());
-							
-							next_node.current_val = Activator.activate(next_node.activation, next_node.current_val);
-							
-							if(!next_actives.contains(next_node))
-							{	
-								if(next_node.is_output == true || next_node.is_input == true)
-								{
-									this.outs_count++;
-									next_node.visits++;
-								}
-								else
-								{
-									next_actives.add(next_node);
-								}
+						ConnectionGene next_conn = this.conns.get(current.connections.get(x));
+						if(next_conn == null)
+						{
+							System.out.println("null conn encountered");	
+						}
+						else
+						{
+							NodeGene next_node = this.nodes.get(next_conn.to_node);
+							if(next_node != null) {
+								next_node.add_to_current_value(current.get_current_val() * next_conn.get_weight());
+								
+								next_node.current_val = Activator.activate(next_node.activation, next_node.current_val);
+								
+								if(!next_actives.contains(next_node))
+								{	
+									if(next_node.is_output == true || next_node.is_input == true)
+									{
+										this.outs_count++;
+										next_node.visits++;
+									}
+									else
+									{
+										next_actives.add(next_node);
+									}
+								}	
 							}	
-						}	
+						}
 					}
 				}
 			}
