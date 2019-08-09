@@ -407,7 +407,7 @@ public class Population {
 			}
 		}
 		//for (Integer ik: GenomeB.get_al)
-		
+		this.next_genome_id++;
 		this.genomes.put(offspring.id, offspring);
 		
 	}
