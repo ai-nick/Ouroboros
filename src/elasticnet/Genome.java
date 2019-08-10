@@ -39,7 +39,10 @@ public class Genome {
 	// used when mutating this genome, leaves the original alone 
 	// pretty sure we need to pass in pops master map of genes here and
 	// add entries for this id
-	public Genome(Genome cloner, int id)
+	public Genome(Genome cloner, int id,
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns,
+			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes
+			)
 	{
 		this.id = id;
 		gen_born = cloner.gen_born + 1;

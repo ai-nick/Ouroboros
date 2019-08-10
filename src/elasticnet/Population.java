@@ -316,7 +316,7 @@ public class Population {
 		}
 		
 		// give the offspring a new id and increment our next id property
-		Genome offspring = new Genome(this.hash_id, this.next_genome_id);
+		Genome offspring = new Genome(this.hash_id, this.next_genome_id, this.connection_genes, this.node_genes);
 		
 		this.next_genome_id++;
 		
@@ -407,7 +407,6 @@ public class Population {
 			}
 		}
 		//for (Integer ik: GenomeB.get_al)
-		this.next_genome_id++;
 		this.genomes.put(offspring.id, offspring);
 		
 	}
