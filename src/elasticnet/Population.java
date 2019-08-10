@@ -307,6 +307,24 @@ public class Population {
 		// give the offspring a new id and increment our next id property
 		Genome offspring = new Genome(this.hash_id, this.next_genome_id);
 		
+		int in_count = this.config.num_input;
+		int out_count = this.config.num_output;
+		
+		for(int i = 0; i < in_count; i++)
+		{
+			int node_id = GenomeA.input_nodes.get(i);
+			offspring.input_nodes.add(node_id);
+			NodeGene clone_node = this.node_genes.get(node_id).get(GenomeA.id);
+			this.node_genes.get(node_id).put(offspring.id, clone_node);
+		}
+		for(int i = 0; i < out_count; i++)
+		{
+			int node_id = GenomeA.output_nodes.get(i);
+			offspring.output_nodes.add(node_id);
+			NodeGene clone_node = this.node_genes.get(node_id).get(GenomeA.id);
+			this.node_genes.get(node_id).put(offspring.id, clone_node);
+		}
+		
 		this.next_genome_id++;
 		
 		// get the max num of genes for hidden nodes and connections 
@@ -325,9 +343,34 @@ public class Population {
 			node_gene_counter = GenomeB.output_nodes.size()+GenomeB.input_nodes.size()+GenomeB.hidden_nodes.size();
 		}
 		
+		int gA_conn_counter = GenomeA.conn_genes.size();
+		
+		for (int k = 0; k < gA_conn_counter; k++)
+		{
+			int gA_id = GenomeA.conn_genes.get(k);
+			
+			ConnectionGene gA = this.connection_genes.get(gA_id).get(GenomeA.id);
+			
+			if(!GenomeB.conn_genes.contains(gA_id))
+			{
+				this.connection_genes.get(gA_id).put(offspring.id, gA);
+				offspring.conn_genes.add(gA_id);
+			}
+			else
+			{	
+				ConnectionGene gB = this.connection_genes.get(gA_id).get(GenomeB.id);
+				
+				offspring.conn_genes.add(gA_id);
+				
+				this.connection_genes.get(gA_id).put(offspring.id, _cross_over_conns(gA, gB));
+			}
+		}
+		
 		// now the connection genes have been handled, on to nodes
 		ArrayList<Integer> gA_all_node_ids = GenomeA.get_all_nodes();
 		ArrayList<Integer> gB_all_node_ids = GenomeB.get_all_nodes();
+		
+		/*
 		int full_node_count = gA_all_node_ids.size();
 		
 		for (int ik = 0; ik < full_node_count; ik++)
@@ -361,6 +404,7 @@ public class Population {
 				this.node_genes.get(gA_id).put(offspring.id, crossed);
 			}
 		}
+		*/
 		//for (Integer ik: GenomeB.get_al)
 		this.genomes.put(offspring.id, offspring);
 		
