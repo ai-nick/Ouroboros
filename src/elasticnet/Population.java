@@ -305,7 +305,7 @@ public class Population {
 		}
 		
 		// give the offspring a new id and increment our next id property
-		Genome offspring = new Genome(this.hash_id, this.next_genome_id, this.connection_genes, this.node_genes);
+		Genome offspring = new Genome(this.hash_id, this.next_genome_id);
 		
 		this.next_genome_id++;
 		
@@ -323,40 +323,6 @@ public class Population {
 		else
 		{
 			node_gene_counter = GenomeB.output_nodes.size()+GenomeB.input_nodes.size()+GenomeB.hidden_nodes.size();
-		}
-		/*
-		if(GenomeA.conn_genes.size() > GenomeB.conn_genes.size())
-		{
-			conn_gene_counter = GenomeA.conn_genes.size();
-			use_a = true;
-		}
-		else
-		{
-			conn_gene_counter = GenomeB.conn_genes.size();
-			use_a = false;
-		}
-		*/
-		int gA_conn_counter = GenomeA.conn_genes.size();
-		
-		for (int k = 0; k < gA_conn_counter; k++)
-		{
-			int gA_id = GenomeA.conn_genes.get(k);
-			
-			ConnectionGene gA = this.connection_genes.get(gA_id).get(GenomeA.id);
-			
-			if(!GenomeB.conn_genes.contains(gA_id))
-			{
-				this.connection_genes.get(gA_id).put(offspring.id, gA);
-				offspring.conn_genes.add(gA_id);
-			}
-			else
-			{	
-				ConnectionGene gB = this.connection_genes.get(gA_id).get(GenomeB.id);
-				
-				offspring.conn_genes.add(gA_id);
-				
-				this.connection_genes.get(gA_id).put(offspring.id, _cross_over_conns(gA, gB));
-			}
 		}
 		
 		// now the connection genes have been handled, on to nodes
