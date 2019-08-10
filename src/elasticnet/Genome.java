@@ -52,6 +52,19 @@ public class Genome {
 		input_nodes = new ArrayList<Integer>(cloner.input_nodes);
 		hidden_nodes = new ArrayList<Integer>(cloner.hidden_nodes);
 		output_nodes = new ArrayList<Integer>(cloner.output_nodes);
+		int conn_count = conn_genes.size();
+		for(int ix = 0; ix < conn_count; ix++)
+		{
+			ConnectionGene to_add = pop_conns.get(conn_genes.get(ix)).get(cloner.id);
+			pop_conns.get(conn_genes.get(ix)).put(this.id, to_add);
+		}
+		ArrayList<Integer> all_nodes = this.get_all_nodes();
+		int node_count = all_nodes.size();
+		for(int ix = 0; ix < node_count; ix++)
+		{
+			NodeGene to_add = pop_nodes.get(all_nodes.get(ix)).get(cloner.id);
+			pop_nodes.get(conn_genes.get(ix)).put(this.id, to_add);
+		}
 	}
 	
 	public int create_from_scratch(NeatConfig config, 

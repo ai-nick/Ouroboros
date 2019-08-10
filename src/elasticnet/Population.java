@@ -255,19 +255,8 @@ public class Population {
 	
 	public void breed_asexual(Genome single_parent, Species the_species)
 	{
-		Genome offspring = new Genome(single_parent, this.next_genome_id);
+		Genome offspring = new Genome(single_parent, this.next_genome_id, this.connection_genes, this.node_genes);
 		ArrayList<Integer> all_nodes = offspring.get_all_nodes();
-		int nodes_count = all_nodes.size();
-		for(int i = 0; i < nodes_count; i++) {
-			NodeGene cloned = this.node_genes.get(all_nodes.get(i)).get(single_parent.id);
-			this.node_genes.get(all_nodes.get(i)).put(offspring.id, cloned);
-		}
-		int conn_count = offspring.conn_genes.size();
-		for(int i = 0; i < conn_count; i++)
-		{
-			ConnectionGene cloned = this.connection_genes.get(offspring.conn_genes.get(i)).get(single_parent.id);
-			this.connection_genes.get(offspring.conn_genes.get(i)).put(offspring.id, cloned);
-		}
 		offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
 		this.next_genome_id++;
 		the_species.member_ids.add(offspring.id);
