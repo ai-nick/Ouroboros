@@ -96,6 +96,7 @@ public class NeuralNetwork implements INeuralNet {
 					if(this.activated_conns.contains(current.connections.get(x)) != true)
 					{
 						ConnectionGene next_conn = this.conns.get(current.connections.get(x));
+						//getting conns without to_node set here
 						NodeGene next_node = this.nodes.get(next_conn.to_node);
 						if(next_node != null) {
 							next_node.add_to_current_value(current.get_current_val() * next_conn.get_weight());
