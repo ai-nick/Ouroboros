@@ -43,10 +43,16 @@ public class NeuralNetwork implements INeuralNet {
 		for(int i = 0; i < node_count; i++)
 		{
 			int key = all_ids.get(i);
-			
-			this.nodes.put(key, node_genes.get(key).get(genome_in.id));
+			NodeGene add_node = node_genes.get(key).get(genome_in.id);
+			this.nodes.put(key, add_node);
+			int num_conns = add_node.connections.size();
+			for(int x = 0; x < num_conns; x++)
+			{
+				int gene_id = add_node.connections.get(x);
+				this.conns.put(gene_id, conn_genes.get(gene_id).get(genome_in.id));
+			}
 		}
-		
+		/*
 		int conn_count = genome_in.conn_genes.size();
 		
 		for(int i = 0; i < conn_count; i++)
@@ -54,7 +60,7 @@ public class NeuralNetwork implements INeuralNet {
 			int gene_id = genome_in.conn_genes.get(i);
 			this.conns.put(gene_id, conn_genes.get(gene_id).get(genome_in.id));
 		}
-		
+		*/
 		this.output_ids = genome_in.output_nodes;
 		
 		this.outs_count = this.output_ids.size();
@@ -96,6 +102,10 @@ public class NeuralNetwork implements INeuralNet {
 					if(this.activated_conns.contains(current.connections.get(x)) != true)
 					{
 						ConnectionGene next_conn = this.conns.get(current.connections.get(x));
+						if(next_conn == null)
+						{
+							System.out.println("null conn encountered");
+						}
 						//getting conns without to_node set here
 						NodeGene next_node = this.nodes.get(next_conn.to_node);
 						if(next_node != null) {

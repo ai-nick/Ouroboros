@@ -21,26 +21,23 @@ public class TestGenome {
 		for (int i = 0; i < pop_size; i++)
 		{
 			Genome next = test_pop.genomes.get(i);
+			ArrayList<Integer> all_nodes = next.get_all_nodes();
+			int num_nodes = all_nodes.size();
 			
-			int num_conns = next.conn_genes.size();
-			
-			for(int x = 0; x < num_conns; x++)
+			for(int x = 0; x < num_nodes; x++)
 			{
-				ConnectionGene next_conn = test_pop.connection_genes.get(next.conn_genes.get(x)).get(next.id);
-				if(next_conn == null)
+				NodeGene next_node = test_pop.node_genes.get(all_nodes.get(x)).get(next.id);
+				int num_conns = next_node.get_connections().size();
+				for(int ix = 0; ix < num_conns; ix++)
 				{
-					System.out.println("genome: ");
-					System.out.println(next.id);
-					System.out.println("null conn encountered, id = " + next.conn_genes.get(x).toString());
-					num_nulls++;
-				}
-				if(next.get_all_nodes().contains(next_conn.get_to()) == false)
-				{
-					num_null_to_nodes++;
-				}
-				if(next.get_all_nodes().contains(next_conn.get_from()) == false)
-				{
-					num_null_nodes++;
+					ConnectionGene next_conn = test_pop.connection_genes.get(next_node.get_connections().get(ix)).get(next.id);
+					if(next_conn == null)
+					{
+						System.out.println("genome: ");
+						System.out.println(next.id);
+						System.out.println("null conn encountered, id = " + next.conn_genes.get(ix).toString());
+						num_nulls++;
+					}
 				}
 			}
 		}
