@@ -394,7 +394,7 @@ public class Genome {
 				int g_id = the_map.keySet().iterator().next();
 				if(g_id == this.id)
 				{
-					//if we hid this it aint it chief
+					//if we hit this it aint it chief
 					return gene_id;
 				}
 				ConnectionGene cg = the_map.get(g_id);
@@ -548,8 +548,9 @@ public class Genome {
 				ConnectionGene pop_conn = pop_conns.get(ix).get(this.id);
 				if(pop_conn.to_node == delete_node.inno_id || pop_conn.from_node == delete_node.inno_id)
 				{
+					NodeGene from_node = pop_nodes.get(pop_conn.from_node).get(this.id);
+					from_node.connections.remove(from_node.connections.indexOf(from_node.inno_id));
 					pop_conns.get(ix).remove(this.id);
-					
 					this.conn_genes.remove(this.conn_genes.indexOf(ix));		
 				}
 			}
@@ -579,8 +580,11 @@ public class Genome {
 		
 		ArrayList<Integer> all_nodes = this.get_all_nodes();
 		
-		int count = all_nodes.size();
+		NodeGene from_node = pop_nodes.get(delete_conn.from_node).get(this.id);
 		
+		from_node.connections.remove(from_node.connections.indexOf(delete_id));
+		//int count = all_nodes.size();
+		/*
 		for(int ix = 0; ix < count; ix++)
 		{
 			NodeGene current = pop_nodes.get(all_nodes.get(ix)).get(this.id);
@@ -590,7 +594,7 @@ public class Genome {
 				current.connections.remove(delete_index);	
 			}
 		}
-		
+		*/
 		this.conn_genes.remove(delete_key);
 		
 		pop_conns.get(delete_id).remove(this.id);
@@ -612,19 +616,19 @@ public class Genome {
 				
 				ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, new_id, this.id);
 				
-				this.conn_genes.add(new_id);
+				this.conn_genes.add(new_gene.inno_id);
 				
 				from_node.connections.add(new_gene.inno_id);
 				
-				if(pop_conns.keySet().contains(new_id))
+				if(pop_conns.keySet().contains(new_gene.inno_id))
 				{
-					pop_conns.get(new_id).put(this.id, new_gene);
+					pop_conns.get(new_gene.inno_id).put(this.id, new_gene);
 				}
 				else
 				{
 					HashMap<Integer, ConnectionGene> new_dict = new HashMap<Integer, ConnectionGene>();
 					new_dict.put(this.id, new_gene);
-					pop_conns.put(new_id, new_dict);
+					pop_conns.put(new_gene.inno_id, new_dict);
 				}
 				pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 				new_id++;

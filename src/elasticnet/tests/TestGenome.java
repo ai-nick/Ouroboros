@@ -12,7 +12,7 @@ public class TestGenome {
 	
 	public static void main(String[] args) throws IOException {
 		
-		int pop_size = 100000;
+		int pop_size = 100;
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		int num_nulls = 0;
@@ -35,7 +35,7 @@ public class TestGenome {
 					{
 						System.out.println("genome: ");
 						System.out.println(next.id);
-						System.out.println("null conn encountered, id = " + next.conn_genes.get(ix).toString());
+						System.out.println("null conn encountered, id = " + next_node.get_connections().get(ix).toString());
 						num_nulls++;
 					}
 				}
