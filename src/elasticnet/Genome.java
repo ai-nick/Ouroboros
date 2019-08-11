@@ -304,13 +304,6 @@ public class Genome {
 				return new_id;
 			}
 		}
-		
-		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
-		
-		//NodeGene to_node = pop_nodes.get(all_the_nodes.get(to_node_key)).get(this.id);
-		
-		// the next to if statements ensure we dont add conns that are either output -> output
-		// of input->input
 		if(this.output_nodes.contains(to_node_key) && this.output_nodes.contains(from_node_key))
 		{
 			return new_id;
@@ -323,6 +316,13 @@ public class Genome {
 		{
 			return new_id;
 		}
+		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
+		
+		//NodeGene to_node = pop_nodes.get(all_the_nodes.get(to_node_key)).get(this.id);
+		
+		// the next to if statements ensure we dont add conns that are either output -> output
+		// of input->input
+
 		for(Integer p : pop_conns.keySet())
 		{
 			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
