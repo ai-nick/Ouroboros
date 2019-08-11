@@ -256,7 +256,7 @@ public class Population {
 	public void breed_asexual(Genome single_parent, Species the_species)
 	{
 		Genome offspring = new Genome(single_parent, this.next_genome_id, this.connection_genes, this.node_genes);
-		ArrayList<Integer> all_nodes = offspring.get_all_nodes();
+		
 		offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
 		this.next_genome_id++;
 		the_species.member_ids.add(offspring.id);
@@ -324,9 +324,6 @@ public class Population {
 			NodeGene clone_node = this.node_genes.get(node_id).get(GenomeA.id);
 			this.node_genes.get(node_id).put(offspring.id, clone_node);
 		}
-		
-		this.next_genome_id++;
-		
 		// get the max num of genes for hidden nodes and connections 
 		boolean use_a;
 		
@@ -374,52 +371,26 @@ public class Population {
 				
 				offspring.conn_genes.add(gA_id);
 				
-				this.connection_genes.get(gA_id).put(offspring.id, _cross_over_conns(gA, gB));
+				ConnectionGene crossed_over = _cross_over_conns(gA, gB);
+				
+				if(offspring.input_nodes.contains(crossed_over.from_node) == false && offspring.hidden_nodes.contains(crossed_over.from_node) == false)
+				{
+					offspring.hidden_nodes.add(crossed_over.from_node);
+					NodeGene from_node = this.node_genes.get(crossed_over.from_node).get(GenomeA.id);
+					this.node_genes.get(crossed_over.from_node).put(offspring.id, from_node);
+				}
+				if(offspring.output_nodes.contains(crossed_over.to_node) == false && offspring.hidden_nodes.contains(crossed_over.to_node) == false) 
+				{
+					offspring.hidden_nodes.add(crossed_over.to_node);
+					NodeGene from_node = this.node_genes.get(crossed_over.to_node).get(GenomeA.id);
+					this.node_genes.get(crossed_over.to_node).put(offspring.id, from_node);	
+				}				
+				
+				this.connection_genes.get(gA_id).put(offspring.id, crossed_over);
 			}
 		}
-		
-		// now the connection genes have been handled, on to nodes
-		ArrayList<Integer> gA_all_node_ids = GenomeA.get_all_nodes();
-		ArrayList<Integer> gB_all_node_ids = GenomeB.get_all_nodes();
-		
-		/*
-		int full_node_count = gA_all_node_ids.size();
-		
-		for (int ik = 0; ik < full_node_count; ik++)
-		{
-			int gA_id = gA_all_node_ids.get(ik);
-			NodeGene gA_node = this.node_genes.get(gA_id).get(GenomeA.id);
-			if(gB_all_node_ids.contains(gA_id) != true)
-			{
-				// retrieve gene from master dictionary
-				if(gA_node.is_input == true)
-				{
-					offspring.input_nodes.add(gA_id);
-					this.node_genes.get(gA_id).put(offspring.id, gA_node);
-				}
-				if(gA_node.is_output == true)
-				{
-					offspring.output_nodes.add(gA_id);
-					this.node_genes.get(gA_id).put(offspring.id, gA_node);					
-				}
-				if(gA_node.is_input == false && gA_node.is_output == false)
-				{
-					offspring.hidden_nodes.add(gA_id);
-					this.node_genes.get(gA_id).put(offspring.id, gA_node);
-				}
-			}
-			else
-			{
-				NodeGene gB_node = this.node_genes.get(gA_id).get(GenomeB.id);
-				NodeGene crossed = _cross_over_nodes(gA_node, gB_node);
-				offspring.set_node(crossed);
-				this.node_genes.get(gA_id).put(offspring.id, crossed);
-			}
-		}
-		*/
-		//for (Integer ik: GenomeB.get_al)
 		this.genomes.put(offspring.id, offspring);
-		
+		this.next_genome_id++;
 	}
 	
 
