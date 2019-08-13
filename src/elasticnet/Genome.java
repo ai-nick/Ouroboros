@@ -506,13 +506,11 @@ public class Genome {
 			
 			System.out.println("add node gene with id: " + new_node.inno_id);
 			
-			new_id++;
-			
 			NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
 			
 			from_node.connections.remove(from_node.connections.indexOf(connection_to_split_index));
 			
-			from_node.connections.add(new_conn_b.inno_id);
+			new_id++;
 		}
 		this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
 		
