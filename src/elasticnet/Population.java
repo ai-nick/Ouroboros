@@ -383,6 +383,12 @@ public class Population {
 				{
 					offspring.hidden_nodes.add(crossed_over.to_node);
 					NodeGene from_node = this.node_genes.get(crossed_over.to_node).get(GenomeA.id);
+					int node_conn_count = from_node.connections.size();
+					for (int z = 0; z < node_conn_count; z++)
+					{
+						int node_conn_id = from_node.connections.get(z);
+						this.connection_genes.get(node_conn_id).put(offspring.id, this.connection_genes.get(node_conn_id).get(GenomeA.id));
+					}
 					this.node_genes.get(crossed_over.to_node).put(offspring.id, from_node);	
 				}				
 				
