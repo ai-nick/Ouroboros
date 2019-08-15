@@ -80,6 +80,9 @@ public class Population {
 			{
 				Genome gBaby = new Genome(this.hash_id, ix);
 				
+				//System.out.print("setting up genome: ");
+				//System.out.println(ix);
+				
 				this.inno_num = gBaby.create_from_scratch(this.config, this.hash_id, this.node_genes, this.connection_genes);
 				
 				this.genomes.put(ix,gBaby);

@@ -265,6 +265,7 @@ public class Genome {
 		}
 		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
 		{
+			//this is where we are loosing conn pointers from node genes
 			System.out.println("adding node here");
 			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
 		}
@@ -298,6 +299,7 @@ public class Genome {
 		for(int i = 0; i < num_conns; i++)
 		{
 			ConnectionGene next_gene = pop_conns.get(this.conn_genes.get(i)).get(this.id);
+			
 			if(next_gene.to_node == to_node_key && next_gene.from_node == from_node_key)
 			{
 				//god doesnt play dice, this mutation wasnt meant to be
@@ -328,7 +330,8 @@ public class Genome {
 			HashMap<Integer, ConnectionGene> gene_list = pop_conns.get(p);
 			if(gene_list.keySet().iterator().hasNext())
 			{
-				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());					
+				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());
+				
 				if ((p_conn.to_node == to_node_key) && (p_conn.from_node == from_node.inno_id))
 				{
 					conn_id = p_conn.inno_id;
