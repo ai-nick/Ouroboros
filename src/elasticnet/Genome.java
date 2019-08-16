@@ -404,25 +404,8 @@ public class Genome {
 					}
 					if (cg.from_node == connection_to_split.from_node)
 					{
-						HashMap<Integer, NodeGene> node_map = pop_nodes.get(cg.to_node);
-						if(node_map != null && node_map.keySet().iterator().hasNext() == true)
-						{
-							NodeGene ng = node_map.get(node_map.keySet().iterator().next());
-							
-							int node_conn_count = ng.connections.size();
-							
-							for(int i = 0; i < node_conn_count; i++)
-							{
-								ConnectionGene next_cg = pop_conns.get(ng.connections.get(i)).get(g_id);
-								if(next_cg.to_node == connection_to_split.to_node)
-								{
-									struct_exists = true;
-									gene_id = ng.inno_id;
-									conn_a_id = cg.inno_id;
-									conn_b_id = next_cg.inno_id;
-								}
-							}	
-						}
+						//TODO check all conns for this node, see if it has one to the to_node for our
+						//conn to split
 					}
 				}
 			}
