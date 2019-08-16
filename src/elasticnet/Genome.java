@@ -395,38 +395,36 @@ public class Genome {
 			if(the_map != null && the_map.keySet().iterator().hasNext() == true)
 			{
 				int g_id = the_map.keySet().iterator().next();
-				if(g_id == this.id)
+				if(g_id != this.id)
 				{
-					//if we hit this it aint it chief
-					return gene_id;
-				}
-				ConnectionGene cg = the_map.get(g_id);
-				if(cg == null)
-				{
-					System.out.println("null conn encountered");
-				}
-				if (cg.from_node == connection_to_split.from_node)
-				{
-					HashMap<Integer, NodeGene> node_map = pop_nodes.get(cg.to_node);
-					if(node_map != null && node_map.keySet().iterator().hasNext() == true)
+					ConnectionGene cg = the_map.get(g_id);
+					if(cg == null)
 					{
-						NodeGene ng = node_map.get(node_map.keySet().iterator().next());
-						
-						int node_conn_count = ng.connections.size();
-						
-						for(int i = 0; i < node_conn_count; i++)
-						{
-							ConnectionGene next_cg = pop_conns.get(ng.connections.get(i)).get(g_id);
-							if(next_cg.to_node == connection_to_split.to_node)
-							{
-								struct_exists = true;
-								gene_id = ng.inno_id;
-								conn_a_id = cg.inno_id;
-								conn_b_id = next_cg.inno_id;
-							}
-						}	
+						System.out.println("null conn encountered");
 					}
-				}	
+					if (cg.from_node == connection_to_split.from_node)
+					{
+						HashMap<Integer, NodeGene> node_map = pop_nodes.get(cg.to_node);
+						if(node_map != null && node_map.keySet().iterator().hasNext() == true)
+						{
+							NodeGene ng = node_map.get(node_map.keySet().iterator().next());
+							
+							int node_conn_count = ng.connections.size();
+							
+							for(int i = 0; i < node_conn_count; i++)
+							{
+								ConnectionGene next_cg = pop_conns.get(ng.connections.get(i)).get(g_id);
+								if(next_cg.to_node == connection_to_split.to_node)
+								{
+									struct_exists = true;
+									gene_id = ng.inno_id;
+									conn_a_id = cg.inno_id;
+									conn_b_id = next_cg.inno_id;
+								}
+							}	
+						}
+					}
+				}
 			}
 		}
 
