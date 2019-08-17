@@ -10,7 +10,7 @@ public class NeatConfig {
 	
 	String defaultActivation = "sigmoid";
 	
-	String output_activation = "tanh";
+	String output_activation = "sigmoid";
 	
 	ArrayList<String> possible_activations = new ArrayList<String>()
 			{{
@@ -28,13 +28,13 @@ public class NeatConfig {
 	
 	int num_hidden = 0;
 	
-	Double elitism = 0.89;
+	Double elitism = 0.5;
 	
 	Double add_conn_prob = .15;
 	Double add_node_prob = .15;
 	Double delete_conn_prob = .1;
 	Double delete_node_prob = .1;
-	Double compat_threshold = 3.0;
+	Double compat_threshold = 2.0;
 	
 	//mins and maxs
 	
@@ -61,7 +61,7 @@ public class NeatConfig {
 	{
 		this.num_input = inputs;
 		this.num_output = outputs;
-		this.output_activation = output_activation;
+		this.output_activation = output_active;
 	}
 	
 	public String as_json()
