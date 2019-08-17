@@ -406,9 +406,20 @@ public class Genome {
 					{
 						//TODO check all conns for this node, see if it has one to the to_node for our
 						//conn to split
-						NodeGene from_node_conn_count = pop_nodes.get(connection_to_split.from_node).get(g_id);
+						NodeGene middle_node = pop_nodes.get(cg.to_node).get(g_id);
 						// Ah Tasha Sultana inspired my ass now i got 
-						
+						int conn_count = middle_node.connections.size();
+						for (int x = 0; x < conn_count; x++)
+						{
+							ConnectionGene second_conn = pop_conns.get(middle_node.connections.get(x)).get(g_id);
+							if(second_conn.to_node == connection_to_split.to_node)
+							{
+								struct_exists = true;
+								conn_a_id = cg.inno_id;
+								conn_b_id = second_conn.inno_id;
+								gene_id = middle_node.inno_id;
+							}
+						}
 					}
 				}
 			}
