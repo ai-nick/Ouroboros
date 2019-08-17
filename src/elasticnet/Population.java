@@ -432,6 +432,10 @@ public class Population {
 	
 	private ConnectionGene _cross_over_conns(ConnectionGene a, ConnectionGene b)
 	{
+		System.out.print("crossing over conns: ");
+		System.out.print(a.inno_id);
+		System.out.print(" and ");
+		System.out.print(b.inno_id);
 		ConnectionGene new_gene = new ConnectionGene(a.from_node, a.to_node, a.inno_id);
 		
 		new_gene.activation_level = a.activation_level;
@@ -452,6 +456,10 @@ public class Population {
 	
 	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b)
 	{
+		System.out.print("crossing over nodes: ");
+		System.out.print(a.inno_id);
+		System.out.print(" and ");
+		System.out.print(b.inno_id);
 		NodeGene new_node = new NodeGene(a.inno_id, this.hash_id);
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;

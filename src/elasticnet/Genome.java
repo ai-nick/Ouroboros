@@ -63,7 +63,7 @@ public class Genome {
 		for(int ix = 0; ix < node_count; ix++)
 		{
 			NodeGene to_add = pop_nodes.get(all_nodes.get(ix)).get(cloner.id);
-			pop_nodes.get(conn_genes.get(ix)).put(this.id, to_add);
+			pop_nodes.get(all_nodes.get(ix)).put(this.id, to_add);
 		}
 	}
 	
@@ -250,23 +250,23 @@ public class Genome {
 		}
 		if (rand.nextFloat() < (config.delete_node_prob/prob_sum))
 		{
-			System.out.println("deleting node here");
+			//System.out.println("deleting node here");
 			mutate_delete_node(pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.delete_conn_prob/prob_sum))
 		{
-			System.out.println("deleting conn here");
+			//System.out.println("deleting conn here");
 			mutate_delete_conn(pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
 		{
-			System.out.println("adding conn here");
+			//System.out.println("adding conn here");
 			new_id = mutate_add_conn(new_id, pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
 		{
 			//this is where we are loosing conn pointers from node genes
-			System.out.println("adding node here");
+			//System.out.println("adding node here");
 			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
 		}
 		return new_id;
@@ -379,8 +379,8 @@ public class Genome {
 		
 		int connection_to_split_index = this.conn_genes.get(this.get_random_in_range(this.conn_genes.size()));
 		
-		System.out.println("splitting conn");
-		System.out.println(connection_to_split_index);
+		//System.out.println("splitting conn");
+		//System.out.println(connection_to_split_index);
 		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
@@ -483,7 +483,7 @@ public class Genome {
 			
 			pop_conns.put(new_id, new_conn_dict_a);
 			
-			System.out.println("add new conn gene with id: " + new_conn_a.inno_id);
+			//System.out.println("add new conn gene with id: " + new_conn_a.inno_id);
 			
 			new_id++;
 			
@@ -497,7 +497,7 @@ public class Genome {
 			
 			pop_conns.put(new_id, new_conn_dict_b);
 			
-			System.out.println("add new conn gene with id: " + new_conn_b.inno_id);
+			//System.out.println("add new conn gene with id: " + new_conn_b.inno_id);
 			
 			new_node.connections.add(new_conn_b.inno_id);
 			
@@ -509,7 +509,7 @@ public class Genome {
 			
 			this.hidden_nodes.add(new_node.inno_id);
 			
-			System.out.println("add node gene with id: " + new_node.inno_id);
+			//System.out.println("add node gene with id: " + new_node.inno_id);
 			
 			NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
 			

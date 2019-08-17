@@ -32,6 +32,8 @@ public class NeuralNetwork implements INeuralNet {
 			HashMap<Integer, HashMap<Integer, ConnectionGene>> conn_genes
 			)
 	{
+		System.out.print("running genome ");
+		System.out.println(genome_in.id);
 		this.fully_activated = false;
 		
 		this.input_ids = genome_in.input_nodes;
@@ -104,9 +106,10 @@ public class NeuralNetwork implements INeuralNet {
 						ConnectionGene next_conn = this.conns.get(current.connections.get(x));
 						if(next_conn == null)
 						{
-							System.out.println("null conn encountered");
+							System.out.print("null conn encountered: ");
+							System.out.println(current.connections.get(x));
+							System.out.println(this.conns.toString());
 						}
-						//getting conns without to_node set here
 						NodeGene next_node = this.nodes.get(next_conn.to_node);
 						if(next_node != null) {
 							next_node.add_to_current_value(current.get_current_val() * next_conn.get_weight());

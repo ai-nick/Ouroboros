@@ -31,7 +31,7 @@ public class Xor {
 		
 		int num_epochs = this.signs.length/2;
 		
-		int pop_size = 50;
+		int pop_size = 80;
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size);
 		
@@ -53,7 +53,7 @@ public class Xor {
 				
 				for(int z = 0; z < 4; z++)
 				{
-					System.out.println(z);
+					//System.out.println(z);
 					test_net.set_input(inputs[z]);
 					
 					test_net.Activate();
@@ -73,9 +73,9 @@ public class Xor {
 				}
 				//System.out.println(best_fitness);
 			}
-			
+			System.out.println("speciating");
 			test_pop.speciate_population();
-			
+			System.out.println("reproducing");
 			test_pop.the_reproduction_function();
 		}
 	}
