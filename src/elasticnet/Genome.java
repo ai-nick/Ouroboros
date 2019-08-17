@@ -379,6 +379,9 @@ public class Genome {
 		
 		int connection_to_split_index = this.conn_genes.get(this.get_random_in_range(this.conn_genes.size()));
 		
+		System.out.println("splitting conn");
+		System.out.println(connection_to_split_index);
+		
 		ConnectionGene connection_to_split = pop_conns.get(connection_to_split_index).get(this.id);
 		
 		boolean struct_exists = false;
@@ -436,8 +439,6 @@ public class Genome {
 			
 			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, conn_a_id, this.id);
 			
-			pop_nodes.get(connection_to_split.from_node).get(this.id).connections.add(new_conn_a.inno_id);
-			
 			this.conn_genes.add(conn_a_id);
 			
 			pop_conns.get(conn_a_id).put(this.id, new_conn_a);
@@ -453,6 +454,12 @@ public class Genome {
 			pop_nodes.get(gene_id).put(this.id, new_node);
 			
 			this.hidden_nodes.add(gene_id);
+			
+			NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
+			
+			from_node.connections.add(new_conn_a.inno_id);
+			
+			from_node.connections.remove(from_node.connections.indexOf(connection_to_split_index));
 		}
 		else
 		{
