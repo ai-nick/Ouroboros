@@ -406,6 +406,9 @@ public class Genome {
 					{
 						//TODO check all conns for this node, see if it has one to the to_node for our
 						//conn to split
+						NodeGene from_node_conn_count = pop_nodes.get(connection_to_split.from_node).get(g_id);
+						// Ah Tasha Sultana inspired my ass now i got 
+						
 					}
 				}
 			}
