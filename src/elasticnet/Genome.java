@@ -48,29 +48,29 @@ public class Genome {
 		gen_born = cloner.gen_born + 1;
 		population_hash = cloner.population_hash;
 		species_id = cloner.species_id;
-		//conn_genes = new ArrayList<Integer>(cloner.conn_genes);
+		conn_genes = new ArrayList<Integer>(cloner.conn_genes);
 		input_nodes = new ArrayList<Integer>(cloner.input_nodes);
 		hidden_nodes = new ArrayList<Integer>(cloner.hidden_nodes);
 		output_nodes = new ArrayList<Integer>(cloner.output_nodes);
 		int conn_count = conn_genes.size();
-		/*
 		for(int ix = 0; ix < conn_count; ix++)
 		{
 			ConnectionGene to_add = pop_conns.get(conn_genes.get(ix)).get(cloner.id);
 			pop_conns.get(conn_genes.get(ix)).put(this.id, to_add);
 		}
-		*/
 		ArrayList<Integer> all_nodes = this.get_all_nodes();
 		int node_count = all_nodes.size();
 		for(int ix = 0; ix < node_count; ix++)
 		{
 			NodeGene to_add = pop_nodes.get(all_nodes.get(ix)).get(cloner.id);
+			/*
 			int conns = to_add.connections.size();
 			for (int x = 0; x < conns; x++)
 			{
 				ConnectionGene conn_to_add = pop_conns.get(to_add.connections.get(x)).get(cloner.id);
 				pop_conns.get(to_add.connections.get(x)).put(this.id, conn_to_add);
 			}
+			*/
 			pop_nodes.get(all_nodes.get(ix)).put(this.id, to_add);
 		}
 	}
@@ -358,15 +358,23 @@ public class Genome {
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
 			pop_conns.put(conn_id, new_map);
-			new_id++;
 		}
 		else 
 		{
 			pop_conns.get(conn_id).put(this.id, new_gene);
+			conn_id++;
 		}
 		this.conn_genes.add(new_gene.inno_id);
 		from_node.connections.add(new_gene.inno_id);
-		return conn_id;
+		if(new_id == conn_id)
+		{
+			new_id++;
+			return new_id;
+		}
+		else
+		{
+			return new_id;	
+		}
 	}
 	
 	private int mutate_add_node(int new_id, 
