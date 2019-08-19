@@ -33,7 +33,10 @@ public class ConnectionGene implements IConnection {
 	
 	public ConnectionGene(ConnectionGene to_clone, int new_id)
 	{
-		
+		this.to_node = to_clone.to_node;
+		this.from_node = to_clone.from_node;
+		this.activation_level = to_clone.activation_level;
+		int num_atts = to_clone.atts.size();
 	}
 	
 	public void set_weight(double w) {

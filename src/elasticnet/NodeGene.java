@@ -74,12 +74,6 @@ public class NodeGene implements INode {
 		return this.activation;
 	}
 	
-	
-	public ArrayList<Double> get_coord()
-	{
-		return this.coordinate;
-	}
-	
 	public boolean get_is_recurrent()
 	{
 		return this.is_recurrent;
