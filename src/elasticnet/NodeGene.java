@@ -10,7 +10,7 @@ public class NodeGene implements INode {
 	boolean is_output;
 	String activation = "sigmoid";
 	int inno_id;
-	ArrayList<Double> coordinate;
+	//ArrayList<Double> coordinate;
 	boolean is_recurrent;
 	ArrayList<Integer> connections = new ArrayList<Integer>();
 	HashMap<String, Object> atts = new HashMap<String, Object>();
@@ -40,6 +40,17 @@ public class NodeGene implements INode {
 		this.inno_id = inno_id;
 		this.activation = act;
 		this.level = level;
+	}
+	
+	public NodeGene(NodeGene to_clone, int id)
+	{
+		this.inno_id = id;
+		this.level = to_clone.level;
+		this.is_input = to_clone.is_input;
+		this.is_output = to_clone.is_output;
+		this.activation = to_clone.activation;
+		int num_atts = to_clone.atts.size();
+		int num_conns = to_clone.connections.size(); 
 	}
 	
 	@Override

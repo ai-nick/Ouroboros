@@ -31,6 +31,11 @@ public class ConnectionGene implements IConnection {
 		this.set_weight(weight);
 	}
 	
+	public ConnectionGene(ConnectionGene to_clone, int new_id)
+	{
+		
+	}
+	
 	public void set_weight(double w) {
 		this.atts.put("weight", w);
 	}
