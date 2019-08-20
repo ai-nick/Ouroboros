@@ -12,11 +12,12 @@ public class ConnectionGene implements IConnection {
 	int to_node = -1;
 	int activation_level = 0;
 	//int genome_id;
-	HashMap<String, Double> atts = new HashMap<String, Double>();
+	HashMap<String, Double> atts;
 	double min = -3.0;
 	double max = 3.0;
 	
 	public ConnectionGene(int f, int t, int inno) {
+		this.atts = new HashMap<String, Double>();
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;
@@ -25,6 +26,7 @@ public class ConnectionGene implements IConnection {
 	}
 	
 	public ConnectionGene(int f, int t, int inno, double weight) {
+		this.atts = new HashMap<String, Double>();
 		this.inno_id = inno;
 		this.from_node = f;
 		this.to_node = t;
@@ -36,7 +38,7 @@ public class ConnectionGene implements IConnection {
 		this.to_node = to_clone.to_node;
 		this.from_node = to_clone.from_node;
 		this.activation_level = to_clone.activation_level;
-		int num_atts = to_clone.atts.size();
+		this.atts = new HashMap<String, Double>(to_clone.atts);
 	}
 	
 	public void set_weight(double w) {

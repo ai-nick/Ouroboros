@@ -11,8 +11,6 @@ public interface INode {
 	
 	public int get_level();
 	
-	public ArrayList<Double> get_coord();
-	
 	public boolean get_is_recurrent();
 	
 	public double activate();
