@@ -99,7 +99,8 @@ public class SortTest {
 		
 		for(int x = 0; x < 155; x++)
 		{
-			System.out.println(test.genomes.get(test.index_array[x]).fitness);
+			//System.out.println(test.genomes.get(test.index_array[x]).fitness);
+			System.out.println(test.index_array[x]);
 		}
 	}
 
