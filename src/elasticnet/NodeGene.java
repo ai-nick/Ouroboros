@@ -42,9 +42,9 @@ public class NodeGene implements INode {
 		this.level = level;
 	}
 	
-	public NodeGene(NodeGene to_clone, int id)
+	public NodeGene(NodeGene to_clone)
 	{
-		this.inno_id = id;
+		this.inno_id = to_clone.inno_id;
 		this.level = to_clone.level;
 		this.is_input = to_clone.is_input;
 		this.is_output = to_clone.is_output;

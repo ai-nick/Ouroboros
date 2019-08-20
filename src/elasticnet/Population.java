@@ -241,7 +241,7 @@ public class Population {
 				int spec_size = current_species.member_ids.size();
 				// need to figure out wtf i was even thinking here FUCKING STUPID ASS NICK ASs MFER, WTF VROTHEREN
 				int genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator);
-				if(elite_iterator <= 2)
+				if(elite_iterator <= 2 && elite_iterator < this.pop_species.get(ix).member_ids.size())
 				{
 					System.out.println("breeding asexual");
 					this.breed_asexual(this.genomes.get(genome_id), current_species);	

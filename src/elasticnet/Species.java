@@ -47,7 +47,7 @@ public class Species {
 		if(this.member_ids.size() > 1)
 		{
 			this.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length-1);
-			System.out.println(this.sorted_idx_array.toString());
+			//System.out.println(this.sorted_idx_array);
 		}
 		return this.adjust_fit_sum;
 	}
