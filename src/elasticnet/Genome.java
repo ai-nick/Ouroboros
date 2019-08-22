@@ -576,12 +576,8 @@ public class Genome {
 				}
 				if(pop_conn.to_node == delete_node.inno_id)
 				{
-					// not explaining anything just a reminder im a fucking idiot
-					NodeGene to_node = pop_nodes.get(pop_conn.to_node).get(this.id);
-					to_node.connections.remove(to_node.connections.indexOf(pop_conn.inno_id));
 					pop_conns.get(ix).remove(this.id);
 					this.conn_genes.remove(pop_conn.inno_id);
-					pop_nodes.get(to_node.inno_id).replace(this.id, to_node);
 				}
 			}
 		}
