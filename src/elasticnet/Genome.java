@@ -565,12 +565,23 @@ public class Genome {
 			if(pop_conns.get(ix).containsKey(this.id) == true)
 			{
 				ConnectionGene pop_conn = pop_conns.get(ix).get(this.id);
-				if(pop_conn.to_node == delete_node.inno_id || pop_conn.from_node == delete_node.inno_id)
+				if(pop_conn.from_node == delete_node.inno_id)
 				{
+					// not explaining anything just a reminder im a fucking idiot
 					NodeGene from_node = pop_nodes.get(pop_conn.from_node).get(this.id);
 					from_node.connections.remove(from_node.connections.indexOf(pop_conn.inno_id));
 					pop_conns.get(ix).remove(this.id);
-					this.conn_genes.remove(this.conn_genes.indexOf(ix));		
+					this.conn_genes.remove(pop_conn.inno_id);
+					pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
+				}
+				if(pop_conn.to_node == delete_node.inno_id)
+				{
+					// not explaining anything just a reminder im a fucking idiot
+					NodeGene to_node = pop_nodes.get(pop_conn.to_node).get(this.id);
+					to_node.connections.remove(to_node.connections.indexOf(pop_conn.inno_id));
+					pop_conns.get(ix).remove(this.id);
+					this.conn_genes.remove(pop_conn.inno_id);
+					pop_nodes.get(to_node.inno_id).replace(this.id, to_node);
 				}
 			}
 		}
