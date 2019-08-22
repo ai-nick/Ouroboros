@@ -577,7 +577,7 @@ public class Genome {
 				else if (pop_conn.to_node == delete_node.inno_id)
 				{
 					pop_conns.get(ix).remove(this.id);
-					this.conn_genes.remove(pop_conn.inno_id);
+					this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
 				}
 			}
 		}

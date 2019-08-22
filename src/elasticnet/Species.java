@@ -67,6 +67,10 @@ public class Species {
 			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns, 
 			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes)
 	{
+		int christ_how_big_are_we = this.sorted_idx_array.length;
+		int seriously = this.member_ids.size();
+		System.out.println(christ_how_big_are_we);
+		System.out.println(seriously);
 		System.out.println(this.sorted_idx_array);
 		int num_members = this.sorted_idx_array.length;
 		if (num_elites == 0)
