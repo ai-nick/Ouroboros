@@ -73,6 +73,7 @@ public class Species {
 		{
 			return;
 		}
+		// wait so how tf?
 		for(int x = num_elites; x < num_members; x++)
 		{
 			int g_id = this.member_ids.get(this.sorted_idx_array[x]);
