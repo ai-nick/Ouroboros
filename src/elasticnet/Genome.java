@@ -258,23 +258,23 @@ public class Genome {
 		}
 		if (rand.nextFloat() < (config.delete_node_prob/prob_sum))
 		{
-			//System.out.println("deleting node here");
+			System.out.println("deleting node here");
 			mutate_delete_node(pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.delete_conn_prob/prob_sum))
 		{
-			//System.out.println("deleting conn here");
+			System.out.println("deleting conn here");
 			mutate_delete_conn(pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
 		{
-			//System.out.println("adding conn here");
+			System.out.println("adding conn here");
 			new_id = mutate_add_conn(new_id, pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
 		{
 			//this is where we are loosing conn pointers from node genes
-			//System.out.println("adding node here");
+			System.out.println("adding node here");
 			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
 		}
 		return new_id;
@@ -544,22 +544,22 @@ public class Genome {
 	private void mutate_delete_node(HashMap<Integer,HashMap<Integer, ConnectionGene>> pop_conns, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		int num_nodes = this.hidden_nodes.size();
-		
+		// if we have no nodes just return its doomed and will die out yolo or w/e
 		if (num_nodes == 0)
 		{
 			return;
 		}
-		
+		// roll the proverbial dice
+		// then get an int in range (0, num_nodes), get node id
+		// at that index
 		Random dice = new Random();
 		
 		int node_idx = dice.nextInt(num_nodes);
 		
 		int delete_id = this.hidden_nodes.get(node_idx);
-		
+		//get the node from our master hashmap
 		NodeGene delete_node = pop_nodes.get(delete_id).get(this.id);
-		
-		//int conn_counter = delete_node.connections.size();
-		
+		//aw really fucked this loop didnt i lads
 		for (int ix : pop_conns.keySet())
 		{
 			if(pop_conns.get(ix).containsKey(this.id) == true)
