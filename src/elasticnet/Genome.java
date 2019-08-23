@@ -676,9 +676,23 @@ public class Genome {
 		{
 			int gene_key = all_node_ids.get(d);
 			
+			NodeGene current = pop_nodes.get(gene_key).get(this.id);
+			
+			int node_conn_count = current.connections.siz();
+			
+			for(int c = 0; c < node_conn_count; c++)
+			{
+				ConnectionGene to_remove = pop_conns.get(current.connections.get(c)).get(this.id);
+				this.conn_genes.remove(this.conn_genes.indexOf(to_remove.inno_id));
+				pop_conns.get(to_remove.inno_id).remove(this.id);
+			}
+			
 			pop_nodes.get(gene_key).remove(this.id);
 		}
-		
+		/*
+		 * this can be deleted in due time, moving away form dependancy on 
+		 * genome -> conn_genes as its redundant considering all nodes contain ids of there 
+		 * conns
 		int num_conns = this.conn_genes.size();
 		
 		for(int d = 0; d < num_conns; d++)
@@ -687,7 +701,7 @@ public class Genome {
 			
 			pop_conns.get(gene_key).remove(this.id);
 		}
-		
+		*/
 		return;
 	}
 	
