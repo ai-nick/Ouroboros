@@ -571,7 +571,7 @@ public class Genome {
 					NodeGene from_node = pop_nodes.get(pop_conn.from_node).get(this.id);
 					from_node.connections.remove(from_node.connections.indexOf(pop_conn.inno_id));
 					pop_conns.get(ix).remove(this.id);
-					this.conn_genes.remove(pop_conn.inno_id);
+					this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
 					pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 				}
 				else if (pop_conn.to_node == delete_node.inno_id)

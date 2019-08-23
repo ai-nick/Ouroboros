@@ -213,6 +213,7 @@ public class Population {
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
+		int[] sorted_species_ids = new int[num_species];
 		int saved_sum = 0;
 		// next we will reduce each species by this elitism percent
 		// and add the new amount of the species to our save_sum
@@ -225,6 +226,7 @@ public class Population {
 			saved_sum += keep_top;
 			if(keep_top > 0)
 			{
+				//reduce the species to only the elite genomes
 				current.have_mercy(keep_top, this.genomes, this.connection_genes, this.node_genes);
 				//breed_all_remaining(current);				
 			}
@@ -241,7 +243,7 @@ public class Population {
 				int spec_size = current_species.member_ids.size();
 				// need to figure out wtf i was even thinking here FUCKING STUPID ASS NICK ASs MFER, WTF VROTHEREN
 				int genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator);
-				if(elite_iterator <= 2 && elite_iterator < this.pop_species.get(ix).member_ids.size())
+				if(elite_iterator <= 2 && elite_iterator < spec_size)
 				{
 					System.out.println("breeding asexual");
 					this.breed_asexual(this.genomes.get(genome_id), current_species);	
