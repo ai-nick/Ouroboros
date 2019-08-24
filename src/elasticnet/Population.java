@@ -468,6 +468,7 @@ public class Population {
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
 		new_node.is_output = a.is_output;
+		new_node.connections = new ArrayList<Integer>(a.connections);
 		for(String key : a.atts.keySet())
 		{
 			if(Math.random() > .5)
