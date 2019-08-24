@@ -54,15 +54,6 @@ public class NeuralNetwork implements INeuralNet {
 				this.conns.put(gene_id, conn_genes.get(gene_id).get(genome_in.id));
 			}
 		}
-		/*
-		int conn_count = genome_in.conn_genes.size();
-		
-		for(int i = 0; i < conn_count; i++)
-		{
-			int gene_id = genome_in.conn_genes.get(i);
-			this.conns.put(gene_id, conn_genes.get(gene_id).get(genome_in.id));
-		}
-		*/
 		this.output_ids = genome_in.output_nodes;
 		
 		this.outs_count = this.output_ids.size();
