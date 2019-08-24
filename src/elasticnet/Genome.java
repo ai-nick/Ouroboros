@@ -609,6 +609,8 @@ public class Genome {
 		NodeGene from_node = pop_nodes.get(delete_conn.from_node).get(this.id);
 		
 		from_node.connections.remove(from_node.connections.indexOf(delete_id));
+		
+		pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 		//int count = all_nodes.size();
 		/*
 		for(int ix = 0; ix < count; ix++)
@@ -678,7 +680,7 @@ public class Genome {
 			
 			NodeGene current = pop_nodes.get(gene_key).get(this.id);
 			
-			int node_conn_count = current.connections.siz();
+			int node_conn_count = current.connections.size();
 			
 			for(int c = 0; c < node_conn_count; c++)
 			{
