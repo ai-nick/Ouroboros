@@ -701,10 +701,12 @@ public class Genome {
 	
 	public ArrayList<Integer> get_all_conn_ids(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes)
 	{
-		int nodes_count = this.get_all_nodes().size();
+		ArrayList<Integer> all_nodes = this.get_all_nodes();
+		int nodes_count = all_nodes.size();
 		ArrayList<Integer> conns = new ArrayList<Integer>();
 		for(int ix = 0; ix < nodes_count; ix++)
 		{
+			NodeGene current = pop_nodes.get(all_nodes.get(ix)).get(this.id);
 			
 		}
 		return conns;
