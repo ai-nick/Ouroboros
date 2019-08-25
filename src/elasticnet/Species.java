@@ -73,8 +73,6 @@ public class Species {
 			return;
 		}
 		// wait so how tf?
-		System.out.print("species: ");
-		System.out.println(this.speciesID);
 		for(int x = num_elites; x < num_members; x++)
 		{
 			int g_id = this.member_ids.get(this.sorted_idx_array[x]);
@@ -89,9 +87,6 @@ public class Species {
 		//int[] new_sorted = new int[num_elites];
 		for(int x = 0; x < num_elites; x++)
 		{
-			// now our members id array list is sorted and 
-			// we dont have to rely on sorted_array in the 
-			// reproduction method 
 			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[x]));
 			//new_sorted[x] = this.sorted_idx_array[x];
 		}

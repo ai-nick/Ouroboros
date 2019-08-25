@@ -130,13 +130,16 @@ public class Population {
 			//same loop as before but for the second genome
 			//no need to check if the other contains it 
 			//because if it did its already been addressed
-			if(two.conn_genes.get(ix) >= one.gene_id_min && two.conn_genes.get(ix) <= one.gene_id_max)
+			if(one.conn_genes.contains(two.conn_genes.get(ix)) == false)
 			{
-				d += 1.0;
-			}
-			else
-			{
-				e += 1.0;
+				if(two.conn_genes.get(ix) >= one.gene_id_min && two.conn_genes.get(ix) <= one.gene_id_max)
+				{
+					d += 1.0;
+				}
+				else
+				{
+					e += 1.0;
+				}	
 			}
 		}
 		if(loop_count < one.conn_genes.size())
