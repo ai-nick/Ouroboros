@@ -699,6 +699,17 @@ public class Genome {
 		return;
 	}
 	
+	public ArrayList<Integer> get_all_conn_ids(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes)
+	{
+		int nodes_count = this.get_all_nodes().size();
+		ArrayList<Integer> conns = new ArrayList<Integer>();
+		for(int ix = 0; ix < nodes_count; ix++)
+		{
+			
+		}
+		return conns;
+	}
+	
 	private int get_random_in_range(int range_len)
 	{
 		Random dice = new Random();
