@@ -213,7 +213,16 @@ public class Population {
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
 		int[] sorted_species_ids = new int[num_species];
-		
+		int saved_sum = 0;
+		int keep_top = (int)((double)num_genomes * elitism_percent);
+		// next we will reduce each species by this elitism percent
+		// and add the new amount of the species to our save_sum
+		for(int x = 0; x < num_species; x++)
+		{
+			Species current = this.pop_species.get(x);
+			num_genomes = current.member_ids.size();
+			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
+		}
 	}
 	
 	// determine the number of genomes each species should reproduce
