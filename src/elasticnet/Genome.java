@@ -698,7 +698,9 @@ public class Genome {
 		*/
 		return;
 	}
-	
+	// return array of all conn ids
+	// by looping through nodes and 
+	// and adding the conn ids to an array
 	public ArrayList<Integer> get_all_conn_ids(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		ArrayList<Integer> all_nodes = this.get_all_nodes();
@@ -707,7 +709,11 @@ public class Genome {
 		for(int ix = 0; ix < nodes_count; ix++)
 		{
 			NodeGene current = pop_nodes.get(all_nodes.get(ix)).get(this.id);
-			
+			int conns_count = current.connections.size();
+			for(int ix2 = 0; ix2 < conns_count; ix2++)
+			{
+				conns.add(current.connections.get(ix2));
+			}
 		}
 		return conns;
 	}
