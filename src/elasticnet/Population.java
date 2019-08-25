@@ -206,6 +206,15 @@ public class Population {
 		}
 	}
 	
+	
+	public void new_reproduction()
+	{
+		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
+		int num_species = this.pop_species.size();
+		double elitism_percent = this.config.elitism;
+		int[] sorted_species_ids = new int[num_species];
+	}
+	
 	// determine the number of genomes each species should reproduce
 	// TODO need to hash out how to let species grow, target the desired pop_size
 	public void the_reproduction_function()
