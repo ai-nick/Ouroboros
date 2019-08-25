@@ -102,6 +102,8 @@ public class Population {
 		int[] j = new int[loop_count];
 		for(int idx = 0; idx < loop_count; idx++)
 		{
+			//looping through genes
+			//and check if we can 
 			int one_id = one.conn_genes.get(idx);
 			if(two.conn_genes.contains(one_id))
 			{
@@ -125,6 +127,9 @@ public class Population {
 		
 		for(int ix = 0; ix < loop_count; ix++)
 		{
+			//same loop as before but for the second genome
+			//no need to check if the other contains it 
+			//because if it did its already been addressed
 			if(two.conn_genes.get(ix) >= one.gene_id_min && two.conn_genes.get(ix) <= one.gene_id_max)
 			{
 				d += 1.0;
