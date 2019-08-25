@@ -32,8 +32,8 @@ public class NeuralNetwork implements INeuralNet {
 			HashMap<Integer, HashMap<Integer, ConnectionGene>> conn_genes
 			)
 	{
-		System.out.print("running genome ");
-		System.out.println(genome_in.id);
+		//System.out.print("running genome ");
+		//System.out.println(genome_in.id);
 		this.fully_activated = false;
 		
 		this.input_ids = genome_in.input_nodes;

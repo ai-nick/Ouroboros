@@ -150,10 +150,11 @@ public class Population {
 	
 	public void speciate_population()
 	{
+		// initialize array of speciated genome ids
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
-		
+		// get the compat distance from config
 		double compat_t = this.config.compat_threshold;
-		
+		// coeeficients 
 		double[] speciation_coeff = { 1.0, 1.0, 1.0 };
 		// check if its the first round of speciation
 		// if it is we will have an empty array 
@@ -166,6 +167,7 @@ public class Population {
 			next_species_id++;
 			speciated.add(first_rep.id);
 		}
+		// we have atleast one species by this point in our control flow
 		for(int x : this.genomes.keySet())
 		{
 			//check if its first species rep_index, not elegant but have to handle
@@ -186,7 +188,7 @@ public class Population {
 						Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
 								current_genome,
 								speciation_coeff);
-						//System.out.println(dist);
+						System.out.println(dist);
 						if( dist < compat_t)
 						{
 							this.pop_species.get(i).member_ids.add(current_genome.id);
@@ -233,6 +235,7 @@ public class Population {
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
 		int[] sorted_species_ids = new int[num_species];
+		System.out.println(num_species);
 		int saved_sum = 0;
 		int keep_top = (int)((double)num_genomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
@@ -240,6 +243,7 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
+			//System.out.println(current.member_ids.size());
 			num_genomes = current.member_ids.size();
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 			saved_sum += keep_top;
