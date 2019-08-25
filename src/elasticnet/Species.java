@@ -75,10 +75,6 @@ public class Species {
 		// wait so how tf?
 		System.out.print("species: ");
 		System.out.println(this.speciesID);
-		for(int y = 0; y < num_members; y++)
-		{
-			System.out.println(this.sorted_idx_array[y]);
-		}
 		for(int x = num_elites; x < num_members; x++)
 		{
 			int g_id = this.member_ids.get(this.sorted_idx_array[x]);

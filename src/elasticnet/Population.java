@@ -178,7 +178,8 @@ public class Population {
 				Genome current_genome = this.genomes.get(x);
 				
 				int num_species = this.pop_species.size();
-				//loop through species and see if the genome is compatible with any
+				//this should be while loop, with a conditional of count == num_species - 1
+				//
 				for(int i = 0; i < num_species; i++)
 				{
 					//check if we added it to one already, could be better and 
@@ -188,7 +189,7 @@ public class Population {
 						Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
 								current_genome,
 								speciation_coeff);
-						System.out.println(dist);
+						//System.out.println(dist);
 						if( dist < compat_t)
 						{
 							this.pop_species.get(i).member_ids.add(current_genome.id);
