@@ -98,13 +98,9 @@ public class Population {
 		double d = 0.0;
 		double s = 0.0;
 		double e = 0.0;
-		int loop_count = one.conn_genes.size();
+		ArrayList<Integer> one_conns = one.get_all_conn_ids(this.node_genes);
+		int loop_count = one_conns.size();
 		//int[] j = new int[loop_count];
-		int nodes_count = one.get_all_nodes().size();
-		for(int ix1 = 0; ix1 < nodes_count; ix1++)
-		{
-			
-		}
 		for(int idx = 0; idx < loop_count; idx++)
 		{
 			//looping through genes
