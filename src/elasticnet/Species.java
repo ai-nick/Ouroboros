@@ -87,8 +87,7 @@ public class Species {
 		//int[] new_sorted = new int[num_elites];
 		for(int x = 0; x < num_elites; x++)
 		{
-			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[x]));
-			//new_sorted[x] = this.sorted_idx_array[x];
+			new_member_ids.add(this.member_ids.get(this.member_ids.indexOf(this.sorted_idx_array[x])));
 		}
 		this.member_ids = new_member_ids;
 	}
