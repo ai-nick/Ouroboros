@@ -165,10 +165,7 @@ public class Population {
 		double compat_t = this.config.compat_threshold;
 		// coeeficients 
 		double[] speciation_coeff = { 1.0, 1.0, 1.0 };
-		// check if its the first round of speciation
-		// if it is we will have an empty array 
-		// and can just choose a random genome to represent 
-		// the "seed" species
+		// set first species and rep genome
 		if (this.pop_species.size() == 0)
 		{
 			Genome first_rep = this.genomes.get(this.genomes.keySet().iterator().next());
