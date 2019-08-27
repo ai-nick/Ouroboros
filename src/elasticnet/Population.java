@@ -238,6 +238,8 @@ public class Population {
 	// TODO need to hash out how to let species grow, target the desired pop_size
 	public void the_reproduction_function()
 	{
+		// dictionary with fitness sums for each species 
+		// TODO sort this shit
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
