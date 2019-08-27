@@ -73,6 +73,8 @@ public class Species {
 			return;
 		}
 		// wait so how tf?
+		System.out.println(this.member_ids.size());
+		System.out.println(num_elites);
 		for(int x = num_elites; x < num_members; x++)
 		{
 			int g_id = this.member_ids.get(this.sorted_idx_array[x]);
@@ -85,9 +87,9 @@ public class Species {
 		}
 		ArrayList<Integer> new_member_ids = new ArrayList<Integer>();
 		//int[] new_sorted = new int[num_elites];
-		for(int x = 0; x < num_elites; x++)
+		for(int x = 0; x < num_elites-1; x++)
 		{
-			new_member_ids.add(this.member_ids.get(this.member_ids.indexOf(this.sorted_idx_array[x])));
+			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[x]));
 		}
 		this.member_ids = new_member_ids;
 	}

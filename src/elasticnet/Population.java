@@ -255,6 +255,7 @@ public class Population {
 			//System.out.println(current.member_ids.size());
 			num_genomes = current.member_ids.size();
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
+			keep_top = current.member_ids.size() * (int)elitism_percent;
 			saved_sum += keep_top;
 			if(keep_top > 0)
 			{
