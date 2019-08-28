@@ -74,11 +74,15 @@ public class Genome {
 			)
 	{
 		int num_in = config.num_input;
+		
 		int num_hidden = config.num_hidden;
+		
 		int num_out = config.num_output;
+		
 		this.population_hash = populationHash;
-		//int gene_index = 0;
+		
 		int inno_id = 0;
+		
 		for (int ix = 0; ix < num_in; ix++)
 		{
 			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
