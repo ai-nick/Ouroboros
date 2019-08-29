@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-
 import com.google.gson.*;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class Population {
 	public HashMap<Integer, Genome> genomes = new HashMap<Integer, Genome>();
 	public HashMap<Integer, HashMap<Integer,NodeGene>> node_genes = new HashMap<Integer, HashMap<Integer, NodeGene>>();
 	public HashMap<Integer, HashMap<Integer,ConnectionGene>> connection_genes = new HashMap<Integer, HashMap<Integer,ConnectionGene>>();
-	
+	public SorterUtil sorter = new SorterUtil();
 	public Population(int gen,  NeatConfig config_in, int pop_size) 
 	{
 		this.ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
@@ -249,6 +248,9 @@ public class Population {
 		int keep_top = (int)((double)num_genomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
 		// and add the new amount of the species to our save_sum
+		//TODO run quick sort on the species ids and the adj_fit_sums hashmap
+		// then use x to scale out species size with any species that is in the lower
+		// half going extinct
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
