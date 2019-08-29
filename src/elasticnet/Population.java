@@ -243,6 +243,10 @@ public class Population {
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
 		int[] sorted_species_ids = new int[num_species];
+		for(int x = 0; x < num_species; x++)
+		{
+			sorted_species_ids[x] = this.pop_species.get(x).speciesID;
+		}
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
 		System.out.println(num_species);
 		int saved_sum = 0;
