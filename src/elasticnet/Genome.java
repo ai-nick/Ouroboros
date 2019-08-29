@@ -19,7 +19,7 @@ public class Genome {
 	int species_id = 0;
 	public double fitness = -1.0;
 	public int avg_w = 0;
-	public ArrayList<Integer> conn_genes = new ArrayList<Integer>();
+	//public ArrayList<Integer> conn_genes = new ArrayList<Integer>();
 	public ArrayList<Integer> input_nodes = new ArrayList<Integer>();
 	public ArrayList<Integer> hidden_nodes = new ArrayList<Integer>();
 	public ArrayList<Integer> output_nodes = new ArrayList<Integer>();
@@ -56,6 +56,7 @@ public class Genome {
 		for(int ix = 0; ix < node_count; ix++)
 		{
 			NodeGene to_add = new NodeGene(pop_nodes.get(all_nodes.get(ix)).get(cloner.id));
+			/*
 			int conns = to_add.connections.size();
 			for (int x = 0; x < conns; x++)
 			{
@@ -63,6 +64,7 @@ public class Genome {
 				this.conn_genes.add(conn_to_add.inno_id);
 				pop_conns.get(to_add.connections.get(x)).put(this.id, conn_to_add);
 			}
+			*/
 			pop_nodes.get(all_nodes.get(ix)).put(this.id, to_add);
 		}
 	}
@@ -141,15 +143,16 @@ public class Genome {
 		}
 		inno_id = this.connect_full_initial(inno_id, conn_gene_list, node_gene_list);
 		inno_id = this.mutate_genome(inno_id, config, node_gene_list, conn_gene_list);
-		this.set_max_and_min();
+		this.set_max_and_min(pop_node_list);
 		return inno_id;
 	}
 	
-	public void set_max_and_min() {
+	public void set_max_and_min(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes) {
 		ArrayList<Integer> all_nodes = this.get_all_nodes();
+		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
 		int min_node_id = Collections.min(all_nodes);
-		int min_conn_id = Collections.min(this.conn_genes);
-		int max_conn_id = Collections.max(this.conn_genes);
+		int min_conn_id = Collections.min(all_conns);
+		int max_conn_id = Collections.max(all_conns);
 		int max_node_id = Collections.max(all_nodes);
 		if (min_node_id < min_conn_id)
 		{
