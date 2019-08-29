@@ -245,7 +245,9 @@ public class Population {
 		int[] sorted_species_ids = new int[num_species];
 		for(int x = 0; x < num_species; x++)
 		{
-			sorted_species_ids[x] = this.pop_species.get(x).speciesID;
+			Species current = this.pop_species.get(x);
+			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
+			sorted_species_ids[x] = current.speciesID;
 		}
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
 		System.out.println(num_species);
@@ -259,9 +261,6 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
-			//System.out.println(current.member_ids.size());
-			num_genomes = current.member_ids.size();
-			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 			keep_top = current.member_ids.size() * (int)elitism_percent;
 			saved_sum += keep_top;
 			if(keep_top > 0)

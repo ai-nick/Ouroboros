@@ -373,6 +373,7 @@ public class Genome {
 		}
 	}
 	
+	//TODO ensure we are removing conn ref from node
 	private int mutate_add_node(int new_id, 
 			String activation, 
 			HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes, 
@@ -382,14 +383,17 @@ public class Genome {
 		//boolean has_hist_id;
 
 		//we cant split a conn if we dont have any
-		if (this.conn_genes.size() == 0)
+		
+		ArrayList<Integer> conn_ids = this.get_all_conn_ids(pop_nodes);
+		
+		if (conn_ids.size() == 0)
 		{
 			return new_id;
 		}
 		
 		int gene_id = new_id;
 		
-		int connection_to_split_index = this.conn_genes.get(this.get_random_in_range(this.conn_genes.size()));
+		int connection_to_split_index = conn_ids.get(this.get_random_in_range(conn_ids.size()));
 		
 		//System.out.println("splitting conn");
 		//System.out.println(connection_to_split_index);
