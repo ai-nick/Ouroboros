@@ -143,7 +143,7 @@ public class Genome {
 		}
 		inno_id = this.connect_full_initial(inno_id, conn_gene_list, node_gene_list);
 		inno_id = this.mutate_genome(inno_id, config, node_gene_list, conn_gene_list);
-		this.set_max_and_min(pop_node_list);
+		this.set_max_and_min(node_gene_list);
 		return inno_id;
 	}
 	
@@ -194,14 +194,6 @@ public class Genome {
 		}
 	}
 	
-	public void set_connections(ArrayList<ConnectionGene> conns)
-	{
-		int conn_count = conns.size();
-		for(int i = 0; i < conn_count; i++)
-		{
-			this.conn_genes.add(conns.get(i).inno_id);
-		}
-	}
 	
 	public void set_species(int id)
 	{
@@ -301,11 +293,13 @@ public class Genome {
 		
 		int from_node_key = this.get_random_in_range(all_the_nodes.size());
 		
-		int num_conns = this.conn_genes.size();
+		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
+		
+		int num_conns = all_conns.size();
 		
 		for(int i = 0; i < num_conns; i++)
 		{
-			ConnectionGene next_gene = pop_conns.get(this.conn_genes.get(i)).get(this.id);
+			ConnectionGene next_gene = pop_conns.get(all_conns.get(i)).get(this.id);
 			
 			if(next_gene.to_node == to_node_key && next_gene.from_node == from_node_key)
 			{
@@ -363,7 +357,7 @@ public class Genome {
 			pop_conns.get(conn_id).put(this.id, new_gene);
 			conn_id++;
 		}
-		this.conn_genes.add(new_gene.inno_id);
+		//this.conn_genes.add(new_gene.inno_id);
 		from_node.connections.add(new_gene.inno_id);
 		if(new_id == conn_id)
 		{
