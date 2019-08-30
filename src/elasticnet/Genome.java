@@ -486,7 +486,7 @@ public class Genome {
 			
 			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
 			
-			this.conn_genes.add(new_id);
+			//this.conn_genes.add(new_id);
 			
 			HashMap<Integer, ConnectionGene> new_conn_dict_a = new HashMap<Integer, ConnectionGene>();
 			
@@ -502,7 +502,7 @@ public class Genome {
 			
 			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, this.id);
 			
-			this.conn_genes.add(new_id);
+			//this.conn_genes.add(new_id);
 			
 			HashMap<Integer, ConnectionGene> new_conn_dict_b = new HashMap<Integer, ConnectionGene>();
 			
@@ -530,7 +530,7 @@ public class Genome {
 			
 			new_id++;
 		}
-		this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
+		//this.conn_genes.remove(this.conn_genes.indexOf(connection_to_split_index));
 		
 		pop_conns.get(connection_to_split_index).remove(this.id);
 		
@@ -568,13 +568,13 @@ public class Genome {
 					NodeGene from_node = pop_nodes.get(pop_conn.from_node).get(this.id);
 					from_node.connections.remove(from_node.connections.indexOf(pop_conn.inno_id));
 					pop_conns.get(ix).remove(this.id);
-					this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
+					//this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
 					pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 				}
 				else if (pop_conn.to_node == delete_node.inno_id)
 				{
 					pop_conns.get(ix).remove(this.id);
-					this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
+					//this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
 				}
 			}
 		}
@@ -588,16 +588,17 @@ public class Genome {
 	//TODO pass in pops nested conn dictionary and remove the conns entry
 	private void mutate_delete_conn(HashMap<Integer,HashMap<Integer, ConnectionGene>> pop_conns, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes)
 	{
+		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
 		Random dice = new Random();
 		
-		if (this.conn_genes.size() == 0)
+		if (all_conns.size() == 0)
 		{
 			return;
 		}
 		
-		int delete_key = dice.nextInt(this.conn_genes.size());
+		int delete_key = dice.nextInt(all_conns.size());
 		
-		int delete_id = this.conn_genes.get(delete_key);
+		int delete_id = all_conns.get(delete_key);
 		
 		ConnectionGene delete_conn = pop_conns.get(delete_id).get(this.id);
 		
@@ -620,7 +621,7 @@ public class Genome {
 			}
 		}
 		*/
-		this.conn_genes.remove(this.conn_genes.indexOf(delete_id));
+		//this.conn_genes.remove(this.conn_genes.indexOf(delete_id));
 		
 		pop_conns.get(delete_id).remove(this.id);
 	}
@@ -641,7 +642,7 @@ public class Genome {
 				
 				ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node.inno_id, new_id, this.id);
 				
-				this.conn_genes.add(new_gene.inno_id);
+				//this.conn_genes.add(new_gene.inno_id);
 				
 				from_node.connections.add(new_gene.inno_id);
 				
@@ -682,7 +683,7 @@ public class Genome {
 			for(int c = 0; c < node_conn_count; c++)
 			{
 				ConnectionGene to_remove = pop_conns.get(current.connections.get(c)).get(this.id);
-				this.conn_genes.remove(this.conn_genes.indexOf(to_remove.inno_id));
+				//this.conn_genes.remove(this.conn_genes.indexOf(to_remove.inno_id));
 				pop_conns.get(to_remove.inno_id).remove(this.id);
 			}
 			

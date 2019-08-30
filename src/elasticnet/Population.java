@@ -385,19 +385,21 @@ public class Population {
 		{
 			node_gene_counter = GenomeB.output_nodes.size()+GenomeB.input_nodes.size()+GenomeB.hidden_nodes.size();
 		}
-		
-		int gA_conn_counter = GenomeA.conn_genes.size();
+		ArrayList<Integer> ga_conns = GenomeA.get_all_conn_ids(this.node_genes);
+		ArrayList<Integer> gb_conns = GenomeB.get_all_conn_ids(this.node_genes);
+		int gA_conn_counter = ga_conns.size();
 		
 		for (int k = 0; k < gA_conn_counter; k++)
 		{
-			int gA_id = GenomeA.conn_genes.get(k);
+			int gA_id = ga_conns.get(k);
 			
 			ConnectionGene gA = this.connection_genes.get(gA_id).get(GenomeA.id);
 			
-			if(GenomeB.conn_genes.contains(gA_id) == false)
+			if(gb_conns.contains(gA_id) == false)
 			{
 				this.connection_genes.get(gA_id).put(offspring.id, gA);
-				offspring.conn_genes.add(gA_id);
+				
+				//offspring.conn_genes.add(gA_id);
 				if(offspring.input_nodes.contains(gA.from_node) == false && offspring.hidden_nodes.contains(gA.from_node) == false)
 				{
 					offspring.hidden_nodes.add(gA.from_node);
@@ -415,7 +417,7 @@ public class Population {
 			{	
 				ConnectionGene gB = this.connection_genes.get(gA_id).get(GenomeB.id);
 				
-				offspring.conn_genes.add(gA_id);
+				//offspring.conn_genes.add(gA_id);
 				
 				ConnectionGene crossed_over = _cross_over_conns(gA, gB);
 				
