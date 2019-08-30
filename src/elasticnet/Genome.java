@@ -407,6 +407,9 @@ public class Genome {
 		
 		HashMap<Integer, NodeGene> node_gene_set = pop_nodes.get(connection_to_split.from_node);
 		
+		// this block amounts to a search of the nodes thier connections
+		// to see if the path from_node -> some other node -> to node already exists in 
+		// another genomme, if it does, we use those ids
 		for(int n : node_gene_set.keySet())
 		{
 			NodeGene check_it = node_gene_set.get(n);
@@ -595,10 +598,12 @@ public class Genome {
 			{
 				NodeGene from_node = pop_nodes.get(next_conn.from_node).get(this.id);
 				from_node.connections.remove(from_node.connections.indexOf(next_conn.inno_id));
+				pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 				pop_conns.get(next_conn.inno_id).remove(this.id);
 			}
 			if(next_conn.from_node == delete_id)
 			{
+				
 				pop_conns.get(next_conn.inno_id).remove(this.id);
 			}
 			
