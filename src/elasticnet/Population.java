@@ -98,16 +98,17 @@ public class Population {
 		double s = 0.0;
 		double e = 0.0;
 		ArrayList<Integer> one_conns = one.get_all_conn_ids(this.node_genes);
+		ArrayList<Integer> two_conns = two.get_all_conn_ids(this.node_genes);
 		int loop_count = one_conns.size();
 		//int[] j = new int[loop_count];
 		for(int idx = 0; idx < loop_count; idx++)
 		{
 			//looping through genes
 			//and check if we can 
-			int one_id = one.conn_genes.get(idx);
-			if(two.conn_genes.contains(one_id))
+			int one_id = one_conns.get(idx);
+			if(two_conns.contains(one_id))
 			{
-				int two_id = two.conn_genes.get(two.conn_genes.indexOf(one_id));
+				int two_id = two_conns.get(two_conns.indexOf(one_id));
 				w = Math.abs(this.connection_genes.get(one_id).get(one.id).atts.get("weight") - this.connection_genes.get(two_id).get(two.id).atts.get("weight"));
 			}
 			else
@@ -123,16 +124,16 @@ public class Population {
 			}
 		}
 		
-		loop_count = two.conn_genes.size();
+		loop_count = two_conns.size();
 		
 		for(int ix = 0; ix < loop_count; ix++)
 		{
 			//same loop as before but for the second genome
 			//no need to check if the other contains it 
 			//because if it did its already been addressed
-			if(one.conn_genes.contains(two.conn_genes.get(ix)) == false)
+			if(one_conns.contains(two_conns.get(ix)) == false)
 			{
-				if(two.conn_genes.get(ix) >= one.gene_id_min && two.conn_genes.get(ix) <= one.gene_id_max)
+				if(two_conns.get(ix) >= one.gene_id_min && two_conns.get(ix) <= one.gene_id_max)
 				{
 					d += 1.0;
 				}
@@ -142,9 +143,9 @@ public class Population {
 				}	
 			}
 		}
-		if(loop_count < one.conn_genes.size())
+		if(loop_count < one_conns.size())
 		{
-			loop_count = one.conn_genes.size();
+			loop_count = one_conns.size();
 		}
 		s += (e*speciation_coefficients[0])/loop_count;
 		s += (d*speciation_coefficients[1])/loop_count;
