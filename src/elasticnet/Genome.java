@@ -477,6 +477,8 @@ public class Genome {
 
 		// if we make it here this structure hasnt occured yet
 		// so we will add the node and its two new connecitons
+		
+		// delcare our new node
 		NodeGene new_node;
 		
 		if(struct_exists == true)
