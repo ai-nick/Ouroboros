@@ -405,6 +405,36 @@ public class Genome {
 		int conn_a_id = -1;
 		int conn_b_id = -1;
 		
+		HashMap<Integer, NodeGene> node_gene_set = pop_nodes.get(connection_to_split.from_node);
+		
+		for(int n : node_gene_set.keySet())
+		{
+			NodeGene check_it = node_gene_set.get(n);
+			
+			int check_conn_count = check_it.connections.size();
+			
+			for(int nx = 0; nx < check_conn_count; nx++)
+			{
+				ConnectionGene next_conn = pop_conns.get(check_it.connections.get(nx)).get(n);
+				NodeGene connected = pop_nodes.get(next_conn.to_node).get(n);
+				int check_conn_count_2 = connected.connections.size();
+				for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)
+				{
+					ConnectionGene second_conn = pop_conns.get(connected.connections.get(nx2)).get(n);
+					if(second_conn.to_node == connection_to_split.to_node)
+					{
+						struct_exists = true;
+						conn_a_id = next_conn.inno_id;
+						conn_b_id = second_conn.inno_id;
+						gene_id = connected.inno_id;
+					}
+				}
+			}
+		}
+		/*
+		 * the old way
+		 */
+		/*
 		for(int c : pop_conns.keySet())
 		{
 			HashMap<Integer, ConnectionGene> the_map = pop_conns.get(c);
@@ -440,6 +470,7 @@ public class Genome {
 				}
 			}
 		}
+		*/
 
 		// if we make it here this structure hasnt occured yet
 		// so we will add the node and its two new connecitons
@@ -549,9 +580,9 @@ public class Genome {
 		// roll the proverbial dice
 		// then get an int in range (0, num_nodes), get node id
 		// at that index
-		Random dice = new Random();
+		//Random dice = new Random();
 		
-		int node_idx = dice.nextInt(num_nodes);
+		int node_idx = this.get_random_in_range(num_nodes);
 		
 		int delete_id = this.hidden_nodes.get(node_idx);
 		//get the node from our master hashmap
