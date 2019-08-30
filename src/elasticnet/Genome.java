@@ -577,37 +577,31 @@ public class Genome {
 		{
 			return;
 		}
-		// roll the proverbial dice
-		// then get an int in range (0, num_nodes), get node id
-		// at that index
-		//Random dice = new Random();
-		
+		// get a random index
 		int node_idx = this.get_random_in_range(num_nodes);
-		
+		// get the hidden node id at that index
 		int delete_id = this.hidden_nodes.get(node_idx);
 		//get the node from our master hashmap
-		NodeGene delete_node = pop_nodes.get(delete_id).get(this.id);
-		//aw really fucked this loop didnt i lads
-		for (int ix : pop_conns.keySet())
+		
+		// gonna do this a bit differently, a way that makes sense lol
+		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
+		
+		int num_all_conns = all_conns.size();
+		
+		for(int ix = 0; ix < num_all_conns; ix++)
 		{
-			if(pop_conns.get(ix).containsKey(this.id) == true)
+			ConnectionGene next_conn = pop_conns.get(all_conns.get(ix)).get(this.id);
+			if(next_conn.to_node == delete_id)
 			{
-				ConnectionGene pop_conn = pop_conns.get(ix).get(this.id);
-				if(pop_conn.from_node == delete_node.inno_id)
-				{
-					// not explaining anything just a reminder im a fucking idiot
-					NodeGene from_node = pop_nodes.get(pop_conn.from_node).get(this.id);
-					from_node.connections.remove(from_node.connections.indexOf(pop_conn.inno_id));
-					pop_conns.get(ix).remove(this.id);
-					//this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
-					pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
-				}
-				else if (pop_conn.to_node == delete_node.inno_id)
-				{
-					pop_conns.get(ix).remove(this.id);
-					//this.conn_genes.remove(this.conn_genes.indexOf(pop_conn.inno_id));
-				}
+				NodeGene from_node = pop_nodes.get(next_conn.from_node).get(this.id);
+				from_node.connections.remove(from_node.connections.indexOf(next_conn.inno_id));
+				pop_conns.get(next_conn.inno_id).remove(this.id);
 			}
+			if(next_conn.from_node == delete_id)
+			{
+				pop_conns.get(next_conn.inno_id).remove(this.id);
+			}
+			
 		}
 		
 		pop_nodes.get(delete_id).remove(this.id);
