@@ -321,8 +321,6 @@ public class Genome {
 		}
 		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
 		
-		//NodeGene to_node = pop_nodes.get(all_the_nodes.get(to_node_key)).get(this.id);
-		
 		// the next to if statements ensure we dont add conns that are either output -> output
 		// of input->input
 
@@ -351,6 +349,7 @@ public class Genome {
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
 			pop_conns.put(conn_id, new_map);
+			new_id = conn_id;
 		}
 		else 
 		{
@@ -359,15 +358,7 @@ public class Genome {
 		}
 		//this.conn_genes.add(new_gene.inno_id);
 		from_node.connections.add(new_gene.inno_id);
-		if(new_id == conn_id)
-		{
-			new_id++;
-			return new_id;
-		}
-		else
-		{
-			return new_id;	
-		}
+		return new_id;
 	}
 	
 	//TODO ensure we are removing conn ref from node
@@ -404,6 +395,13 @@ public class Genome {
 		// by a different genome
 		int conn_a_id = -1;
 		int conn_b_id = -1;
+		
+		if(connection_to_split == null)
+		{
+			System.out.println("null connn chosen, doesnt exist in the master hash map");
+			System.out.print("conn id: ");
+			System.out.println(connection_to_split_index);
+		}
 		
 		HashMap<Integer, NodeGene> node_gene_set = pop_nodes.get(connection_to_split.from_node);
 		
@@ -605,7 +603,6 @@ public class Genome {
 			}
 			if(next_conn.from_node == delete_id)
 			{
-				
 				pop_conns.get(next_conn.inno_id).remove(this.id);
 			}
 			
@@ -628,19 +625,21 @@ public class Genome {
 			return;
 		}
 		
-		int delete_key = dice.nextInt(all_conns.size());
+		int delete_key = this.get_random_in_range(all_conns.size());
 		
 		int delete_id = all_conns.get(delete_key);
 		
-		ConnectionGene delete_conn = pop_conns.get(delete_id).get(this.id);
+		System.out.print("deleting conn id: ");
 		
-		ArrayList<Integer> all_nodes = this.get_all_nodes();
+		System.out.println(delete_id);
+		
+		ConnectionGene delete_conn = pop_conns.get(delete_id).get(this.id);
 		
 		NodeGene from_node = pop_nodes.get(delete_conn.from_node).get(this.id);
 		
 		from_node.connections.remove(from_node.connections.indexOf(delete_id));
 		
-		pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
+		//pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 		//int count = all_nodes.size();
 		/*
 		for(int ix = 0; ix < count; ix++)
