@@ -586,6 +586,9 @@ public class Genome {
 		int delete_id = this.hidden_nodes.get(node_idx);
 		//get the node from our master hashmap
 		
+		System.out.print("delete node id: ");
+		System.out.println(delete_id);
+		
 		// gonna do this a bit differently, a way that makes sense lol
 		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
 		
@@ -632,6 +635,9 @@ public class Genome {
 		System.out.print("deleting conn id: ");
 		
 		System.out.println(delete_id);
+		System.out.print("for genome: ");
+		
+		System.out.println(this.id);
 		
 		ConnectionGene delete_conn = pop_conns.get(delete_id).get(this.id);
 		
