@@ -56,15 +56,15 @@ public class Genome {
 		for(int ix = 0; ix < node_count; ix++)
 		{
 			NodeGene to_add = new NodeGene(pop_nodes.get(all_nodes.get(ix)).get(cloner.id));
-			/*
+			
 			int conns = to_add.connections.size();
 			for (int x = 0; x < conns; x++)
 			{
 				ConnectionGene conn_to_add = pop_conns.get(to_add.connections.get(x)).get(cloner.id);
-				this.conn_genes.add(conn_to_add.inno_id);
+				
 				pop_conns.get(to_add.connections.get(x)).put(this.id, conn_to_add);
 			}
-			*/
+			
 			pop_nodes.get(all_nodes.get(ix)).put(this.id, to_add);
 		}
 	}
