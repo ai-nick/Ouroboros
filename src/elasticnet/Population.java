@@ -282,17 +282,20 @@ public class Population {
 
 				int spec_size = current_species.member_ids.size();
 				// need to figure out wtf i was even thinking here FUCKING STUPID ASS NICK ASs MFER, WTF VROTHEREN
-				int genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator);
-				if(elite_iterator <= 2 && elite_iterator < spec_size)
+				for(int y = 0; y < spec_size; y++)
 				{
-					System.out.println("breeding asexual");
-					this.breed_asexual(this.genomes.get(genome_id), current_species);	
-				} 
-				else if(elite_iterator < spec_size -1)
-				{
-					System.out.println("breeding with sex");
-					int other_genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator+1);
-					this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
+					int genome_id = this.pop_species.get(ix).member_ids.get(y);
+					if(y <= 2)
+					{
+						System.out.println("breeding asexual");
+						this.breed_asexual(this.genomes.get(genome_id), current_species);	
+					} 
+					else if(y < spec_size -1)
+					{
+						System.out.println("breeding with sex");
+						int other_genome_id = current_species.member_ids.get(y+1);
+						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
+					}	
 				}
 				need_new--;
 			}
