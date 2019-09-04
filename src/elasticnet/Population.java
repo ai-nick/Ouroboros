@@ -288,7 +288,7 @@ public class Population {
 					System.out.println("breeding asexual");
 					this.breed_asexual(this.genomes.get(genome_id), current_species);	
 				} 
-				else
+				else if(elite_iterator < spec_size -1)
 				{
 					System.out.println("breeding with sex");
 					int other_genome_id = this.pop_species.get(ix).member_ids.get(elite_iterator+1);
