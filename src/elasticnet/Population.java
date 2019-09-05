@@ -398,9 +398,10 @@ public class Population {
 			
 			if(gb_node_genes.contains(gA_id) == false)
 			{
-				this.connection_genes.get(gA_id).put(offspring.id, gA);
+				this.node_genes.get(gA_id).put(offspring.id, gA);
 				
 				//offspring.conn_genes.add(gA_id);
+				/*
 				if(offspring.input_nodes.contains(gA.from_node) == false && offspring.hidden_nodes.contains(gA.from_node) == false)
 				{
 					offspring.hidden_nodes.add(gA.from_node);
@@ -413,6 +414,7 @@ public class Population {
 					NodeGene from_node = this.node_genes.get(gA.to_node).get(GenomeA.id);
 					this.node_genes.get(gA.to_node).put(offspring.id, from_node);	
 				}
+				*/
 			}
 			else
 			{	
