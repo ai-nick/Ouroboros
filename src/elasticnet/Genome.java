@@ -419,6 +419,7 @@ public class Genome {
 			for(int nx = 0; nx < check_conn_count; nx++)
 			{
 				ConnectionGene next_conn = pop_conns.get(check_it.connections.get(nx)).get(n);
+				// null pointers happening here due to problems in cross over methods of population class
 				NodeGene connected = pop_nodes.get(next_conn.to_node).get(n);
 				int check_conn_count_2 = connected.connections.size();
 				for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)

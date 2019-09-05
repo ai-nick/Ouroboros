@@ -492,6 +492,7 @@ public class Population {
 				
 			}
 		}
+		// lol based
 		for(String key : a.atts.keySet())
 		{
 			if(Math.random() > .5)
