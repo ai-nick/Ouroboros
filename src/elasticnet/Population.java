@@ -375,8 +375,6 @@ public class Population {
 			NodeGene clone_node = this.node_genes.get(node_id).get(GenomeA.id);
 			this.node_genes.get(node_id).put(offspring.id, clone_node);
 		}
-		// get the max num of genes for hidden nodes and connections 
-		boolean use_a;
 		
 		ArrayList<Integer> ga_node_genes = GenomeA.get_all_nodes();
 		ArrayList<Integer> gb_node_genes = GenomeB.get_all_nodes();
@@ -392,28 +390,10 @@ public class Population {
 			if(gb_node_genes.contains(gA_id) == false)
 			{
 				this.node_genes.get(gA_id).put(offspring.id, gA);
-				
-				//offspring.conn_genes.add(gA_id);
-				/*
-				if(offspring.input_nodes.contains(gA.from_node) == false && offspring.hidden_nodes.contains(gA.from_node) == false)
-				{
-					offspring.hidden_nodes.add(gA.from_node);
-					NodeGene from_node = this.node_genes.get(gA.from_node).get(GenomeA.id);
-					this.node_genes.get(gA.from_node).put(offspring.id, from_node);
-				}
-				if(offspring.output_nodes.contains(gA.to_node) == false && offspring.hidden_nodes.contains(gA.to_node) == false) 
-				{
-					offspring.hidden_nodes.add(gA.to_node);
-					NodeGene from_node = this.node_genes.get(gA.to_node).get(GenomeA.id);
-					this.node_genes.get(gA.to_node).put(offspring.id, from_node);	
-				}
-				*/
 			}
 			else
 			{	
 				NodeGene gB = this.node_genes.get(gA_id).get(GenomeB.id);
-				
-				//offspring.conn_genes.add(gA_id);
 				
 				NodeGene crossed_over = _cross_over_nodes(gA, gB);
 				
@@ -487,16 +467,31 @@ public class Population {
 		new_node.is_input = a.is_input;
 		new_node.is_output = a.is_output;
 		ArrayList<Integer> new_conns;
+		boolean use_a;
 		if(Math.random() > .5)
 		{
 			new_conns = a.connections;
+			use_a = true;
 		}
 		else
 		{
 			new_conns = b.connections;
+			use_a = false;
 		}
 		
 		new_node.connections = new ArrayList<Integer>(new_conns);
+		int num_conns = new_node.connections.size();
+		for(int conn_idx = 0; conn_idx < num_conns; conn_idx++)
+		{
+			if(use_a == true)
+			{
+				
+			}
+			else
+			{
+				
+			}
+		}
 		for(String key : a.atts.keySet())
 		{
 			if(Math.random() > .5)
