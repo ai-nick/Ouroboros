@@ -334,6 +334,7 @@ public class Population {
 	}
 	
 	// breed two genomes, params are the ids
+	// breeding should be done with nodes not conns
 	public void cross_breed(Genome a, Genome b)
 	{
 		// genome a will be the fitter of the two mates
