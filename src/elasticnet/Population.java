@@ -418,11 +418,11 @@ public class Population {
 			}
 			else
 			{	
-				ConnectionGene gB = this.connection_genes.get(gA_id).get(GenomeB.id);
+				NodeGene gB = this.node_genes.get(gA_id).get(GenomeB.id);
 				
 				//offspring.conn_genes.add(gA_id);
 				
-				ConnectionGene crossed_over = _cross_over_conns(gA, gB);
+				NodeGene crossed_over = _cross_over_nodes(gA, gB);
 				
 				if(offspring.input_nodes.contains(crossed_over.from_node) == false && offspring.hidden_nodes.contains(crossed_over.from_node) == false)
 				{
