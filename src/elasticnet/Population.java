@@ -424,26 +424,7 @@ public class Population {
 				
 				NodeGene crossed_over = _cross_over_nodes(gA, gB);
 				
-				if(offspring.input_nodes.contains(crossed_over.from_node) == false && offspring.hidden_nodes.contains(crossed_over.from_node) == false)
-				{
-					offspring.hidden_nodes.add(crossed_over.from_node);
-					NodeGene from_node = this.node_genes.get(crossed_over.from_node).get(GenomeA.id);
-					this.node_genes.get(crossed_over.from_node).put(offspring.id, from_node);
-				}
-				if(offspring.output_nodes.contains(crossed_over.to_node) == false && offspring.hidden_nodes.contains(crossed_over.to_node) == false) 
-				{
-					offspring.hidden_nodes.add(crossed_over.to_node);
-					NodeGene from_node = this.node_genes.get(crossed_over.to_node).get(GenomeA.id);
-					int node_conn_count = from_node.connections.size();
-					for (int z = 0; z < node_conn_count; z++)
-					{
-						int node_conn_id = from_node.connections.get(z);
-						this.connection_genes.get(node_conn_id).put(offspring.id, this.connection_genes.get(node_conn_id).get(GenomeA.id));
-					}
-					this.node_genes.get(crossed_over.to_node).put(offspring.id, from_node);	
-				}				
-				
-				this.connection_genes.get(gA_id).put(offspring.id, crossed_over);
+				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
 			}
 		}
 		this.genomes.put(offspring.id, offspring);
@@ -512,6 +493,16 @@ public class Population {
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
 		new_node.is_output = a.is_output;
+		ArrayList<Integer> new_conns;
+		if(Math.random() > .5)
+		{
+			new_conns = a.connections;
+		}
+		else
+		{
+			new_conns = b.connections;
+		}
+		
 		new_node.connections = new ArrayList<Integer>(a.connections);
 		for(String key : a.atts.keySet())
 		{
