@@ -378,29 +378,25 @@ public class Population {
 		// get the max num of genes for hidden nodes and connections 
 		boolean use_a;
 		
-		int conn_gene_counter = 0;
-		
-		int node_gene_counter = 0;
-		
-		if (GenomeA.hidden_nodes.size() > GenomeB.hidden_nodes.size())
+		int node_counter;
+		ArrayList<Integer> ga_node_genes = GenomeA.get_all_nodes();
+		ArrayList<Integer> gb_node_genes = GenomeB.get_all_nodes();
+		if(ga_node_genes.size(); >= gb_node_genes.size())
 		{
-			node_gene_counter = GenomeA.output_nodes.size()+GenomeA.input_nodes.size()+GenomeA.hidden_nodes.size();
+			node_counter = ga_node_genes.size();
 		}
 		else
 		{
-			node_gene_counter = GenomeB.output_nodes.size()+GenomeB.input_nodes.size()+GenomeB.hidden_nodes.size();
+			node_counter = gb_node_genes.size();
 		}
-		ArrayList<Integer> ga_conns = GenomeA.get_all_conn_ids(this.node_genes);
-		ArrayList<Integer> gb_conns = GenomeB.get_all_conn_ids(this.node_genes);
-		int gA_conn_counter = ga_conns.size();
 		
-		for (int k = 0; k < gA_conn_counter; k++)
+		for (int k = 0; k < node_counter; k++)
 		{
-			int gA_id = ga_conns.get(k);
+			int gA_id = ga_node_genes.get(k);
 			
-			ConnectionGene gA = this.connection_genes.get(gA_id).get(GenomeA.id);
+			NodeGene gA = this.node_genes.get(gA_id).get(GenomeA.id);
 			
-			if(gb_conns.contains(gA_id) == false)
+			if(gb_node_genes.contains(gA_id) == false)
 			{
 				this.connection_genes.get(gA_id).put(offspring.id, gA);
 				
