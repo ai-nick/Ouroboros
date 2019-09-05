@@ -378,18 +378,9 @@ public class Population {
 		// get the max num of genes for hidden nodes and connections 
 		boolean use_a;
 		
-		int node_counter;
 		ArrayList<Integer> ga_node_genes = GenomeA.get_all_nodes();
 		ArrayList<Integer> gb_node_genes = GenomeB.get_all_nodes();
-		if(ga_node_genes.size(); >= gb_node_genes.size())
-		{
-			node_counter = ga_node_genes.size();
-		}
-		else
-		{
-			node_counter = gb_node_genes.size();
-		}
-		
+		int node_counter = ga_node_genes.size();
 		for (int k = 0; k < node_counter; k++)
 		{
 			int gA_id = ga_node_genes.get(k);
@@ -503,7 +494,7 @@ public class Population {
 			new_conns = b.connections;
 		}
 		
-		new_node.connections = new ArrayList<Integer>(a.connections);
+		new_node.connections = new ArrayList<Integer>(new_conns);
 		for(String key : a.atts.keySet())
 		{
 			if(Math.random() > .5)
