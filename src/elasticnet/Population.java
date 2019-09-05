@@ -381,6 +381,8 @@ public class Population {
 		ArrayList<Integer> ga_node_genes = GenomeA.get_all_nodes();
 		ArrayList<Integer> gb_node_genes = GenomeB.get_all_nodes();
 		int node_counter = ga_node_genes.size();
+		// as per the paper disjoint and excess we use the fitter genomes (a) 
+		// genes, if both genomes have the gene we cross over
 		for (int k = 0; k < node_counter; k++)
 		{
 			int gA_id = ga_node_genes.get(k);
