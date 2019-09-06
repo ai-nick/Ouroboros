@@ -255,6 +255,34 @@ public class Population {
 				Species current_species = this.pop_species.get(ix);
 
 				int spec_size = current_species.member_ids.size();
+				
+				if(spec_size > 1)
+				{
+					// if our species has enough genomes to breed with sexy times
+					// we will do every combination of mates
+					for (int a = 0; a < spec_size; a++)
+					{
+						Genome a_genome = this.genomes.get(current_species.member_ids.get(a));
+						for(int b = 0; b < spec_size; b++)
+						{
+							if(b != a)
+							{
+								Genome b_genome = this.genomes.get(current_species.member_ids.get(b));
+								
+								this.cross_breed(a_genome, b_genome);
+								need_new--;
+							}
+						}
+					}
+				}
+				else
+				{
+					//TODO figure out if i should be passing species to cross breed in 
+					// the sexual reproduction above as i do below in the asexual
+					// breeding method
+					Genome asex_genome = this.genomes.get(current_species.member_ids.get(0));
+					this.breed_asexual(asex_genome, current_species);
+				}
 			}
 		}
 	}
@@ -420,7 +448,7 @@ public class Population {
 			{	
 				NodeGene gB = this.node_genes.get(gA_id).get(GenomeB.id);
 				
-				NodeGene crossed_over = _cross_over_nodes(gA, gB);
+				NodeGene crossed_over = _cross_over_nodes(gA, gB, offspring.id);
 				
 				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
 			}
