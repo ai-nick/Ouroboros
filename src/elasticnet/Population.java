@@ -464,6 +464,10 @@ public class Population {
 				NodeGene crossed_over = _cross_over_nodes(gA, gB, offspring.id);
 				
 				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
+				// there is a non zero chance that during cross over a node from genomeb 
+				// is contained in this node gene which does not have the to_node in this 
+				// offspring, we will prune these here
+				
 			}
 		}
 		this.genomes.put(offspring.id, offspring);
@@ -535,6 +539,7 @@ public class Population {
 		new_node.is_output = a.is_output;
 		ArrayList<Integer> new_conns;
 		boolean use_a;
+		/*
 		if(Math.random() > .5)
 		{
 			new_conns = a.connections;
@@ -545,15 +550,15 @@ public class Population {
 			new_conns = b.connections;
 			use_a = false;
 		}
-		
-		new_node.connections = new ArrayList<Integer>(new_conns);
+		*/
+		new_node.connections = new ArrayList<Integer>(a.connections);
 		int num_conns = new_node.connections.size();
 		for(int conn_idx = 0; conn_idx < num_conns; conn_idx++)
 		{
-			if(use_a == true)
+			if(b.connections.contains(new_conns.get(conn_idx)) != true)
 			{
 				ConnectionGene add_this = new ConnectionGene(this.connection_genes.get(new_node.connections.get(conn_idx)).get(a.inno_id));
-				
+				new_node.connections.add(e)
 			}
 			else
 			{
