@@ -555,10 +555,11 @@ public class Population {
 		int num_conns = new_node.connections.size();
 		for(int conn_idx = 0; conn_idx < num_conns; conn_idx++)
 		{
-			if(b.connections.contains(new_conns.get(conn_idx)) != true)
+			if(b.connections.contains(new_node.connections.get(conn_idx)) != true)
 			{
-				ConnectionGene add_this = new ConnectionGene(this.connection_genes.get(new_node.connections.get(conn_idx)).get(a.inno_id));
-				new_node.connections.add(e)
+				int gene_id = new_node.connections.get(conn_idx);
+				ConnectionGene add_this = new ConnectionGene(this.connection_genes.get(gene_id).get(a.inno_id));
+				this.connection_genes.get(gene_id).put(genome_id, add_this);
 			}
 			else
 			{
