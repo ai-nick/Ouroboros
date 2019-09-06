@@ -223,7 +223,7 @@ public class Population {
 		double elitism_percent = this.config.elitism;
 		int[] sorted_species_ids = new int[num_species];
 		int saved_sum = 0;
-		int keep_top = (int)((double)num_genomes * elitism_percent);
+		int keep_top;
 		// next we will reduce each species by this elitism percent
 		// and add the new amount of the species to our save_sum
 		for(int x = 0; x < num_species; x++)
@@ -231,6 +231,31 @@ public class Population {
 			Species current = this.pop_species.get(x);
 			num_genomes = current.member_ids.size();
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
+		}
+		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
+		System.out.println(num_species);
+		for(int x = 0; x < num_species; x++)
+		{
+			Species current = this.pop_species.get(x);
+			keep_top = (int)((double)current.member_ids.size() * elitism_percent);
+			saved_sum += keep_top;
+			if(keep_top > 0)
+			{
+				//reduce the species to only the elite genomes
+				current.have_mercy(keep_top, this.genomes, this.connection_genes, this.node_genes);
+				//breed_all_remaining(current);				
+			}
+		}
+		int need_new = this.pop_size - saved_sum;
+		int elite_iterator = 0;
+		while(need_new != 0)
+		{
+			for(int ix = 0; ix < num_species; ix++)
+			{
+				Species current_species = this.pop_species.get(ix);
+
+				int spec_size = current_species.member_ids.size();
+			}
 		}
 	}
 	
@@ -456,7 +481,7 @@ public class Population {
 		return new_gene;
 	}
 	
-	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b)
+	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b, int genome_id)
 	{
 		System.out.print("crossing over nodes: ");
 		System.out.print(a.inno_id);
@@ -485,6 +510,7 @@ public class Population {
 		{
 			if(use_a == true)
 			{
+				ConnectionGene add_this = new ConnectionGene(this.connection_genes.get(new_node.connections.get(conn_idx)).get(a.inno_id));
 				
 			}
 			else
