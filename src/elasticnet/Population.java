@@ -269,7 +269,7 @@ public class Population {
 							{
 								Genome b_genome = this.genomes.get(current_species.member_ids.get(b));
 								
-								this.cross_breed(a_genome, b_genome);
+								this.cross_breed(a_genome, b_genome, current_species);
 								need_new--;
 							}
 						}
@@ -282,6 +282,7 @@ public class Population {
 					// breeding method
 					Genome asex_genome = this.genomes.get(current_species.member_ids.get(0));
 					this.breed_asexual(asex_genome, current_species);
+					need_new--;
 				}
 			}
 		}
@@ -347,7 +348,7 @@ public class Population {
 					{
 						System.out.println("breeding with sex");
 						int other_genome_id = current_species.member_ids.get(y+1);
-						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id));
+						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id), current_species);
 					}	
 				}
 				need_new--;
@@ -380,7 +381,7 @@ public class Population {
 			{
 				if (i != x)
 				{
-					cross_breed(this.genomes.get(the_species.member_ids.get(i)), this.genomes.get(the_species.member_ids.get(x)));
+					cross_breed(this.genomes.get(the_species.member_ids.get(i)), this.genomes.get(the_species.member_ids.get(x)), the_species);
 				}
 			}
 		}
@@ -388,7 +389,7 @@ public class Population {
 	
 	// breed two genomes, params are the ids
 	// breeding should be done with nodes not conns
-	public void cross_breed(Genome a, Genome b)
+	public void cross_breed(Genome a, Genome b, Species the_species)
 	{
 		// genome a will be the fitter of the two mates
 		Genome GenomeA;
@@ -442,10 +443,22 @@ public class Population {
 			
 			if(gb_node_genes.contains(gA_id) == false)
 			{
-				this.node_genes.get(gA_id).put(offspring.id, gA);
+				// Disjoint or excess so we use A because its the fitter genome
+				NodeGene gene_copy = new NodeGene(gA);
+				this.node_genes.get(gA_id).put(offspring.id, gene_copy);
+				int num_conns = gene_copy.connections.size();
+				for(int g_ix = 0; g_ix < num_conns; g_ix++)
+				{
+					int conn_id = gene_copy.connections.get(g_ix);
+					ConnectionGene conn_copy = new ConnectionGene(this.connection_genes.get(conn_id).get(GenomeA.id));
+					this.connection_genes.get(conn_id).put(offspring.id, conn_copy);
+				}
 			}
 			else
 			{	
+				// perform cross over since the gene isnt disjoint or excess
+				// TODO add call to conn cross over appropriately in the node
+				// cross over logic
 				NodeGene gB = this.node_genes.get(gA_id).get(GenomeB.id);
 				
 				NodeGene crossed_over = _cross_over_nodes(gA, gB, offspring.id);
@@ -454,6 +467,7 @@ public class Population {
 			}
 		}
 		this.genomes.put(offspring.id, offspring);
+		the_species.member_ids.add(offspring.id);
 		this.next_genome_id++;
 	}
 	
