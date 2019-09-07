@@ -563,7 +563,10 @@ public class Population {
 			}
 			else
 			{
-				
+				ConnectionGene a_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(a.inno_id));
+				ConnectionGene b_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(b.inno_id));
+				ConnectionGene add_this = this._cross_over_conns(a_conn, b_conn);
+				this.connection_genes.get(gene_id).put(genome_id, add_this);
 			}
 		}
 		// lol based
