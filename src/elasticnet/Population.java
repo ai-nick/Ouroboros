@@ -556,7 +556,7 @@ public class Population {
 		for(int conn_idx = 0; conn_idx < num_conns; conn_idx++)
 		{
 			int gene_id = new_node.connections.get(conn_idx);
-			if(b.connections.contains(new_node.connections.get(conn_idx)) != true)
+			if(b.connections.contains(gene_id) != true)
 			{
 				ConnectionGene add_this = new ConnectionGene(this.connection_genes.get(gene_id).get(a.inno_id));
 				this.connection_genes.get(gene_id).put(genome_id, add_this);
