@@ -509,7 +509,7 @@ public class Population {
 		System.out.print("crossing over conns: ");
 		System.out.print(a.inno_id);
 		System.out.print(" and ");
-		System.out.print(b.inno_id);
+		System.out.println(b.inno_id);
 		ConnectionGene new_gene = new ConnectionGene(a.from_node, a.to_node, a.inno_id);
 		
 		new_gene.activation_level = a.activation_level;
@@ -533,7 +533,7 @@ public class Population {
 		System.out.print("crossing over nodes: ");
 		System.out.print(a.inno_id);
 		System.out.print(" and ");
-		System.out.print(b.inno_id);
+		System.out.println(b.inno_id);
 		NodeGene new_node = new NodeGene(a.inno_id, this.hash_id);
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
@@ -563,6 +563,7 @@ public class Population {
 				if(clone_this == null)
 				{
 					System.out.println("uh wtf vro");
+					System.out.println(gene_id);
 				}
 				ConnectionGene add_this = new ConnectionGene(clone_this);
 				this.connection_genes.get(gene_id).put(genome_id, add_this);
