@@ -470,6 +470,10 @@ public class Genome {
 			from_node.connections.add(new_conn_a.inno_id);
 			
 			from_node.connections.remove(from_node.connections.indexOf(connection_to_split_index));
+			
+			pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
+			
+			new_id = Collections.max(conn_ids) + 1;
 		}
 		else
 		{
@@ -524,6 +528,8 @@ public class Genome {
 			NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
 			
 			from_node.connections.remove(from_node.connections.indexOf(connection_to_split_index));
+			
+			pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 			
 			new_id++;
 		}

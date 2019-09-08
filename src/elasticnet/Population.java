@@ -559,11 +559,12 @@ public class Population {
 			int gene_id = new_node.connections.get(conn_idx);
 			if(b.connections.contains(gene_id) != true)
 			{
-				if(a == null)
+				ConnectionGene clone_this = this.connection_genes.get(gene_id).get(a.inno_id);
+				if(clone_this == null)
 				{
 					System.out.println("uh wtf vro");
 				}
-				ConnectionGene add_this = new ConnectionGene(this.connection_genes.get(gene_id).get(a.inno_id));
+				ConnectionGene add_this = new ConnectionGene(clone_this);
 				this.connection_genes.get(gene_id).put(genome_id, add_this);
 			}
 			else
