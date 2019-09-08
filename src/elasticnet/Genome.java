@@ -435,46 +435,6 @@ public class Genome {
 				}
 			}
 		}
-		/*
-		 * the old way
-		 */
-		/*
-		for(int c : pop_conns.keySet())
-		{
-			HashMap<Integer, ConnectionGene> the_map = pop_conns.get(c);
-			if(the_map != null && the_map.keySet().iterator().hasNext() == true)
-			{
-				int g_id = the_map.keySet().iterator().next();
-				if(g_id != this.id)
-				{
-					ConnectionGene cg = the_map.get(g_id);
-					if(cg == null)
-					{
-						System.out.println("null conn encountered");
-					}
-					if (cg.from_node == connection_to_split.from_node)
-					{
-						//TODO check all conns for this node, see if it has one to the to_node for our
-						//conn to split
-						NodeGene middle_node = pop_nodes.get(cg.to_node).get(g_id);
-						// Ah Tasha Sultana inspired my ass now i got 
-						int conn_count = middle_node.connections.size();
-						for (int x = 0; x < conn_count; x++)
-						{
-							ConnectionGene second_conn = pop_conns.get(middle_node.connections.get(x)).get(g_id);
-							if(second_conn.to_node == connection_to_split.to_node)
-							{
-								struct_exists = true;
-								conn_a_id = cg.inno_id;
-								conn_b_id = second_conn.inno_id;
-								gene_id = middle_node.inno_id;
-							}
-						}
-					}
-				}
-			}
-		}
-		*/
 
 		// if we make it here this structure hasnt occured yet
 		// so we will add the node and its two new connecitons
@@ -648,20 +608,7 @@ public class Genome {
 		
 		from_node.connections.remove(from_node.connections.indexOf(delete_id));
 		
-		//pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
-		//int count = all_nodes.size();
-		/*
-		for(int ix = 0; ix < count; ix++)
-		{
-			NodeGene current = pop_nodes.get(all_nodes.get(ix)).get(this.id);
-			int delete_index = current.connections.indexOf(delete_conn);
-			if (delete_index != -1)
-			{
-				current.connections.remove(delete_index);	
-			}
-		}
-		*/
-		//this.conn_genes.remove(this.conn_genes.indexOf(delete_id));
+		pop_nodes.get(delete_conn.from_node).replace(this.id, from_node);
 		
 		pop_conns.get(delete_id).remove(this.id);
 	}

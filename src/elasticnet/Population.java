@@ -161,6 +161,7 @@ public class Population {
 	{
 		// initialize array of speciated genome ids
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
+		this.pop_species = new ArrayList<Species>();
 		// get the compat distance from config
 		double compat_t = this.config.compat_threshold;
 		// coeeficients 
@@ -558,6 +559,10 @@ public class Population {
 			int gene_id = new_node.connections.get(conn_idx);
 			if(b.connections.contains(gene_id) != true)
 			{
+				if(a == null)
+				{
+					System.out.println("uh wtf vro");
+				}
 				ConnectionGene add_this = new ConnectionGene(this.connection_genes.get(gene_id).get(a.inno_id));
 				this.connection_genes.get(gene_id).put(genome_id, add_this);
 			}
