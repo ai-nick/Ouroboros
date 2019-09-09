@@ -64,10 +64,10 @@ public class Genome {
 				
 				ConnectionGene conn_copy = new ConnectionGene(conn_to_add);
 				
-				pop_conns.get(to_add.connections.get(x)).put(this.id, conn_copy);
+				pop_conns.get(conn_copy.inno_id).put(this.id, conn_copy);
 			}
 			
-			pop_nodes.get(all_nodes.get(ix)).put(this.id, to_add);
+			pop_nodes.get(to_add.inno_id).put(this.id, to_add);
 		}
 	}
 	
@@ -715,6 +715,37 @@ public class Genome {
 			}
 		}
 		return conns;
+	}
+	
+	public boolean check_for_nulls(
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns,
+			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes
+			)
+	{
+		boolean has_nulls = false;
+		ArrayList<Integer> all_nodes = this.get_all_nodes();
+		int num_nodes = all_nodes.size();
+		for(int x = 0; x < num_nodes; x++)
+		{
+			NodeGene next_node = pop_nodes.get(all_nodes.get(x)).get(this.id);
+			if(next_node == null)
+			{
+				has_nulls = true;
+			}
+			else
+			{
+				int conn_count = next_node.connections.size();
+				for(int i = 0; i < conn_count; i++)
+				{
+					ConnectionGene next_conn = pop_conns.get(next_node.connections.get(i)).get(this.id);
+					if(next_conn == null)
+					{
+						has_nulls = true;
+					}
+				}
+			}
+		}
+		return has_nulls;
 	}
 	
 	private int get_random_in_range(int range_len)
