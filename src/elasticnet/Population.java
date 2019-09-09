@@ -355,6 +355,11 @@ public class Population {
 						System.out.println("breeding with sex");
 						int other_genome_id = current_species.member_ids.get(y+1);
 						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id), current_species);
+						boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
+						if(has_nulls == true)
+						{
+							System.out.println("null pointer after sex");
+						}
 					}	
 				}
 				need_new--;
