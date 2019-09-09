@@ -343,7 +343,12 @@ public class Population {
 					if(y <= 2)
 					{
 						System.out.println("breeding asexual");
-						this.breed_asexual(this.genomes.get(genome_id), current_species);	
+						this.breed_asexual(this.genomes.get(genome_id), current_species);
+						boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
+						if(has_nulls == true)
+						{
+							System.out.println("null pointer after asexual");
+						}
 					} 
 					else if(y < spec_size -1)
 					{
