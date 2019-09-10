@@ -580,6 +580,8 @@ public class Population {
 			}
 			else
 			{
+				//shit this is totally wrong, we need the genome ids not the inno ids for the second get
+				// FOUND THIS LITTLE FUCKER BUG BHABHAHBABHBAHBHA
 				ConnectionGene a_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(a.inno_id));
 				ConnectionGene b_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(b.inno_id));
 				ConnectionGene add_this = this._cross_over_conns(a_conn, b_conn);
