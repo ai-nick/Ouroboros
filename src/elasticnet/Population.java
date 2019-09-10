@@ -472,7 +472,7 @@ public class Population {
 				// cross over logic
 				NodeGene gB = this.node_genes.get(gA_id).get(GenomeB.id);
 				
-				NodeGene crossed_over = _cross_over_nodes(gA, gB, offspring.id);
+				NodeGene crossed_over = _cross_over_nodes(gA, gB, GenomeA.id, GenomeB.id, offspring.id);
 				
 				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
 				// there is a non zero chance that during cross over a node from genomeb 
@@ -538,7 +538,7 @@ public class Population {
 		return new_gene;
 	}
 	
-	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b, int genome_id)
+	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b, int genome_a_id, int genome_b_id, int genome_id)
 	{
 		System.out.print("crossing over nodes: ");
 		System.out.print(a.inno_id);
@@ -569,7 +569,7 @@ public class Population {
 			int gene_id = new_node.connections.get(conn_idx);
 			if(b.connections.contains(gene_id) != true)
 			{
-				ConnectionGene clone_this = this.connection_genes.get(gene_id).get(a.inno_id);
+				ConnectionGene clone_this = this.connection_genes.get(gene_id).get(genome_a_id);
 				if(clone_this == null)
 				{
 					System.out.println("uh wtf vro");
@@ -582,8 +582,8 @@ public class Population {
 			{
 				//shit this is totally wrong, we need the genome ids not the inno ids for the second get
 				// FOUND THIS LITTLE FUCKER BUG BHABHAHBABHBAHBHA
-				ConnectionGene a_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(a.inno_id));
-				ConnectionGene b_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(b.inno_id));
+				ConnectionGene a_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(genome_a_id));
+				ConnectionGene b_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(genome_b_id));
 				ConnectionGene add_this = this._cross_over_conns(a_conn, b_conn);
 				this.connection_genes.get(gene_id).put(genome_id, add_this);
 			}
