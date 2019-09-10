@@ -38,6 +38,11 @@ public class TestGenome {
 						System.out.println("null conn encountered, id = " + next_node.get_connections().get(ix).toString());
 						num_nulls++;
 					}
+					NodeGene to_node = test_pop.node_genes.get(next_conn.get_to()).get(next.id);
+					if(to_node == null)
+					{
+						num_null_to_nodes++;
+					}
 				}
 			}
 		}

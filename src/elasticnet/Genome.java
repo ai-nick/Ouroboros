@@ -742,6 +742,11 @@ public class Genome {
 					{
 						has_nulls = true;
 					}
+					NodeGene to_node = pop_nodes.get(next_conn.to_node).get(this.id);
+					if(to_node == null)
+					{
+						has_nulls = true;
+					}
 				}
 			}
 		}
