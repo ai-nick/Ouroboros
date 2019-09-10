@@ -344,22 +344,14 @@ public class Population {
 					{
 						System.out.println("breeding asexual");
 						this.breed_asexual(this.genomes.get(genome_id), current_species);
-						boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
-						if(has_nulls == true)
-						{
-							System.out.println("null pointer after asexual");
-						}
+						//boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
 					} 
 					else if(y < spec_size -1)
 					{
 						System.out.println("breeding with sex");
 						int other_genome_id = current_species.member_ids.get(y+1);
 						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id), current_species);
-						boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
-						if(has_nulls == true)
-						{
-							System.out.println("null pointer after sex");
-						}
+						//boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
 					}	
 				}
 				need_new--;
@@ -371,8 +363,17 @@ public class Population {
 	public void breed_asexual(Genome single_parent, Species the_species)
 	{
 		Genome offspring = new Genome(single_parent, this.next_genome_id, this.connection_genes, this.node_genes);
-		
+		boolean has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
+		if(has_nulls == true)
+		{
+			System.out.println("null pointer after cloning");
+		}
 		offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
+		has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
+		if(has_nulls == true)
+		{
+			System.out.println("null pointer after mutation");
+		}
 		this.next_genome_id++;
 		the_species.member_ids.add(offspring.id);
 		this.genomes.put(offspring.id, offspring);
