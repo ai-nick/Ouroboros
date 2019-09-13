@@ -754,10 +754,12 @@ public class Genome {
 						HashMap<Integer, NodeGene> node_map = pop_nodes.get(next_conn.to_node);
 						if (node_map == null)
 						{
-							System.out.print("null node map for genome");
+							System.out.print("null node map for genome ");
 							System.out.print(this.id);
 							System.out.print(" conn_gene id: ");
-							System.out.println(next_conn.inno_id);
+							System.out.print(next_conn.inno_id);
+							System.out.print(" node id: ");
+							System.out.println(next_conn.to_node);
 						}
 						NodeGene to_node = node_map.get(this.id);
 						if(to_node == null)
