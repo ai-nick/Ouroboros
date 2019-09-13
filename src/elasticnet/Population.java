@@ -342,13 +342,15 @@ public class Population {
 					int genome_id = this.pop_species.get(ix).member_ids.get(y);
 					if(y <= 2)
 					{
-						System.out.println("breeding asexual");
+						System.out.print("breeding asexual genome: ");
+						System.out.println(genome_id);
 						this.breed_asexual(this.genomes.get(genome_id), current_species);
 						//boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
 					} 
 					else if(y < spec_size -1)
 					{
-						System.out.println("breeding with sex");
+						System.out.print("breeding with sex genome: ");
+						System.out.println(genome_id);
 						int other_genome_id = current_species.member_ids.get(y+1);
 						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id), current_species);
 						boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);

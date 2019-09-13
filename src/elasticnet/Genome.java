@@ -759,7 +759,7 @@ public class Genome {
 							System.out.print(" conn_gene id: ");
 							System.out.println(next_conn.inno_id);
 						}
-						NodeGene to_node = pop_nodes.get(next_conn.to_node).get(this.id);
+						NodeGene to_node = node_map.get(this.id);
 						if(to_node == null)
 						{
 							has_nulls = true;
