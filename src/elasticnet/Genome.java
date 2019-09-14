@@ -580,12 +580,9 @@ public class Genome {
 				pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 				pop_conns.get(next_conn.inno_id).remove(this.id);
 			}
-			if(next_conn.from_node == delete_id)
-			{
-				pop_conns.get(next_conn.inno_id).remove(this.id);
-			}
-			
 		}
+		
+		ArrayList<Integer> delet_node_conns = pop_nodes.get(delete_id).get(this.id).connections;
 		
 		pop_nodes.get(delete_id).remove(this.id);
 		
@@ -760,11 +757,15 @@ public class Genome {
 							System.out.print(next_conn.inno_id);
 							System.out.print(" node id: ");
 							System.out.println(next_conn.to_node);
-						}
-						NodeGene to_node = node_map.get(this.id);
-						if(to_node == null)
-						{
 							has_nulls = true;
+						}
+						else
+						{
+							NodeGene to_node = node_map.get(this.id);
+							if(to_node == null)
+							{
+								has_nulls = true;
+							}	
 						}	
 					}
 				}

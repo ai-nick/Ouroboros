@@ -609,4 +609,8 @@ public class Population {
 		}
 		return new_node;
 	}
+	
+	private void save_champ_genome(Genome g) {
+		
+	}
 }
