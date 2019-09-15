@@ -25,7 +25,7 @@ public class Genome {
 	public ArrayList<Integer> output_nodes = new ArrayList<Integer>();
 	public int gene_id_min, gene_id_max = 0;
 	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
-	
+	public boolean is_recursive = false;
 	public Genome(int p_hash, int genome_id) {
 		this.id = genome_id;
 		this.population_hash = p_hash;
@@ -321,6 +321,10 @@ public class Genome {
 		{
 			return new_id;
 		}
+		if(from_node_key == to_node_key && this.is_recursive == false)
+		{
+			return new_id;
+		}
 		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
 		
 		// the next to if statements ensure we dont add conns that are either output -> output
@@ -580,10 +584,21 @@ public class Genome {
 				pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 				pop_conns.get(next_conn.inno_id).remove(this.id);
 			}
+			if(next_conn.from_node == delete_id)
+			{
+				pop_conns.get(next_conn.inno_id).remove(this.id);
+			}
 		}
+		/*
+		ArrayList<Integer> delete_node_conns = pop_nodes.get(delete_id).get(this.id).connections;
 		
-		ArrayList<Integer> delet_node_conns = pop_nodes.get(delete_id).get(this.id).connections;
+		int num_delete_conns = delete_node_conns.size();
 		
+		for(int x = 0; x < num_delete_conns; x++)
+		{
+			
+		}
+		*/
 		pop_nodes.get(delete_id).remove(this.id);
 		
 		this.hidden_nodes.remove(this.hidden_nodes.indexOf(delete_id));

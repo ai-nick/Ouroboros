@@ -435,21 +435,21 @@ public class Population {
 		
 		for(int i = 0; i < in_count; i++)
 		{
-			int node_id = GenomeA.input_nodes.get(i);
+			int node_id = a.input_nodes.get(i);
 			offspring.input_nodes.add(node_id);
-			NodeGene clone_node = this.node_genes.get(node_id).get(GenomeA.id);
+			NodeGene clone_node = this.node_genes.get(node_id).get(a.id);
 			this.node_genes.get(node_id).put(offspring.id, clone_node);
 		}
 		for(int i = 0; i < out_count; i++)
 		{
-			int node_id = GenomeA.output_nodes.get(i);
+			int node_id = a.output_nodes.get(i);
 			offspring.output_nodes.add(node_id);
-			NodeGene clone_node = this.node_genes.get(node_id).get(GenomeA.id);
+			NodeGene clone_node = this.node_genes.get(node_id).get(a.id);
 			this.node_genes.get(node_id).put(offspring.id, clone_node);
 		}
 		
-		ArrayList<Integer> ga_node_genes = GenomeA.get_all_nodes();
-		ArrayList<Integer> gb_node_genes = GenomeB.get_all_nodes();
+		ArrayList<Integer> ga_node_genes = a.get_all_nodes();
+		ArrayList<Integer> gb_node_genes = a.get_all_nodes();
 		int node_counter = ga_node_genes.size();
 		// as per the paper disjoint and excess we use the fitter genomes (a) 
 		// genes, if both genomes have the gene we cross over
@@ -457,7 +457,7 @@ public class Population {
 		{
 			int gA_id = ga_node_genes.get(k);
 			
-			NodeGene gA = this.node_genes.get(gA_id).get(GenomeA.id);
+			NodeGene gA = this.node_genes.get(gA_id).get(a.id);
 			
 			if(gb_node_genes.contains(gA_id) == false)
 			{
@@ -468,7 +468,7 @@ public class Population {
 				for(int g_ix = 0; g_ix < num_conns; g_ix++)
 				{
 					int conn_id = gene_copy.connections.get(g_ix);
-					ConnectionGene conn_copy = new ConnectionGene(this.connection_genes.get(conn_id).get(GenomeA.id));
+					ConnectionGene conn_copy = new ConnectionGene(this.connection_genes.get(conn_id).get(a.id));
 					this.connection_genes.get(conn_id).put(offspring.id, conn_copy);
 				}
 			}
@@ -477,9 +477,9 @@ public class Population {
 				// perform cross over since the gene isnt disjoint or excess
 				// TODO add call to conn cross over appropriately in the node
 				// cross over logic
-				NodeGene gB = this.node_genes.get(gA_id).get(GenomeB.id);
+				NodeGene gB = this.node_genes.get(gA_id).get(b.id);
 				
-				NodeGene crossed_over = _cross_over_nodes(gA, gB, GenomeA.id, GenomeB.id, offspring.id);
+				NodeGene crossed_over = _cross_over_nodes(gA, gB, a.id, a.id, offspring.id);
 				
 				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
 				// there is a non zero chance that during cross over a node from genomeb 
