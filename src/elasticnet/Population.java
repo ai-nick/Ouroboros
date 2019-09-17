@@ -448,8 +448,8 @@ public class Population {
 			this.node_genes.get(node_id).put(offspring.id, clone_node);
 		}
 		
-		ArrayList<Integer> ga_node_genes = a.get_all_nodes();
-		ArrayList<Integer> gb_node_genes = a.get_all_nodes();
+		ArrayList<Integer> ga_node_genes = a.hidden_nodes;
+		ArrayList<Integer> gb_node_genes = b.hidden_nodes;
 		int node_counter = ga_node_genes.size();
 		// as per the paper disjoint and excess we use the fitter genomes (a) 
 		// genes, if both genomes have the gene we cross over
@@ -555,8 +555,6 @@ public class Population {
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
 		new_node.is_output = a.is_output;
-		ArrayList<Integer> new_conns;
-		boolean use_a;
 		/*
 		if(Math.random() > .5)
 		{
