@@ -523,10 +523,12 @@ public class Population {
 	
 	private ConnectionGene _cross_over_conns(ConnectionGene a, ConnectionGene b)
 	{
+		/*
 		System.out.print("crossing over conns: ");
 		System.out.print(a.inno_id);
 		System.out.print(" and ");
 		System.out.println(b.inno_id);
+		*/
 		ConnectionGene new_gene = new ConnectionGene(a.from_node, a.to_node, a.inno_id);
 		
 		new_gene.activation_level = a.activation_level;
@@ -557,18 +559,6 @@ public class Population {
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
 		new_node.is_output = a.is_output;
-		/*
-		if(Math.random() > .5)
-		{
-			new_conns = a.connections;
-			use_a = true;
-		}
-		else
-		{
-			new_conns = b.connections;
-			use_a = false;
-		}
-		*/
 		new_node.connections = new ArrayList<Integer>(a.connections);
 		int num_conns = new_node.connections.size();
 		for(int conn_idx = 0; conn_idx < num_conns; conn_idx++)
