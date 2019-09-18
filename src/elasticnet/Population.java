@@ -547,10 +547,12 @@ public class Population {
 	
 	private NodeGene _cross_over_nodes(NodeGene a, NodeGene b, int genome_a_id, int genome_b_id, int genome_id)
 	{
+		/*
 		System.out.print("crossing over nodes: ");
 		System.out.print(a.inno_id);
 		System.out.print(" and ");
 		System.out.println(b.inno_id);
+		*/
 		NodeGene new_node = new NodeGene(a.inno_id, this.hash_id);
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
