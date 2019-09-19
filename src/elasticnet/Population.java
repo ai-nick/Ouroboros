@@ -342,15 +342,15 @@ public class Population {
 					int genome_id = this.pop_species.get(ix).member_ids.get(y);
 					if(y <= 2)
 					{
-						System.out.print("breeding asexual genome: ");
-						System.out.println(genome_id);
+						//System.out.print("breeding asexual genome: ");
+						//System.out.println(genome_id);
 						this.breed_asexual(this.genomes.get(genome_id), current_species);
 						//boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
 					} 
 					else if(y < spec_size -1)
 					{
-						System.out.print("breeding with sex genome: ");
-						System.out.println(genome_id);
+						//System.out.print("breeding with sex genome: ");
+						//System.out.println(genome_id);
 						int other_genome_id = current_species.member_ids.get(y+1);
 						this.cross_breed(this.genomes.get(genome_id), this.genomes.get(other_genome_id), current_species);
 						boolean has_nulls = this.genomes.get(genome_id).check_for_nulls(this.connection_genes, this.node_genes);
@@ -579,8 +579,8 @@ public class Population {
 			{
 				//shit this is totally wrong, we need the genome ids not the inno ids for the second get
 				// FOUND THIS LITTLE FUCKER BUG BHABHAHBABHBAHBHA
-				ConnectionGene a_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(genome_a_id));
-				ConnectionGene b_conn = new ConnectionGene(this.connection_genes.get(gene_id).get(genome_b_id));
+				ConnectionGene a_conn = this.connection_genes.get(gene_id).get(genome_a_id);
+				ConnectionGene b_conn = this.connection_genes.get(gene_id).get(genome_b_id);
 				ConnectionGene add_this = this._cross_over_conns(a_conn, b_conn);
 				this.connection_genes.get(gene_id).put(genome_id, add_this);
 			}
