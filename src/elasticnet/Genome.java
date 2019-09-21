@@ -355,7 +355,6 @@ public class Genome {
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
 			pop_conns.put(conn_id, new_map);
-			new_id = conn_id;
 		}
 		else 
 		{
@@ -364,7 +363,7 @@ public class Genome {
 		}
 		//this.conn_genes.add(new_gene.inno_id);
 		from_node.connections.add(new_gene.inno_id);
-		return new_id;
+		return conn_id;
 	}
 	
 	//TODO ensure we are removing conn ref from node
