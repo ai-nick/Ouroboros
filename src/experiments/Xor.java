@@ -76,7 +76,7 @@ public class Xor {
 			System.out.println("speciating");
 			test_pop.speciate_population();
 			System.out.println("reproducing");
-			test_pop.the_reproduction_function();
+			test_pop.new_reproduction();
 		}
 	}
 	

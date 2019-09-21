@@ -83,11 +83,14 @@ public class Species {
 			genomes.remove(g_id);
 		}
 		ArrayList<Integer> new_member_ids = new ArrayList<Integer>();
+		int[] new_sorted = new int[num_elites];
 		//int[] new_sorted = new int[num_elites];
 		for(int x = num_elites; x < num_members; x++)
 		{
+			new_sorted[x] = this.sorted_idx_array[x];
 			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[x]));
 		}
+		this.sorted_idx_array = new_sorted;
 		this.member_ids = new_member_ids;
 	}
 	
