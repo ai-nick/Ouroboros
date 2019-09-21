@@ -87,8 +87,8 @@ public class Species {
 		{
 			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[(num_members-1)-x]));
 		}
-		
 		this.member_ids = new_member_ids;
+		this.get_adjusted_fitness_sum(genomes);
 	}
 	
 	//quick sort on fitness 
