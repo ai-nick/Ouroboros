@@ -255,7 +255,7 @@ public class Population {
 			{
 				Species current_species = this.pop_species.get(ix);
 
-				int spec_size = current_species.member_ids.size();
+				int spec_size = current_species.sorted_idx_array.length;
 				
 				if(spec_size > 1)
 				{
@@ -263,12 +263,12 @@ public class Population {
 					// we will do every combination of mates
 					for (int a = 0; a < spec_size; a++)
 					{
-						Genome a_genome = this.genomes.get(current_species.member_ids.get(a));
+						Genome a_genome = this.genomes.get(current_species.sorted_idx_array[a]);
 						for(int b = 0; b < spec_size; b++)
 						{
 							if(b != a)
 							{
-								Genome b_genome = this.genomes.get(current_species.member_ids.get(b));
+								Genome b_genome = this.genomes.get(current_species.sorted_idx_array[b]);
 								
 								this.cross_breed(a_genome, b_genome, current_species);
 								need_new--;

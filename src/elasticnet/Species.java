@@ -85,10 +85,12 @@ public class Species {
 		ArrayList<Integer> new_member_ids = new ArrayList<Integer>();
 		int[] new_sorted = new int[num_elites];
 		//int[] new_sorted = new int[num_elites];
-		for(int x = num_elites; x < num_members; x++)
+		int index_count = 0; 
+		for(int x = 0; x < num_elites; x++)
 		{
-			new_sorted[x] = this.sorted_idx_array[x];
-			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[x]));
+			new_sorted[(num_elites-1)-index_count] = this.sorted_idx_array[x];
+			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[(num_members-1)-x]));
+			index_count++;
 		}
 		this.sorted_idx_array = new_sorted;
 		this.member_ids = new_member_ids;
