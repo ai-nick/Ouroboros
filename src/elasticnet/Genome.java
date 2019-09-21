@@ -693,9 +693,8 @@ public class Genome {
 			
 			for(int c = 0; c < node_conn_count; c++)
 			{
-				ConnectionGene to_remove = pop_conns.get(current.connections.get(c)).get(this.id);
 				//this.conn_genes.remove(this.conn_genes.indexOf(to_remove.inno_id));
-				pop_conns.get(to_remove.inno_id).remove(this.id);
+				pop_conns.get(current.connections.get(c)).remove(this.id);
 			}
 			
 			pop_nodes.get(gene_key).remove(this.id);
