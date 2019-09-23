@@ -57,9 +57,7 @@ public class Genome {
 			int conns = to_add.connections.size();
 			for (int x = 0; x < conns; x++)
 			{
-				ConnectionGene conn_to_add = pop_conns.get(to_add.connections.get(x)).get(cloner.id);
-				
-				ConnectionGene conn_copy = new ConnectionGene(conn_to_add);
+				ConnectionGene conn_copy = new ConnectionGene(pop_conns.get(to_add.connections.get(x)).get(cloner.id));
 				
 				pop_conns.get(conn_copy.inno_id).put(this.id, conn_copy);
 			}

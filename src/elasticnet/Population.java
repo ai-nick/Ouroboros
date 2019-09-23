@@ -437,14 +437,14 @@ public class Population {
 		{
 			int node_id = a.input_nodes.get(i);
 			offspring.input_nodes.add(node_id);
-			NodeGene clone_node = new NodeGene(this.node_genes.get(node_id).get(a.id));
+			NodeGene clone_node = new NodeGene(this.node_genes.get(node_id).get(a.id), false);
 			this.node_genes.get(node_id).put(offspring.id, clone_node);
 		}
 		for(int i = 0; i < out_count; i++)
 		{
 			int node_id = a.output_nodes.get(i);
 			offspring.output_nodes.add(node_id);
-			NodeGene clone_node = new NodeGene(this.node_genes.get(node_id).get(a.id));
+			NodeGene clone_node = new NodeGene(this.node_genes.get(node_id).get(a.id), false);
 			this.node_genes.get(node_id).put(offspring.id, clone_node);
 		}
 		

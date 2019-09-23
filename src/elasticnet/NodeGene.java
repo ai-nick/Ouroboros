@@ -53,6 +53,20 @@ public class NodeGene implements INode {
 		this.atts = new HashMap<String, Object>(to_clone.atts);
 	}
 	
+	public NodeGene(NodeGene to_clone, boolean add_conns)
+	{
+		this.inno_id = to_clone.inno_id;
+		this.level = to_clone.level;
+		this.is_input = to_clone.is_input;
+		this.is_output = to_clone.is_output;
+		this.activation = to_clone.activation;
+		if(add_conns = true)
+		{
+			this.connections = new ArrayList<Integer>(to_clone.connections);	
+		}
+		this.atts = new HashMap<String, Object>(to_clone.atts);
+	}
+	
 	@Override
 	public void set_current_val(double value)
 	{
