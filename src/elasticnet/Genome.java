@@ -36,9 +36,6 @@ public class Genome {
 		fitness = test_fit;
 	}
 	
-	// used when mutating this genome, leaves the original alone 
-	// pretty sure we need to pass in pops master map of genes here and
-	// add entries for this id
 	public Genome(Genome cloner, int id,
 			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns,
 			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes
@@ -68,6 +65,44 @@ public class Genome {
 			}
 			
 			pop_nodes.get(to_add.inno_id).put(this.id, to_add);
+		}
+	}
+	// used when mutating this genome, leaves the original alone 
+	// pretty sure we need to pass in pops master map of genes here and
+	// add entries for this id
+	public Genome(Genome cloner, int id,
+			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns,
+			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes,
+			boolean clone_conns
+			)
+	{
+		this.id = id;
+		gen_born = cloner.gen_born + 1;
+		population_hash = cloner.population_hash;
+		species_id = cloner.species_id;
+		input_nodes = new ArrayList<Integer>(cloner.input_nodes);
+		hidden_nodes = new ArrayList<Integer>(cloner.hidden_nodes);
+		output_nodes = new ArrayList<Integer>(cloner.output_nodes);
+		if(clone_conns == true)
+		{
+			ArrayList<Integer> all_nodes = this.get_all_nodes();
+			int node_count = all_nodes.size();
+			for(int ix = 0; ix < node_count; ix++)
+			{
+				NodeGene to_add = new NodeGene(pop_nodes.get(all_nodes.get(ix)).get(cloner.id));
+				
+				int conns = to_add.connections.size();
+				for (int x = 0; x < conns; x++)
+				{
+					ConnectionGene conn_to_add = pop_conns.get(to_add.connections.get(x)).get(cloner.id);
+					
+					ConnectionGene conn_copy = new ConnectionGene(conn_to_add);
+					
+					pop_conns.get(conn_copy.inno_id).put(this.id, conn_copy);
+				}
+				
+				pop_nodes.get(to_add.inno_id).put(this.id, to_add);
+			}	
 		}
 	}
 	
