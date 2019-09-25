@@ -429,25 +429,6 @@ public class Population {
 		
 		// give the offspring a new id and increment our next id property
 		Genome offspring = new Genome(this.hash_id, this.next_genome_id);
-		
-		int in_count = this.config.num_input;
-		int out_count = this.config.num_output;
-		/*
-		for(int i = 0; i < in_count; i++)
-		{
-			int node_id = a.input_nodes.get(i);
-			offspring.input_nodes.add(node_id);
-			NodeGene clone_node = new NodeGene(this.node_genes.get(node_id).get(a.id), false);
-			this.node_genes.get(node_id).put(offspring.id, clone_node);
-		}
-		for(int i = 0; i < out_count; i++)
-		{
-			int node_id = a.output_nodes.get(i);
-			offspring.output_nodes.add(node_id);
-			NodeGene clone_node = new NodeGene(this.node_genes.get(node_id).get(a.id), false);
-			this.node_genes.get(node_id).put(offspring.id, clone_node);
-		}
-		*/
 		ArrayList<Integer> ga_node_genes = a.get_all_nodes();
 		ArrayList<Integer> gb_node_genes = b.get_all_nodes();
 		int node_counter = ga_node_genes.size();
@@ -516,19 +497,9 @@ public class Population {
 		String json_string = gson.toJson(this);
 		return json_string;
 	}
-	
-	
-	// private methods ie cant imagine neededing to call these anywhere other
-	// than public methods above, feel free to tell me im wrong if i am
-	
+
 	private ConnectionGene _cross_over_conns(ConnectionGene a, ConnectionGene b)
 	{
-		/*
-		System.out.print("crossing over conns: ");
-		System.out.print(a.inno_id);
-		System.out.print(" and ");
-		System.out.println(b.inno_id);
-		*/
 		ConnectionGene new_gene = new ConnectionGene(a.from_node, a.to_node, a.inno_id);
 		
 		new_gene.activation_level = a.activation_level;
