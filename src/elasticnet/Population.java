@@ -463,10 +463,6 @@ public class Population {
 				NodeGene crossed_over = _cross_over_nodes(gA, gB, a.id, a.id, offspring.id);
 				
 				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
-				// there is a non zero chance that during cross over a node from genomeb 
-				// is contained in this node gene which does not have the to_node in this 
-				// offspring, we will prune these here
-				
 			}
 		}
 		this.genomes.put(offspring.id, offspring);
