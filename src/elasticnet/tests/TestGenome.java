@@ -18,12 +18,16 @@ public class TestGenome {
 		int num_nulls = 0;
 		int num_null_nodes = 0;
 		int num_null_to_nodes = 0;
+		int genomes_with_nulls = 0;
 		for (int i = 0; i < pop_size; i++)
 		{
 			Genome next = test_pop.genomes.get(i);
 			ArrayList<Integer> all_nodes = next.get_all_nodes();
 			int num_nodes = all_nodes.size();
-			
+			if(next.check_for_nulls(test_pop.connection_genes, test_pop.node_genes) == true)
+			{
+				genomes_with_nulls++;
+			}
 			for(int x = 0; x < num_nodes; x++)
 			{
 				NodeGene next_node = test_pop.node_genes.get(all_nodes.get(x)).get(next.id);
@@ -52,6 +56,8 @@ public class TestGenome {
 		System.out.println(num_null_nodes);
 		System.out.println("num null to nodes");
 		System.out.println(num_null_to_nodes);
+		System.out.print("num genomes with nulls: ");
+		System.out.println(genomes_with_nulls);
 		//System.out.println(test_pop.connection_genes.get(7).toString());
 	}
 

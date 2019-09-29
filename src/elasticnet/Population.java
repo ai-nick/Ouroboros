@@ -378,7 +378,7 @@ public class Population {
 		has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
 		if(has_nulls == true)
 		{
-			System.out.println("null pointer after mutation");
+			System.out.println("null pointer after mutating clone");
 		}
 		this.next_genome_id++;
 		the_species.member_ids.add(offspring.id);
