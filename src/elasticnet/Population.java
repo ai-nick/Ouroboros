@@ -42,8 +42,11 @@ public class Population {
 	public HashMap<Integer, HashMap<Integer,NodeGene>> node_genes = new HashMap<Integer, HashMap<Integer, NodeGene>>();
 	public HashMap<Integer, HashMap<Integer,ConnectionGene>> connection_genes = new HashMap<Integer, HashMap<Integer,ConnectionGene>>();
 	public SorterUtil sorter = new SorterUtil();
-	public Population(int gen,  NeatConfig config_in, int pop_size) 
+	public boolean is_p2p = false;
+	
+	public Population(int gen,  NeatConfig config_in, int pop_size, boolean is_p2p) 
 	{
+		this.is_p2p = is_p2p;
 		this.ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 		this.hash_id = this.ts.hashCode();
 		this.pop_size = pop_size;
