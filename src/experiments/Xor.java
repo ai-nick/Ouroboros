@@ -33,7 +33,7 @@ public class Xor {
 		
 		int pop_size = 80;
 		
-		Population test_pop = new Population(0, new NeatConfig(), pop_size);
+		Population test_pop = new Population(0, new NeatConfig(), pop_size, false);
 		
 		int num_gens = 10;
 		

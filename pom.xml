@@ -32,5 +32,10 @@
   		<artifactId>xchange-bitmex</artifactId>
   		<version>4.3.19</version>
   	</dependency>
+  	<dependency>
+    <groupId>org.dizitart</groupId>
+    <artifactId>nitrite</artifactId>
+    <version>{version}</version>
+	</dependency>
   </dependencies>
 </project>
