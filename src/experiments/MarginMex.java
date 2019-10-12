@@ -37,7 +37,7 @@ public class MarginMex {
 		
 		this.hs.build_simple_input();
 		
-		this.pop = new Population(0, new NeatConfig(this.hs.get_simple()[0].length, 3, "tanh"), this.pop_size);
+		this.pop = new Population(0, new NeatConfig(this.hs.get_simple()[0].length, 3, "tanh"), this.pop_size, false);
 		
 		double best = 1000.0;
 		
