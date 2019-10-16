@@ -14,7 +14,7 @@ public class TestGenome {
 		
 		int pop_size = 10000;
 		
-		Population test_pop = new Population(0, new NeatConfig(), pop_size);
+		Population test_pop = new Population(0, new NeatConfig(), pop_size, false);
 		int num_nulls = 0;
 		int num_null_nodes = 0;
 		int num_null_to_nodes = 0;
