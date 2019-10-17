@@ -240,7 +240,7 @@ public class Population {
 		System.out.println(num_species);
 		for(int x = 0; x < num_species; x++)
 		{
-			Species current = this.pop_species.get(x);
+			Species current = this.pop_species.get(sorted_species_ids[x]);
 			keep_top = (int)((double)current.member_ids.size() * elitism_percent);
 			saved_sum += keep_top;
 			if(keep_top > 0)
