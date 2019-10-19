@@ -251,7 +251,6 @@ public class Population {
 			}
 		}
 		int need_new = this.pop_size - saved_sum;
-		int elite_iterator = 0;
 		System.out.println(need_new);
 		while(need_new != 0)
 		{
@@ -260,8 +259,10 @@ public class Population {
 				Species current_species = this.pop_species.get(sorted_species_ids[ix]);
 
 				int spec_size = current_species.sorted_idx_array.length;
-				
-				if(spec_size > 1)
+				// if there are only two genomes in the species bread them asexually
+				// if we have room after the first reproduction loop we will 
+				// rebread sexually between the 4 species produced in this loop
+				if(spec_size > 2)
 				{
 					// if our species has enough genomes to breed with sexy times
 					// we will do every combination of mates
@@ -270,7 +271,6 @@ public class Population {
 						Genome a_genome = this.genomes.get(current_species.member_ids.get(current_species.sorted_idx_array[a]));
 						this.breed_asexual(a_genome, current_species);
 						need_new--;
-						System.out.println(need_new);
 						/*
 						for(int b = 0; b < spec_size; b++)
 						{
@@ -293,7 +293,6 @@ public class Population {
 					Genome asex_genome = this.genomes.get(current_species.member_ids.get(0));
 					this.breed_asexual(asex_genome, current_species);
 					need_new--;
-					System.out.println(need_new);
 				}
 				if (need_new == 0)
 				{
