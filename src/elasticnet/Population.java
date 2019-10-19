@@ -240,7 +240,7 @@ public class Population {
 		System.out.println(num_species);
 		for(int x = 0; x < num_species; x++)
 		{
-			Species current = this.pop_species.get(sorted_species_ids[x]);
+			Species current = this.pop_species.get(x);
 			keep_top = (int)((double)current.member_ids.size() * elitism_percent);
 			saved_sum += keep_top;
 			if(keep_top > 0)
@@ -252,11 +252,12 @@ public class Population {
 		}
 		int need_new = this.pop_size - saved_sum;
 		int elite_iterator = 0;
+		System.out.println(need_new);
 		while(need_new != 0)
 		{
 			for(int ix = 0; ix < num_species; ix++)
 			{
-				Species current_species = this.pop_species.get(ix);
+				Species current_species = this.pop_species.get(sorted_species_ids[ix]);
 
 				int spec_size = current_species.sorted_idx_array.length;
 				
@@ -267,6 +268,10 @@ public class Population {
 					for (int a = 0; a < spec_size; a++)
 					{
 						Genome a_genome = this.genomes.get(current_species.member_ids.get(current_species.sorted_idx_array[a]));
+						this.breed_asexual(a_genome, current_species);
+						need_new--;
+						System.out.println(need_new);
+						/*
 						for(int b = 0; b < spec_size; b++)
 						{
 							if(b != a)
@@ -277,6 +282,7 @@ public class Population {
 								need_new--;
 							}
 						}
+						*/
 					}
 				}
 				else
@@ -287,6 +293,11 @@ public class Population {
 					Genome asex_genome = this.genomes.get(current_species.member_ids.get(0));
 					this.breed_asexual(asex_genome, current_species);
 					need_new--;
+					System.out.println(need_new);
+				}
+				if (need_new == 0)
+				{
+					break;
 				}
 			}
 		}
@@ -310,8 +321,8 @@ public class Population {
 		}
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
 		System.out.println(num_species);
-		int saved_sum = 0;
-		int keep_top = (int)((double)num_genomes * elitism_percent);
+		Integer saved_sum = 0;
+		Integer keep_top = (int)((double)num_genomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
 		// and add the new amount of the species to our save_sum
 		//TODO run quick sort on the species ids and the adj_fit_sums hashmap
@@ -364,6 +375,7 @@ public class Population {
 					}	
 				}
 				need_new--;
+				System.out.println(need_new);
 			}
 			elite_iterator++;
 		}
