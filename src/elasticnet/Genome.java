@@ -19,6 +19,8 @@ public class Genome {
 	int species_id = 0;
 	public double fitness = -1.0;
 	public int avg_w = 0;
+	public boolean needs_validation = false;
+	public boolean has_validation = false;
 	//public ArrayList<Integer> conn_genes = new ArrayList<Integer>();
 	public ArrayList<Integer> input_nodes = new ArrayList<Integer>();
 	public ArrayList<Integer> hidden_nodes = new ArrayList<Integer>();
