@@ -26,6 +26,8 @@ public class Genome {
 	public int gene_id_min, gene_id_max = 0;
 	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
 	public boolean is_recursive = false;
+	public String peer_eval_id = "";
+	public String peer_validation_id = "";
 	public Genome(int p_hash, int genome_id) {
 		this.id = genome_id;
 		this.population_hash = p_hash;
