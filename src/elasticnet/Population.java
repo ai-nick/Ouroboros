@@ -237,7 +237,7 @@ public class Population {
 			sorted_species_ids[x] = current.speciesID;
 		}
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
-		System.out.println(num_species);
+		//System.out.println(num_species);
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(sorted_species_ids[x]);
@@ -249,7 +249,12 @@ public class Population {
 				current.have_mercy(keep_top, this.genomes, this.connection_genes, this.node_genes);
 				//breed_all_remaining(current);				
 			}
+			else
+			{
+				saved_sum += current.member_ids.size();
+			}
 		}
+		num_species = this.pop_species.size();
 		int need_new = this.pop_size - saved_sum;
 		System.out.println(need_new);
 		while(need_new != 0)
