@@ -233,7 +233,6 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
-			num_genomes = current.member_ids.size();
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes));
 			sorted_species_ids[x] = current.speciesID;
 		}
