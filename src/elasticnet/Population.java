@@ -10,6 +10,7 @@ import com.google.gson.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * 
@@ -117,7 +118,7 @@ public class Population {
 			else
 			{
 				//TODO check and make sure genomes min and max get set
-				if(one_id >= two.gene_id_min && one_id <= two.gene_id_max)
+				if(one_id >= Collections.min(two_conns) && one_id <= Collections.max(two_conns))
 				{
 					d += 1.0;
 				}
