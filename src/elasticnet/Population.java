@@ -116,6 +116,7 @@ public class Population {
 			}
 			else
 			{
+				//TODO check and make sure genomes min and max get set
 				if(one_id >= two.gene_id_min && one_id <= two.gene_id_max)
 				{
 					d += 1.0;

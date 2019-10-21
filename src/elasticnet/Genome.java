@@ -30,6 +30,9 @@ public class Genome {
 	public boolean is_recursive = false;
 	public String peer_eval_id = "";
 	public String peer_validation_id = "";
+	
+	//TODO set max and min conn in all mutation methods
+	//TODO and upon construction
 	public Genome(int p_hash, int genome_id) {
 		this.id = genome_id;
 		this.population_hash = p_hash;
