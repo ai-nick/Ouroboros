@@ -138,7 +138,7 @@ public class Population {
 			//because if it did its already been addressed
 			if(one_conns.contains(two_conns.get(ix)) == false)
 			{
-				if(two_conns.get(ix) >= one.gene_id_min && two_conns.get(ix) <= one.gene_id_max)
+				if(two_conns.get(ix) >= Collections.min(one_conns) && two_conns.get(ix) <= Collections.max(one_conns))
 				{
 					d += 1.0;
 				}
