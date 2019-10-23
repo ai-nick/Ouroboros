@@ -19,13 +19,12 @@ public class Genome {
 	int species_id = 0;
 	public double fitness = -1.0;
 	public int avg_w = 0;
-	public boolean needs_validation = false;
+	public boolean needs_validation = true;
 	public boolean has_validation = false;
 	//public ArrayList<Integer> conn_genes = new ArrayList<Integer>();
 	public ArrayList<Integer> input_nodes = new ArrayList<Integer>();
 	public ArrayList<Integer> hidden_nodes = new ArrayList<Integer>();
 	public ArrayList<Integer> output_nodes = new ArrayList<Integer>();
-	public int gene_id_min, gene_id_max = 0;
 	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
 	public boolean is_recursive = false;
 	public String peer_eval_id = "";
@@ -185,33 +184,7 @@ public class Genome {
 		}
 		inno_id = this.connect_full_initial(inno_id, conn_gene_list, node_gene_list);
 		inno_id = this.mutate_genome(inno_id, config, node_gene_list, conn_gene_list);
-		this.set_max_and_min(node_gene_list);
 		return inno_id;
-	}
-	
-	public void set_max_and_min(HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes) {
-		ArrayList<Integer> all_nodes = this.get_all_nodes();
-		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
-		int min_node_id = Collections.min(all_nodes);
-		int min_conn_id = Collections.min(all_conns);
-		int max_conn_id = Collections.max(all_conns);
-		int max_node_id = Collections.max(all_nodes);
-		if (min_node_id < min_conn_id)
-		{
-			this.gene_id_min = min_node_id;
-		}
-		else
-		{
-			this.gene_id_min = min_conn_id;
-		}
-		if(max_node_id > max_conn_id)
-		{
-			this.gene_id_max = max_node_id;
-		}
-		else
-		{
-			this.gene_id_max = max_conn_id;
-		}
 	}
 	
 	public double get_prime(int num_others)
