@@ -1,19 +1,53 @@
 package HelpingHand;
 
-public class FitnessBlock {
+import agent.FitnessBlock;
+import agent.FitnessBlock.FitnessBlock_TYPE;
+import agent.FitnessBlock.FitnessBlockBuilder;
 
-	public String population_hash = "";
-	public String node_id = "";
-	public long genome_id;
-	public double fitness;
-	public boolean been_verified = false;
-	
-	public FitnessBlock(String p_hash, String node_id, long g_id, double ft, boolean bv)
-	{
-		this.population_hash = p_hash;
-		this.node_id = node_id;
-		this.genome_id = g_id;
-		this.fitness = ft;
-		this.been_verified = bv;
-	}
+public class FitnessBlock {
+    private static final long serialVersionUID = 1L;
+
+    int sender;
+    int receiver;
+    FitnessBlock_TYPE type;
+    String FitnessBlock_body;
+
+    public enum FitnessBlock_TYPE {
+        READY, EVENT_NEW_FITNESS, EVENT_NEW_VALIDATION, EVENT_RANDOM_CHOICE, EVENT_FINISHED_SUBSET, EVENT_HELPING_PEER,
+        EVENT_SPECIECIATION_COMPLETE, EVENT_REPRODUCTION_COMPLETE
+    }
+
+    @Override
+    public String toString() {
+        return String.format("FitnessBlock {type=%s, sender=%d, receiver=%d, blocks=%s}", type, sender, receiver, FitnessBlock_body);
+    }
+
+    static class FitnessBlockBuilder {
+        private final FitnessBlock FitnessBlock = new FitnessBlock();
+
+        FitnessBlockBuilder withSender(final int sender) {
+            FitnessBlock.sender = sender;
+            return this;
+        }
+
+        FitnessBlockBuilder withReceiver(final int receiver) {
+            FitnessBlock.receiver = receiver;
+            return this;
+        }
+
+        FitnessBlockBuilder withType(final FitnessBlock_TYPE type) {
+            FitnessBlock.type = type;
+            return this;
+        }
+
+        FitnessBlockBuilder withBody(final String body) {
+            FitnessBlock.FitnessBlock_body = body;
+            return this;
+        }
+
+        FitnessBlock build() {
+            return FitnessBlock;
+        }
+
+    }
 }
