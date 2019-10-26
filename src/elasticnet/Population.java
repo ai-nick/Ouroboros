@@ -93,12 +93,12 @@ public class Population {
 		{
 			for (int ix = 0; ix < this.pop_size; ix++)
 			{
-				Genome gBaby = new Genome(this.hash_id, ix);
+				Genome gBaby = new Genome(this.ts, ix);
 				
 				//System.out.print("setting up genome: ");
 				//System.out.println(ix);
 				
-				this.inno_num = gBaby.create_from_scratch(this.config, this.hash_id, this.node_genes, this.connection_genes);
+				this.inno_num = gBaby.create_from_scratch(this.config, this.ts, this.node_genes, this.connection_genes);
 				
 				this.genomes.put(ix,gBaby);
 			}

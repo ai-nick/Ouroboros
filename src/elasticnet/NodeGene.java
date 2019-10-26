@@ -19,12 +19,12 @@ public class NodeGene implements INode {
 	int visits = 0;
 	//String layer = "";
 	
-	public NodeGene(int inno_id, int g_id)
+	public NodeGene(int inno_id)
 	{
 		this.inno_id = inno_id;
 	}
 	
-	public NodeGene(int inno_id, int g_id, String activation)
+	public NodeGene(int inno_id, String activation)
 	{
 		this.inno_id = inno_id;
 		this.activation = activation;

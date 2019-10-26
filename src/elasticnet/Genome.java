@@ -111,7 +111,7 @@ public class Genome {
 	}
 	
 	public int create_from_scratch(NeatConfig config, 
-			int populationHash,
+			Long populationHash,
 			HashMap<Integer, HashMap<Integer,NodeGene>> node_gene_list,
 			HashMap<Integer, HashMap<Integer,ConnectionGene>> conn_gene_list
 			)
@@ -128,7 +128,7 @@ public class Genome {
 		
 		for (int ix = 0; ix < num_in; ix++)
 		{
-			NodeGene new_node = new NodeGene(inno_id, this.population_hash);
+			NodeGene new_node = new NodeGene(inno_id);
 			new_node.is_input = true;
 			new_node.is_output = false;
 			inno_id++;
@@ -146,7 +146,7 @@ public class Genome {
 		//gene_index++;
 		for (int ix = 0; ix < num_out; ix++)
 		{
-			NodeGene new_node = new NodeGene(inno_id, this.population_hash, config.output_activation);
+			NodeGene new_node = new NodeGene(inno_id, config.output_activation);
 			new_node.is_input = false;
 			new_node.is_output = true;
 			inno_id++;
@@ -166,7 +166,7 @@ public class Genome {
 		{
 			for (int ix = 0; ix < num_hidden; ix++)
 			{
-				NodeGene new_node = new NodeGene(inno_id, this.population_hash);
+				NodeGene new_node = new NodeGene(inno_id);
 				new_node.is_input = false;
 				new_node.is_output = false;
 				inno_id++;
