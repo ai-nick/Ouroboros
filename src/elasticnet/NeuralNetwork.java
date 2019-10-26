@@ -7,7 +7,6 @@ import org.omg.CORBA.SystemException;
 import com.google.gson.Gson;
 
 public class NeuralNetwork implements INeuralNet {
-
 	//no comment
 	public int num_activations = 0;
 	ArrayList<Integer> input_ids = new ArrayList<Integer>();
@@ -16,11 +15,10 @@ public class NeuralNetwork implements INeuralNet {
 	HashMap<Integer, NodeGene> nodes = new HashMap<Integer, NodeGene>();
 	HashMap<Integer, ConnectionGene> conns = new HashMap<Integer, ConnectionGene>();
 	ArrayList<Integer> activated_conns = new ArrayList<Integer>();
-	public boolean feed_forward;
+	public boolean feed_forward = true;
 	int num_output = 0;
 	int outs_count = 0;
 	ArrayList<Integer> output_ids = new ArrayList<Integer>();
-	
 	public NeuralNetwork(ArrayList<Integer> input_ids, HashMap<Integer, NodeGene> net_nodes)
 	{
 		this.input_ids = input_ids;

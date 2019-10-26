@@ -1,6 +1,6 @@
 package HelpingHand;
 
-import static agent.Message.MESSAGE_TYPE.INFO_NEW_BLOCK;
+import static HelpingHand.Message.MESSAGE_TYPE.INFO_NEW_BLOCK;
 import static agent.Message.MESSAGE_TYPE.READY;
 import static agent.Message.MESSAGE_TYPE.REQ_ALL_BLOCKS;
 import static agent.Message.MESSAGE_TYPE.RSP_ALL_BLOCKS;
@@ -10,14 +10,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import agent.Agent;
-import agent.Message;
+import HelpingHand.OuroborosAgent;
+import HelpingHand.Message;
 
 public class OuroborosDaemonThread {
     private Socket client;
     private final Agent agent;
 
-    AgentServerThread(final Agent agent, final Socket client) {
+    AgentServerThread(final OuroborosAgent agent, final Socket client) {
         super(agent.getName() + System.currentTimeMillis());
         this.agent = agent;
         this.client = client;

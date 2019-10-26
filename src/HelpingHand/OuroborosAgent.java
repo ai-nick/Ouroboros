@@ -1,9 +1,9 @@
 package HelpingHand;
 
-import static agent.Message.MESSAGE_TYPE.INFO_NEW_BLOCK;
-import static agent.Message.MESSAGE_TYPE.READY;
-import static agent.Message.MESSAGE_TYPE.REQ_ALL_BLOCKS;
-import static agent.Message.MESSAGE_TYPE.RSP_ALL_BLOCKS;
+import static HelpingHand.Message.MESSAGE_TYPE.INFO_NEW_BLOCK;
+import static HelpingHand.Message.MESSAGE_TYPE.READY;
+import static HelpingHand.Message.MESSAGE_TYPE.REQ_ALL_BLOCKS;
+import static HelpingHand.Message.MESSAGE_TYPE.RSP_ALL_BLOCKS;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

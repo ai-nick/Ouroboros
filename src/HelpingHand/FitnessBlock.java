@@ -1,8 +1,8 @@
 package HelpingHand;
 
-import agent.FitnessBlock;
-import agent.FitnessBlock.FitnessBlock_TYPE;
-import agent.FitnessBlock.FitnessBlockBuilder;
+import OuroborosAgent.FitnessBlock;
+import OuroborosAgent.FitnessBlock.FitnessBlock_TYPE;
+import OuroborosAgent.FitnessBlock.FitnessBlockBuilder;
 
 public class FitnessBlock {
     private static final long serialVersionUID = 1L;
