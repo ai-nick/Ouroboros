@@ -12,10 +12,10 @@ import com.google.gson.Gson;
 
 public class Genome {
 
-	public int id = 0;
-	int gen_born = 0;
+	public Integer id;
+	Integer gen_born = 0;
 	//ArrayList<Integer> gene_ids = new ArrayList<Integer>();
-	int population_hash = 0;
+	Long population_hash = 0;
 	int species_id = 0;
 	public double fitness = -1.0;
 	public int avg_w = 0;
@@ -32,7 +32,7 @@ public class Genome {
 	
 	//TODO set max and min conn in all mutation methods
 	//TODO and upon construction
-	public Genome(int p_hash, int genome_id) {
+	public Genome(Long p_hash, int genome_id) {
 		this.id = genome_id;
 		this.population_hash = p_hash;
 	}

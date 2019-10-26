@@ -11,7 +11,6 @@ public class CPPN extends NeuralNetwork{
 	public CPPN(Genome genome_in, HashMap<Integer, HashMap<Integer, NodeGene>> node_genes,
 			HashMap<Integer, HashMap<Integer, ConnectionGene>> conn_genes, int coord_length) {
 		super(genome_in, node_genes, conn_genes);
-		// TODO Auto-generated constructor stub
 		this.coord_len = coord_length;
 	}
 }

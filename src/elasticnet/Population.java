@@ -26,35 +26,47 @@ import java.util.Collections;
  */
 
 public class Population {
-	int best_genome_id;
-	int num_genomes;
-	int hash_id;
+	Integer best_genome_id;
+	Integer num_genomes;
 	int min_species_size = 5;
 	String fitness_function = "";
-	String ts = "";
-	int current_gen = 0;
-	int inno_num = 0;
-	int next_genome_id = 0;
-	int next_species_id = 0;
+	Long ts;
+	Integer current_gen = 0;
+	Integer inno_num = 0;
+	Integer next_genome_id = 0;
+	Integer next_species_id = 0;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
-	int pop_size = 0;
+	Integer pop_size = 0;
 	public HashMap<Integer, Genome> genomes = new HashMap<Integer, Genome>();
 	public HashMap<Integer, HashMap<Integer,NodeGene>> node_genes = new HashMap<Integer, HashMap<Integer, NodeGene>>();
 	public HashMap<Integer, HashMap<Integer,ConnectionGene>> connection_genes = new HashMap<Integer, HashMap<Integer,ConnectionGene>>();
 	public SorterUtil sorter = new SorterUtil();
-	public boolean is_p2p = false;
+	public boolean is_p2p;
 	
 	public Population(int gen,  NeatConfig config_in, int pop_size, boolean is_p2p) 
 	{
 		this.is_p2p = is_p2p;
-		this.ts = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		this.hash_id = this.ts.hashCode();
+		this.ts = System.currentTimeMillis();
 		this.pop_size = pop_size;
 		this.config = config_in;
 		this.inno_num = (config_in.num_input * config_in.num_output)+config_in.num_input+config_in.num_output;
 		this.current_gen = gen;
 		if (this.current_gen == 0) {
+			this.set_up_first_pop();
+		}
+	}
+	
+	public Population(int gen, NeatConfig config_in, int num_inputs, int num_outputs, int pop_size, boolean is_p2p)
+	{
+		this.is_p2p = is_p2p;
+		this.ts = System.currentTimeMillis();
+		this.pop_size = pop_size;
+		this.config = config_in;
+		this.inno_num = (num_inputs*num_outputs) + num_inputs + num_outputs;
+		this.current_gen = gen;
+		if(this.current_gen == 0)
+		{
 			this.set_up_first_pop();
 		}
 	}
@@ -382,6 +394,10 @@ public class Population {
 				}
 				need_new--;
 				System.out.println(need_new);
+				if (need_new == 0)
+				{
+					break;
+				}
 			}
 			elite_iterator++;
 		}
