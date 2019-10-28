@@ -465,7 +465,7 @@ public class Population {
 		}
 		
 		// give the offspring a new id and increment our next id property
-		Genome offspring = new Genome(this.hash_id, this.next_genome_id);
+		Genome offspring = new Genome(this.ts, this.next_genome_id);
 		ArrayList<Integer> ga_node_genes = a.get_all_nodes();
 		ArrayList<Integer> gb_node_genes = b.get_all_nodes();
 		int node_counter = ga_node_genes.size();
@@ -559,7 +559,7 @@ public class Population {
 		System.out.print(" and ");
 		System.out.println(b.inno_id);
 		*/
-		NodeGene new_node = new NodeGene(a.inno_id, this.hash_id);
+		NodeGene new_node = new NodeGene(a.inno_id);
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
 		new_node.is_output = a.is_output;

@@ -15,7 +15,7 @@ public class Genome {
 	public Integer id;
 	Integer gen_born = 0;
 	//ArrayList<Integer> gene_ids = new ArrayList<Integer>();
-	Long population_hash = 0;
+	Long population_hash;
 	int species_id = 0;
 	public double fitness = -1.0;
 	public int avg_w = 0;
@@ -215,7 +215,7 @@ public class Genome {
 		this.species_id = id;
 	}
 	
-	public void set_population_id(int id)
+	public void set_population_id(Long id)
 	{
 		this.population_hash = id;
 	}
@@ -225,7 +225,7 @@ public class Genome {
 		return this.species_id;
 	}
 	
-	public int get_pop_id()
+	public Long get_pop_id()
 	{
 		return this.population_hash;
 	}
@@ -810,7 +810,7 @@ public class Genome {
 	public String as_json()
 	{
 		Gson gson = new Gson();
-		Genome empty_self = new Genome(this.id, this.population_hash);
+		Genome empty_self = new Genome(this.population_hash, this.id);
 		String empty_json = gson.toJson(this);
 		return empty_json;
 	}
