@@ -55,7 +55,7 @@ public class NeuralNetwork implements INeuralNet {
 		this.output_ids = genome_in.output_nodes;
 		
 		this.outs_count = this.output_ids.size();
-		System.out.println(this.outs_count);
+		//System.out.println(this.outs_count);
 	}
 	
 	@Override
@@ -162,6 +162,7 @@ public class NeuralNetwork implements INeuralNet {
 		// TODO Auto-generated method stub
 		ArrayList<Double> outs = new ArrayList<Double>();
 		int loop_count = this.output_ids.size();
+		//System.out.println(loop_count);
 		for(int i = 0; i < loop_count; i++)
 		{
 			outs.add(this.nodes.get(this.output_ids.get(i)).current_val);
