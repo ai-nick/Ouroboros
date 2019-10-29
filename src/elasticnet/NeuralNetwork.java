@@ -55,6 +55,7 @@ public class NeuralNetwork implements INeuralNet {
 		this.output_ids = genome_in.output_nodes;
 		
 		this.outs_count = this.output_ids.size();
+		System.out.println(this.outs_count);
 	}
 	
 	@Override
