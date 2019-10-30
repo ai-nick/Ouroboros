@@ -57,7 +57,7 @@ public class Xor {
 					test_net.set_input(inputs[z]);
 					
 					test_net.Activate();
-					
+					// getting out of bounds index here
 					current_genome.fitness -= Math.pow(test_net.get_output().get(0) - outputs[z], 2);
 					
 					test_net.Reset();	
