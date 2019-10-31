@@ -491,6 +491,7 @@ public class Population {
 					ConnectionGene conn_copy = new ConnectionGene(this.connection_genes.get(conn_id).get(a.id));
 					this.connection_genes.get(conn_id).put(offspring.id, conn_copy);
 				}
+				offspring.set_node(gene_copy);
 			}
 			else
 			{	
@@ -500,6 +501,8 @@ public class Population {
 				NodeGene gB = this.node_genes.get(gA_id).get(b.id);
 				
 				NodeGene crossed_over = _cross_over_nodes(gA, gB, a.id, a.id, offspring.id);
+				
+				offspring.set_node(crossed_over);
 				
 				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
 			}
