@@ -113,6 +113,7 @@ public class Population {
 		double d = 0.0;
 		double s = 0.0;
 		double e = 0.0;
+		//TODO check conn arrays are not empty
 		ArrayList<Integer> one_conns = one.get_all_conn_ids(this.node_genes);
 		ArrayList<Integer> two_conns = two.get_all_conn_ids(this.node_genes);
 		int loop_count = one_conns.size();
@@ -130,13 +131,16 @@ public class Population {
 			else
 			{
 				//TODO check and make sure genomes min and max get set
-				if(one_id >= Collections.min(two_conns) && one_id <= Collections.max(two_conns))
+				if(two_conns.isEmpty() == false)
 				{
-					d += 1.0;
-				}
-				else
-				{
-					e += 1.0;
+					if(one_id >= Collections.min(two_conns) && one_id <= Collections.max(two_conns))
+					{
+						d += 1.0;
+					}
+					else
+					{
+						e += 1.0;
+					}	
 				}
 			}
 		}

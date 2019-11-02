@@ -576,10 +576,6 @@ public class Genome {
 		int node_idx = this.get_random_in_range(num_nodes);
 		// get the hidden node id at that index
 		int delete_id = this.hidden_nodes.get(node_idx);
-		//get the node from our master hashmap
-		
-		//System.out.print("delete node id: ");
-		//System.out.println(delete_id);
 		
 		// gonna do this a bit differently, a way that makes sense lol
 		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
