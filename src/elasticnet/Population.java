@@ -243,7 +243,7 @@ public class Population {
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
-		int[] sorted_species_ids = new int[num_species];
+		Integer[] sorted_species_ids = new Integer[num_species];
 		int saved_sum = 0;
 		int keep_top;
 		// next we will reduce each species by this elitism percent
@@ -334,7 +334,7 @@ public class Population {
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
-		int[] sorted_species_ids = new int[num_species];
+		Integer[] sorted_species_ids = new Integer[num_species];
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
@@ -342,7 +342,6 @@ public class Population {
 			sorted_species_ids[x] = current.speciesID;
 		}
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
-		System.out.println(num_species);
 		Integer saved_sum = 0;
 		Integer keep_top = (int)((double)num_genomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
