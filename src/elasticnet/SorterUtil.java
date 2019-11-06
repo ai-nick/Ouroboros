@@ -6,14 +6,14 @@ public class SorterUtil {
 	//quick sort on fitness 
 	public void quick_sort_big_dumb(Integer[] sort_array, HashMap<Integer, Double> sort_dict, int left, int right)
 	{
-		System.out.println(sort_array.length);
-		//System.out.println(right);
 		int left_start = left;
+		//System.out.println(left);
 		int pivot = right;
 		right--;
 		while(left<right)
 		{
 			System.out.println(pivot);
+			System.out.println(left);
 			if(sort_dict.get(sort_array[left]) > sort_dict.get(sort_array[pivot]))
 			{
 				if(sort_dict.get(sort_array[right]) < sort_dict.get(sort_array[pivot]))
