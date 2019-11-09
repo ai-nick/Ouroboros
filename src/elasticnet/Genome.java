@@ -256,31 +256,33 @@ public class Genome {
 		
 		String default_activation = config.defaultActivation;
 		
+		// sum of all mutation probabilities
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
 		
+		// if sum is less than 1.0 set sum to be 1.0
 		if (prob_sum < 1.0)
 		{
 			prob_sum = 1.0;
 		}
 		if (rand.nextFloat() < (config.delete_node_prob/prob_sum))
 		{
-			//System.out.println("deleting node here");
+			System.out.println("deleting node here");
 			mutate_delete_node(pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.delete_conn_prob/prob_sum))
 		{
-			//System.out.println("deleting conn here");
+			System.out.println("deleting conn here");
 			mutate_delete_conn(pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
 		{
-			//System.out.println("adding conn here");
+			System.out.println("adding conn here");
 			new_id = mutate_add_conn(new_id, pop_conns, pop_nodes);
 		}
 		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
 		{
 			//this is where we are loosing conn pointers from node genes
-			//System.out.println("adding node here");
+			System.out.println("adding node here");
 			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
 		}
 		return new_id;
