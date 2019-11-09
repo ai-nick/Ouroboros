@@ -78,6 +78,10 @@ public class Xor {
 			System.out.println("reproducing");
 			test_pop.the_reproduction_function();
 		}
+		System.out.print("best fit id: ");
+		System.out.println(best_genome_id);
+		System.out.print("best fit value: ");
+		System.out.println(best_fitness);
 	}
 	
 	public void permute_signs(int coord_len) {
