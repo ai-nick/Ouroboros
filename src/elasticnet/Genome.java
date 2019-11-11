@@ -449,13 +449,21 @@ public class Genome {
 				int check_conn_count_2 = connected.connections.size();
 				for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)
 				{
+					//getting null conns here i think 
 					ConnectionGene second_conn = pop_conns.get(connected.connections.get(nx2)).get(n);
-					if(second_conn.to_node == connection_to_split.to_node)
+					if (second_conn == null)
 					{
-						struct_exists = true;
-						conn_a_id = next_conn.inno_id;
-						conn_b_id = second_conn.inno_id;
-						gene_id = connected.inno_id;
+						System.out.println("second conn in check null");
+					}
+					else
+					{
+						if(second_conn.to_node == connection_to_split.to_node)
+						{
+							struct_exists = true;
+							conn_a_id = next_conn.inno_id;
+							conn_b_id = second_conn.inno_id;
+							gene_id = connected.inno_id;
+						}	
 					}
 				}
 			}
