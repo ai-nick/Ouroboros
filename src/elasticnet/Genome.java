@@ -445,7 +445,13 @@ public class Genome {
 					System.out.print(" in genome: ");
 					System.out.println(n);
 				}
-				NodeGene connected = pop_nodes.get(next_conn.to_node).get(n);
+				HashMap<Integer, NodeGene> node_set_two = pop_nodes.get(next_conn.to_node);
+				if(node_set_two == null)
+				{
+					System.out.print("null node set for node id: ");
+					System.out.print(next_conn.to_node);
+				}
+				NodeGene connected = node_set_two.get(n);
 				int check_conn_count_2 = connected.connections.size();
 				for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)
 				{
@@ -480,13 +486,13 @@ public class Genome {
 			// uses ids of the existing structure to build our node and connections
 			new_node = new NodeGene(gene_id, activation);
 			
-			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, conn_a_id, this.id);
+			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, conn_a_id, 1.0);
 			
 			//this.conn_genes.add(conn_a_id);
 			
 			pop_conns.get(conn_a_id).put(this.id, new_conn_a);
 			
-			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, conn_b_id, this.id);
+			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, conn_b_id, 0.0);
 			
 			//this.conn_genes.add(conn_b_id);
 			
@@ -494,9 +500,9 @@ public class Genome {
 			
 			new_node.connections.add(new_conn_b.inno_id);
 			
-			pop_nodes.get(gene_id).put(this.id, new_node);
+			pop_nodes.get(new_node.inno_id).put(this.id, new_node);
 			
-			this.hidden_nodes.add(gene_id);
+			this.hidden_nodes.add(new_node.inno_id);
 			
 			NodeGene from_node = pop_nodes.get(connection_to_split.from_node).get(this.id);
 			
@@ -518,7 +524,7 @@ public class Genome {
 			
 			new_id++;
 			
-			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, this.id);
+			ConnectionGene new_conn_a = new ConnectionGene(connection_to_split.from_node, new_node.inno_id, new_id, 1.0);
 			
 			//this.conn_genes.add(new_id);
 			
@@ -534,7 +540,7 @@ public class Genome {
 			
 			new_id++;
 			
-			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, this.id);
+			ConnectionGene new_conn_b = new ConnectionGene(new_node.inno_id, connection_to_split.to_node, new_id, connection_to_split.atts.get("weight"));
 			
 			//this.conn_genes.add(new_id);
 			
@@ -627,7 +633,6 @@ public class Genome {
 	private void mutate_delete_conn(HashMap<Integer,HashMap<Integer, ConnectionGene>> pop_conns, HashMap<Integer,HashMap<Integer, NodeGene>> pop_nodes)
 	{
 		ArrayList<Integer> all_conns = this.get_all_conn_ids(pop_nodes);
-		Random dice = new Random();
 		
 		if (all_conns.size() == 0)
 		{
