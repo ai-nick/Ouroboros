@@ -359,13 +359,12 @@ public class Genome {
 				}		
 			}
 		}
-		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node_key, conn_id, this.id);
+		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node_key, conn_id, 1.0);
 		if (new_structure == true)
 		{
 			while(pop_conns.containsKey(conn_id) || pop_nodes.containsKey(conn_id))
 			{
 				conn_id++;
-			}
 			new_gene.inno_id = conn_id;
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
