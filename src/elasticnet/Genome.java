@@ -365,6 +365,7 @@ public class Genome {
 			while(pop_conns.containsKey(conn_id) || pop_nodes.containsKey(conn_id))
 			{
 				conn_id++;
+			}
 			new_gene.inno_id = conn_id;
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
