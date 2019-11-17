@@ -274,7 +274,7 @@ public class Population {
 		}
 		num_species = this.pop_species.size();
 		int need_new = this.pop_size - saved_sum;
-		System.out.println(need_new);
+		//System.out.println(need_new);
 		while(need_new != 0)
 		{
 			for(int ix = 0; ix < num_species; ix++)
@@ -341,7 +341,9 @@ public class Population {
 			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes));
 			sorted_species_ids[x] = current.speciesID;
 		}
+		System.out.println(sorted_species_ids.length);
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
+		System.out.println(sorted_species_ids.length);
 		Integer saved_sum = 0;
 		Integer keep_top = (int)((double)num_genomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
@@ -351,7 +353,7 @@ public class Population {
 		// half going extinct
 		for(int x = 0; x < num_species; x++)
 		{
-			Species current = this.pop_species.get(x);
+			Species current = this.pop_species.get(sorted_species_ids[x]);
 			keep_top = current.member_ids.size() * (int)elitism_percent;
 			saved_sum += keep_top;
 			if(keep_top > 0)
@@ -396,7 +398,7 @@ public class Population {
 					}	
 				}
 				need_new--;
-				System.out.println(need_new);
+				//System.out.println(need_new);
 				if (need_new == 0)
 				{
 					break;

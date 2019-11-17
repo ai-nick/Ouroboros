@@ -445,32 +445,37 @@ public class Genome {
 					System.out.print(" in genome: ");
 					System.out.println(n);
 				}
-				HashMap<Integer, NodeGene> node_set_two = pop_nodes.get(next_conn.to_node);
-				if(node_set_two == null)
+				else
 				{
-					System.out.print("null node set for node id: ");
-					System.out.print(next_conn.to_node);
-				}
-				NodeGene connected = node_set_two.get(n);
-				int check_conn_count_2 = connected.connections.size();
-				for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)
-				{
-					//getting null conns here i think 
-					ConnectionGene second_conn = pop_conns.get(connected.connections.get(nx2)).get(n);
-					if (second_conn == null)
+					HashMap<Integer, NodeGene> node_set_two = pop_nodes.get(next_conn.to_node);
+					if(node_set_two == null)
 					{
-						System.out.println("second conn in check null");
+						System.out.print("null node set for node id: ");
+						System.out.print(next_conn.to_node);
 					}
-					else
-					{
-						if(second_conn.to_node == connection_to_split.to_node)
+					else {
+						NodeGene connected = node_set_two.get(n);
+						int check_conn_count_2 = connected.connections.size();
+						for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)
 						{
-							struct_exists = true;
-							conn_a_id = next_conn.inno_id;
-							conn_b_id = second_conn.inno_id;
-							gene_id = connected.inno_id;
+							//getting null conns here i think 
+							ConnectionGene second_conn = pop_conns.get(connected.connections.get(nx2)).get(n);
+							if (second_conn == null)
+							{
+								System.out.println("second conn in check null");
+							}
+							else
+							{
+								if(second_conn.to_node == connection_to_split.to_node)
+								{
+									struct_exists = true;
+									conn_a_id = next_conn.inno_id;
+									conn_b_id = second_conn.inno_id;
+									gene_id = connected.inno_id;
+								}	
+							}
 						}	
-					}
+					}	
 				}
 			}
 		}

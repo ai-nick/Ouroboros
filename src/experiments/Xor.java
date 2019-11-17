@@ -76,7 +76,7 @@ public class Xor {
 			System.out.println("speciating");
 			test_pop.speciate_population();
 			System.out.println("reproducing");
-			test_pop.new_reproduction();
+			test_pop.the_reproduction_function();
 		}
 		System.out.print("best fit id: ");
 		System.out.println(best_genome_id);
