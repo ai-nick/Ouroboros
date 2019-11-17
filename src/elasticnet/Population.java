@@ -51,6 +51,8 @@ public class Population {
 		this.pop_size = pop_size;
 		this.config = config_in;
 		this.inno_num = (config_in.num_input * config_in.num_output)+config_in.num_input+config_in.num_output;
+		System.out.print("num of initial genes: ");
+		System.out.println(this.inno_num);
 		this.current_gen = gen;
 		if (this.current_gen == 0) {
 			this.set_up_first_pop();
@@ -64,6 +66,8 @@ public class Population {
 		this.pop_size = pop_size;
 		this.config = config_in;
 		this.inno_num = (num_inputs*num_outputs) + num_inputs + num_outputs;
+		System.out.print("num of initial genes: ");
+		System.out.println(this.inno_num);
 		this.current_gen = gen;
 		if(this.current_gen == 0)
 		{
@@ -274,7 +278,8 @@ public class Population {
 		}
 		num_species = this.pop_species.size();
 		int need_new = this.pop_size - saved_sum;
-		//System.out.println(need_new);
+		System.out.print("size after elitism: ");
+		System.out.println(this.genomes.size());
 		while(need_new != 0)
 		{
 			for(int ix = 0; ix < num_species; ix++)
@@ -341,9 +346,8 @@ public class Population {
 			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes));
 			sorted_species_ids[x] = current.speciesID;
 		}
-		System.out.println(sorted_species_ids.length);
+		//System.out.println(sorted_species_ids.length);
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
-		System.out.println(sorted_species_ids.length);
 		Integer saved_sum = 0;
 		Integer keep_top = (int)((double)num_genomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
@@ -358,6 +362,8 @@ public class Population {
 			saved_sum += keep_top;
 			if(keep_top > 0)
 			{
+				System.out.print("running elitism for species: ");
+				System.out.println(current.speciesID);
 				//reduce the species to only the elite genomes
 				current.have_mercy(keep_top, this.genomes, this.connection_genes, this.node_genes);
 				//breed_all_remaining(current);				
@@ -365,6 +371,8 @@ public class Population {
 		}
 		// now we handle reproducing the correct amount of genomes
 		int need_new = this.pop_size - saved_sum;
+		System.out.print("size after elitism: ");
+		System.out.println(this.genomes.size());
 		int elite_iterator = 0;
 		while(need_new != 0)
 		{
