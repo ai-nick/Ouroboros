@@ -103,6 +103,7 @@ public class SortTest {
 			System.out.print(" : ");
 			System.out.println(test.index_array[x]);
 		}
+		System.out.println(test.genomes.size());
 	}
 
 }

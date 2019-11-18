@@ -728,19 +728,6 @@ public class Genome {
 			
 			pop_nodes.get(gene_key).remove(this.id);
 		}
-		/*
-		 * this can be deleted in due time, moving away form dependancy on 
-		 * genome -> conn_genes as its redundant considering all nodes contain ids of there 
-		 * conns
-		int num_conns = this.conn_genes.size();
-		
-		for(int d = 0; d < num_conns; d++)
-		{
-			int gene_key = this.conn_genes.get(d);
-			
-			pop_conns.get(gene_key).remove(this.id);
-		}
-		*/
 		return;
 	}
 	// return array of all conn ids
