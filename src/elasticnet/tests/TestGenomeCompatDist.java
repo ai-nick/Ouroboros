@@ -13,6 +13,7 @@ public class TestGenomeCompatDist {
 		int pop_size = 50;
 		Population test_pop = new Population(0, new NeatConfig(), pop_size, false);
 		Random dice = new Random();
+		Integer[] sorted_idx_list = new Integer[pop_size];
 		for(int i = 0; i < pop_size; i++)
 		{
 			Genome g = test_pop.genomes.get(i);
