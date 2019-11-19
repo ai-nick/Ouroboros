@@ -21,7 +21,22 @@ public class TestGenomeCompatDist {
 			g.fitness = dice_roll;
 		}
 		System.out.println(test_pop.genomes.size());
-		
+		int null_count = 0;
+		for(Integer ix: test_pop.connection_genes.keySet())
+		{
+			if(test_pop.connection_genes.get(ix) == null)
+			{
+				null_count += 1;
+			}
+		}
+		for(Integer ix: test_pop.node_genes.keySet())
+		{
+			if(test_pop.node_genes.get(ix) == null)
+			{
+				null_count += 1;
+			}
+		}
+		System.out.println(null_count);
 	}
 
 }
