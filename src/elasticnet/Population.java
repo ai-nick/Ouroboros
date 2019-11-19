@@ -202,20 +202,22 @@ public class Population {
 		// we have atleast one species by this point in our control flow
 		for(int x : this.genomes.keySet())
 		{
-			//check if its first species rep_index, not elegant but have to handle
+			// we check if this id already belongs to a species from previous generations
+			// TODO check that speciated isnt cleared, otherwise this doesnt make sense
 			if(!speciated.contains(this.genomes.get(x).id)) 
 			{
 				boolean species_found = false;
 				
 				Genome current_genome = this.genomes.get(x);
-				
+				// we should always have atleast one species here (see line ~197)
 				int num_species = this.pop_species.size();
 				//this should be while loop, with a conditional of count == num_species - 1
 				//
 				for(int i = 0; i < num_species; i++)
 				{
 					//check if we added it to one already, could be better and 
-					//break loop once on is found, TODO 
+					//break loop once on is found, TODO check our compat dist calculation
+					//as we are seeing very high distances, THIS IS A CONCERN
 					if(!species_found)
 					{
 						Double dist = this.compat_distance(this.genomes.get(this.pop_species.get(i).rep_id), 
