@@ -36,7 +36,8 @@ public class TestGenomeCompatDist {
 				null_count += 1;
 			}
 		}
-		System.out.println(null_count);
+		test_pop.speciate_population();
+		System.out.println(test_pop.get_species().size());
 	}
 
 }
