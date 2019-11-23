@@ -354,7 +354,7 @@ public class Population {
 			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes));
 			sorted_species_ids[x] = current.speciesID;
 		}
-		//System.out.println(sorted_species_ids.length);
+		System.out.println(sorted_species_ids.length);
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
 		Integer saved_sum = 0;
 		Integer keep_top = (int)((double)num_genomes * elitism_percent);
