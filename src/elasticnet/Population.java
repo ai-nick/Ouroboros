@@ -117,13 +117,8 @@ public class Population {
 		double d = 0.0;
 		double s = 0.0;
 		double e = 0.0;
+		int match_count = 0;
 		//TODO check conn arrays are not empty
-		if (one.get_all_conn_ids(this.node_genes).size() < two.get_all_conn_ids(this.node_genes).size())
-		{
-			Genome temp = one;
-			one = two;
-			two = temp;
-		}
 		ArrayList<Integer> one_conns = one.get_all_conn_ids(this.node_genes);
 		ArrayList<Integer> two_conns = two.get_all_conn_ids(this.node_genes);
 		int loop_count = one_conns.size();
@@ -137,6 +132,7 @@ public class Population {
 			{
 				int two_id = two_conns.get(two_conns.indexOf(one_id));
 				w = Math.abs(this.connection_genes.get(one_id).get(one.id).atts.get("weight") - this.connection_genes.get(two_id).get(two.id).atts.get("weight"));
+				match_count++;
 			}
 			else
 			{
@@ -173,13 +169,13 @@ public class Population {
 				}	
 			}
 		}
-		if(loop_count < one_conns.size())
-		{
+		if(one_conns.size() > two_conns.size()) {
 			loop_count = one_conns.size();
 		}
+		loop_count = one_conns.size();
 		s += (e*speciation_coefficients[0])/loop_count;
 		s += (d*speciation_coefficients[1])/loop_count;
-		s += w*speciation_coefficients[2];
+		s += (w*speciation_coefficients[2])/match_count;
 		one.fit_dists.put(two.id, s);
 		return s;
 	}
@@ -196,7 +192,7 @@ public class Population {
 		// get the compat distance from config
 		double compat_t = this.config.compat_threshold;
 		// coeeficients 
-		double[] speciation_coeff = { 1.0, 1.0, 1.0 };
+		double[] speciation_coeff = { 1.0, 1.0, .5 };
 		// set first species and rep genome
 		if (this.pop_species.size() == 0)
 		{
