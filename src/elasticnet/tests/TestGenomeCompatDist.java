@@ -11,7 +11,7 @@ public class TestGenomeCompatDist {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int pop_size = 50;
-		Population test_pop = new Population(0, new NeatConfig(), pop_size, false);
+		Population test_pop = new Population(0, new NeatConfig(5, 1), pop_size, false);
 		Random dice = new Random();
 		Integer[] sorted_idx_list = new Integer[pop_size];
 		for(int i = 0; i < pop_size; i++)

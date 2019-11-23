@@ -263,7 +263,7 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
-			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes));
+			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes, this.sorter));
 			sorted_species_ids[x] = current.speciesID;
 		}
 		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
@@ -351,11 +351,17 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
-			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes));
+			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes, this.sorter));
 			sorted_species_ids[x] = current.speciesID;
 		}
-		System.out.println(sorted_species_ids.length);
-		sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);
+		if(sorted_species_ids.length > 1)
+		{
+			sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);	
+		}
+		else
+		{
+			System.out.println("only one species check config");
+		}
 		Integer saved_sum = 0;
 		Integer keep_top = (int)((double)num_genomes * elitism_percent);
 		// next we will reduce each species by this elitism percent

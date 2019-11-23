@@ -73,9 +73,9 @@ public class Xor {
 				}
 				//System.out.println(best_fitness);
 			}
-			System.out.println("speciating");
+			//System.out.println("speciating");
 			test_pop.speciate_population();
-			System.out.println("reproducing");
+			//System.out.println("reproducing");
 			test_pop.the_reproduction_function();
 		}
 		System.out.print("best fit id: ");

@@ -16,17 +16,17 @@ public class Species {
 	double adjust_fit_sum = 0.0;
 	double best_fitness = 0.0;
 	int best_genome_index;
-	int[] sorted_idx_array;
+	Integer[] sorted_idx_array;
 	public Species(int id, int first_id)
 	{
 		this.speciesID = id;
 		this.member_ids.add(first_id);
 	}
 	
-	public double get_adjusted_fitness_sum(HashMap<Integer,Genome> genomes)
+	public double get_adjusted_fitness_sum(HashMap<Integer,Genome> genomes, SorterUtil sorter_util)
 	{
 		//System.out.println(this.member_ids);
-		this.sorted_idx_array = new int[this.member_ids.size()];
+		this.sorted_idx_array = new Integer[this.member_ids.size()];
 		
 		HashMap<Integer, Double> fit_sort_dict = new HashMap<Integer, Double>();
 		
@@ -46,7 +46,7 @@ public class Species {
 		}
 		if(this.member_ids.size() > 1)
 		{
-			this.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length-1);
+			sorter_util.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length-1);
 			//System.out.println(this.sorted_idx_array);
 		}
 		return this.adjust_fit_sum;
@@ -88,72 +88,8 @@ public class Species {
 			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[(num_members-1)-x]));
 		}
 		this.member_ids = new_member_ids;
-		this.get_adjusted_fitness_sum(genomes);
 	}
 	
-	//quick sort on fitness 
-	public void quick_sort_big_dumb(int[] sort_array, HashMap<Integer, Double> sort_dict, int left, int right)
-	{
-		int left_start = left;
-		int pivot = right;
-		right--;
-		while(left<right)
-		{
-			if(sort_dict.get(sort_array[left]) > sort_dict.get(sort_array[pivot]))
-			{
-				if(sort_dict.get(sort_array[right]) < sort_dict.get(sort_array[pivot]))
-				{
-					int t = sort_array[left];
-					sort_array[left] = sort_array[right];
-					sort_array[right] = t;
-					right--;
-					left++;
-				}
-				else
-				{
-					right--;
-				}
-			}
-			else
-			{
-				if(sort_dict.get(sort_array[right]) < sort_dict.get(sort_array[pivot]))
-				{
-					left++;
-				}
-				else
-				{
-					left++;
-					right--;
-				}
-			}
-		}
-		if(sort_dict.get(sort_array[left]) > sort_dict.get(sort_array[pivot]))
-		{
-			int t = sort_array[left];
-			sort_array[left] = sort_array[pivot];
-			sort_array[pivot] = t;
-		}
-		else
-		{
-			int t = sort_array[left+1];
-			sort_array[left+1] = sort_array[pivot];
-			sort_array[pivot] = t;
-			left++;
-		}
-		if(left == right)
-		{
-			left++;
-			right--;
-		}
-		if(right > left_start+1)
-		{
-			quick_sort_big_dumb(sort_array, sort_dict, left_start, right);	
-		}
-		if(left < pivot-1)
-		{
-			quick_sort_big_dumb(sort_array, sort_dict, left, pivot);	
-		}
-	}
 	
 	public String as_json()
 	{
