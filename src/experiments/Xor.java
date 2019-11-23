@@ -35,7 +35,7 @@ public class Xor {
 		
 		Population test_pop = new Population(0, new NeatConfig(), pop_size, false);
 		
-		int num_gens = 1;
+		int num_gens = 5;
 		
 		double best_fitness = 0.0;
 		

@@ -125,11 +125,11 @@ public class SorterUtil {
 		}
 		if(right > left_start+1)
 		{
-			quick_sort_big_dumb(sort_array, sort_dict, left_start, right);	
+			quick_sort_big_dumb_primitive(sort_array, sort_dict, left_start, right);	
 		}
 		if(left < pivot-1)
 		{
-			quick_sort_big_dumb(sort_array, sort_dict, left, pivot);	
+			quick_sort_big_dumb_primitive(sort_array, sort_dict, left, pivot);	
 		}
 	}
 
