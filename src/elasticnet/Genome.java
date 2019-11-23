@@ -16,7 +16,7 @@ public class Genome {
 	Integer gen_born = 0;
 	//ArrayList<Integer> gene_ids = new ArrayList<Integer>();
 	Long population_hash;
-	int species_id = 0;
+	int species_id = -1;
 	public double fitness = -1.0;
 	public int avg_w = 0;
 	public boolean needs_validation = true;

@@ -118,6 +118,12 @@ public class Population {
 		double s = 0.0;
 		double e = 0.0;
 		//TODO check conn arrays are not empty
+		if (one.get_all_conn_ids(this.node_genes).size() < two.get_all_conn_ids(this.node_genes).size())
+		{
+			Genome temp = one;
+			one = two;
+			two = temp;
+		}
 		ArrayList<Integer> one_conns = one.get_all_conn_ids(this.node_genes);
 		ArrayList<Integer> two_conns = two.get_all_conn_ids(this.node_genes);
 		int loop_count = one_conns.size();
@@ -134,7 +140,6 @@ public class Population {
 			}
 			else
 			{
-				//TODO check and make sure genomes min and max get set
 				if(two_conns.isEmpty() == false)
 				{
 					if(one_id >= Collections.min(two_conns) && one_id <= Collections.max(two_conns))
@@ -184,7 +189,8 @@ public class Population {
 	
 	public void speciate_population()
 	{
-		// initialize array of speciated genome ids
+		// initialize array of speciated genome ids that have
+		// are part of a species
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
 		this.pop_species = new ArrayList<Species>();
 		// get the compat distance from config
@@ -194,6 +200,7 @@ public class Population {
 		// set first species and rep genome
 		if (this.pop_species.size() == 0)
 		{
+			// grabs a random genome from our set
 			Genome first_rep = this.genomes.get(this.genomes.keySet().iterator().next());
 			this.pop_species.add(new Species(next_species_id, first_rep.id));
 			next_species_id++;
@@ -206,6 +213,7 @@ public class Population {
 			// TODO check that speciated isnt cleared, otherwise this doesnt make sense
 			if(!speciated.contains(this.genomes.get(x).id)) 
 			{
+				// finna track if it has a species yet tehe
 				boolean species_found = false;
 				
 				Genome current_genome = this.genomes.get(x);
@@ -229,6 +237,8 @@ public class Population {
 							this.pop_species.get(i).member_ids.add(current_genome.id);
 							speciated.add(current_genome.id);
 							species_found = true;
+							//found species break our loop
+							break;
 						}	
 					}
 				}
