@@ -314,6 +314,7 @@ public class Genome {
 		
 		int num_conns = all_conns.size();
 		
+		// performs a check to see if this connection already exists for this genome
 		for(int i = 0; i < num_conns; i++)
 		{
 			ConnectionGene next_gene = pop_conns.get(all_conns.get(i)).get(this.id);
@@ -630,7 +631,7 @@ public class Genome {
 		*/
 		pop_nodes.get(delete_id).remove(this.id);
 		
-		this.hidden_nodes.remove(this.hidden_nodes.indexOf(delete_id));
+		this.hidden_nodes.remove(node_idx);
 		
 		return;
 	}
@@ -647,13 +648,6 @@ public class Genome {
 		int delete_key = this.get_random_in_range(all_conns.size());
 		
 		int delete_id = all_conns.get(delete_key);
-		
-		//System.out.print("deleting conn id: ");
-		
-		//System.out.println(delete_id);
-		//System.out.print("for genome: ");
-		
-		//System.out.println(this.id);
 		
 		ConnectionGene delete_conn = pop_conns.get(delete_id).get(this.id);
 		
