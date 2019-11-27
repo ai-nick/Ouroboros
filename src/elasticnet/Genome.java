@@ -314,6 +314,10 @@ public class Genome {
 		
 		int num_conns = all_conns.size();
 		
+		int to_id = all_the_nodes.get(to_node_key);
+		
+		int from_id = all_the_nodes.get(from_node_key);
+		
 		// performs a check to see if this connection already exists for this genome
 		for(int i = 0; i < num_conns; i++)
 		{
@@ -325,26 +329,25 @@ public class Genome {
 				return new_id;
 			}
 		}
-		if(this.output_nodes.contains(to_node_key) && this.output_nodes.contains(from_node_key))
+		// make sure the connection makes sense
+		// no output to output, input to input, or output to input allowed
+		// recursive connections only if the net is setup for recursion
+		if(this.output_nodes.contains(to_id) && this.output_nodes.contains(from_id))
 		{
 			return new_id;
 		}
-		if(this.input_nodes.contains(from_node_key) && this.input_nodes.contains(to_node_key))
+		if(this.input_nodes.contains(from_id) && this.input_nodes.contains(to_id))
 		{
 			return new_id;
 		}
-		if(this.output_nodes.contains(from_node_key) || this.input_nodes.contains(to_node_key))
+		if(this.output_nodes.contains(from_id) || this.input_nodes.contains(to_id))
 		{
 			return new_id;
 		}
-		if(from_node_key == to_node_key && this.is_recursive == false)
+		if(from_id == to_id && this.is_recursive == false)
 		{
 			return new_id;
 		}
-		NodeGene from_node = pop_nodes.get(all_the_nodes.get(from_node_key)).get(this.id);
-		
-		// the next to if statements ensure we dont add conns that are either output -> output
-		// of input->input
 
 		for(Integer p : pop_conns.keySet())
 		{
@@ -353,14 +356,14 @@ public class Genome {
 			{
 				ConnectionGene p_conn = gene_list.get(gene_list.keySet().iterator().next());
 				
-				if ((p_conn.to_node == to_node_key) && (p_conn.from_node == from_node.inno_id))
+				if ((p_conn.to_node == to_id) && (p_conn.from_node == from_id))
 				{
 					conn_id = p_conn.inno_id;
 					new_structure = false;
 				}		
 			}
 		}
-		ConnectionGene new_gene = new ConnectionGene(from_node.inno_id, to_node_key, conn_id, 1.0);
+		ConnectionGene new_gene = new ConnectionGene(from_id, to_id, conn_id, 1.0);
 		if (new_structure == true)
 		{
 			while(pop_conns.containsKey(conn_id) || pop_nodes.containsKey(conn_id))
@@ -378,6 +381,7 @@ public class Genome {
 			conn_id++;
 		}
 		//this.conn_genes.add(new_gene.inno_id);
+		NodeGene from_node = pop_nodes.get(from_id).get(this.id);
 		from_node.connections.add(new_gene.inno_id);
 		return conn_id;
 	}
