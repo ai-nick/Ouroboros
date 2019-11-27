@@ -288,6 +288,8 @@ public class Genome {
 		return new_id;
 	}
 	
+	
+	//TODO make a method to ensure we the new id is the global max gene id + 1
 	private int mutate_add_conn(int new_id, 
 			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns,
 			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes
@@ -386,6 +388,7 @@ public class Genome {
 		return conn_id;
 	}
 	
+	//TODO make a method to ensure we the new id is the global max gene id + 1
 	//TODO ensure we are removing conn ref from node
 	private int mutate_add_node(int new_id, 
 			String activation, 
