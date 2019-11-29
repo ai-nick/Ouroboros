@@ -368,11 +368,6 @@ public class Genome {
 		ConnectionGene new_gene = new ConnectionGene(from_id, to_id, conn_id, 1.0);
 		if (new_structure == true)
 		{
-			while(pop_conns.containsKey(conn_id) || pop_nodes.containsKey(conn_id))
-			{
-				conn_id++;
-			}
-			new_gene.inno_id = conn_id;
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);
 			pop_conns.put(conn_id, new_map);
@@ -380,9 +375,7 @@ public class Genome {
 		else 
 		{
 			pop_conns.get(conn_id).put(this.id, new_gene);
-			conn_id++;
 		}
-		//this.conn_genes.add(new_gene.inno_id);
 		NodeGene from_node = pop_nodes.get(from_id).get(this.id);
 		from_node.connections.add(new_gene.inno_id);
 		return conn_id;

@@ -344,6 +344,10 @@ public class Population {
 	{
 		// dictionary with fitness sums for each species 
 		// TODO sort this shit
+		while(this.inno_num <= Collections.max(this.connection_genes.keySet()) || this.inno_num <= Collections.max(this.node_genes.keySet()))
+		{
+			this.inno_num++;
+		}
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
@@ -433,20 +437,28 @@ public class Population {
 	public void breed_asexual(Genome single_parent, Species the_species)
 	{
 		Genome offspring = new Genome(single_parent, this.next_genome_id, this.connection_genes, this.node_genes);
+		
 		boolean has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
+		
 		if(has_nulls == true)
 		{
 			System.out.println("null pointer after cloning");
 		}
-		offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
+		
+		this.inno_num = offspring.mutate_genome(this.inno_num, this.config, this.node_genes, this.connection_genes);
+		
 		has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
+		
 		if(has_nulls == true)
 		{
 			System.out.println("null pointer after mutating clone");
 		}
 		this.next_genome_id++;
+		
 		the_species.member_ids.add(offspring.id);
+		
 		this.genomes.put(offspring.id, offspring);
+		
 		return;
 	}
 	
@@ -454,9 +466,11 @@ public class Population {
 	public void breed_all_remaining(Species the_species)
 	{
 		int num_genomes = the_species.member_ids.size();
+		
 		if(num_genomes > this.genomes.size()){
 			System.out.println("species has more members than population, error");
 		}
+		
 		for (int i = 0; i < num_genomes; i++)
 		{
 			for (int x = 0; x < num_genomes; x++)
