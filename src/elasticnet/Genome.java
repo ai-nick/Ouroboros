@@ -377,7 +377,9 @@ public class Genome {
 			pop_conns.get(conn_id).put(this.id, new_gene);
 		}
 		NodeGene from_node = pop_nodes.get(from_id).get(this.id);
+		
 		from_node.connections.add(new_gene.inno_id);
+		
 		return conn_id;
 	}
 	
@@ -429,7 +431,7 @@ public class Genome {
 		// this block amounts to a search of the nodes thier connections
 		// to see if the path from_node -> some other node -> to node already exists in 
 		// another genomme, if it does, we use those ids
-		for(int n : node_gene_set.keySet())
+		for(Integer n : node_gene_set.keySet())
 		{
 			NodeGene check_it = node_gene_set.get(n);
 			
@@ -455,26 +457,29 @@ public class Genome {
 						System.out.print(next_conn.to_node);
 					}
 					else {
-						NodeGene connected = node_set_two.get(n);
-						int check_conn_count_2 = connected.connections.size();
-						for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)
+						if(node_set_two.containsKey(n))
 						{
-							//getting null conns here i think 
-							ConnectionGene second_conn = pop_conns.get(connected.connections.get(nx2)).get(n);
-							if (second_conn == null)
+							NodeGene connected = node_set_two.get(n);
+							int check_conn_count_2 = connected.connections.size();
+							for(int nx2 = 0; nx2 < check_conn_count_2; nx2++)
 							{
-								System.out.println("second conn in check null");
-							}
-							else
-							{
-								if(second_conn.to_node == connection_to_split.to_node)
+								//getting null conns here i think 
+								ConnectionGene second_conn = pop_conns.get(connected.connections.get(nx2)).get(n);
+								if (second_conn == null)
 								{
-									struct_exists = true;
-									conn_a_id = next_conn.inno_id;
-									conn_b_id = second_conn.inno_id;
-									gene_id = connected.inno_id;
-								}	
-							}
+									System.out.println("second conn in check null");
+								}
+								else
+								{
+									if(second_conn.to_node == connection_to_split.to_node)
+									{
+										struct_exists = true;
+										conn_a_id = next_conn.inno_id;
+										conn_b_id = second_conn.inno_id;
+										gene_id = connected.inno_id;
+									}	
+								}
+							}	
 						}	
 					}	
 				}
@@ -514,7 +519,9 @@ public class Genome {
 			
 			from_node.connections.add(new_conn_a.inno_id);
 			
-			from_node.connections.remove(from_node.connections.indexOf(connection_to_split_index));
+			from_node.connections.remove(from_node.connections.indexOf(connection_to_split.inno_id));
+			
+			pop_conns.get(connection_to_split.inno_id).remove(this.id);
 			
 			pop_nodes.get(from_node.inno_id).replace(this.id, from_node);
 			
@@ -522,10 +529,6 @@ public class Genome {
 		}
 		else
 		{
-			while(pop_conns.containsKey(new_id) == true || pop_nodes.containsKey(new_id) == true)
-			{
-				new_id++;
-			}
 			new_node = new NodeGene(new_id, activation);
 			
 			new_id++;
