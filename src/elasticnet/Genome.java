@@ -256,6 +256,8 @@ public class Genome {
 		
 		String default_activation = config.defaultActivation;
 		
+		double node_mutate_rate = config.weight_mutate_rate;
+		
 		// sum of all mutation probabilities
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
 		

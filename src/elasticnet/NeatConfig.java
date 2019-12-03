@@ -47,6 +47,8 @@ public class NeatConfig {
 	Double bias_min = -30.0;
 	Double bias_max = 30.0;
 	
+	Double weight_mutate_rate = .8;
+	
 	public NeatConfig()
 	{	
 	}
