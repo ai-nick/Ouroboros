@@ -49,6 +49,8 @@ public class NeatConfig {
 	
 	Double weight_mutate_rate = .8;
 	
+	Double mutate_weight_factor = .4;
+	
 	public NeatConfig()
 	{	
 	}

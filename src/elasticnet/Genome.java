@@ -256,7 +256,11 @@ public class Genome {
 		
 		String default_activation = config.defaultActivation;
 		
-		double node_mutate_rate = config.weight_mutate_rate;
+		double weight_mutate_rate = config.weight_mutate_rate;
+		
+		double mutate_factor = config.mutate_weight_factor;
+		
+		this.mutate_weights(mutate_factor, weight_mutate_rate, pop_nodes,  pop_conns);
 		
 		// sum of all mutation probabilities
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
@@ -290,6 +294,29 @@ public class Genome {
 		return new_id;
 	}
 	
+	private void mutate_weights(double mutate_factor, double mutate_rate,
+			HashMap<Integer, HashMap<Integer,NodeGene>> pop_nodes, 
+			HashMap<Integer, HashMap<Integer,ConnectionGene>> pop_conns
+			)
+	{
+		Random dice = new Random();
+		ArrayList<Integer> conn_ids = this.get_all_conn_ids(pop_nodes);
+		int conn_count = conn_ids.size();
+		for (int ix = 0; ix < conn_count; ix++)
+		{
+			ConnectionGene next_conn = pop_conns.get(conn_ids.get(ix)).get(this.id);
+			
+			if(dice.nextFloat() < mutate_rate)
+			{
+				Double weight_val = next_conn.atts.get("wieght");
+				
+				Double current_plus_guass = weight_val + (dice.nextGaussian() * mutate_factor);
+				
+				//TODO clamp the current plus gauss to config min and max
+				Double clamped = 
+			}
+		}
+	}
 	
 	//TODO make a method to ensure we the new id is the global max gene id + 1
 	private int mutate_add_conn(int new_id, 
