@@ -256,11 +256,7 @@ public class Genome {
 		
 		String default_activation = config.defaultActivation;
 		
-		double weight_mutate_rate = config.weight_mutate_rate;
-		
-		double mutate_factor = config.mutate_weight_factor;
-		
-		this.mutate_weights(mutate_factor, weight_mutate_rate, config.weight_min, config.weight_max, pop_nodes,  pop_conns);
+		this.mutate_weights(config.mutate_weight_factor, config.weight_mutate_rate, config.weight_min, config.weight_max, pop_nodes,  pop_conns);
 		
 		// sum of all mutation probabilities
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
