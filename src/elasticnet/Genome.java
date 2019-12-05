@@ -260,7 +260,7 @@ public class Genome {
 		
 		double mutate_factor = config.mutate_weight_factor;
 		
-		this.mutate_weights(mutate_factor, weight_mutate_rate, pop_nodes,  pop_conns);
+		this.mutate_weights(mutate_factor, weight_mutate_rate, config.weight_min, config.weight_max, pop_nodes,  pop_conns);
 		
 		// sum of all mutation probabilities
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
@@ -294,7 +294,7 @@ public class Genome {
 		return new_id;
 	}
 	
-	private void mutate_weights(double mutate_factor, double mutate_rate,
+	private void mutate_weights(double mutate_factor, double mutate_rate, double min, double max_weight,
 			HashMap<Integer, HashMap<Integer,NodeGene>> pop_nodes, 
 			HashMap<Integer, HashMap<Integer,ConnectionGene>> pop_conns
 			)
@@ -310,10 +310,12 @@ public class Genome {
 			{
 				Double weight_val = next_conn.atts.get("wieght");
 				
-				Double current_plus_guass = weight_val + (dice.nextGaussian() * mutate_factor);
+				Double current_plus_gauss = weight_val + (dice.nextGaussian() * mutate_factor);
 				
 				//TODO clamp the current plus gauss to config min and max
-				Double clamped = 
+				Double clamped = Math.max(Math.min(current_plus_gauss, max_weight), min);
+				
+				next_conn.atts.replace("weight", clamped);
 			}
 		}
 	}
