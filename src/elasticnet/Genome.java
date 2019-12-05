@@ -308,7 +308,7 @@ public class Genome {
 			
 			if(dice.nextFloat() < mutate_rate)
 			{
-				Double weight_val = next_conn.atts.get("wieght");
+				Double weight_val = next_conn.atts.get("weight");
 				
 				Double current_plus_gauss = weight_val + (dice.nextGaussian() * mutate_factor);
 				
