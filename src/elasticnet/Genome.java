@@ -413,6 +413,8 @@ public class Genome {
 		
 		from_node.connections.add(new_gene.inno_id);
 		
+		conn_id++;
+		
 		return conn_id;
 	}
 	
