@@ -389,8 +389,6 @@ public class Population {
 		}
 		// now we handle reproducing the correct amount of genomes
 		int need_new = this.pop_size - saved_sum;
-		System.out.print("size after elitism: ");
-		System.out.println(this.genomes.size());
 		int elite_iterator = 0;
 		while(need_new != 0)
 		{

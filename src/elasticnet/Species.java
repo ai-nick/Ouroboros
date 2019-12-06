@@ -75,7 +75,7 @@ public class Species {
 		for(int x = 0; x < num_elites; x++)
 		{
 			int g_id = this.member_ids.get(this.sorted_idx_array[x]);
-			System.out.println(g_id);
+			//System.out.println(g_id);
 			Genome removing = genomes.get(g_id);
 			
 			removing.remove_genes_from_pop(pop_nodes, pop_conns);
