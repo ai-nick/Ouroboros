@@ -603,7 +603,7 @@ public class Population {
 		System.out.print(" and ");
 		System.out.println(b.inno_id);
 		*/
-		NodeGene new_node = new NodeGene(a.inno_id);
+		NodeGene new_node = new NodeGene(a);
 		new_node.level = a.level;
 		new_node.is_input = a.is_input;
 		new_node.is_output = a.is_output;
@@ -648,7 +648,9 @@ public class Population {
 		return new_node;
 	}
 	
-	private void save_champ_genome(Genome g) {
-		
+	private String save_champ_genome(Genome g) {
+		Gson gson = new Gson();
+		String empty_json = gson.toJson(this);
+		return empty_json;
 	}
 }
