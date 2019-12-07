@@ -375,6 +375,7 @@ public class Population {
 		// half going extinct
 		for(int x = 0; x < num_species; x++)
 		{
+			// need index here not id, was probably fucking a bunch of stuff up
 			Species current = this.pop_species.get(sorted_species_ids[x]);
 			keep_top = current.member_ids.size() * (int)elitism_percent;
 			saved_sum += keep_top;
