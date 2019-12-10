@@ -351,16 +351,16 @@ public class Population {
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
-		Integer[] sorted_species_ids = new Integer[num_species];
+		Integer[] sorted_species_idxs = new Integer[num_species];
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
 			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes, this.sorter));
-			sorted_species_ids[x] = current.speciesID;
+			sorted_species_idxs[x] = x;
 		}
-		if(sorted_species_ids.length > 1)
+		if(sorted_species_idxs.length > 1)
 		{
-			sorter.quick_sort_big_dumb(sorted_species_ids, adj_fit_sums, 0, num_species-1);	
+			sorter.quick_sort_big_dumb(sorted_species_idxs, adj_fit_sums, 0, num_species-1);	
 		}
 		else
 		{
@@ -376,7 +376,7 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			// need index here not id, was probably fucking a bunch of stuff up
-			Species current = this.pop_species.get(sorted_species_ids[x]);
+			Species current = this.pop_species.get(sorted_species_idxs[x]);
 			keep_top = current.member_ids.size() * (int)elitism_percent;
 			saved_sum += keep_top;
 			if(keep_top > 0)
