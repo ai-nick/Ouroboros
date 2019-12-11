@@ -355,7 +355,7 @@ public class Population {
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
-			adj_fit_sums.put(current.speciesID, current.get_adjusted_fitness_sum(this.genomes, this.sorter));
+			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.genomes, this.sorter));
 			sorted_species_idxs[x] = x;
 		}
 		if(sorted_species_idxs.length > 1)
