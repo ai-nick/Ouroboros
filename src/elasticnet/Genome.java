@@ -263,7 +263,7 @@ public class Genome {
 		
 		// if sum is less than 1.0 set sum to be 1.0
 		
-		while(new_id < Collections.max(pop_conns.keySet()) || new_id < Collections.max(pop_nodes.keySet()))
+		while(new_id <= Collections.max(pop_conns.keySet()) || new_id <= Collections.max(pop_nodes.keySet()))
 		{
 			new_id++;
 		}

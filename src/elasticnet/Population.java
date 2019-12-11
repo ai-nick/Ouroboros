@@ -188,7 +188,7 @@ public class Population {
 		// initialize array of speciated genome ids that have
 		// are part of a species
 		ArrayList<Integer> speciated = new ArrayList<Integer>();
-		this.pop_species = new ArrayList<Species>();
+		//this.pop_species = new ArrayList<Species>();
 		// get the compat distance from config
 		double compat_t = this.config.compat_threshold;
 		// coeeficients 

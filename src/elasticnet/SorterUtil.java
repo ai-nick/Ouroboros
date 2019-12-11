@@ -12,7 +12,7 @@ public class SorterUtil {
 		right--;
 		while(left<right)
 		{
-			System.out.println(pivot);
+			//System.out.println(pivot);
 			//System.out.println(left);
 			if(sort_dict.get(sort_array[left]) > sort_dict.get(sort_array[pivot]))
 			{
