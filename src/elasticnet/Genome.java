@@ -399,7 +399,7 @@ public class Genome {
 			}
 		}
 		ConnectionGene new_gene = new ConnectionGene(from_id, to_id, conn_id, 1.0);
-		if (new_structure == true)
+		if (new_structure == true && pop_conns.containsKey(conn_id) == false)
 		{
 			HashMap<Integer, ConnectionGene> new_map = new HashMap<Integer, ConnectionGene>();
 			new_map.put(this.id, new_gene);

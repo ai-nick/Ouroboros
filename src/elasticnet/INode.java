@@ -19,7 +19,7 @@ public interface INode {
 	
 	public boolean is_output();
 	
-	public ArrayList<Integer> get_connections();
+	public ArrayList<ConnectionGene> get_connections();
 	
 	public void add_to_current_value(double val);
 	

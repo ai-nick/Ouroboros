@@ -12,7 +12,7 @@ public class NodeGene implements INode {
 	int inno_id;
 	//ArrayList<Double> coordinate;
 	boolean is_recurrent;
-	public ArrayList<Integer> connections = new ArrayList<Integer>();
+	public ArrayList<ConnectionGene> connections = new ArrayList<ConnectionGene>();
 	HashMap<String, Object> atts = new HashMap<String, Object>();
 	double current_val = 0.0;
 	int level;
@@ -44,7 +44,7 @@ public class NodeGene implements INode {
 		this.is_input = to_clone.is_input;
 		this.is_output = to_clone.is_output;
 		this.activation = to_clone.activation;
-		this.connections = new ArrayList<Integer>(to_clone.connections);
+		this.connections = new ArrayList<ConnectionGene>(to_clone.connections);
 		this.atts = new HashMap<String, Object>(to_clone.atts);
 	}
 	
@@ -57,7 +57,7 @@ public class NodeGene implements INode {
 		this.activation = to_clone.activation;
 		if(add_conns = true)
 		{
-			this.connections = new ArrayList<Integer>(to_clone.connections);	
+			this.connections = new ArrayList<ConnectionGene>(to_clone.connections);	
 		}
 		this.atts = new HashMap<String, Object>(to_clone.atts);
 	}
@@ -93,7 +93,7 @@ public class NodeGene implements INode {
 		return inno_id;
 	}
 	
-	public ArrayList<Integer> get_connections()
+	public ArrayList<ConnectionGene> get_connections()
 	{
 		return this.connections;
 	}
