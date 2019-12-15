@@ -92,14 +92,14 @@ public class BaseGenome {
 	{
 		int rand_index = this.get_random_in_range(this.hidden_nodes.size());
 		
-		NodeGene delete_this = this.hidden_nodes.get(rand_index);
-		
+		this.hidden_nodes.remove(rand_index);
 		
 		return;
 	}
 	
 	public void mutate_delete_conn(InnovationService inno_service)
 	{
+		
 		return;
 	}
 	
@@ -115,6 +115,23 @@ public class BaseGenome {
 	public void mutate_weights(double rate, double factor, double min, double max)
 	{
 		return;
+	}
+	
+	private ArrayList<long> get_conn_ids()
+	{
+		ArrayList<Long> ids = new ArrayList<Long>();
+		
+		int num_node_input = this.input_nodes.size();
+		
+		for (int x = 0; x < num_node_input; x++)
+		{
+			int conns_count = this.input_nodes.get(x).connections.size();
+			
+			for(int i = 0; i < conns_count; i++)
+			{
+				ids.add(this.input_nodes.get(x).connections.get(i).inno_id);
+			}
+		}
 	}
 	
 	private int get_random_in_range(int range_len)
