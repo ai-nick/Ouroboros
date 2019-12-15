@@ -67,23 +67,23 @@ public class BaseGenome {
 		if (rand.nextFloat() < (config.delete_node_prob/prob_sum))
 		{
 			System.out.println("deleting node here");
-			mutate_delete_node(pop_conns, pop_nodes);
+			mutate_delete_node(inno_service);
 		}
 		if (rand.nextFloat() < (config.delete_conn_prob/prob_sum))
 		{
 			System.out.println("deleting conn here");
-			mutate_delete_conn(pop_conns, pop_nodes);
+			mutate_delete_conn(inno_service);
 		}
 		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
 		{
 			System.out.println("adding conn here");
-			new_id = mutate_add_conn(new_id, pop_conns, pop_nodes);
+			mutate_add_conn(inno_service);
 		}
 		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
 		{
 			//this is where we are loosing conn pointers from node genes
 			System.out.println("adding node here");
-			new_id = mutate_add_node(new_id, config.defaultActivation, pop_nodes, pop_conns);
+			mutate_add_node(inno_service, config.defaultActivation);
 		}
 		return new_id;
 	}
@@ -98,7 +98,7 @@ public class BaseGenome {
 		return;
 	}
 	
-	public void mutate_add_node(InnovationService inno_service)
+	public void mutate_add_node(InnovationService inno_service, String default_activation)
 	{
 		return;
 	}
