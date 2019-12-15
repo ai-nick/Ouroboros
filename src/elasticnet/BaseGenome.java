@@ -46,25 +46,19 @@ public class BaseGenome {
 	
 	public int mutate_genome(int new_id, 
 			NeatConfig config,
-			HashMap<Integer, HashMap<Integer,NodeGene>> pop_nodes, 
-			HashMap<Integer, HashMap<Integer,ConnectionGene>> pop_conns
+			InnovationService inno_service
 			)
 	{
 		Random rand = new Random();
 		
 		String default_activation = config.defaultActivation;
 		
-		this.mutate_weights(config.mutate_weight_factor, config.weight_mutate_rate, config.weight_min, config.weight_max, pop_nodes,  pop_conns);
+		this.mutate_weights(config.mutate_weight_factor, config.weight_mutate_rate, config.weight_min, config.weight_max, inno_service);
 		
 		// sum of all mutation probabilities
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
 		
 		// if sum is less than 1.0 set sum to be 1.0
-		
-		while(new_id <= Collections.max(pop_conns.keySet()) || new_id <= Collections.max(pop_nodes.keySet()))
-		{
-			new_id++;
-		}
 	
 		if (prob_sum < 1.0)
 		{
@@ -94,6 +88,25 @@ public class BaseGenome {
 		return new_id;
 	}
 	
+	public void mutate_delete_node(InnovationService inno_service)
+	{
+		return;
+	}
+	
+	public void mutate_delete_conn(InnovationService inno_service)
+	{
+		return;
+	}
+	
+	public void mutate_add_node(InnovationService inno_service)
+	{
+		return;
+	}
+	
+	public void mutate_add_conn(InnovationService inno_service)
+	{
+		return;
+	}
 	public void mutate_weights(double rate, double factor, double min, double max)
 	{
 		return;
