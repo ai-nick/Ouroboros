@@ -90,6 +90,11 @@ public class BaseGenome {
 	
 	public void mutate_delete_node(InnovationService inno_service)
 	{
+		int rand_index = this.get_random_in_range(this.hidden_nodes.size());
+		
+		NodeGene delete_this = this.hidden_nodes.get(rand_index);
+		
+		
 		return;
 	}
 	
@@ -111,6 +116,7 @@ public class BaseGenome {
 	{
 		return;
 	}
+	
 	private int get_random_in_range(int range_len)
 	{
 		Random dice = new Random();
