@@ -99,7 +99,7 @@ public class BaseGenome {
 	
 	public void mutate_delete_conn(InnovationService inno_service)
 	{
-		ArrayList<Long> conn_ids = this.get_conn_ids();
+		ArrayList<Long[]> conn_ids = this.get_conn_ids();
 		
 		int rand_index = this.get_random_in_range(conn_ids.size());
 		
@@ -110,7 +110,7 @@ public class BaseGenome {
 	{
 		long next_node_id = inno_service.get_next_node_id();
 		
-		ArrayList<Long> conn_ids = this.get_conn_ids();
+		ArrayList<Long[]> conn_ids = this.get_conn_ids();
 		
 		int conn_to_split_idx = this.get_random_in_range(conn_ids.size());
 		return;
@@ -125,19 +125,21 @@ public class BaseGenome {
 		return;
 	}
 	
-	private ArrayList<Long> get_conn_ids()
+	private ArrayList<Long[]> get_conn_ids()
 	{
-		ArrayList<Long> ids = new ArrayList<Long>();
+		ArrayList<Long[]> ids = new ArrayList<Long[]>();
 		
 		int num_nodes_input = this.input_nodes.size();
 		
 		for (int x = 0; x < num_nodes_input; x++)
 		{
-			int conns_count = this.input_nodes.get(x).connections.size();
+			NodeGene current = this.input_nodes.get(x);
+			
+			int conns_count = current.connections.size();
 			
 			for(int i = 0; i < conns_count; i++)
 			{
-				ids.add(this.input_nodes.get(x).connections.get(i).inno_id);
+				ids.add(new Long[] {current.connections.get(i).inno_id, current.inno_id});
 			}
 		}
 		
@@ -145,11 +147,12 @@ public class BaseGenome {
 		
 		for (int x = 0; x < num_nodes_hidden; x++)
 		{
-			int conns_count = this.hidden_nodes.get(x).connections.size();
+			NodeGene current = this.hidden_nodes.get(x);
+			int conns_count = current.connections.size();
 			
 			for(int i = 0; i < conns_count; i++)
 			{
-				ids.add(this.hidden_nodes.get(x).connections.get(i).inno_id);
+				ids.add(new Long[] {current.connections.get(i).inno_id, current.inno_id});
 			}
 		}		
 		
