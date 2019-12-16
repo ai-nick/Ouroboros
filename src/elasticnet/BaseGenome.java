@@ -108,6 +108,11 @@ public class BaseGenome {
 	
 	public void mutate_add_node(InnovationService inno_service, String default_activation)
 	{
+		long next_node_id = inno_service.get_next_node_id();
+		
+		ArrayList<Long> conn_ids = this.get_conn_ids();
+		
+		int conn_to_split_idx = this.get_random_in_range(conn_ids.size());
 		return;
 	}
 	
@@ -151,7 +156,10 @@ public class BaseGenome {
 		return ids;
 	}
 	
-	private ArrayList<Long> get_node_ids
+	private ArrayList<Long> get_node_ids()
+	{
+		return;
+	}
 	
 	private int get_random_in_range(int range_len)
 	{
