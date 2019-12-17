@@ -26,6 +26,21 @@ public class InnovationService {
 		return Collections.max(conn_coo.keySet());
 	}
 	
+	public Long struct_exists(Long from_node, Long to_node)
+	{
+		Long returnVal = null;
+		
+		for(Long conn_id : this.conn_coo.keySet())
+		{
+			if(this.conn_coo.get(conn_id)[0] == from_node)
+			{
+				
+			}
+		}
+		
+		return returnVal;
+	}
+	
 	public Long conn_exists(Long[] conn_to_from)
 	{
 		if(this.conn_coo.values().contains(conn_to_from))
