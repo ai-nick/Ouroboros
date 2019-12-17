@@ -7,12 +7,12 @@ import java.util.HashMap;
 public class InnovationService {
 	public ArrayList<Long> node_ids;
 	
-	public HashMap<Long[], Long> conn_coo;
+	public HashMap<Long, Long[]> conn_coo;
 	
 	public InnovationService()
 	{
 		this.node_ids = new ArrayList<Long>();
-		this.conn_coo = new HashMap<Long[], Long>();
+		this.conn_coo = new HashMap<Long, Long[]>();
 	}
 	
 	public Long get_next_node_id()
@@ -23,13 +23,22 @@ public class InnovationService {
 	
 	public long get_next_conn_id()
 	{
-		return Collections.max(conn_coo.values());
+		return Collections.max(conn_coo.keySet());
 	}
 	
-	public Long gene_exists(Long[] conn_to_from)
+	public Long conn_exists(Long[] conn_to_from)
 	{
-		Long response = this.conn_coo.get(conn_to_from);
+		if(this.conn_coo.values().contains(conn_to_from))
+		{
+			for(Long key : this.conn_coo.keySet())
+			{
+				if (this.conn_coo.get(key) == conn_to_from)
+				{
+					return key;
+				}
+			}
+		}
 		
-		return response;
+		return null;
 	}
 }
