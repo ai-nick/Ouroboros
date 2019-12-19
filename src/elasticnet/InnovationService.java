@@ -26,15 +26,25 @@ public class InnovationService {
 		return Collections.max(conn_coo.keySet());
 	}
 	
-	public Long struct_exists(Long from_node, Long to_node)
+	// if the path exists with a node in between from and to nodes
+	// return the middle node id if not returns null
+	public Long path_exists(Long from_node, Long to_node)
 	{
 		Long returnVal = null;
 		
 		for(Long conn_id : this.conn_coo.keySet())
 		{
-			if(this.conn_coo.get(conn_id)[0] == from_node)
+			Long[] next_conn = this.conn_coo.get(conn_id);
+			if(next_conn[0] == from_node && next_conn[1] != to_node)
 			{
-				
+				for(Long conn_id_2 : this.conn_coo.keySet())
+				{
+					Long[] second_conn = this.conn_coo.get(conn_id_2);
+					if(second_conn[0] == next_conn[1] && second_conn[1] == to_node)
+					{
+						return conn_id_2;
+					}
+				}
 			}
 		}
 		
