@@ -53,7 +53,7 @@ public class BaseGenome {
 		
 		String default_activation = config.defaultActivation;
 		
-		this.mutate_weights(config.mutate_weight_factor, config.weight_mutate_rate, config.weight_min, config.weight_max, inno_service);
+		this.mutate_weights(config.mutate_weight_factor, config.weight_mutate_rate, config.weight_min, config.weight_max);
 		
 		// sum of all mutation probabilities
 		Double prob_sum = config.add_conn_prob + config.delete_conn_prob + config.add_node_prob + config.delete_node_prob;
@@ -103,6 +103,40 @@ public class BaseGenome {
 		
 		int rand_index = this.get_random_in_range(conn_ids.size());
 		
+		Long remove_id = conn_ids.get(rand_index)[0];
+		
+		int num_input = this.input_nodes.size();
+		
+		for(int x = 0; x < num_input; x++)
+		{
+			NodeGene next_node = this.input_nodes.get(x);
+			if(next_node.connections.keySet().contains(remove_id))
+			{
+				next_node.connections.remove(remove_id);
+			}
+		}
+		
+		int num_hidden = this.hidden_nodes.size();
+		
+		for(int x = 0; x < num_hidden; x++)
+		{
+			NodeGene next_node = this.hidden_nodes.get(x);
+			if(next_node.connections.keySet().contains(remove_id))
+			{
+				next_node.connections.remove(remove_id);
+			}
+		}
+		
+		int num_output = this.output_nodes.size();
+		
+		for(int x = 0; x < num_output; x++)
+		{
+			NodeGene next_node = this.output_nodes.get(x);
+			if(next_node.connections.keySet().contains(remove_id))
+			{
+				next_node.connections.remove(remove_id);
+			}
+		}
 		return;
 	}
 	

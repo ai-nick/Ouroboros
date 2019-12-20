@@ -1,6 +1,7 @@
 package elasticnet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface INode {
@@ -15,11 +16,11 @@ public interface INode {
 	
 	public double activate();
 	
-	public int get_node_id();
+	public Long get_node_id();
 	
 	public boolean is_output();
 	
-	public ArrayList<ConnectionGene> get_connections();
+	public HashMap<Long, ConnectionGene> get_connections();
 	
 	public void add_to_current_value(double val);
 	
