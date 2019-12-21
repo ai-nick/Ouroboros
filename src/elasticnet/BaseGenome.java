@@ -21,10 +21,9 @@ public class BaseGenome {
 	public int avg_w = 0;
 	public boolean needs_validation = true;
 	public boolean has_validation = false;
-	//public ArrayList<Integer> conn_genes = new ArrayList<Integer>();
-	public ArrayList<NodeGene> input_nodes = new ArrayList<NodeGene>();
-	public ArrayList<NodeGene> hidden_nodes = new ArrayList<NodeGene>();
-	public ArrayList<NodeGene> output_nodes = new ArrayList<NodeGene>();
+	public HashMap<Long, NodeGene>  input_nodes = new HashMap<Long, NodeGene>();
+	public HashMap<Long, NodeGene>  hidden_nodes = new HashMap<Long, NodeGene>();
+	public HashMap<Long, NodeGene> output_nodes = new HashMap<Long, NodeGene>();
 	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
 	public boolean is_recursive = false;
 	public String peer_eval_id = "";
@@ -106,47 +105,18 @@ public class BaseGenome {
 		Long remove_id = conn_ids.get(rand_index)[0];
 		
 		int num_input = this.input_nodes.size();
-		
-		for(int x = 0; x < num_input; x++)
-		{
-			NodeGene next_node = this.input_nodes.get(x);
-			if(next_node.connections.keySet().contains(remove_id))
-			{
-				next_node.connections.remove(remove_id);
-			}
-		}
-		
-		int num_hidden = this.hidden_nodes.size();
-		
-		for(int x = 0; x < num_hidden; x++)
-		{
-			NodeGene next_node = this.hidden_nodes.get(x);
-			if(next_node.connections.keySet().contains(remove_id))
-			{
-				next_node.connections.remove(remove_id);
-			}
-		}
-		
-		int num_output = this.output_nodes.size();
-		
-		for(int x = 0; x < num_output; x++)
-		{
-			NodeGene next_node = this.output_nodes.get(x);
-			if(next_node.connections.keySet().contains(remove_id))
-			{
-				next_node.connections.remove(remove_id);
-			}
-		}
 		return;
 	}
 	
 	public void mutate_add_node(InnovationService inno_service, String default_activation)
 	{
-		long next_node_id = inno_service.get_next_node_id();
-		
 		ArrayList<Long[]> conn_ids = this.get_conn_ids();
 		
-		int conn_to_split_idx = this.get_random_in_range(conn_ids.size());
+		int rand_index = this.get_random_in_range(conn_ids.size());
+		
+		Long split_id = conn_ids.get(rand_index)[0];
+		
+		Long new_inno = inno_service.path_exists(from_node, to_node)
 		
 		return;
 	}
@@ -158,6 +128,56 @@ public class BaseGenome {
 	public void mutate_weights(double rate, double factor, double min, double max)
 	{
 		return;
+	}
+	
+	private ConnectionGene get_conn_by_id(Long inno_id)
+	{
+		int num_input = this.input_nodes.size();
+		
+		for(int x = 0; x < num_input; x++)
+		{
+			NodeGene next_node = this.input_nodes.get(x);
+			
+			if(next_node.connections.keySet().contains(inno_id))
+			{
+				return next_node.connections.get(inno_id);
+			}
+		}
+		
+		int num_hidden = this.hidden_nodes.size();
+		
+		for(int x = 0; x < num_hidden; x++)
+		{
+			NodeGene next_node = this.hidden_nodes.get(x);
+			
+			if(next_node.connections.keySet().contains(inno_id))
+			{
+				return next_node.connections.get(inno_id);
+			}
+		}
+		
+		int num_output = this.output_nodes.size();
+		
+		for(int x = 0; x < num_output; x++)
+		{
+			NodeGene next_node = this.output_nodes.get(x);
+			
+			if(next_node.connections.keySet().contains(inno_id))
+			{
+				return next_node.connections.get(inno_id);
+			}
+		}
+		
+		return null;
+	}
+	
+	private ConnectionGene get_conn_with_node_and_conn_id(Long conn_id, Long node_id)
+	{
+		if(this.input_nodes.contains(node_id))
+		{
+			return this.input_nodes.get(node_id).connections.get(conn_id);
+		}
+		return null;
 	}
 	
 	private ArrayList<Long[]> get_conn_ids()
@@ -183,6 +203,7 @@ public class BaseGenome {
 		for (int x = 0; x < num_nodes_hidden; x++)
 		{
 			NodeGene current = this.hidden_nodes.get(x);
+			
 			int conns_count = current.connections.size();
 			
 			for(int i = 0; i < conns_count; i++)
