@@ -102,9 +102,10 @@ public class BaseGenome {
 		
 		int rand_index = this.get_random_in_range(conn_ids.size());
 		
-		Long remove_id = conn_ids.get(rand_index)[0];
+		Long[] remove_ids = conn_ids.get(rand_index);
 		
-		int num_input = this.input_nodes.size();
+		this.get_node_by_id(remove_ids[1]).connections.remove(remove_ids[0]);
+		
 		return;
 	}
 	
@@ -116,7 +117,8 @@ public class BaseGenome {
 		
 		Long split_id = conn_ids.get(rand_index)[0];
 		
-		Long new_inno = inno_service.path_exists(from_node, to_node)
+		ConnectionGene split_conn = this.get_conn_with_node_and_conn_id(split_id, conn_ids.get(rand_index)[1]);
+		
 		
 		return;
 	}
@@ -173,10 +175,41 @@ public class BaseGenome {
 	
 	private ConnectionGene get_conn_with_node_and_conn_id(Long conn_id, Long node_id)
 	{
-		if(this.input_nodes.contains(node_id))
+		if(this.input_nodes.keySet().contains(node_id))
 		{
 			return this.input_nodes.get(node_id).connections.get(conn_id);
 		}
+		
+		if(this.hidden_nodes.keySet().contains(node_id))
+		{
+			return this.hidden_nodes.get(node_id).connections.get(conn_id);
+		}
+		
+		if(this.output_nodes.keySet().contains(node_id))
+		{
+			return this.output_nodes.get(node_id).connections.get(conn_id);
+		}
+		
+		return null;
+	}
+	
+	private NodeGene get_node_by_id(Long inno_id)
+	{
+		if(this.input_nodes.keySet().contains(inno_id))
+		{
+			return this.input_nodes.get(inno_id);
+		}
+		
+		if(this.hidden_nodes.keySet().contains(inno_id))
+		{
+			return this.hidden_nodes.get(inno_id);
+		}
+		
+		if(this.output_nodes.containsKey(inno_id))
+		{
+			return this.output_nodes.get(inno_id);
+		}
+		
 		return null;
 	}
 	
@@ -210,8 +243,21 @@ public class BaseGenome {
 			{
 				ids.add(new Long[] {current.connections.get(i).inno_id, current.inno_id});
 			}
-		}		
+		}
 		
+		int num_output_nodes = this.output_nodes.size();
+		
+		for (int x = 0; x < num_output_nodes; x++)
+		{
+			NodeGene current = this.output_nodes.get(x);
+			
+			int conns_count = current.connections.size();
+			
+			for(int i = 0; i < conns_count; i++)
+			{
+				ids.add(new Long[] {current.connections.get(i).inno_id, current.inno_id});
+			}
+		}
 		return ids;
 	}
 	
