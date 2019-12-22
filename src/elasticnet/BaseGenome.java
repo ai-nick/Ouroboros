@@ -125,11 +125,31 @@ public class BaseGenome {
 	
 	public void mutate_add_conn(InnovationService inno_service)
 	{
-		return;
+		ArrayList<Long> all_node_ids = this.get_all_node_innos();
+		
+		int rand_from = this.get_random_in_range(all_node_ids.size());
+		
+		int rand_to = this.get_random_in_range(all_node_ids.size());
+		
+		if(rand_from == rand_to && this.is_recursive != true)
+		{
+			return;
+		}
 	}
 	public void mutate_weights(double rate, double factor, double min, double max)
 	{
 		return;
+	}
+	
+	private ArrayList<Long> get_all_node_innos()
+	{
+		ArrayList<Long> returnThis = new ArrayList<Long>(this.input_nodes.keySet());
+		
+		returnThis.addAll(this.hidden_nodes.keySet());
+		
+		returnThis.addAll(this.output_nodes.keySet());
+		
+		return returnThis;
 	}
 	
 	private ConnectionGene get_conn_by_id(Long inno_id)
