@@ -25,7 +25,7 @@ public class ConnectionGene implements IConnection {
 		this.set_weight(ThreadLocalRandom.current().nextDouble(min, max));
 	}
 	
-	public ConnectionGene(int f, int t, int inno, double weight) {
+	public ConnectionGene(long f, long t, long inno, double weight) {
 		this.atts = new HashMap<String, Double>();
 		this.inno_id = inno;
 		this.from_node = f;

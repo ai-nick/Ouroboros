@@ -119,6 +119,15 @@ public class BaseGenome {
 		
 		ConnectionGene split_conn = this.get_conn_with_node_and_conn_id(split_id, conn_ids.get(rand_index)[1]);
 		
+		Long inno_id = inno_service.path_exists(split_conn.from_node, split_conn.from_node);
+		
+		if(inno_id == null)
+		{
+			inno_id = inno_service.get_next_conn_id();
+		}
+		NodeGene add_this = new NodeGene(inno_id);
+		
+		ConnectionGene conn_one = new ConnectionGene(split_conn.from_node, inno_id, inno_id + 1);
 		
 		return;
 	}
@@ -145,7 +154,61 @@ public class BaseGenome {
 	
 	public void mutate_weights(double rate, double factor, double min, double max)
 	{
-		return;
+		Random dice = new Random();
+		
+		for(NodeGene next : this.input_nodes.values())
+		{
+			for(ConnectionGene conn : next.connections.values())
+			{
+				if(dice.nextFloat() < rate)
+				{
+					Double weight_val = conn.atts.get("weight");
+					
+					Double current_plus_gauss = weight_val + (dice.nextGaussian() * factor);
+					
+					//TODO clamp the current plus gauss to config min and max
+					Double clamped = Math.max(Math.min(current_plus_gauss, max), min);
+					
+					conn.atts.replace("weight", clamped);
+				}
+			}
+		}
+		
+		for(NodeGene next : this.hidden_nodes.values())
+		{
+			for(ConnectionGene conn : next.connections.values())
+			{
+				if(dice.nextFloat() < rate)
+				{
+					Double weight_val = conn.atts.get("weight");
+					
+					Double current_plus_gauss = weight_val + (dice.nextGaussian() * factor);
+					
+					//TODO clamp the current plus gauss to config min and max
+					Double clamped = Math.max(Math.min(current_plus_gauss, max), min);
+					
+					conn.atts.replace("weight", clamped);
+				}
+			}
+		}
+		
+		for(NodeGene next : this.output_nodes.values())
+		{
+			for(ConnectionGene conn : next.connections.values())
+			{
+				if(dice.nextFloat() < rate)
+				{
+					Double weight_val = conn.atts.get("weight");
+					
+					Double current_plus_gauss = weight_val + (dice.nextGaussian() * factor);
+					
+					//TODO clamp the current plus gauss to config min and max
+					Double clamped = Math.max(Math.min(current_plus_gauss, max), min);
+					
+					conn.atts.replace("weight", clamped);
+				}
+			}
+		}
 	}
 	
 	private void make_conn(Long from_node_id, Long to_node_id, InnovationService inno_service)
