@@ -7,16 +7,16 @@ import io.netty.util.internal.ThreadLocalRandom;
 
 public class ConnectionGene implements IConnection {
 
-	public long inno_id;
-	int from_node = -1;
-	int to_node = -1;
+	public Long inno_id;
+	Long from_node;
+	Long to_node;
 	int activation_level = 0;
 	//int genome_id;
 	HashMap<String, Double> atts;
 	double min = -3.0;
 	double max = 3.0;
 	
-	public ConnectionGene(int f, int t, int inno) {
+	public ConnectionGene(Long f, Long t, Long inno) {
 		this.atts = new HashMap<String, Double>();
 		this.inno_id = inno;
 		this.from_node = f;

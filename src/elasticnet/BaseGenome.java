@@ -135,9 +135,31 @@ public class BaseGenome {
 		{
 			return;
 		}
+		
+		if(this.input_nodes.keySet().contains(rand_from) && this.input_nodes.keySet().contains(rand_to))
+		{
+			// no input to input 
+			return;
+		}
 	}
+	
 	public void mutate_weights(double rate, double factor, double min, double max)
 	{
+		return;
+	}
+	
+	private void make_conn(Long from_node_id, Long to_node_id, InnovationService inno_service)
+	{
+		Long conn_inno = inno_service.conn_exists(new Long[]{to_node_id, from_node_id});
+		
+		if(conn_inno == null)
+		{
+			conn_inno = inno_service.get_next_conn_id();
+		}
+		NodeGene from_node = this.get_node_by_id(from_node_id);
+		
+		from_node.connections.put(conn_inno, new ConnectionGene(from_node_id, to_node_id, conn_inno));
+		
 		return;
 	}
 	
