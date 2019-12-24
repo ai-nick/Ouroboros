@@ -378,7 +378,7 @@ public class BaseGenome {
 		return ids;
 	}
 	
-	private void create_from_scratch(NeatConfig config, Long timestamp)
+	private void create_from_scratch(NeatConfig config, Long timestamp, InnovationService inno_service)
 	{
 		this.population_hash = timestamp;
 		int num_in = config.num_input;
@@ -390,6 +390,10 @@ public class BaseGenome {
 			new_node.is_input = true;
 			new_node.is_output = false;
 			this.input_nodes.put(inno, new_node);
+			if(inno_service.node_ids.contains(inno) != true)
+			{
+				inno_service.node_ids.add(inno);
+			}
 			inno++;
 		}
 		for (int ix = 0; ix < num_out; ix++)
@@ -397,14 +401,39 @@ public class BaseGenome {
 			NodeGene new_node = new NodeGene(inno);
 			new_node.is_input = false;
 			new_node.is_output = true;
-			this.input_nodes.put(inno, new_node);
+			this.output_nodes.put(inno, new_node);
+			if(inno_service.node_ids.contains(inno) != true)
+			{
+				inno_service.node_ids.add(inno);
+			}
 			inno++;
 		}
+		this.connect_fully(inno_service);
 	}
 	
-	private void connect_fully()
+	private void connect_fully(InnovationService inno_service, long inno_num)
 	{
-		
+		int num_in = this.input_nodes.size();
+		 
+		for(Long node_key : this.input_nodes.keySet())
+		{
+			NodeGene from_node = this.input_nodes.get(node_key);
+			
+			int num_out = this.output_nodes.size();
+			
+			for(Long out_key : this.output_nodes.keySet())
+			{
+				ConnectionGene new_conn = new ConnectionGene(from_node.inno_id, out_key, inno_num);
+				
+				from_node.connections.put(inno_num, new_conn);
+				
+				if(inno_service.conn_coo.containsKey(inno_num) == false)
+				{
+					inno_service.add_conn(inno_num, from_node.inno_id, out_key);
+				}
+				inno_num++;
+			}
+		}
 	}
 	
 	private int get_random_in_range(int range_len)
