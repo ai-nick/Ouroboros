@@ -14,11 +14,9 @@ public class BaseGenome {
 
 	public Long id;
 	Integer gen_born = 0;
-	//ArrayList<Integer> gene_ids = new ArrayList<Integer>();
 	Long population_hash;
 	int species_id = -1;
 	public double fitness = -1.0;
-	public int avg_w = 0;
 	public boolean needs_validation = true;
 	public boolean has_validation = false;
 	public HashMap<Long, NodeGene>  input_nodes = new HashMap<Long, NodeGene>();
@@ -90,9 +88,8 @@ public class BaseGenome {
 	public void mutate_delete_node(InnovationService inno_service)
 	{
 		int rand_index = this.get_random_in_range(this.hidden_nodes.size());
-		
-		this.hidden_nodes.remove(rand_index);
-		
+		long key = (long)this.hidden_nodes.keySet().toArray()[rand_index];
+		this.hidden_nodes.remove(key);	
 		return;
 	}
 	
@@ -125,7 +122,7 @@ public class BaseGenome {
 		
 		if(inno_id == null)
 		{
-			inno_id = inno_service.get_next_conn_id();
+			inno_id = inno_service.get_next_inno_id();
 			new_structure = true;
 		}
 		NodeGene add_this = new NodeGene(inno_id);
@@ -154,20 +151,16 @@ public class BaseGenome {
 	{
 		ArrayList<Long> all_node_ids = this.get_all_node_innos();
 		
-		int rand_from = this.get_random_in_range(all_node_ids.size());
+		long rand_from = all_node_ids.get(this.get_random_in_range(all_node_ids.size()));
 		
-		int rand_to = this.get_random_in_range(all_node_ids.size());
+		long rand_to = all_node_ids.get(this.get_random_in_range(all_node_ids.size()));
 		
 		if(rand_from == rand_to && this.is_recursive != true)
 		{
 			return;
 		}
 		
-		if(this.input_nodes.keySet().contains(rand_from) && this.input_nodes.keySet().contains(rand_to))
-		{
-			// no input to input 
-			return;
-		}
+		this.make_conn(rand_from, rand_to, inno_service);
 	}
 	
 	public void mutate_weights(double rate, double factor, double min, double max)
@@ -235,7 +228,8 @@ public class BaseGenome {
 		
 		if(conn_inno == null)
 		{
-			conn_inno = inno_service.get_next_conn_id();
+			conn_inno = inno_service.get_next_inno_id();
+			inno_service.add_conn(conn_inno, from_node_id, to_node_id);
 		}
 		NodeGene from_node = this.get_node_by_id(from_node_id);
 		

@@ -20,15 +20,18 @@ public class InnovationService {
 		this.conn_coo.put(inno, new Long[]{from, to});
 	}
 	
-	public Long get_next_node_id()
+	public long get_next_inno_id()
 	{
-		long next = Collections.max(node_ids);
-		return next;
-	}
-	
-	public long get_next_conn_id()
-	{
-		return Collections.max(conn_coo.keySet());
+		long max_node = Collections.max(node_ids);
+		long max_conn = Collections.max(conn_coo.keySet());
+		if(max_node > max_conn)
+		{
+			return max_node + 1;
+		}
+		else
+		{
+			return max_conn + 1;
+		}
 	}
 	
 	// if the path exists with a node in between from and to nodes
