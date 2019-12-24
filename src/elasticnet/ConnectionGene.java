@@ -46,34 +46,30 @@ public class ConnectionGene implements IConnection {
 		this.atts.put("weight", w);
 	}
 	
-	public int get_id()
+	public long get_id()
 	{
 		return inno_id;
 	}
 	public double get_weight() {
 		return this.atts.get("weight");
 	}
-	public int get_from() {
+	public long get_from() {
 		return this.from_node;
 	}
 	
-	public int get_to() {
+	public long get_to() {
 		return this.to_node;
 	}
 	
-	public void set_from(int f) {
+	public void set_from(long f) {
 		this.from_node = f;
 	}
 	
-	public void set_to(int t) {
+	public void set_to(long t) {
 		this.to_node = t;
 	}
 	
-	public int getInnoId() {
-		return this.inno_id;
-	}
-	
-	public int get_next_node()
+	public long get_next_node()
 	{
 		return to_node;
 	}

@@ -111,6 +111,8 @@ public class BaseGenome {
 	
 	public void mutate_add_node(InnovationService inno_service, String default_activation)
 	{
+		boolean new_structure = false;
+		
 		ArrayList<Long[]> conn_ids = this.get_conn_ids();
 		
 		int rand_index = this.get_random_in_range(conn_ids.size());
@@ -124,12 +126,20 @@ public class BaseGenome {
 		if(inno_id == null)
 		{
 			inno_id = inno_service.get_next_conn_id();
+			new_structure = true;
 		}
 		NodeGene add_this = new NodeGene(inno_id);
 		
 		ConnectionGene conn_one = new ConnectionGene(split_conn.from_node, inno_id, inno_id + 1);
 		
 		add_this.connections.put(conn_one.inno_id, conn_one);
+		
+		
+		
+		if(new_structure == true)
+		{
+			inno_service.add_conn(conn_one.inno_id, conn_one.from_node, conn_one.to_node);
+		}
 		
 		return;
 	}

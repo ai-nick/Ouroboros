@@ -15,6 +15,11 @@ public class InnovationService {
 		this.conn_coo = new HashMap<Long, Long[]>();
 	}
 	
+	public void add_conn(long inno, long from, long to)
+	{
+		this.conn_coo.put(inno, new Long[]{from, to});
+	}
+	
 	public Long get_next_node_id()
 	{
 		long next = Collections.max(node_ids);
