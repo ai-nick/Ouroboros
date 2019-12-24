@@ -378,6 +378,35 @@ public class BaseGenome {
 		return ids;
 	}
 	
+	private void create_from_scratch(NeatConfig config, Long timestamp)
+	{
+		this.population_hash = timestamp;
+		int num_in = config.num_input;
+		int num_out = config.num_output;
+		long inno = (long)0;
+		for (int ix = 0; ix < num_in; ix++)
+		{
+			NodeGene new_node = new NodeGene(inno);
+			new_node.is_input = true;
+			new_node.is_output = false;
+			this.input_nodes.put(inno, new_node);
+			inno++;
+		}
+		for (int ix = 0; ix < num_out; ix++)
+		{
+			NodeGene new_node = new NodeGene(inno);
+			new_node.is_input = false;
+			new_node.is_output = true;
+			this.input_nodes.put(inno, new_node);
+			inno++;
+		}
+	}
+	
+	private void connect_fully()
+	{
+		
+	}
+	
 	private int get_random_in_range(int range_len)
 	{
 		Random dice = new Random();

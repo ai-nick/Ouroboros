@@ -26,7 +26,7 @@ public class BasePopulation {
 	public SorterUtil sorter = new SorterUtil();
 	public boolean is_p2p;
 	
-	public Population(int gen,  NeatConfig config_in, int pop_size, boolean is_p2p) 
+	public BasePopulation(int gen,  NeatConfig config_in, int pop_size, boolean is_p2p) 
 	{
 		this.is_p2p = is_p2p;
 		this.ts = System.currentTimeMillis();
@@ -41,7 +41,7 @@ public class BasePopulation {
 		}
 	}
 	
-	public Population(int gen, NeatConfig config_in, int num_inputs, int num_outputs, int pop_size, boolean is_p2p)
+	public BasePopulation(int gen, NeatConfig config_in, int num_inputs, int num_outputs, int pop_size, boolean is_p2p)
 	{
 		this.is_p2p = is_p2p;
 		this.ts = System.currentTimeMillis();
@@ -74,12 +74,12 @@ public class BasePopulation {
 	
 	public void set_up_first_pop()
 	{
-		// if no BaseGenomes are loaded we will start by creating a fresh population
+		// if no BaseGenomes are loaded we will start by creating a fresh BasePopulation
 		if(pop_size != 0)
 		{
 			for (int ix = 0; ix < this.pop_size; ix++)
 			{
-				BaseGenome gBaby = new BaseGenome(this.ts, ix);
+				BaseGenome gBaby = new BaseGenome(ix);
 				
 				//System.out.print("setting up BaseGenome: ");
 				//System.out.println(ix);
@@ -165,7 +165,7 @@ public class BasePopulation {
 	
 	// split BaseGenomes into species using compat dists
 	
-	public void speciate_population()
+	public void speciate_BasePopulation()
 	{
 		// initialize array of speciated BaseGenome ids that have
 		// are part of a species
@@ -449,7 +449,7 @@ public class BasePopulation {
 		int num_BaseGenomes = the_species.member_ids.size();
 		
 		if(num_BaseGenomes > this.BaseGenomes.size()){
-			System.out.println("species has more members than population, error");
+			System.out.println("species has more members than BasePopulation, error");
 		}
 		
 		for (int i = 0; i < num_BaseGenomes; i++)
