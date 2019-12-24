@@ -129,6 +129,8 @@ public class BaseGenome {
 		
 		ConnectionGene conn_one = new ConnectionGene(split_conn.from_node, inno_id, inno_id + 1);
 		
+		add_this.connections.put(conn_one.inno_id, conn_one);
+		
 		return;
 	}
 	
