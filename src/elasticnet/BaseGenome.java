@@ -132,14 +132,20 @@ public class BaseGenome {
 		
 		ConnectionGene conn_one = new ConnectionGene(split_conn.from_node, inno_id, inno_id + 1);
 		
-		add_this.connections.put(conn_one.inno_id, conn_one);
+		this.get_node_by_id(split_conn.from_node).connections.put(conn_one.inno_id, conn_one);
 		
+		ConnectionGene conn_two = new ConnectionGene(inno_id, split_conn.to_node, inno_id +2);
 		
+		add_this.connections.put(conn_two.inno_id, conn_two);
 		
 		if(new_structure == true)
 		{
+			inno_service.node_ids.add(inno_id);
 			inno_service.add_conn(conn_one.inno_id, conn_one.from_node, conn_one.to_node);
+			inno_service.add_conn(conn_two.inno_id, conn_two.from_node, conn_two.to_node);
 		}
+		
+		this.hidden_nodes.put(inno_id, add_this);
 		
 		return;
 	}
