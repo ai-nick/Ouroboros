@@ -417,16 +417,14 @@ public class BasePopulation {
 	
 	public void breed_asexual(BaseGenome single_parent, Species the_species)
 	{
-		BaseGenome offspring = new BaseGenome(single_parent, this.next_BaseGenome_id, this.connection_genes, this.node_genes);
-		
-		boolean has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
+		BaseGenome offspring = new BaseGenome(single_parent, this.next_BaseGenome_id, );
 		
 		if(has_nulls == true)
 		{
 			System.out.println("null pointer after cloning");
 		}
 		
-		this.inno_num = offspring.mutate_BaseGenome(this.inno_num, this.config, this.node_genes, this.connection_genes);
+		this.inno_num = offspring.mutate_genome(this.inno_num, this.config, innovation);
 		
 		has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
 		

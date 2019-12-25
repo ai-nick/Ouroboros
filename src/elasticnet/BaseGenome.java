@@ -41,6 +41,16 @@ public class BaseGenome {
 		fitness = test_fit;
 	}
 	
+	public BaseGenome(BaseGenome clone_this, long genome_id)
+	{
+		this.id = genome_id;
+		this.population_hash = clone_this.population_hash;
+		this.gen_born = clone_this.gen_born + 1;
+		this.input_nodes = new HashMap<Long, NodeGene>(clone_this.input_nodes);
+		this.hidden_nodes = new HashMap<Long, NodeGene>(clone_this.hidden_nodes);
+		this.output_nodes = new HashMap<Long, NodeGene>(clone_this.output_nodes);
+	}
+	
 	public int mutate_genome(int new_id, 
 			NeatConfig config,
 			InnovationService inno_service
