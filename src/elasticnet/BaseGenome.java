@@ -408,7 +408,7 @@ public class BaseGenome {
 			}
 			inno++;
 		}
-		this.connect_fully(inno_service);
+		this.connect_fully(inno_service, inno);
 	}
 	
 	private void connect_fully(InnovationService inno_service, long inno_num)
