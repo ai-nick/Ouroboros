@@ -84,7 +84,7 @@ public class BasePopulation {
 				//System.out.print("setting up BaseGenome: ");
 				//System.out.println(ix);
 				
-				this.inno_num = gBaby.create_from_scratch(this.config, this.ts, this.node_genes, this.connection_genes);
+				gBaby.create_from_scratch(this.config, this.ts, this.innovation);
 				
 				this.BaseGenomes.put(ix,gBaby);
 			}

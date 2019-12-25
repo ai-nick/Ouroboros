@@ -378,7 +378,7 @@ public class BaseGenome {
 		return ids;
 	}
 	
-	private void create_from_scratch(NeatConfig config, Long timestamp, InnovationService inno_service)
+	public void create_from_scratch(NeatConfig config, Long timestamp, InnovationService inno_service)
 	{
 		this.population_hash = timestamp;
 		int num_in = config.num_input;
