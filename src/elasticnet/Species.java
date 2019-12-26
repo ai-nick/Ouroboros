@@ -23,7 +23,7 @@ public class Species {
 		this.member_ids.add(first_id);
 	}
 	
-	public double get_adjusted_fitness_sum(HashMap<Long,Genome> genomes, SorterUtil sorter_util)
+	public double get_adjusted_fitness_sum(HashMap<Long,BaseGenome> genomes, SorterUtil sorter_util)
 	{
 		//System.out.println(this.member_ids);
 		this.sorted_idx_array = new int[this.member_ids.size()];

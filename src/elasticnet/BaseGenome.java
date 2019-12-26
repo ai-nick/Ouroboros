@@ -340,7 +340,7 @@ public class BaseGenome {
 		return null;
 	}
 	
-	private ArrayList<Long[]> get_conn_ids()
+	public ArrayList<Long[]> get_conn_ids()
 	{
 		ArrayList<Long[]> ids = new ArrayList<Long[]>();
 		

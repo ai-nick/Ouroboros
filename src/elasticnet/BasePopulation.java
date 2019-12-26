@@ -9,13 +9,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class BasePopulation {
-	Integer best_BaseGenome_id;
+	Long best_BaseGenome_id;
 	Integer num_BaseGenomes;
 	int min_species_size = 5;
 	String fitness_function = "";
 	Long ts;
 	Integer current_gen = 0;
-	Integer inno_num = 0;
+	Long inno_num;
 	Long next_BaseGenome_id;
 	Long next_species_id;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
@@ -32,7 +32,6 @@ public class BasePopulation {
 		this.ts = System.currentTimeMillis();
 		this.pop_size = pop_size;
 		this.config = config_in;
-		this.inno_num = (config_in.num_input * config_in.num_output)+config_in.num_input+config_in.num_output;
 		System.out.print("num of initial genes: ");
 		System.out.println(this.inno_num);
 		this.current_gen = gen;
@@ -47,7 +46,6 @@ public class BasePopulation {
 		this.ts = System.currentTimeMillis();
 		this.pop_size = pop_size;
 		this.config = config_in;
-		this.inno_num = (num_inputs*num_outputs) + num_inputs + num_outputs;
 		System.out.print("num of initial genes: ");
 		System.out.println(this.inno_num);
 		this.current_gen = gen;
@@ -62,12 +60,12 @@ public class BasePopulation {
 		return this.pop_species;
 	}
 	
-	public void set_best_BaseGenome_id(int id)
+	public void set_best_BaseGenome_id(long id)
 	{
 		this.best_BaseGenome_id = id;
 	}
 	
-	public int get_best_BaseGenome_id()
+	public long get_best_BaseGenome_id()
 	{
 		return this.best_BaseGenome_id;
 	}
@@ -101,8 +99,8 @@ public class BasePopulation {
 		double e = 0.0;
 		int match_count = 0;
 		//TODO check conn arrays are not empty
-		ArrayList<Integer> one_conns = one.get_all_conn_ids(this.node_genes);
-		ArrayList<Integer> two_conns = two.get_all_conn_ids(this.node_genes);
+		ArrayList<Long[]> one_conns = one.get_conn_ids();
+		ArrayList<Long[]> two_conns = two.get_conn_ids();
 		int loop_count = one_conns.size();
 		//int[] j = new int[loop_count];
 		for(int idx = 0; idx < loop_count; idx++)
@@ -237,7 +235,7 @@ public class BasePopulation {
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;
-		Integer[] sorted_species_ids = new Integer[num_species];
+		int[] sorted_species_ids = new int[num_species];
 		int saved_sum = 0;
 		int keep_top;
 		// next we will reduce each species by this elitism percent
@@ -417,14 +415,11 @@ public class BasePopulation {
 	
 	public void breed_asexual(BaseGenome single_parent, Species the_species)
 	{
-		BaseGenome offspring = new BaseGenome(single_parent, this.next_BaseGenome_id, innovation);
+		BaseGenome offspring = new BaseGenome(single_parent, this.next_BaseGenome_id);
 		
-		if(has_nulls == true)
-		{
-			System.out.println("null pointer after cloning");
-		}
+		this.inno_num = innovation.get_next_inno_id();
 		
-		this.inno_num = offspring.mutate_genome(this.inno_num, this.config, innovation);
+		this.inno_num = offspring.mutate_genome(, this.config, innovation);
 		
 		this.next_BaseGenome_id++;
 		
