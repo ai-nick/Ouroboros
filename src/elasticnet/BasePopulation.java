@@ -16,13 +16,13 @@ public class BasePopulation {
 	Long ts;
 	Integer current_gen = 0;
 	Integer inno_num = 0;
-	Integer next_BaseGenome_id = 0;
-	Integer next_species_id = 0;
+	Long next_BaseGenome_id;
+	Long next_species_id;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	Integer pop_size = 0;
 	InnovationService innovation = new InnovationService();
-	public HashMap<Integer, BaseGenome> BaseGenomes = new HashMap<Integer, BaseGenome>();
+	public HashMap<Long, BaseGenome> BaseGenomes = new HashMap<Long, BaseGenome>();
 	public SorterUtil sorter = new SorterUtil();
 	public boolean is_p2p;
 	
@@ -86,11 +86,11 @@ public class BasePopulation {
 				
 				gBaby.create_from_scratch(this.config, this.ts, this.innovation);
 				
-				this.BaseGenomes.put(ix,gBaby);
+				this.BaseGenomes.put((long)ix,gBaby);
 			}
 			this.num_BaseGenomes = pop_size;
 			
-			this.next_BaseGenome_id = this.pop_size;
+			this.next_BaseGenome_id = (long)this.pop_size;
 		}
 	}
 	
@@ -417,7 +417,7 @@ public class BasePopulation {
 	
 	public void breed_asexual(BaseGenome single_parent, Species the_species)
 	{
-		BaseGenome offspring = new BaseGenome(single_parent, this.next_BaseGenome_id, );
+		BaseGenome offspring = new BaseGenome(single_parent, this.next_BaseGenome_id, innovation);
 		
 		if(has_nulls == true)
 		{
@@ -426,12 +426,6 @@ public class BasePopulation {
 		
 		this.inno_num = offspring.mutate_genome(this.inno_num, this.config, innovation);
 		
-		has_nulls = offspring.check_for_nulls(connection_genes, node_genes);
-		
-		if(has_nulls == true)
-		{
-			System.out.println("null pointer after mutating clone");
-		}
 		this.next_BaseGenome_id++;
 		
 		the_species.member_ids.add(offspring.id);

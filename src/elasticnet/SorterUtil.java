@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class SorterUtil {
 	//quick sort on fitness 
-	public void quick_sort_big_dumb(Integer[] sort_array, HashMap<Integer, Double> sort_dict, int left, int right)
+	public void quick_sort_big_dumb(int[] sort_array, HashMap<Integer, Double> sort_dict, int left, int right)
 	{
 		int left_start = left;
 		//System.out.println(left);
