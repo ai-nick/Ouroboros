@@ -388,6 +388,54 @@ public class BaseGenome {
 		return ids;
 	}
 	
+	public ArrayList<Long> get_conn_ids_simple()
+	{
+		ArrayList<Long> ids = new ArrayList<Long>();
+		
+		int num_nodes_input = this.input_nodes.size();
+		
+		for (int x = 0; x < num_nodes_input; x++)
+		{
+			NodeGene current = this.input_nodes.get(x);
+			
+			int conns_count = current.connections.size();
+			
+			for(int i = 0; i < conns_count; i++)
+			{
+				ids.add(current.connections.get(i).inno_id);
+			}
+		}
+		
+		int num_nodes_hidden = this.hidden_nodes.size();
+		
+		for (int x = 0; x < num_nodes_hidden; x++)
+		{
+			NodeGene current = this.hidden_nodes.get(x);
+			
+			int conns_count = current.connections.size();
+			
+			for(int i = 0; i < conns_count; i++)
+			{
+				ids.add(current.connections.get(i).inno_id);
+			}
+		}
+		
+		int num_output_nodes = this.output_nodes.size();
+		
+		for (int x = 0; x < num_output_nodes; x++)
+		{
+			NodeGene current = this.output_nodes.get(x);
+			
+			int conns_count = current.connections.size();
+			
+			for(int i = 0; i < conns_count; i++)
+			{
+				ids.add(current.connections.get(i).inno_id);
+			}
+		}
+		return ids;
+	}
+	
 	public void create_from_scratch(NeatConfig config, Long timestamp, InnovationService inno_service)
 	{
 		this.population_hash = timestamp;

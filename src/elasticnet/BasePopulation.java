@@ -99,18 +99,18 @@ public class BasePopulation {
 		double e = 0.0;
 		int match_count = 0;
 		//TODO check conn arrays are not empty
-		ArrayList<Long[]> one_conns = one.get_conn_ids();
-		ArrayList<Long[]> two_conns = two.get_conn_ids();
+		ArrayList<Long> one_conns = one.get_conn_ids_simple();
+		ArrayList<Long> two_conns = two.get_conn_ids_simple();
 		int loop_count = one_conns.size();
 		//int[] j = new int[loop_count];
 		for(int idx = 0; idx < loop_count; idx++)
 		{
 			//looping through genes
 			//and check if we can 
-			int one_id = one_conns.get(idx);
+			long one_id = one_conns.get(idx);
 			if(two_conns.contains(one_id))
 			{
-				int two_id = two_conns.get(two_conns.indexOf(one_id));
+				long two_id = two_conns.get(two_conns.indexOf(one_id));
 				w = Math.abs(this.connection_genes.get(one_id).get(one.id).atts.get("weight") - this.connection_genes.get(two_id).get(two.id).atts.get("weight"));
 				match_count++;
 			}
