@@ -17,7 +17,7 @@ public class BasePopulation {
 	Integer current_gen = 0;
 	Long inno_num;
 	Long next_BaseGenome_id;
-	Long next_species_id;
+	Integer next_species_id;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	Integer pop_size = 0;
@@ -170,7 +170,7 @@ public class BasePopulation {
 	{
 		// initialize array of speciated BaseGenome ids that have
 		// are part of a species
-		ArrayList<Integer> speciated = new ArrayList<Integer>();
+		ArrayList<Long> speciated = new ArrayList<Long>();
 		//this.pop_species = new ArrayList<Species>();
 		// get the compat distance from config
 		double compat_t = this.config.compat_threshold;
@@ -186,7 +186,7 @@ public class BasePopulation {
 			speciated.add(first_rep.id);
 		}
 		// we have atleast one species by this point in our control flow
-		for(int x : this.BaseGenomes.keySet())
+		for(long x : this.BaseGenomes.keySet())
 		{
 			// we check if this id already belongs to a species from previous generations
 			// TODO check that speciated isnt cleared, otherwise this doesnt make sense
