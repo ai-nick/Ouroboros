@@ -22,7 +22,7 @@ public class BaseGenome {
 	public HashMap<Long, NodeGene>  input_nodes = new HashMap<Long, NodeGene>();
 	public HashMap<Long, NodeGene>  hidden_nodes = new HashMap<Long, NodeGene>();
 	public HashMap<Long, NodeGene> output_nodes = new HashMap<Long, NodeGene>();
-	HashMap<Integer, Double> fit_dists = new HashMap<Integer, Double>();
+	HashMap<Long, Double> fit_dists = new HashMap<Long, Double>();
 	public boolean is_recursive = false;
 	public String peer_eval_id = "";
 	public String peer_validation_id = "";
