@@ -63,7 +63,7 @@ public class Species {
 	}
 	
 	public void have_mercy(int num_elites, 
-			HashMap<Integer, Genome> genomes,
+			HashMap<Long, BaseGenome> genomes,
 			InnovationService inno_service)
 	{
 		int num_members = this.sorted_idx_array.length;

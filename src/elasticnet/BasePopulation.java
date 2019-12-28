@@ -259,7 +259,7 @@ public class BasePopulation {
 			if(keep_top > 0)
 			{
 				//reduce the species to only the elite BaseGenomes
-				current.have_mercy(keep_top, this.BaseGenomes, this.connection_genes, this.node_genes);
+				current.have_mercy(keep_top, this.BaseGenomes, this.innovation);
 				//breed_all_remaining(current);				
 			}
 			else
