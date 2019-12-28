@@ -328,14 +328,21 @@ public class BasePopulation {
 		// dictionary with fitness sums for each species 
 		// TODO sort this shit
 		Long next_inno_num = this.innovation.get_next_inno_id();
+		
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
+		
 		int num_species = this.pop_species.size();
+		
 		double elitism_percent = this.config.elitism;
-		Integer[] sorted_species_idxs = new Integer[num_species];
+		
+		int[] sorted_species_idxs = new int[num_species];
+		
 		for(int x = 0; x < num_species; x++)
 		{
 			Species current = this.pop_species.get(x);
+			
 			adj_fit_sums.put(x, current.get_adjusted_fitness_sum(this.BaseGenomes, this.sorter));
+			
 			sorted_species_idxs[x] = x;
 		}
 		if(sorted_species_idxs.length > 1)
@@ -347,6 +354,7 @@ public class BasePopulation {
 			System.out.println("only one species check config");
 		}
 		Integer saved_sum = 0;
+		
 		Integer keep_top = (int)((double)num_BaseGenomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
 		// and add the new amount of the species to our save_sum
@@ -357,12 +365,13 @@ public class BasePopulation {
 		{
 			// need index here not id, was probably fucking a bunch of stuff up
 			Species current = this.pop_species.get(sorted_species_idxs[x]);
+			
 			keep_top = current.member_ids.size() * (int)elitism_percent;
+			
 			saved_sum += keep_top;
+			
 			if(keep_top > 0)
 			{
-				System.out.print("running elitism for species: ");
-				System.out.println(current.speciesID);
 				//reduce the species to only the elite BaseGenomes
 				current.have_mercy(keep_top, this.BaseGenomes, this.connection_genes, this.node_genes);
 				//breed_all_remaining(current);				
@@ -370,7 +379,9 @@ public class BasePopulation {
 		}
 		// now we handle reproducing the correct amount of BaseGenomes
 		int need_new = this.pop_size - saved_sum;
+		
 		int elite_iterator = 0;
+		
 		while(need_new != 0)
 		{
 			for(int ix = 0; ix < num_species; ix++)
@@ -382,6 +393,7 @@ public class BasePopulation {
 				for(int y = 0; y < spec_size; y++)
 				{
 					int BaseGenome_id = this.pop_species.get(ix).member_ids.get(y);
+					
 					if(y <= 2)
 					{
 						//System.out.print("breeding asexual BaseGenome: ");
@@ -394,8 +406,11 @@ public class BasePopulation {
 						//System.out.print("breeding with sex BaseGenome: ");
 						//System.out.println(BaseGenome_id);
 						int other_BaseGenome_id = current_species.member_ids.get(y+1);
+						
 						this.cross_breed(this.BaseGenomes.get(BaseGenome_id), this.BaseGenomes.get(other_BaseGenome_id), current_species);
+						
 						boolean has_nulls = this.BaseGenomes.get(BaseGenome_id).check_for_nulls(this.connection_genes, this.node_genes);
+						
 						if(has_nulls == true)
 						{
 							System.out.println("null pointer after cross breeding");
@@ -476,9 +491,12 @@ public class BasePopulation {
 		}
 		
 		// give the offspring a new id and increment our next id property
-		BaseGenome offspring = new BaseGenome(this.ts, this.next_BaseGenome_id);
+		BaseGenome offspring = new BaseGenome(this.ts, this.next_BaseGenome_id, this.current_gen);
+		
 		ArrayList<Integer> ga_node_genes = a.get_all_nodes();
+		
 		ArrayList<Integer> gb_node_genes = b.get_all_nodes();
+		
 		int node_counter = ga_node_genes.size();
 		// as per the paper disjoint and excess we use the fitter BaseGenomes (a) 
 		// genes, if both BaseGenomes have the gene we cross over
