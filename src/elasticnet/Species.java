@@ -35,7 +35,7 @@ public class Species {
 			// suspect we are getting null genomes here, need to check sorting isnt
 			// modifying genome id values
 			long member_id = this.member_ids.get(x);
-			Genome fit_genome = genomes.get(member_id);
+			BaseGenome fit_genome = genomes.get(member_id);
 			if(fit_genome == null)
 			{
 				System.out.println("null genome");
@@ -63,9 +63,8 @@ public class Species {
 	}
 	
 	public void have_mercy(int num_elites, 
-			HashMap<Integer, Genome> genomes, 
-			HashMap<Integer, HashMap<Integer, ConnectionGene>> pop_conns, 
-			HashMap<Integer, HashMap<Integer, NodeGene>> pop_nodes)
+			HashMap<Integer, Genome> genomes,
+			InnovationService inno_service)
 	{
 		int num_members = this.sorted_idx_array.length;
 		if (num_elites == 0)
@@ -77,8 +76,6 @@ public class Species {
 			long g_id = this.member_ids.get(this.sorted_idx_array[x]);
 			//System.out.println(g_id);
 			Genome removing = genomes.get(g_id);
-			
-			removing.remove_genes_from_pop(pop_nodes, pop_conns);
 			
 			genomes.remove(g_id);
 		}

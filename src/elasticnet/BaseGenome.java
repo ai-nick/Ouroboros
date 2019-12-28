@@ -232,6 +232,11 @@ public class BaseGenome {
 		}
 	}
 	
+	public double get_prime(int species_size)
+	{
+		return this.fitness/species_size;
+	}
+	
 	private void make_conn(Long from_node_id, Long to_node_id, InnovationService inno_service)
 	{
 		Long conn_inno = inno_service.conn_exists(new Long[]{to_node_id, from_node_id});
