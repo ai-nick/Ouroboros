@@ -320,14 +320,14 @@ public class BaseGenome {
 		return null;
 	}
 	
-	private NodeGene get_node_by_id(Long inno_id)
+	public NodeGene get_node_by_id(Long inno_id)
 	{
-		if(this.input_nodes.keySet().contains(inno_id))
+		if(this.input_nodes.containsKey(inno_id))
 		{
 			return this.input_nodes.get(inno_id);
 		}
 		
-		if(this.hidden_nodes.keySet().contains(inno_id))
+		if(this.hidden_nodes.containsKey(inno_id))
 		{
 			return this.hidden_nodes.get(inno_id);
 		}
