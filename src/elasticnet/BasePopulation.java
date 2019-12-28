@@ -327,10 +327,7 @@ public class BasePopulation {
 	{
 		// dictionary with fitness sums for each species 
 		// TODO sort this shit
-		while(this.inno_num <= Collections.max(this.connection_genes.keySet()) || this.inno_num <= Collections.max(this.node_genes.keySet()))
-		{
-			this.inno_num++;
-		}
+		Long next_inno_num = this.innovation.get_next_inno_id();
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		int num_species = this.pop_species.size();
 		double elitism_percent = this.config.elitism;

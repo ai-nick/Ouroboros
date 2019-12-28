@@ -75,7 +75,7 @@ public class Species {
 		{
 			long g_id = this.member_ids.get(this.sorted_idx_array[x]);
 			//System.out.println(g_id);
-			Genome removing = genomes.get(g_id);
+			BaseGenome removing = genomes.get(g_id);
 			
 			genomes.remove(g_id);
 		}
