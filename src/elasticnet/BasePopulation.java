@@ -113,8 +113,8 @@ public class BasePopulation {
 				// any conn inno should have the same from connection across all genomes
 				Long[] gene_from_coo = this.innovation.conn_coo.get(one_id);
 				ConnectionGene one_gene = one.get_node_by_id(gene_from_coo[0]).connections.get(one_id);
-				//w = Math.abs(this.connection_genes.get(one_id).get(one.id).atts.get("weight") - this.connection_genes.get(two_id).get(two.id).atts.get("weight"));
-				w = one.
+				ConnectionGene two_gene = two.get_node_by_id(gene_from_coo[0]).connections.get(one_id);
+				w = Math.abs(one_gene.atts.get("weight") - two_gene.atts.get("weight"));
 				match_count++;
 			}
 			else
