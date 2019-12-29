@@ -66,7 +66,7 @@ public class BaseGenome {
 		return;
 	}
 	
-	public int mutate_genome(int new_id, 
+	public long mutate_genome(long new_id, 
 			NeatConfig config,
 			InnovationService inno_service
 			)

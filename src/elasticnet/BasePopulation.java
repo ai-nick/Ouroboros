@@ -374,7 +374,7 @@ public class BasePopulation {
 			if(keep_top > 0)
 			{
 				//reduce the species to only the elite BaseGenomes
-				current.have_mercy(keep_top, this.BaseGenomes, this.connection_genes, this.node_genes);
+				current.have_mercy(keep_top, this.BaseGenomes, this.innovation);
 				//breed_all_remaining(current);				
 			}
 		}
@@ -393,7 +393,7 @@ public class BasePopulation {
 				// need to figure out wtf i was even thinking here FUCKING STUPID ASS NICK ASs MFER, WTF VROTHEREN
 				for(int y = 0; y < spec_size; y++)
 				{
-					int BaseGenome_id = this.pop_species.get(ix).member_ids.get(y);
+					Long BaseGenome_id = this.pop_species.get(ix).member_ids.get(y);
 					
 					if(y <= 2)
 					{
@@ -406,16 +406,9 @@ public class BasePopulation {
 					{
 						//System.out.print("breeding with sex BaseGenome: ");
 						//System.out.println(BaseGenome_id);
-						int other_BaseGenome_id = current_species.member_ids.get(y+1);
+						Long other_BaseGenome_id = current_species.member_ids.get(y+1);
 						
 						this.cross_breed(this.BaseGenomes.get(BaseGenome_id), this.BaseGenomes.get(other_BaseGenome_id), current_species);
-						
-						boolean has_nulls = this.BaseGenomes.get(BaseGenome_id).check_for_nulls(this.connection_genes, this.node_genes);
-						
-						if(has_nulls == true)
-						{
-							System.out.println("null pointer after cross breeding");
-						}
 					}	
 				}
 				need_new--;
@@ -435,7 +428,7 @@ public class BasePopulation {
 		
 		this.inno_num = innovation.get_next_inno_id();
 		
-		this.inno_num = offspring.mutate_genome(, this.config, innovation);
+		this.inno_num = offspring.mutate_genome(this.inno_num, this.config, this.innovation);
 		
 		this.next_BaseGenome_id++;
 		
