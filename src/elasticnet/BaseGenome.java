@@ -50,6 +50,22 @@ public class BaseGenome {
 		this.output_nodes = new HashMap<Long, NodeGene>(clone_this.output_nodes);
 	}
 	
+	public void set_node(NodeGene node)
+	{
+		if(node.is_input == true)
+		{
+			this.input_nodes.put(node.inno_id, node);
+			return;
+		}
+		if(node.is_output == true)
+		{
+			this.output_nodes.put(node.inno_id, node);
+			return;
+		}
+		this.hidden_nodes.put(node.inno_id, node);
+		return;
+	}
+	
 	public int mutate_genome(int new_id, 
 			NeatConfig config,
 			InnovationService inno_service

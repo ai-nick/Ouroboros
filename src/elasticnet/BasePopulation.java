@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -473,6 +474,8 @@ public class BasePopulation {
 	public void cross_breed(BaseGenome a, BaseGenome b, Species the_species)
 	{
 		// BaseGenome a will be the fitter of the two mates
+		Random dice = new Random();
+		
 		BaseGenome BaseGenomeA;
 		
 		BaseGenome BaseGenomeB;
@@ -500,10 +503,10 @@ public class BasePopulation {
 		int node_counter = ga_node_genes.size();
 		// as per the paper disjoint and excess we use the fitter BaseGenomes (a) 
 		// genes, if both BaseGenomes have the gene we cross over
-		for (BaseGenome gA : ga_node_genes.values())
+		for (NodeGene gA : ga_node_genes.values())
 		{
 			
-			if(gb_node_genes.containsKey(gA.id) == false)
+			if(gb_node_genes.containsKey(gA.inno_id) == false)
 			{
 				// Disjoint or excess so we use A because its the fitter BaseGenome
 				NodeGene gene_copy = new NodeGene(gA);
@@ -522,13 +525,15 @@ public class BasePopulation {
 				// perform cross over since the gene isnt disjoint or excess
 				// TODO add call to conn cross over appropriately in the node
 				// cross over logic
-				NodeGene gB = this.node_genes.get(gA_id).get(b.id);
-				
-				NodeGene crossed_over = _cross_over_nodes(gA, gB, a.id, a.id, offspring.id);
-				
-				offspring.set_node(crossed_over);
-				
-				this.node_genes.get(gA_id).put(offspring.id, crossed_over);
+				if (dice.nextFloat() > 0.5f)
+				{
+					NodeGene addNode = gb_node_genes.get(gA.inno_id);
+					offspring.set_node(new NodeGene(addNode));
+				}
+				else
+				{
+					offspring.set_node(new NodeGene(gA));
+				}
 			}
 		}
 		this.BaseGenomes.put(offspring.id, offspring);
