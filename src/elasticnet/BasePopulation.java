@@ -510,14 +510,6 @@ public class BasePopulation {
 			{
 				// Disjoint or excess so we use A because its the fitter BaseGenome
 				NodeGene gene_copy = new NodeGene(gA);
-				this.node_genes.get(gA_id).put(offspring.id, gene_copy);
-				int num_conns = gene_copy.connections.size();
-				for(int g_ix = 0; g_ix < num_conns; g_ix++)
-				{
-					int conn_id = gene_copy.connections.get(g_ix);
-					ConnectionGene conn_copy = new ConnectionGene(this.connection_genes.get(conn_id).get(a.id));
-					this.connection_genes.get(conn_id).put(offspring.id, conn_copy);
-				}
 				offspring.set_node(gene_copy);
 			}
 			else
@@ -593,37 +585,20 @@ public class BasePopulation {
 		System.out.print(" and ");
 		System.out.println(b.inno_id);
 		*/
+		Random dice = new Random();
+		
 		NodeGene new_node = new NodeGene(a);
-		new_node.level = a.level;
-		new_node.is_input = a.is_input;
-		new_node.is_output = a.is_output;
-		new_node.connections = new ArrayList<Integer>(a.connections);
-		int num_conns = new_node.connections.size();
-		for(int conn_idx = 0; conn_idx < num_conns; conn_idx++)
+		for (ConnectionGene conn : new_node.connections.values())
 		{
-			int gene_id = new_node.connections.get(conn_idx);
-			if(b.connections.contains(gene_id) != true)
+			if(b.connections.containsKey(conn.inno_id))
 			{
-				ConnectionGene clone_this = this.connection_genes.get(gene_id).get(BaseGenome_a_id);
-				if(clone_this == null)
+				if (dice.nextFloat() > .5)
 				{
-					System.out.println("uh wtf vro");
-					System.out.println(gene_id);
+					new_node.connections.replace(conn.inno_id, b.connections.get(conn.inno_id));
 				}
-				ConnectionGene add_this = new ConnectionGene(clone_this);
-				this.connection_genes.get(gene_id).put(BaseGenome_id, add_this);
-			}
-			else
-			{
-				//shit this is totally wrong, we need the BaseGenome ids not the inno ids for the second get
-				// FOUND THIS LITTLE FUCKER BUG BHABHAHBABHBAHBHA
-				ConnectionGene a_conn = this.connection_genes.get(gene_id).get(BaseGenome_a_id);
-				ConnectionGene b_conn = this.connection_genes.get(gene_id).get(BaseGenome_b_id);
-				ConnectionGene add_this = this._cross_over_conns(a_conn, b_conn);
-				this.connection_genes.get(gene_id).put(BaseGenome_id, add_this);
 			}
 		}
-		// lol based
+		/* not sure if this is needed
 		for(String key : a.atts.keySet())
 		{
 			if(Math.random() > .5)
@@ -635,6 +610,7 @@ public class BasePopulation {
 				new_node.atts.put(key, b.atts.get(key));
 			}
 		}
+		*/
 		return new_node;
 	}
 	
