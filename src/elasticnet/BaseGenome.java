@@ -26,7 +26,6 @@ public class BaseGenome {
 	public boolean is_recursive = false;
 	public String peer_eval_id = "";
 	public String peer_validation_id = "";
-	public InnovationService inno_service = new InnovationService();
 	
 	//TODO set max and min conn in all mutation methods
 	//TODO and upon construction
@@ -235,6 +234,14 @@ public class BaseGenome {
 	public double get_prime(int species_size)
 	{
 		return this.fitness/species_size;
+	}
+	
+	public HashMap<Long, NodeGene> get_all_nodes()
+	{
+		HashMap<Long, NodeGene> all_nodes = new HashMap<Long, NodeGene>(this.input_nodes);
+		all_nodes.putAll(this.hidden_nodes);
+		all_nodes.putAll(this.output_nodes);
+		return all_nodes;
 	}
 	
 	private void make_conn(Long from_node_id, Long to_node_id, InnovationService inno_service)

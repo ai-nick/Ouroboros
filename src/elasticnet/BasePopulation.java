@@ -493,20 +493,17 @@ public class BasePopulation {
 		// give the offspring a new id and increment our next id property
 		BaseGenome offspring = new BaseGenome(this.ts, this.next_BaseGenome_id, this.current_gen);
 		
-		ArrayList<Integer> ga_node_genes = a.get_all_nodes();
+		HashMap<Long, NodeGene> ga_node_genes = a.get_all_nodes();
 		
-		ArrayList<Integer> gb_node_genes = b.get_all_nodes();
+		HashMap<Long, NodeGene> gb_node_genes = b.get_all_nodes();
 		
 		int node_counter = ga_node_genes.size();
 		// as per the paper disjoint and excess we use the fitter BaseGenomes (a) 
 		// genes, if both BaseGenomes have the gene we cross over
-		for (int k = 0; k < node_counter; k++)
+		for (BaseGenome gA : ga_node_genes.values())
 		{
-			int gA_id = ga_node_genes.get(k);
 			
-			NodeGene gA = this.node_genes.get(gA_id).get(a.id);
-			
-			if(gb_node_genes.contains(gA_id) == false)
+			if(gb_node_genes.containsKey(gA.id) == false)
 			{
 				// Disjoint or excess so we use A because its the fitter BaseGenome
 				NodeGene gene_copy = new NodeGene(gA);
