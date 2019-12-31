@@ -1,9 +1,9 @@
 package experiments;
 
-import elasticnet.Genome;
+import elasticnet.BaseGenome;
 import elasticnet.NeatConfig;
 import elasticnet.NeuralNetwork;
-import elasticnet.Population;
+import elasticnet.BasePopulation;
 
 public class Xor {
 	public String[] signs = new String[4];
@@ -33,21 +33,21 @@ public class Xor {
 		
 		int pop_size = 800;
 		
-		Population test_pop = new Population(0, new NeatConfig(), pop_size, false);
+		BasePopulation test_pop = new BasePopulation(0, new NeatConfig(), pop_size, false);
 		
 		int num_gens = 5;
 		
 		double best_fitness = 0.0;
 		
-		int best_genome_id = 0;
+		long best_genome_id = 0;
 		
 		for(int i = 0; i < num_gens; i++)
 		{
-			for(Genome current_genome : test_pop.genomes.values())
+			for(BaseGenome current_genome : test_pop.BaseGenomes.values())
 			{	
 				current_genome.fitness = 4.0;
 				
-				NeuralNetwork test_net = new NeuralNetwork(current_genome, test_pop.node_genes, test_pop.connection_genes);
+				NeuralNetwork test_net = new NeuralNetwork(current_genome);
 				
 				test_net.feed_forward = true;
 				
@@ -74,7 +74,7 @@ public class Xor {
 				//System.out.println(best_fitness);
 			}
 			//System.out.println("speciating");
-			test_pop.speciate_population();
+			test_pop.speciate_BasePopulation();
 			//System.out.println("reproducing");
 			test_pop.the_reproduction_function();
 		}
