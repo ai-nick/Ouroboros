@@ -18,12 +18,7 @@ public class BaseNeuralNetwork implements INeuralNet
 	int num_output = 0;
 	int outs_count = 0;
 	ArrayList<Integer> output_ids = new ArrayList<Integer>();
-	public BaseNeuralNetwork(ArrayList<Integer> input_ids, HashMap<Integer, NodeGene> net_nodes)
-	{
-		this.input_ids = input_ids;
-		this.nodes = net_nodes;
-	}
-	
+
 	public BaseNeuralNetwork(BaseGenome genome_in
 			)
 	{
@@ -31,9 +26,7 @@ public class BaseNeuralNetwork implements INeuralNet
 		//System.out.println(genome_in.id);
 		this.fully_activated = false;
 		
-		this.input_ids = genome_in.input_nodes;
-		
-		ArrayList<Integer> all_ids = genome_in.get_all_nodes();
+		HashMap<Long, NodeGene> all_ids = genome_in.get_all_nodes();
 		
 		int node_count = all_ids.size();
 		
