@@ -2,19 +2,18 @@ package elasticnet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.google.gson.Gson;
 
 public class BaseNeuralNetwork implements INeuralNet
 {
 	//no comment
 	public int num_activations = 0;
-	ArrayList<Integer> input_ids = new ArrayList<Integer>();
+	ArrayList<Long> input_ids = new ArrayList<Long>();
 	ArrayList<NodeGene> activation_nodes = new ArrayList<NodeGene>();
 	public boolean fully_activated;
-	HashMap<Integer, NodeGene> nodes = new HashMap<Integer, NodeGene>();
-	HashMap<Integer, ConnectionGene> conns = new HashMap<Integer, ConnectionGene>();
-	ArrayList<Integer> activated_conns = new ArrayList<Integer>();
+	HashMap<Long, NodeGene> nodes = new HashMap<Long, NodeGene>();
+	//HashMap<Long, ConnectionGene> conns = new HashMap<Long, ConnectionGene>();
+	ArrayList<Long> activated_conns = new ArrayList<Long>();
 	public boolean feed_forward = true;
 	int num_output = 0;
 	int outs_count = 0;
@@ -25,7 +24,7 @@ public class BaseNeuralNetwork implements INeuralNet
 		this.nodes = net_nodes;
 	}
 	
-	public BaseNeuralNetwork(Genome genome_in
+	public BaseNeuralNetwork(BaseGenome genome_in
 			)
 	{
 		//System.out.print("running genome ");
