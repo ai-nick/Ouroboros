@@ -26,7 +26,11 @@ public class BaseGenome {
 	public boolean is_recursive = false;
 	public String peer_eval_id = "";
 	public String peer_validation_id = "";
-	
+	// for network evaluation
+	ArrayList<Long> activated_conns = new ArrayList<Long>();
+	public boolean feed_forward = true;
+	int num_output = 0;
+	int outs_count = 0;
 	//TODO set max and min conn in all mutation methods
 	//TODO and upon construction
 	public BaseGenome(Long p_hash, Long genome_id, int gen) {
@@ -48,6 +52,17 @@ public class BaseGenome {
 		this.input_nodes = new HashMap<Long, NodeGene>(clone_this.input_nodes);
 		this.hidden_nodes = new HashMap<Long, NodeGene>(clone_this.hidden_nodes);
 		this.output_nodes = new HashMap<Long, NodeGene>(clone_this.output_nodes);
+	}
+	
+	public void set_inputs(double[] inputs)
+	{
+		ArrayList<Long> sorted_keys = new ArrayList<Long>(this.input_nodes.keySet());
+		Collections.sort(sorted_keys);
+		int loop_count = sorted_keys.size();
+		for(int i = 0; i < loop_count; i++)
+		{
+			this.input_nodes.get(sorted_keys.get(i)).current_val = inputs[i];
+		}
 	}
 	
 	public void set_node(NodeGene node)
