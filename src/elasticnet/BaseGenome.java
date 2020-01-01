@@ -54,15 +54,11 @@ public class BaseGenome {
 		this.output_nodes = new HashMap<Long, NodeGene>(clone_this.output_nodes);
 	}
 	
-	public void set_inputs(double[] inputs)
+	public void activate(double[] inputs)
 	{
-		ArrayList<Long> sorted_keys = new ArrayList<Long>(this.input_nodes.keySet());
-		Collections.sort(sorted_keys);
-		int loop_count = sorted_keys.size();
-		for(int i = 0; i < loop_count; i++)
-		{
-			this.input_nodes.get(sorted_keys.get(i)).current_val = inputs[i];
-		}
+		this.set_inputs(inputs);
+		
+		// activate all nodes and traverse each conn once
 	}
 	
 	public void set_node(NodeGene node)
@@ -273,6 +269,17 @@ public class BaseGenome {
 		all_nodes.putAll(this.hidden_nodes);
 		all_nodes.putAll(this.output_nodes);
 		return all_nodes;
+	}
+	
+	private void set_inputs(double[] inputs)
+	{
+		ArrayList<Long> sorted_keys = new ArrayList<Long>(this.input_nodes.keySet());
+		Collections.sort(sorted_keys);
+		int loop_count = sorted_keys.size();
+		for(int i = 0; i < loop_count; i++)
+		{
+			this.input_nodes.get(sorted_keys.get(i)).current_val = inputs[i];
+		}
 	}
 	
 	private void make_conn(Long from_node_id, Long to_node_id, InnovationService inno_service)
