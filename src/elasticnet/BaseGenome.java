@@ -56,21 +56,35 @@ public class BaseGenome {
 	
 	public void activate(double[] inputs)
 	{
-		ArrayList input_ordered = this.set_inputs(inputs);
+		//ArrayList input_ordered = this.set_inputs(inputs);
 		
-		int input_count = input_ordered.size();
+		int input_count = this.input_nodes.size();
 		// activate all nodes and traverse each conn once
 		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
 		
-		ArrayList<NodeGene> actives = new ArrayList<NodeGene>();
+		ArrayList<NodeGene> actives = new ArrayList<NodeGene>(this.input_nodes.values());
 		
-		for(int ix = 0; ix < input_count; ix++)
+		ArrayList<Long> activated_conns = new ArrayList<Long>();
+		
+		while(actives.size() != 0)
 		{
-			NodeGene n = this.input_nodes.get(input_ordered.get(ix));
+			NodeGene n = all_nodes.get(actives.iterator().next());
+			
 			for(ConnectionGene g : n.connections.values())
 			{
-				
+				if(activated_conns.contains(g.inno_id) == false)
+				{
+					NodeGene next_node = all_nodes.get(g.to_node);
+					
+					next_node.add_to_current_value(n.current_val * g.get_weight());
+					
+					actives.add(next_node);
+					
+					activated_conns.add(g.inno_id);
+				}
 			}
+			
+			actives.remove(n);
 		}
 	}
 	
