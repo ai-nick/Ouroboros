@@ -47,20 +47,19 @@ public class Xor {
 			{	
 				current_genome.fitness = 4.0;
 				
-				NeuralNetwork test_net = new NeuralNetwork(current_genome);
+				//NeuralNetwork test_net = new NeuralNetwork(current_genome);
 				
-				test_net.feed_forward = true;
+				//test_net.feed_forward = true;
 				
 				for(int z = 0; z < 4; z++)
 				{
-					//System.out.println(z);
-					test_net.set_input(inputs[z]);
-					
-					test_net.Activate();
+					current_genome.activate(inputs[z]);
 					// getting out of bounds index here
-					current_genome.fitness -= Math.pow(test_net.get_output().get(0) - outputs[z], 2);
+					double[] out_vals = current_genome.get_output();
 					
-					test_net.Reset();	
+					current_genome.fitness -= Math.pow(out_vals[0] - outputs[z], 2);
+					
+					current_genome.reset_vals();
 				}
 				
 				if(current_genome.fitness > best_fitness)

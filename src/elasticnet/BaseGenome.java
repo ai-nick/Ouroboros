@@ -66,26 +66,46 @@ public class BaseGenome {
 		
 		ArrayList<Long> activated_conns = new ArrayList<Long>();
 		
-		while(actives.size() != 0)
+		while(actives.iterator().hasNext())
 		{
-			NodeGene n = all_nodes.get(actives.iterator().next());
+			NodeGene n = actives.iterator().next();
 			
-			for(ConnectionGene g : n.connections.values())
+			if(n.connections != null)
 			{
-				if(activated_conns.contains(g.inno_id) == false)
+				for(ConnectionGene g : n.connections.values())
 				{
-					NodeGene next_node = all_nodes.get(g.to_node);
-					
-					next_node.add_to_current_value(n.current_val * g.get_weight());
-					
-					actives.add(next_node);
-					
-					activated_conns.add(g.inno_id);
-				}
+					if(activated_conns.contains(g.inno_id) == false)
+					{
+						NodeGene next_node = all_nodes.get(g.to_node);
+						
+						next_node.add_to_current_value(n.current_val * g.get_weight());
+						
+						actives.add(next_node);
+						
+						activated_conns.add(g.inno_id);
+					}
+				}	
 			}
 			
 			actives.remove(n);
 		}
+	}
+	
+	public double[] get_output()
+	{
+		double[] out_vals = new double[this.outs_count];
+		ArrayList<Long> outs_ordered = new ArrayList<Long>(this.output_nodes.keySet());
+		Collections.sort(outs_ordered);
+		for(int ix = 0; ix < this.outs_count; ix++)
+		{
+			out_vals[ix] = this.output_nodes.get(outs_ordered.get(ix)).current_val;
+		}
+		return out_vals;
+	}
+	
+	public void reset_vals()
+	{
+		return;
 	}
 	
 	public void set_node(NodeGene node)
