@@ -59,7 +59,7 @@ public class Xor {
 					// getting out of bounds index here
 					ArrayList<Double> out_vals = current_genome.get_output();
 					
-					current_genome.fitness -= Math.pow(out_vals.get(z) - outputs[z], 2);
+					current_genome.fitness -= Math.pow(out_vals.get(0) - outputs[z], 2);
 					
 					current_genome.reset_vals();
 				}
