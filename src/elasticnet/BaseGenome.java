@@ -91,14 +91,19 @@ public class BaseGenome {
 		}
 	}
 	
-	public double[] get_output()
+	public ArrayList<Double> get_output()
 	{
-		double[] out_vals = new double[this.outs_count];
+		ArrayList<Double> out_vals = new ArrayList<Double>();
+		
 		ArrayList<Long> outs_ordered = new ArrayList<Long>(this.output_nodes.keySet());
+		
+		int num_out = outs_ordered.size();
+		
 		Collections.sort(outs_ordered);
-		for(int ix = 0; ix < this.outs_count; ix++)
+		
+		for(int ix = 0; ix < num_out; ix++)
 		{
-			out_vals[ix] = this.output_nodes.get(outs_ordered.get(ix)).current_val;
+			out_vals.add(this.output_nodes.get(outs_ordered.get(ix)).current_val);
 		}
 		return out_vals;
 	}

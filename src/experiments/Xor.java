@@ -1,5 +1,7 @@
 package experiments;
 
+import java.util.ArrayList;
+
 import elasticnet.BaseGenome;
 import elasticnet.NeatConfig;
 import elasticnet.NeuralNetwork;
@@ -55,9 +57,9 @@ public class Xor {
 				{
 					current_genome.activate(inputs[z]);
 					// getting out of bounds index here
-					double[] out_vals = current_genome.get_output();
+					ArrayList<Double> out_vals = current_genome.get_output();
 					
-					current_genome.fitness -= Math.pow(out_vals[0] - outputs[z], 2);
+					current_genome.fitness -= Math.pow(out_vals.get(z) - outputs[z], 2);
 					
 					current_genome.reset_vals();
 				}
