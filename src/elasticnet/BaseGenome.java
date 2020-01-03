@@ -175,10 +175,13 @@ public class BaseGenome {
 	
 	public void mutate_delete_node(InnovationService inno_service)
 	{
-		int rand_index = this.get_random_in_range(this.hidden_nodes.size());
-		long key = (long)this.hidden_nodes.keySet().toArray()[rand_index];
-		this.hidden_nodes.remove(key);	
-		return;
+		if(this.hidden_nodes.size() > 0)
+		{
+			int rand_index = this.get_random_in_range(this.hidden_nodes.size());
+			long key = (long)this.hidden_nodes.keySet().toArray()[rand_index];
+			this.hidden_nodes.remove(key);	
+			return;	
+		}
 	}
 	
 	public void mutate_delete_conn(InnovationService inno_service)
@@ -447,43 +450,31 @@ public class BaseGenome {
 	{
 		ArrayList<Long[]> ids = new ArrayList<Long[]>();
 		
-		int num_nodes_input = this.input_nodes.size();
-		
-		for (int x = 0; x < num_nodes_input; x++)
+		for (Long x : this.input_nodes.keySet())
 		{
 			NodeGene current = this.input_nodes.get(x);
 			
-			int conns_count = current.connections.size();
-			
-			for(int i = 0; i < conns_count; i++)
+			for(long i : current.connections.keySet())
 			{
 				ids.add(new Long[] {current.connections.get(i).inno_id, current.inno_id});
 			}
 		}
 		
-		int num_nodes_hidden = this.hidden_nodes.size();
-		
-		for (int x = 0; x < num_nodes_hidden; x++)
+		for (Long x : this.hidden_nodes.keySet())
 		{
 			NodeGene current = this.hidden_nodes.get(x);
 			
-			int conns_count = current.connections.size();
-			
-			for(int i = 0; i < conns_count; i++)
+			for(long i : current.connections.keySet())
 			{
 				ids.add(new Long[] {current.connections.get(i).inno_id, current.inno_id});
 			}
 		}
 		
-		int num_output_nodes = this.output_nodes.size();
-		
-		for (int x = 0; x < num_output_nodes; x++)
+		for (Long x : this.output_nodes.keySet())
 		{
 			NodeGene current = this.output_nodes.get(x);
 			
-			int conns_count = current.connections.size();
-			
-			for(int i = 0; i < conns_count; i++)
+			for(long i : current.connections.keySet())
 			{
 				ids.add(new Long[] {current.connections.get(i).inno_id, current.inno_id});
 			}
@@ -495,43 +486,31 @@ public class BaseGenome {
 	{
 		ArrayList<Long> ids = new ArrayList<Long>();
 		
-		int num_nodes_input = this.input_nodes.size();
-		
-		for (int x = 0; x < num_nodes_input; x++)
+		for (Long x : this.input_nodes.keySet())
 		{
 			NodeGene current = this.input_nodes.get(x);
 			
-			int conns_count = current.connections.size();
-			
-			for(int i = 0; i < conns_count; i++)
+			for(Long i : current.connections.keySet())
 			{
 				ids.add(current.connections.get(i).inno_id);
 			}
 		}
 		
-		int num_nodes_hidden = this.hidden_nodes.size();
-		
-		for (int x = 0; x < num_nodes_hidden; x++)
+		for (Long x : this.hidden_nodes.keySet())
 		{
 			NodeGene current = this.hidden_nodes.get(x);
 			
-			int conns_count = current.connections.size();
-			
-			for(int i = 0; i < conns_count; i++)
+			for(Long i : current.connections.keySet())
 			{
 				ids.add(current.connections.get(i).inno_id);
 			}
 		}
 		
-		int num_output_nodes = this.output_nodes.size();
-		
-		for (int x = 0; x < num_output_nodes; x++)
+		for (Long x : this.output_nodes.keySet())
 		{
 			NodeGene current = this.output_nodes.get(x);
-			
-			int conns_count = current.connections.size();
-			
-			for(int i = 0; i < conns_count; i++)
+
+			for(Long i : current.connections.keySet())
 			{
 				ids.add(current.connections.get(i).inno_id);
 			}

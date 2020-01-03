@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 public class Species {
 	int speciesID;
 	public ArrayList<Long> member_ids = new ArrayList<Long>();	
-	int rep_id;
+	long rep_id;
 	int pop_id;
 	double adjust_fit_sum = 0.0;
 	double best_fitness = 0.0;
