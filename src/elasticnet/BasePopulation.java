@@ -78,7 +78,7 @@ public class BasePopulation {
 		{
 			for (int ix = 0; ix < this.pop_size; ix++)
 			{
-				BaseGenome gBaby = new BaseGenome(ix);
+				BaseGenome gBaby = new BaseGenome(this.ts, (long)ix);
 				
 				//System.out.print("setting up BaseGenome: ");
 				//System.out.println(ix);
