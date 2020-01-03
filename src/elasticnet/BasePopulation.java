@@ -18,7 +18,7 @@ public class BasePopulation {
 	Integer current_gen = 0;
 	Long inno_num;
 	Long next_BaseGenome_id;
-	Integer next_species_id;
+	Integer next_species_id = 0;
 	ArrayList<Species> pop_species = new ArrayList<Species>();
 	NeatConfig config;
 	Integer pop_size = 0;
@@ -78,7 +78,7 @@ public class BasePopulation {
 		{
 			for (int ix = 0; ix < this.pop_size; ix++)
 			{
-				BaseGenome gBaby = new BaseGenome(this.ts, (long)ix);
+				BaseGenome gBaby = new BaseGenome(this.ts, (long)ix, 0);
 				
 				//System.out.print("setting up BaseGenome: ");
 				//System.out.println(ix);
