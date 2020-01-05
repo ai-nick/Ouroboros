@@ -318,8 +318,12 @@ public class BaseGenome {
 		return this.fitness/species_size;
 	}
 	
-	public HashMap<Long, NodeGene> get_all_nodes()
+	public HashMap<Long, NodeGene> get_all_nodes()		
 	{
+		if (this.input_nodes == null)
+		{
+			System.out.println("null inputs wtf mate");
+		}
 		HashMap<Long, NodeGene> all_nodes = new HashMap<Long, NodeGene>(this.input_nodes);
 		all_nodes.putAll(this.hidden_nodes);
 		all_nodes.putAll(this.output_nodes);

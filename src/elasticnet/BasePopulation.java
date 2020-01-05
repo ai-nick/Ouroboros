@@ -422,6 +422,19 @@ public class BasePopulation {
 		}
 	}
 	
+	public ArrayList<Species> remove_empty()
+	{
+		int loop_count = this.pop_species.size();
+		
+		for(int x; x < loop_count; x++) {
+			
+			if(this.pop_species.get(x).member_ids.size() == 0)
+			{
+				this.pop_species.remove(x);
+			}
+		}
+		return this.pop_species;
+	}
 	public void breed_asexual(BaseGenome single_parent, Species the_species)
 	{
 		BaseGenome offspring = new BaseGenome(single_parent, this.next_BaseGenome_id);
@@ -513,6 +526,10 @@ public class BasePopulation {
 				if (dice.nextFloat() > 0.5f)
 				{
 					NodeGene addNode = gb_node_genes.get(gA.inno_id);
+					if(addNode == null)
+					{
+						System.out.println(gA.inno_id);
+					}
 					offspring.set_node(new NodeGene(addNode));
 				}
 				else
