@@ -211,7 +211,7 @@ public class BasePopulation {
 						Double dist = this.compat_distance(this.BaseGenomes.get(this.pop_species.get(i).rep_id), 
 								current_BaseGenome,
 								speciation_coeff);
-						//System.out.println(dist);
+						System.out.println(dist);
 						if( dist < compat_t)
 						{
 							this.pop_species.get(i).member_ids.add(current_BaseGenome.id);
@@ -231,6 +231,8 @@ public class BasePopulation {
 				}
 			}
 		}
+		this.pop_species = this.remove_empty();
+		System.out.println("speciated");
 	}
 	
 	

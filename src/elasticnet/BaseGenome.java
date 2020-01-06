@@ -151,23 +151,23 @@ public class BaseGenome {
 		}
 		if (rand.nextFloat() < (config.delete_node_prob/prob_sum))
 		{
-			System.out.println("deleting node here");
+			//System.out.println("deleting node here");
 			mutate_delete_node(inno_service);
 		}
 		if (rand.nextFloat() < (config.delete_conn_prob/prob_sum))
 		{
-			System.out.println("deleting conn here");
+			//System.out.println("deleting conn here");
 			mutate_delete_conn(inno_service);
 		}
 		if (rand.nextFloat() < (config.add_conn_prob/prob_sum))
 		{
-			System.out.println("adding conn here");
+			//System.out.println("adding conn here");
 			mutate_add_conn(inno_service);
 		}
 		if (rand.nextFloat() < (config.add_node_prob/prob_sum))
 		{
 			//this is where we are loosing conn pointers from node genes
-			System.out.println("adding node here");
+			//System.out.println("adding node here");
 			mutate_add_node(inno_service, config.defaultActivation);
 		}
 		return new_id;
