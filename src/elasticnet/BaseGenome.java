@@ -77,7 +77,10 @@ public class BaseGenome {
 					if(activated_conns.contains(g.inno_id) == false)
 					{
 						NodeGene next_node = all_nodes.get(g.to_node);
-						
+						if(next_node == null)
+						{
+							System.out.println("null to node");
+						}
 						next_node.add_to_current_value(n.current_val * g.get_weight());
 						
 						actives.add(next_node);
@@ -179,7 +182,8 @@ public class BaseGenome {
 		{
 			int rand_index = this.get_random_in_range(this.hidden_nodes.size());
 			long key = (long)this.hidden_nodes.keySet().toArray()[rand_index];
-			this.hidden_nodes.remove(key);	
+			this.hidden_nodes.remove(key);
+			this.remove_conns_to_node(key);
 			return;	
 		}
 	}
@@ -335,6 +339,11 @@ public class BaseGenome {
 		all_nodes.putAll(this.hidden_nodes);
 		all_nodes.putAll(this.output_nodes);
 		return all_nodes;
+	}
+	
+	private void remove_conns_to_node(Long node_id)
+	{
+		return;
 	}
 	
 	private ArrayList<Long> set_inputs(double[] inputs)
