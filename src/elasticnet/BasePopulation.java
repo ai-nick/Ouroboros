@@ -426,7 +426,7 @@ public class BasePopulation {
 	{
 		int loop_count = this.pop_species.size();
 		
-		for(int x; x < loop_count; x++) {
+		for(int x = 0; x < loop_count; x++) {
 			
 			if(this.pop_species.get(x).member_ids.size() == 0)
 			{

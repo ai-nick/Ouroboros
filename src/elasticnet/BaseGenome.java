@@ -188,6 +188,10 @@ public class BaseGenome {
 	{
 		ArrayList<Long[]> conn_ids = this.get_conn_ids();
 		
+		if(conn_ids.size() == 0)
+		{
+			return;
+		}
 		int rand_index = this.get_random_in_range(conn_ids.size());
 		
 		Long[] remove_ids = conn_ids.get(rand_index);
@@ -202,7 +206,10 @@ public class BaseGenome {
 		boolean new_structure = false;
 		
 		ArrayList<Long[]> conn_ids = this.get_conn_ids();
-		
+		if(conn_ids.size() == 0)
+		{
+			return;
+		}
 		int rand_index = this.get_random_in_range(conn_ids.size());
 		
 		Long split_id = conn_ids.get(rand_index)[0];
