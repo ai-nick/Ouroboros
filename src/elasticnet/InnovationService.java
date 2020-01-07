@@ -74,4 +74,10 @@ public class InnovationService {
 		
 		return null;
 	}
+	
+	public ArrayList<Long> get_all_conns_to(long to_node)
+	{
+		ArrayList<Long> all_conns_to = new ArrayList<Long>();
+		return all_conns_to;
+	}
 }

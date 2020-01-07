@@ -183,7 +183,7 @@ public class BaseGenome {
 			int rand_index = this.get_random_in_range(this.hidden_nodes.size());
 			long key = (long)this.hidden_nodes.keySet().toArray()[rand_index];
 			this.hidden_nodes.remove(key);
-			this.remove_conns_to_node(key);
+			this.remove_conns_to_node(key, inno_service);
 			return;	
 		}
 	}
@@ -341,8 +341,9 @@ public class BaseGenome {
 		return all_nodes;
 	}
 	
-	private void remove_conns_to_node(Long node_id)
+	private void remove_conns_to_node(Long node_id, InnovationService inno)
 	{
+		ArrayList<long> all_incoming = this.inn
 		return;
 	}
 	
