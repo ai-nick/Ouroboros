@@ -343,7 +343,17 @@ public class BaseGenome {
 	
 	private void remove_conns_to_node(Long node_id, InnovationService inno)
 	{
-		ArrayList<long> all_incoming = this.inn
+		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
+		for(NodeGene ng : all_nodes.values())
+		{
+			for(ConnectionGene cg : ng.connections.values())
+			{
+				if(cg.to_node == node_id)
+				{
+					ng.connections.remove(cg.inno_id);
+				}
+			}
+		}
 		return;
 	}
 	
