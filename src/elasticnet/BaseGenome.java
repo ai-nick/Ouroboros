@@ -79,7 +79,8 @@ public class BaseGenome {
 						NodeGene next_node = all_nodes.get(g.to_node);
 						if(next_node == null)
 						{
-							System.out.println("null to node");
+							System.out.print("null to node: ");
+							System.out.println(g.to_node);
 						}
 						next_node.add_to_current_value(n.current_val * g.get_weight());
 						
@@ -346,13 +347,7 @@ public class BaseGenome {
 		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
 		for(NodeGene ng : all_nodes.values())
 		{
-			for(ConnectionGene cg : ng.connections.values())
-			{
-				if(cg.to_node == node_id)
-				{
-					ng.connections.remove(cg.inno_id);
-				}
-			}
+			ng.connections.values().removeIf(e -> e.to_node == node_id);
 		}
 		return;
 	}
