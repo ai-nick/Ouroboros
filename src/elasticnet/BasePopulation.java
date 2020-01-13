@@ -330,7 +330,7 @@ public class BasePopulation {
 	{
 		// dictionary with fitness sums for each species 
 		// TODO sort this shit
-		Long next_inno_num = this.innovation.get_next_inno_id();
+		//Long next_inno_num = this.innovation.get_next_inno_id();
 		
 		HashMap<Integer, Double> adj_fit_sums = new HashMap<Integer, Double>();
 		

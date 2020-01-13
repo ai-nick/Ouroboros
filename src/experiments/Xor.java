@@ -78,6 +78,7 @@ public class Xor {
 			test_pop.speciate_BasePopulation();
 			//System.out.println("reproducing");
 			test_pop.the_reproduction_function();
+			System.out.println("reproduction complete");
 		}
 		System.out.print("best fit id: ");
 		System.out.println(best_genome_id);
