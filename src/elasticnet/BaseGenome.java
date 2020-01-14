@@ -174,7 +174,7 @@ public class BaseGenome {
 			//System.out.println("adding node here");
 			mutate_add_node(inno_service, config.defaultActivation);
 		}
-		return new_id;
+		return inno_service.next_inno_id;
 	}
 	
 	public void mutate_delete_node(InnovationService inno_service)
