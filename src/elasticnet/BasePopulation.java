@@ -530,11 +530,11 @@ public class BasePopulation {
 					{
 						System.out.println(gA.inno_id);
 					}
-					offspring.set_sex_node(new NodeGene(addNode));
+					offspring.set_node(new NodeGene(addNode));
 				}
 				else
 				{
-					offspring.set_sex_node(new NodeGene(gA));
+					offspring.set_node(new NodeGene(gA));
 				}
 			}
 		}

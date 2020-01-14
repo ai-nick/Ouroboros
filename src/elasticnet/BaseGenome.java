@@ -146,6 +146,7 @@ public class BaseGenome {
 			return;
 		}
 		this.hidden_nodes.put(node.inno_id, node);
+		this.check_node_has_all_to_conns(node);
 		return;
 	}
 	
