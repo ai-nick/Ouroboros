@@ -28,7 +28,7 @@ public class NeatConfig {
 	
 	int num_hidden = 0;
 	
-	Double elitism = 0.5;
+	Double elitism = 0.8;
 	
 	Double add_conn_prob = .15;
 	Double add_node_prob = .15;

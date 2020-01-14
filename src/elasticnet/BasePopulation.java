@@ -350,6 +350,7 @@ public class BasePopulation {
 		}
 		if(sorted_species_idxs.length > 1)
 		{
+			System.out.println(sorted_species_idxs.length);
 			sorter.quick_sort_big_dumb(sorted_species_idxs, adj_fit_sums, 0, num_species-1);	
 		}
 		else
@@ -382,8 +383,6 @@ public class BasePopulation {
 		}
 		// now we handle reproducing the correct amount of BaseGenomes
 		int need_new = this.pop_size - saved_sum;
-		
-		int elite_iterator = 0;
 		
 		while(need_new != 0)
 		{
@@ -420,7 +419,6 @@ public class BasePopulation {
 					break;
 				}
 			}
-			elite_iterator++;
 		}
 	}
 	
