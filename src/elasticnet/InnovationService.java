@@ -35,11 +35,25 @@ public class InnovationService {
 		long max_conn = Collections.max(conn_coo.keySet());
 		if(max_node > max_conn)
 		{
-			this.next_inno_id = max_node + 1;
+			if(this.next_inno_id >= max_node + 1)
+			{
+				return;
+			}
+			else 
+			{
+				this.next_inno_id = max_node + 1;
+			}
 		}
 		else
 		{
-			this.next_inno_id = max_conn + 1;
+			if(this.next_inno_id >= max_conn + 1)
+			{
+				return;
+			}
+			else 
+			{
+				this.next_inno_id = max_conn + 1;
+			}
 		}
 	}
 	
