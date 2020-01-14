@@ -9,6 +9,8 @@ public class InnovationService {
 	
 	public HashMap<Long, Long[]> conn_coo;
 	
+	public long next_inno_id = 0;
+	
 	public InnovationService()
 	{
 		this.node_ids = new ArrayList<Long>();
@@ -22,16 +24,28 @@ public class InnovationService {
 	
 	public long get_next_inno_id()
 	{
+		this.set_max_inno_id();
+		
+		return this.next_inno_id;
+	}
+	
+	public void set_max_inno_id()
+	{
 		long max_node = Collections.max(node_ids);
 		long max_conn = Collections.max(conn_coo.keySet());
 		if(max_node > max_conn)
 		{
-			return max_node + 1;
+			this.next_inno_id = max_node + 1;
 		}
 		else
 		{
-			return max_conn + 1;
+			this.next_inno_id = max_conn + 1;
 		}
+	}
+	
+	public void set_next_inno_id(long next_id)
+	{
+		this.next_inno_id = next_id;
 	}
 	
 	// if the path exists with a node in between from and to nodes
