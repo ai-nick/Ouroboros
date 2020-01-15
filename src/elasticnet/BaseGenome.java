@@ -2,7 +2,9 @@ package elasticnet;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -139,36 +141,36 @@ public class BaseGenome {
 		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
 		
 		for(NodeGene g_in : all_nodes.values()) {
-			ArrayList<Long> input_conns = new ArrayList<Long>();
-			ArrayList<Long> hidden_conns = new ArrayList<Long>();
-			ArrayList<Long> output_conns = new ArrayList<Long>();
-			if(g_in.connections != null)
+			
+			Iterator it = g_in.connections.entrySet().iterator();
+			
+			while(it.hasNext())
 			{
-				for(ConnectionGene cg : g_in.connections.values())
+				cg = it.next();
+				if (g_in.is_input == true)
 				{
-					if (g_in.is_input == true)
+					if (this.input_nodes.containsKey(cg.to_node) == false)
 					{
-						if (this.input_nodes.containsKey(cg.to_node) == false)
-						{
-							input_conns.add(cg.inno_id);
-						}
+						input_conns.add(cg.inno_id);
 					}
-					else if (g_in.is_output == true)
+				}
+				else if (g_in.is_output == true)
+				{
+					if (this.output_nodes.containsKey(cg.to_node) == false)
 					{
-						if (this.output_nodes.containsKey(cg.to_node) == false)
-						{
-							hidden_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
-						}
+						hidden_conns.add(cg.inno_id);
+						//hidden_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
 					}
-					else  if (g_in.is_input == false && g_in.is_output == false)
+				}
+				else  if (g_in.is_input == false && g_in.is_output == false)
+				{
+					if(this.hidden_nodes.containsKey(cg.to_node) == false)
 					{
-						if(this.hidden_nodes.containsKey(cg.to_node) == false)
-						{
-							ouput_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
-						}	
-					}
-				}	
-			}	
+						output_conns.add(cg.inno_id);
+						//ouput_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
+					}	
+				}
+			}
 		}
 		return;
 	}
