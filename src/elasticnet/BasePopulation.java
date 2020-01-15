@@ -538,8 +538,12 @@ public class BasePopulation {
 				}
 			}
 		}
+		offspring.remove_conns_to_nulls();
+		
 		this.BaseGenomes.put(offspring.id, offspring);
+		
 		the_species.member_ids.add(offspring.id);
+		
 		this.next_BaseGenome_id++;
 	}
 	

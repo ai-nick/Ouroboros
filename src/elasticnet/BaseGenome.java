@@ -133,20 +133,37 @@ public class BaseGenome {
 		return;
 	}
 	
-	public void set_sex_node(NodeGene node)
+	public void remove_conns_to_nulls()
 	{
-		if(node.is_input == true)
-		{
-			this.input_nodes.put(node.inno_id, node);
-			return;
+		
+		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
+		
+		for(NodeGene g_in : all_nodes.values()) {
+			for(ConnectionGene cg : g_in.connections.values())
+			{
+				if (g_in.is_input == true)
+				{
+					if (this.input_nodes.containsKey(cg.to_node) == false)
+					{
+						this.input_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
+					}
+				}
+				else if (g_in.is_output == true)
+				{
+					if (this.output_nodes.containsKey(cg.to_node) == false)
+					{
+						this.output_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
+					}
+				}
+				else  if (g_in.is_input == false && g_in.is_output == false)
+				{
+					if(this.hidden_nodes.containsKey(cg.to_node) == false)
+					{
+						this.hidden_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
+					}	
+				}
+			}	
 		}
-		if(node.is_output == true)
-		{
-			this.output_nodes.put(node.inno_id, node);
-			return;
-		}
-		this.hidden_nodes.put(node.inno_id, node);
-		this.check_node_has_all_to_conns(node);
 		return;
 	}
 	
@@ -357,36 +374,6 @@ public class BaseGenome {
 		all_nodes.putAll(this.hidden_nodes);
 		all_nodes.putAll(this.output_nodes);
 		return all_nodes;
-	}
-	
-	private void check_node_has_all_to_conns(NodeGene g_in)
-	{
-		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
-		for(ConnectionGene cg : g_in.connections.values())
-		{
-			if (g_in.is_input == true)
-			{
-				if (this.input_nodes.containsKey(cg.to_node) == false)
-				{
-					this.input_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
-				}
-			}
-			else if (g_in.is_output == true)
-			{
-				if (this.output_nodes.containsKey(cg.to_node) == false)
-				{
-					this.output_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
-				}
-			}
-			else  if (g_in.is_input == false && g_in.is_output == false)
-			{
-				if(this.hidden_nodes.containsKey(cg.to_node) == false)
-				{
-					this.hidden_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
-				}	
-			}
-		}
-		return;
 	}
 	
 	private void remove_conns_to_node(Long node_id, InnovationService inno)
