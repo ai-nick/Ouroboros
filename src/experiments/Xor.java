@@ -33,7 +33,7 @@ public class Xor {
 		
 		int num_epochs = this.signs.length/2;
 		
-		int pop_size = 100;
+		int pop_size = 1000;
 		
 		BasePopulation test_pop = new BasePopulation(0, new NeatConfig(), pop_size, false);
 		

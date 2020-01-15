@@ -139,29 +139,35 @@ public class BaseGenome {
 		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
 		
 		for(NodeGene g_in : all_nodes.values()) {
-			for(ConnectionGene cg : g_in.connections.values())
+			ArrayList<Long> input_conns = new ArrayList<Long>();
+			ArrayList<Long> hidden_conns = new ArrayList<Long>();
+			ArrayList<Long> output_conns = new ArrayList<Long>();
+			if(g_in.connections != null)
 			{
-				if (g_in.is_input == true)
+				for(ConnectionGene cg : g_in.connections.values())
 				{
-					if (this.input_nodes.containsKey(cg.to_node) == false)
+					if (g_in.is_input == true)
 					{
-						this.input_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
+						if (this.input_nodes.containsKey(cg.to_node) == false)
+						{
+							input_conns.add(cg.inno_id);
+						}
 					}
-				}
-				else if (g_in.is_output == true)
-				{
-					if (this.output_nodes.containsKey(cg.to_node) == false)
+					else if (g_in.is_output == true)
 					{
-						this.output_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
+						if (this.output_nodes.containsKey(cg.to_node) == false)
+						{
+							hidden_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
+						}
 					}
-				}
-				else  if (g_in.is_input == false && g_in.is_output == false)
-				{
-					if(this.hidden_nodes.containsKey(cg.to_node) == false)
+					else  if (g_in.is_input == false && g_in.is_output == false)
 					{
-						this.hidden_nodes.get(g_in.inno_id).connections.remove(cg.inno_id);
-					}	
-				}
+						if(this.hidden_nodes.containsKey(cg.to_node) == false)
+						{
+							ouput_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
+						}	
+					}
+				}	
 			}	
 		}
 		return;

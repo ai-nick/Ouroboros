@@ -443,6 +443,8 @@ public class BasePopulation {
 		
 		this.inno_num = offspring.mutate_genome(this.inno_num, this.config, this.innovation);
 		
+		offspring.remove_conns_to_nulls();
+		
 		this.next_BaseGenome_id++;
 		
 		the_species.member_ids.add(offspring.id);
