@@ -30,20 +30,26 @@ public class Species {
 		
 		HashMap<Integer, Double> fit_sort_dict = new HashMap<Integer, Double>();
 		
+		ArrayList<Long> deleted_genomes = new ArrayList<Long>();
+		// TODO change to hash map iteration
 		for(int x = 0; x < this.member_ids.size(); x++)
 		{
 			// suspect we are getting null genomes here, need to check sorting isnt
 			// modifying genome id values
 			long member_id = this.member_ids.get(x);
-			BaseGenome fit_genome = genomes.get(member_id);
-			if(fit_genome == null)
+			if(genomes.containsKey(member_id) == true)
 			{
-				System.out.println("null genome");
+				BaseGenome fit_genome = genomes.get(member_id);
+				this.adjust_fit_sum += fit_genome.get_prime(this.member_ids.size());
+				fit_sort_dict.put(x, fit_genome.fitness);
+				this.sorted_idx_array[x] = x;	
 			}
-			this.adjust_fit_sum += fit_genome.get_prime(this.member_ids.size());
-			fit_sort_dict.put(x, fit_genome.fitness);
-			this.sorted_idx_array[x] = x;
+			else
+			{
+				deleted_genomes.add(member_id);
+			}
 		}
+		this.member_ids.removeAll(deleted_genomes);
 		if(this.member_ids.size() > 1)
 		{
 			sorter_util.quick_sort_big_dumb(this.sorted_idx_array, fit_sort_dict, 0, this.sorted_idx_array.length-1);
