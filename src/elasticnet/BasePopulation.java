@@ -143,13 +143,16 @@ public class BasePopulation {
 			//because if it did its already been addressed
 			if(one_conns.contains(two_conns.get(ix)) == false)
 			{
-				if(two_conns.get(ix) >= Collections.min(one_conns) && two_conns.get(ix) <= Collections.max(one_conns))
+				if(one_conns.isEmpty() == false)
 				{
-					d += 1.0;
-				}
-				else
-				{
-					e += 1.0;
+					if(two_conns.get(ix) >= Collections.min(one_conns) && two_conns.get(ix) <= Collections.max(one_conns))
+					{
+						d += 1.0;
+					}
+					else
+					{
+						e += 1.0;
+					}	
 				}	
 			}
 		}
@@ -211,7 +214,7 @@ public class BasePopulation {
 						Double dist = this.compat_distance(this.BaseGenomes.get(this.pop_species.get(i).rep_id), 
 								current_BaseGenome,
 								speciation_coeff);
-						System.out.println(dist);
+						//System.out.println(dist);
 						if( dist < compat_t)
 						{
 							this.pop_species.get(i).member_ids.add(current_BaseGenome.id);
@@ -350,7 +353,6 @@ public class BasePopulation {
 		}
 		if(sorted_species_idxs.length > 1)
 		{
-			System.out.println(sorted_species_idxs.length);
 			sorter.quick_sort_big_dumb(sorted_species_idxs, adj_fit_sums, 0, num_species-1);	
 		}
 		else

@@ -63,7 +63,6 @@ public class Xor {
 					
 					current_genome.reset_vals();
 				}
-				System.out.println(current_genome.fitness);
 				if(current_genome.fitness > best_fitness)
 				{
 					best_genome_id = current_genome.id;

@@ -146,19 +146,22 @@ public class BaseGenome {
 			
 			while(it.hasNext())
 			{
-				cg = it.next();
+				Map.Entry<Long, ConnectionGene> entry = (Map.Entry<Long, ConnectionGene>)it.next();
+				
+				ConnectionGene cg = entry.getValue();
+				
 				if (g_in.is_input == true)
 				{
 					if (this.input_nodes.containsKey(cg.to_node) == false)
 					{
-						input_conns.add(cg.inno_id);
+						it.remove();
 					}
 				}
 				else if (g_in.is_output == true)
 				{
 					if (this.output_nodes.containsKey(cg.to_node) == false)
 					{
-						hidden_conns.add(cg.inno_id);
+						it.remove();
 						//hidden_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
 					}
 				}
@@ -166,7 +169,7 @@ public class BaseGenome {
 				{
 					if(this.hidden_nodes.containsKey(cg.to_node) == false)
 					{
-						output_conns.add(cg.inno_id);
+						it.remove();
 						//ouput_conns.add(g_in.inno_id).connections.remove(cg.inno_id);
 					}	
 				}
