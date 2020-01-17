@@ -426,7 +426,8 @@ public class BasePopulation {
 	
 	public ArrayList<Species> remove_empty()
 	{
-		int loop_count = this.pop_species.size();
+		// need to delete species without nodes, reset pop species size
+		int loop_count = this.pop_species.size() - 1;
 		
 		for(int x = 0; x < loop_count; x++) {
 			
