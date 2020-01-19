@@ -427,15 +427,18 @@ public class BasePopulation {
 	public ArrayList<Species> remove_empty()
 	{
 		// need to delete species without nodes, reset pop species size
-		int loop_count = this.pop_species.size() - 1;
+		int loop_count = this.pop_species.size();
+		
+		ArrayList<Species> remove_these = new ArrayList<Species>();
 		
 		for(int x = 0; x < loop_count; x++) {
-			
-			if(this.pop_species.get(x).member_ids.size() == 0)
+			Species next_species = this.pop_species.get(x);
+			if(next_species.member_ids.size() == 0)
 			{
-				this.pop_species.remove(x);
+				remove_these.add(next_species);
 			}
 		}
+		this.pop_species.removeAll(remove_these);
 		return this.pop_species;
 	}
 	public void breed_asexual(BaseGenome single_parent, Species the_species)
