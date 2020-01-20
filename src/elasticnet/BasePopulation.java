@@ -361,7 +361,7 @@ public class BasePopulation {
 		}
 		Integer saved_sum = 0;
 		
-		Integer keep_top = (int)((double)num_BaseGenomes * elitism_percent);
+		Integer keep_top = (int)(num_BaseGenomes * elitism_percent);
 		// next we will reduce each species by this elitism percent
 		// and add the new amount of the species to our save_sum
 		//TODO run quick sort on the species ids and the adj_fit_sums hashmap

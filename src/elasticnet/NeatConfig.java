@@ -28,13 +28,13 @@ public class NeatConfig {
 	
 	int num_hidden = 0;
 	
-	Double elitism = 1.0;
+	Double elitism = .5;
 	
 	Double add_conn_prob = .15;
 	Double add_node_prob = .15;
 	Double delete_conn_prob = .1;
 	Double delete_node_prob = .1;
-	Double compat_threshold = .8;
+	Double compat_threshold = .2;
 	
 	//mins and maxs
 	
