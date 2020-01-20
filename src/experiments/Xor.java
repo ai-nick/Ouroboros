@@ -71,7 +71,6 @@ public class Xor {
 					System.out.println(best_genome_id);
 					System.out.println(best_fitness);
 				}
-				//System.out.println(best_fitness);
 			}
 			//System.out.println("speciating");
 			test_pop.speciate_BasePopulation();
