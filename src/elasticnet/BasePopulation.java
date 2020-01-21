@@ -180,15 +180,16 @@ public class BasePopulation {
 		double compat_t = this.config.compat_threshold;
 		// coeeficients 
 		double[] speciation_coeff = { 1.0, 1.0, .5 };
-		// set first species and rep BaseGenome
-		if (this.pop_species.size() == 0)
-		{
-			// grabs a random BaseGenome from our set
-			BaseGenome first_rep = this.BaseGenomes.get(this.BaseGenomes.keySet().iterator().next());
-			this.pop_species.add(new Species(next_species_id, first_rep.id));
-			next_species_id++;
-			speciated.add(first_rep.id);
-		}
+		
+		this.pop_species = new ArrayList<Species>();
+		
+		this.next_species_id = 0;
+
+		// grabs a random BaseGenome from our set
+		BaseGenome first_rep = this.BaseGenomes.get(this.BaseGenomes.keySet().iterator().next());
+		this.pop_species.add(new Species(next_species_id, first_rep.id));
+		next_species_id++;
+		speciated.add(first_rep.id);
 		// we have atleast one species by this point in our control flow
 		for(long x : this.BaseGenomes.keySet())
 		{
@@ -325,7 +326,6 @@ public class BasePopulation {
 				}
 			}
 		}
-		this.remove_empty();
 	}
 	
 	// determine the number of BaseGenomes each species should reproduce
