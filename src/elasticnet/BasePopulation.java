@@ -325,6 +325,7 @@ public class BasePopulation {
 				}
 			}
 		}
+		this.remove_empty();
 	}
 	
 	// determine the number of BaseGenomes each species should reproduce
