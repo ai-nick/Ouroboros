@@ -43,10 +43,10 @@ public class MarginMex {
 		
 		for (int ix = 0; ix < this.num_gens; ix++)
 		{
-			for(int x = 0; x < this.pop_size; x++)
+			for(Long x : this.pop.BaseGenomes.keySet())
 			{	
 				//System.out.println(x);
-				BaseGenome current = this.pop.get_BaseGenome(x);
+				BaseGenome current = this.pop.BaseGenomes.get(x);
 				
 				this.port = new PaperPortfolio(1000.0, "usdt");
 				
