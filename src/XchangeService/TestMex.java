@@ -17,9 +17,7 @@ public class TestMex {
 		
 		try (PrintWriter out = new PrintWriter("xbtusd.json")) {
 		    System.out.println(data);
+		    out.write(data);
 		}
-		//HistDataBar[] container = new Gson().fromJson(data, HistDataBar[].class);
-		
-		//System.out.println(container[0].close);
 	}
 }

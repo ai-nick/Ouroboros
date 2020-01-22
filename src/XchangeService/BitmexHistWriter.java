@@ -1,8 +1,10 @@
 package XchangeService;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -63,7 +65,8 @@ public class BitmexHistWriter {
 		*/
 		try
 		{
-			return getHTML(hist_endpoint);
+			String json_hist = getHTML(hist_endpoint);
+			return json_hist;
 		}
 		catch(Exception e)
 		{
