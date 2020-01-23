@@ -65,9 +65,9 @@ public class MarginMex {
 					//current.set_input();
 					
 					current.activate(this.hs.get_simple()[i]);
+					
 					double buy_sell = current.get_output().get(0);
-					//System.out.println(buy_sell);
-					//System.out.println(this.hs.hist_list[i].symbol);
+					
 					if (buy_sell > .5)
 					{
 						this.port.buy_coin(this.hs.hist_list[i].symbol, fixed_order_size, this.hs.hist_list[i].close);

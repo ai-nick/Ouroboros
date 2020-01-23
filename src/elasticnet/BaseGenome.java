@@ -31,10 +31,7 @@ public class BaseGenome {
 	// for network evaluation
 	ArrayList<Long> activated_conns = new ArrayList<Long>();
 	public boolean feed_forward = true;
-	int num_output = 0;
-	int outs_count = 0;
-	//TODO set max and min conn in all mutation methods
-	//TODO and upon construction
+
 	public BaseGenome(Long p_hash, Long genome_id, int gen) {
 		this.id = genome_id;
 		this.population_hash = p_hash;
@@ -61,7 +58,9 @@ public class BaseGenome {
 		//ArrayList input_ordered = this.set_inputs(inputs);
 		
 		int input_count = this.input_nodes.size();
-		// activate all nodes and traverse each conn once
+
+		this.set_inputs(inputs);
+		
 		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
 		
 		ArrayList<NodeGene> actives = new ArrayList<NodeGene>(this.input_nodes.values());
@@ -84,7 +83,7 @@ public class BaseGenome {
 							System.out.print("null to node: ");
 							System.out.println(g.to_node);
 						}
-						next_node.add_to_current_value(n.current_val * g.get_weight());
+						next_node.add_to_current_value(Activator.tanh_activation(n.current_val * g.get_weight()));
 						
 						actives.add(next_node);
 						
