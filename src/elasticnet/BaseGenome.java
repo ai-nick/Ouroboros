@@ -115,7 +115,12 @@ public class BaseGenome {
 	
 	public void reset_vals()
 	{
-		return;
+		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
+		
+		for(NodeGene g : all_nodes.values())
+		{
+			g.current_val = 0.0;
+		}
 	}
 	
 	public void set_node(NodeGene node)
