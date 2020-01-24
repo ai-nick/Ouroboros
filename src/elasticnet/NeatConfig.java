@@ -30,8 +30,8 @@ public class NeatConfig {
 	
 	Double elitism = .5;
 	
-	Double add_conn_prob = .15;
-	Double add_node_prob = .15;
+	Double add_conn_prob = .34;
+	Double add_node_prob = .34;
 	Double delete_conn_prob = .1;
 	Double delete_node_prob = .1;
 	Double compat_threshold = .2;
@@ -47,9 +47,9 @@ public class NeatConfig {
 	Double bias_min = -30.0;
 	Double bias_max = 30.0;
 	
-	Double weight_mutate_rate = 5.0;
+	Double weight_mutate_rate = .88;
 	
-	Double mutate_weight_factor = .4;
+	Double mutate_weight_factor = .1;
 	
 	public NeatConfig()
 	{	

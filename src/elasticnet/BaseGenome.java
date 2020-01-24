@@ -55,19 +55,15 @@ public class BaseGenome {
 	
 	public void activate(double[] inputs)
 	{
-		//ArrayList input_ordered = this.set_inputs(inputs);
-		
-		int input_count = this.input_nodes.size();
-
 		this.set_inputs(inputs);
 		
 		HashMap<Long, NodeGene> all_nodes = this.get_all_nodes();
 		
 		ArrayList<NodeGene> actives = new ArrayList<NodeGene>(this.input_nodes.values());
 		
-		ArrayList<Long> activated_conns = new ArrayList<Long>();
+		int active_count = actives.size();
 		
-		while(actives.iterator().hasNext())
+		while(active_count != 0)
 		{
 			NodeGene n = actives.iterator().next();
 			
@@ -78,21 +74,17 @@ public class BaseGenome {
 					if(activated_conns.contains(g.inno_id) == false)
 					{
 						NodeGene next_node = all_nodes.get(g.to_node);
-						if(next_node == null)
-						{
-							System.out.print("null to node: ");
-							System.out.println(g.to_node);
-						}
+						
 						next_node.add_to_current_value(Activator.tanh_activation(n.current_val * g.get_weight()));
 						
 						actives.add(next_node);
 						
-						activated_conns.add(g.inno_id);
+						active_count++;
 					}
 				}	
 			}
-			
 			actives.remove(n);
+			active_count--;
 		}
 	}
 	

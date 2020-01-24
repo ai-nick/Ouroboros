@@ -20,7 +20,7 @@ public class Xor {
 	}
 	
 	public void run_pop() {
-		this.permute_signs(2);
+		//this.permute_signs(2);
 		
 		double[][] inputs = {
 				{0.0, 0.0},
@@ -45,13 +45,13 @@ public class Xor {
 		
 		for(int i = 0; i < num_gens; i++)
 		{
+			System.out.println(test_pop.BaseGenomes.size());
+			
+			System.out.println(test_pop.get_species().size());
+			
 			for(BaseGenome current_genome : test_pop.BaseGenomes.values())
-			{	
+			{
 				current_genome.fitness = 4.0;
-				
-				//NeuralNetwork test_net = new NeuralNetwork(current_genome);
-				
-				//test_net.feed_forward = true;
 				
 				for(int z = 0; z < 4; z++)
 				{

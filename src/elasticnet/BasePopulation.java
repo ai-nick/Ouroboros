@@ -12,7 +12,6 @@ import com.google.gson.reflect.TypeToken;
 public class BasePopulation {
 	Long best_BaseGenome_id;
 	Integer num_BaseGenomes;
-	int min_species_size = 5;
 	String fitness_function = "";
 	Long ts;
 	Integer current_gen = 0;
@@ -79,9 +78,6 @@ public class BasePopulation {
 			for (int ix = 0; ix < this.pop_size; ix++)
 			{
 				BaseGenome gBaby = new BaseGenome(this.ts, (long)ix, 0);
-				
-				//System.out.print("setting up BaseGenome: ");
-				//System.out.println(ix);
 				
 				gBaby.create_from_scratch(this.config, this.ts, this.innovation);
 				
