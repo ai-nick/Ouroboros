@@ -183,10 +183,13 @@ public class BasePopulation {
 
 		// grabs a random BaseGenome from our set
 		BaseGenome first_rep = this.BaseGenomes.get(this.BaseGenomes.keySet().iterator().next());
+		
 		this.pop_species.add(new Species(next_species_id, first_rep.id));
+		
 		next_species_id++;
+		
 		speciated.add(first_rep.id);
-		// we have atleast one species by this point in our control flow
+		
 		for(long x : this.BaseGenomes.keySet())
 		{
 			// we check if this id already belongs to a species from previous generations
@@ -429,7 +432,16 @@ public class BasePopulation {
 		
 		for(int x = 0; x < loop_count; x++) {
 			Species next_species = this.pop_species.get(x);
-			if(next_species.member_ids.size() == 0)
+			int num_members = next_species.member_ids.size();
+			int num_inactive = 0;
+			for (int m = 0; m < num_members; m++)
+			{
+				if(this.BaseGenomes.containsKey(m) == false)
+				{
+					num_inactive++;
+				}
+			}
+			if(num_inactive == num_members)
 			{
 				remove_these.add(next_species);
 			}
