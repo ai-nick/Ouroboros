@@ -371,12 +371,11 @@ public class BasePopulation {
 			
 			keep_top = current.member_ids.size() * (int)elitism_percent;
 			
-			saved_sum += keep_top;
-			
 			if(keep_top > 0)
 			{
 				//reduce the species to only the elite BaseGenomes
 				current.have_mercy(keep_top, this.BaseGenomes, this.innovation);
+				saved_sum += keep_top;
 				//breed_all_remaining(current);				
 			}
 		}
