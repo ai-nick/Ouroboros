@@ -410,12 +410,12 @@ public class BasePopulation {
 						
 						this.cross_breed(this.BaseGenomes.get(BaseGenome_id), this.BaseGenomes.get(other_BaseGenome_id), current_species);
 					}	
-				}
-				need_new--;
-				//System.out.println(need_new);
-				if (need_new == 0)
-				{
-					break;
+					need_new--;
+					
+					if (need_new == 0)
+					{
+						break;
+					}
 				}
 			}
 		}
