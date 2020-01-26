@@ -77,20 +77,27 @@ public class Species {
 		{
 			return;
 		}
+		
+		ArrayList<BaseGenome> remove_these = new ArrayList<BaseGenome>();
+		
+		/*
 		for(int x = 0; x < num_elites; x++)
 		{
 			long g_id = this.member_ids.get(this.sorted_idx_array[x]);
 			//System.out.println(g_id);
 			BaseGenome removing = genomes.get(g_id);
-			
 			genomes.remove(g_id);
 		}
-		ArrayList<Long> new_member_ids = new ArrayList<Long>();
+		*/
+		ArrayList<Long> remove_these_ids = new ArrayList<Long>();
+		
 		for(int x = 0; x < num_elites; x++)
 		{
-			new_member_ids.add(this.member_ids.get(this.sorted_idx_array[(num_members-1)-x]));
+			BaseGenome tots_removable = genomes.get(this.member_ids.get(this.sorted_idx_array[x]));
+			genomes.remove(tots_removable);
+			remove_these_ids.add(tots_removable.id);
 		}
-		this.member_ids = new_member_ids;
+		this.member_ids.removeAll(remove_these_ids);
 	}
 	
 	
