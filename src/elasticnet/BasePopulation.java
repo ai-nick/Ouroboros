@@ -209,20 +209,17 @@ public class BasePopulation {
 					//check if we added it to one already, could be better and 
 					//break loop once on is found, TODO check our compat dist calculation
 					//as we are seeing very high distances, THIS IS A CONCERN
-					if(!species_found)
+					Double dist = this.compat_distance(this.BaseGenomes.get(this.pop_species.get(i).rep_id), 
+							current_BaseGenome,
+							speciation_coeff);
+					//System.out.println(dist);
+					if( dist < compat_t)
 					{
-						Double dist = this.compat_distance(this.BaseGenomes.get(this.pop_species.get(i).rep_id), 
-								current_BaseGenome,
-								speciation_coeff);
-						//System.out.println(dist);
-						if( dist < compat_t)
-						{
-							this.pop_species.get(i).member_ids.add(current_BaseGenome.id);
-							speciated.add(current_BaseGenome.id);
-							species_found = true;
-							//found species break our loop
-							break;
-						}	
+						this.pop_species.get(i).member_ids.add(current_BaseGenome.id);
+						speciated.add(current_BaseGenome.id);
+						species_found = true;
+						//found species break our loop
+						break;
 					}
 				}
 				if(!speciated.contains(current_BaseGenome.id))
@@ -436,7 +433,7 @@ public class BasePopulation {
 			int num_inactive = 0;
 			for (int m = 0; m < num_members; m++)
 			{
-				if(this.BaseGenomes.containsKey(m) == false)
+				if(this.BaseGenomes.containsKey(next_species.member_ids.get(m)) == false)
 				{
 					num_inactive++;
 				}
