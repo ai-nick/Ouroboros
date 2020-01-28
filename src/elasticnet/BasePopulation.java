@@ -352,6 +352,7 @@ public class BasePopulation {
 		{
 			sorter.quick_sort_big_dumb(sorted_species_idxs, adj_fit_sums, 0, num_species-1);
 			
+			/*
 			for(int s = 0; s < sorted_species_idxs.length /2; s++)
 			{
 				Species removing = this.pop_species.get(sorted_species_idxs[s]);
@@ -361,6 +362,7 @@ public class BasePopulation {
 				}
 				this.pop_species.remove(s);
 			}
+			*/
 		}
 		else
 		{

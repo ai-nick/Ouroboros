@@ -6,6 +6,8 @@ import com.google.gson.Gson;
 
 // oi at a neat config ye ot theh
 // ew ot ay loiscence fo at? 
+
+//TODO: Read these values in from json 
 public class NeatConfig {
 	
 	String defaultActivation = "sigmoid";
@@ -34,7 +36,7 @@ public class NeatConfig {
 	Double add_node_prob = .34;
 	Double delete_conn_prob = .1;
 	Double delete_node_prob = .1;
-	Double compat_threshold = .1;
+	Double compat_threshold = .3;
 	
 	//mins and maxs
 	
