@@ -36,7 +36,7 @@ public class NeatConfig {
 	Double add_node_prob = .34;
 	Double delete_conn_prob = .1;
 	Double delete_node_prob = .1;
-	Double compat_threshold = .3;
+	Double compat_threshold = 1.0;
 	
 	//mins and maxs
 	
